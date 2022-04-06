@@ -1,0 +1,98 @@
+.filterSelected{
+background-color: #669BC1 !important;
+    color: #ffffff !important;
+    border: 2px solid #005096 !important;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--fontfamily);
+}
+
+.filterSelected::after {
+    content: "\2713";
+    color: var(--FHlightblue);
+    display: block;
+    height: 4rem;
+    width: 4rem;
+    margin: 0 6px 0 0;
+    position: absolute;
+    font-size: 5rem;
+    right: -1rem;
+    top: -1.1rem;
+    opacity: 60%;
+}
+
+.filterBtn{
+    background-color: #CDDEEB;
+    color:#005999;
+    font-size: 1.0rem;
+    border: 2px solid #005096;
+    text-transform:none;
+    font-weight: bold;
+    border-radius: 20px;
+    height: 3rem;
+    padding: 0 20px;
+    font-family: var(--fontfamily);
+    margin: 0.2rem;
+}
+
+.filterBtn:hover{
+    cursor: pointer;
+}
+
+.dateFilter{
+
+}
+
+.selected-ends div{
+
+}
+
+.listWrapper li>*{
+    pointer-events: none;
+}
+
+.reservation{
+    border: 1px solid #707070;
+    padding: 1rem 2rem;
+    background-color: white !important; ;
+}
+
+.timeFilter{
+    border-bottom: 1px solid #707070;
+    padding: 0 0 0.5rem 0;
+}
+
+.filterWrapper{
+    justify-content: center;
+    text-align: center;
+}
+h2,p{
+    margin:0px;
+    color: black;
+}
+.departments{
+    margin-top: 0.3rem;
+}
+.departmentLabel{
+    background-color: blue;
+    margin: 0 0.2rem 0 0;
+    padding: 0.4rem;
+    background-color: #227C9D !important;
+    color: #FEF9EF !important;
+    border-radius: 0.3rem;
+}
+
+.uk-active .modeSwitch{
+    color: #005999 !important ;
+    border-bottom: 2px solid #005999 !important;
+}
+
+.uk-navbar{
+    background-color: #005096 !important;
+}
+.uk-navbar span{
+    color:white !important;
+    font-size: 1.5rem;
+  }
+
+

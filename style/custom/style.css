@@ -1,0 +1,81 @@
+:root{
+    /*font-size: 62.5%;
+    1.5rem = 15px*/
+    --fontSize: 1rem;
+    --fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --FHlightblue: #CDDEEB;
+    --FHdefaultblue: #005096;
+}
+
+h1,h2,h3,h4,h5,p, span, button, a{
+    font-family: var(--fontfamily);
+}
+
+
+.blue {
+    background-color: #005096;
+    color: white;
+}
+
+.blue-40 {
+    background-color: #00509633;
+}
+
+.blue-20 {
+    background-color: #00509633;
+}
+
+
+.grid-33 {
+    width: 33.33%;
+}
+
+.grid-50 {
+    width: 50%;
+}
+
+.grid-100 {
+    width: 100%;
+}
+
+
+ /* Style for Checklist */
+
+.checkListbutton {
+    width: 30;
+    left: -20;
+    position: relative;
+    top: 5px;
+}
+
+.grid-100 {
+    width: 100%;
+}
+
+.right {
+    float: right;
+}
+
+.checklist-checkbox {
+    left: 123px; 
+
+    width: 20px;
+    height: 20px;
+    border: 1px solid #005096;
+    border-radius: 50%;
+    background-color: #CDDEEB;
+
+}
+
+.space-between-list{
+    margin-bottom: 20px;
+}
+
+.custom_HR{
+    border-left: 5px solid #005096;
+    
+}
+
+.nospace-up{
+    margin-top: 0px;
+}
