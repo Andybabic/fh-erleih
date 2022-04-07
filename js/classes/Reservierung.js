@@ -9,7 +9,7 @@ export default class Reservierung{
         nextDate = nextDate.toISOString().slice(0,10);
 
         this.vars = {
-            apiUrl:         "https://verleihneu.fhstp.ac.at/api/",
+            apiUrl:         "http://localhost:3000/functions/callAPI.php?r=",
             today:    new Date().toISOString().slice(0,10),
             tomorrow:       nextDate,
         };

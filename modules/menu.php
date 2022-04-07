@@ -1,7 +1,11 @@
 
 
 
+<?php
+//get domain name
+$domain = $_SERVER['HTTP_HOST'];
 
+?>
 
 
 
@@ -13,7 +17,7 @@
             </a>
         </div>
         <div class="uk-navbar-right">
-            <a class="uk-navbar-toggle" href="https://verleihneu.fhstp.ac.at/fh_erleih/functions/logout.php">
+            <a class="uk-navbar-toggle" href="<?php $domain ?>/functions/logout.php">
                 <span class="uk-icon" uk-icon="sign-out"></span>
 
             </a>

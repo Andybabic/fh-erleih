@@ -104,7 +104,8 @@ if(isset($_POST['username']) && isset($_POST['password'])  ){
 
    }
     else {
-        //header("Location: ../pages/login.php?state=error");
+        header("Location: ../pages/login.php?state=error");
+        
    }
 
     // redirect to home page
