@@ -30,8 +30,8 @@ import Ajax from '../classes/Ajax.js';
                 2: "Audio",
                 3: "Video",
                 5: "InteraktiveMedien",
-                /*
                 6: "Physiotheraphie",
+                /*
                 9: "Diätologie",
                 */
             }
