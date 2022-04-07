@@ -39,7 +39,8 @@ export default class Ajax{
         const api = `${this.vars.apiUrl}user/${userId}/`;
 
         return new Promise((resolve, reject) => {
-            fetch(api)
+
+            fetch(api, {credentials: "include"})
                 .then(res => res.json())
                 .then(data => {
                     resolve(data);
