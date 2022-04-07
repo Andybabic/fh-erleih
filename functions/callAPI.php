@@ -5,24 +5,25 @@ $config_file = require_once("../config.php");
 
 //api url
 $api_url = $config_api_url;
+$headercockie=  getallheaders()["Cookie"] ;
 
 
 // zum beispiel $url = "util/login";
-function call($api_url ,$api, $call){
-    $url = $api_url . $api;
-    $data = $call;
+function call($url ){
+    global $headercockie;
+
+    $url = $url;
     $options = array(
             'http' => array(
+            'header'  => "Cookie: ".getallheaders()["Cookie"]."\r\n"."Content-type: application/json\r\n",
             'method'  => 'GET',
-            'content' => json_encode($data),
+            'content' => json_encode(''),
             'ignore_errors' => true,
-            //"\r\n","Content-type: application/json\r\n"
-            'header' => "Cookie: PHPSESSID=".$_COOKIE['PHPSESSID']."\r\n"."Content-type: application/json\r\n",
             )
-    );
+        );
     
     $context  = stream_context_create($options);
-    $result = file_get_contents( $url, false, $context );
+    $result = file_get_contents( $url, true, $context );
     // get sassion from request
     $session = json_decode($result, true);
 
@@ -34,24 +35,29 @@ function call($api_url ,$api, $call){
     $status = $match[1];
 
     if ($status !== "200") {
-         return "Sorry du hast keine Berechtigungen";
-
+        echo($url);
+        echo('<br>');
+        echo($status);
+        echo( "Sorry du hast keine Berechtigungen");
+        echo('<br>');
+        echo($headercockie);
+        echo('<br>');
+        echo(var_dump($status_data[8]));
+        return $session;
     }
     else {
         //set rest session to local session
-        return var_dump($session);
-
+        echo(json_encode($session));
     }
-
 }
 
 
-if(isset($_GET['r']) && isset($_GET['c'])){
+if(isset($_GET['r']) ){
     $api = $_GET['r'];
-    $call = $_GET['c'];
+   
 
 
-    $result = call($api_url , $api, $call);
+    $result = call($api_url.$api);
     echo($result);
 
 

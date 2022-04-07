@@ -9,7 +9,7 @@
 $current_dir = dirname($_SERVER['PHP_SELF']);
 //count the number of slashes in the current directory
 $count_slashes = substr_count($current_dir, "/");
-$path= "";
+$path= "../";
 //get the path to the root directory
 for ($i = 1; $i < $count_slashes; $i++) {
     $path = $path."../";

@@ -36,7 +36,7 @@ require_once("../functions/loader.php");
 
 
 <script>
-    var json = $.getJSON("https://verleihneu.fhstp.ac.at/fh_erleih/functions/callAPI.php?r=/user/&c");
+    var json = $.getJSON("/functions/callAPI.php?r=/user/&c");
     console.log(json);
 </script>
 

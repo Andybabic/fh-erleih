@@ -18,7 +18,7 @@ import Ajax from './Ajax.js';
                 request:        new Ajax(),
                 reservierung:   new Reservierung(),
             };
-            this.pageUrl = "https://verleihneu.fhstp.ac.at/fh_erleih/";
+            this.pageUrl = "localhost/";
 
 
             this.initOverviewPage();
