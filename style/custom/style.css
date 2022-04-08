@@ -79,3 +79,13 @@ h1,h2,h3,h4,h5,p, span, button, a{
 .nospace-up{
     margin-top: 0px;
 }
+
+.uk-navbar{
+    background-color: #005096 !important;
+}
+
+.uk-navbar span {
+    color:white !important;
+    font-size: 1.5rem;
+}
+
