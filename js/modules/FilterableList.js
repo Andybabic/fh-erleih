@@ -8,7 +8,7 @@ import Ajax from '../classes/Ajax.js';
         constructor($base, listType) {
             this.filter = {
                 today:              true,
-                tomorrow:           true,
+                tomorrow:           false,
                 timespan:           [],
             };
             this.vars = {
@@ -30,8 +30,8 @@ import Ajax from '../classes/Ajax.js';
                 2: "Audio",
                 3: "Video",
                 5: "InteraktiveMedien",
-                6: "Physiotheraphie",
                 /*
+                6: "Physiotheraphie",
                 9: "Diätologie",
                 */
             }
@@ -51,7 +51,15 @@ import Ajax from '../classes/Ajax.js';
             this.addFilter();
 
             if(localStorage.filterValues){
+                //if there are filter preferences stored apply them
                 this.filter = JSON.parse(localStorage.filterValues);
+            }else{
+                //if no values are stored set all department filter
+                for (const key in this.departments) {
+                    const filter = this.departments[key];
+                    console.log(filter);
+                    this.filter[filter] = true;
+                }
             }
             this.setFilterStyle();
 
@@ -113,9 +121,9 @@ import Ajax from '../classes/Ajax.js';
 
             const timeFilter = `
                     <div class="timeFilter">
-                        <button class="filterBtn ${this.vars.selectionClass}" data-filter="today" data-selected="1">Heute</button>
-                        <button class="filterBtn  ${this.vars.selectionClass}" data-filter="tomorrow" data-selected="1">Morgen</button>
-                        <button class="filterBtn " data-filter="togglePicker" data-selected="0">Datum</button>
+                        <button class="filterBtn ${this.vars.selectionClass}" data-filter="today">Heute</button>
+                        <button class="filterBtn  ${this.vars.selectionClass}" data-filter="tomorrow">Morgen</button>
+                        <button class="filterBtn " data-filter="togglePicker">Datum</button>
                     </div>
             `;
             const prepareFilters = `
@@ -210,7 +218,10 @@ import Ajax from '../classes/Ajax.js';
 
                 //get overview list based on filter settings
                 localStorage.filterValues = JSON.stringify(this.filter);
-                this.getList();
+                if(filter != "togglePicker"){
+                    //exception for toggle picker because this button only toggles date picker and doesnt trigger a list reload
+                    this.getList();
+                }
             });
         }
 
