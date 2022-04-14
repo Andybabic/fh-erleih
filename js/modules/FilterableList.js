@@ -244,6 +244,7 @@ import Ajax from '../classes/Ajax.js';
         }
 
         async getList(){
+            this.toggleLoader();
             //gets the reservations (by department) from
             const dates = this.getFilterDates();
             const startDate = dates[0];
@@ -339,6 +340,7 @@ import Ajax from '../classes/Ajax.js';
                 this.doms.listWrapper.html(resList);
             }
             this.listInteraction();
+            this.toggleLoader();
         }
 
         listInteraction(){
@@ -543,6 +545,23 @@ import Ajax from '../classes/Ajax.js';
                 },
             });
         };
+
+        toggleLoader(){
+            if($(".loader-horizontal").length){
+                $(".loader-horizontal").slideToggle();
+            }else{
+                const loader = `
+                    <div class="loader-horizontal">
+                      <div class="loader-horizontal__dot"></div>
+                      <div class="loader-horizontal__dot"></div>
+                      <div class="loader-horizontal__dot"></div>
+                    </div>
+                `;
+
+                $(loader).insertAfter(this.doms.filterWrapper);
+            }
+        }
+
 
         removeList(){
             //to call from modeSwitch

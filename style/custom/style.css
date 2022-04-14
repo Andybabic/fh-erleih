@@ -89,3 +89,39 @@ h1,h2,h3,h4,h5,p, span, button, a{
     font-size: 1.5rem;
 }
 
+/*---LOADER---*/
+.loader-horizontal {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+.loader-horizontal__dot {
+    width: 10px;
+    height: 10px;
+    background: var(--FHdefaultblue);
+    border-radius: 100%;
+    float: left;
+    margin-right: 6px;
+    animation: bounce 1.8s infinite;
+}
+.loader-horizontal__dot:first-child {
+    animation-delay: 0.1s;
+}
+.loader-horizontal__dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.loader-horizontal__dot:nth-child(3) {
+    animation-timing-function: ease;
+    animation-delay: 0.5s;
+}
+@-webkit-keyframes bounce {
+    0%, 100% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;
+    }
+}
