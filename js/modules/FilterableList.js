@@ -313,6 +313,7 @@ import Ajax from '../classes/Ajax.js';
                 this.doms.listWrapper.html(emptyMessage);
             }else{
                 let resList = `<ul class="uk-list uk-list-striped">`;
+                let doneList = `<ul class="doneList uk-list uk-list-striped">`;
                 //iterate through days
                 for (const resByDate of data) {
                     const reservations = resByDate.reservations;
@@ -324,11 +325,16 @@ import Ajax from '../classes/Ajax.js';
                         const date = new Date(res.date);
                         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                         const dateStr = date.toLocaleDateString("de-DE", dateOptions);
-
+                        //add class if reservation is in preparation or fully prepared
+                        let preperationClass = "";
+                        if(res.inPreparation && !res.preparedAll){
+                            preperationClass = "inPreparation";
+                        }else if(res.preparedAll){
+                            preperationClass = "preparedAll";
+                        }
 
                         let li = `
-                            
-                            <li class="reservation" data-id = ${curId}>
+                            <li class="reservation ${preperationClass}" data-id = ${curId}>
                                 <h2>${res.firstName} ${res.lastName} - ${res.userId}</h2>
                                 <p>${dateStr}</p>  
                                 <p>Anzahl an Equipment: ${res.reservations.length}</p>
@@ -345,11 +351,41 @@ import Ajax from '../classes/Ajax.js';
                         }
                         li += `</p></li>`;
 
-                        resList += li;
+                        //append li to reslist or to preparedlist depending on preparedAll attribute
+                        if(res.preparedAll){
+                            doneList += li;
+                        }else{
+                            resList += li;
+                        }
                     }
                 }
                 resList += `</ul>`;
-                this.doms.listWrapper.html(resList);
+                doneList += `</ul>`;
+
+                //create done list with toggle if list is not empty
+                let doneListWrapper;
+                if($(doneList)[0].childElementCount){
+                    doneListWrapper = `
+                        <div class="doneListWrapper">
+                            <div id="doneListToogle">
+                                <h2>Vorbereitet</h2>
+                                <span class="doneListArrow">&darr;</span>
+                            </div>
+                            ${doneList}
+                        </div>
+                    `;
+                }else{
+                    doneListWrapper = "";
+                }
+
+
+                //clear list and add list again
+                this.doms.listWrapper.html("");
+                this.doms.listWrapper.append(resList);
+                if(doneListWrapper != ""){
+                    this.doms.listWrapper.append(doneListWrapper);
+                }
+
             }
             this.listInteraction();
             this.toggleLoader();
@@ -360,6 +396,16 @@ import Ajax from '../classes/Ajax.js';
                 const id = e.target.dataset.id
                 const data = this.vars[id];
                 this.nextPage(data);
+            });
+
+            //done list toggle
+            $("#doneListToogle").on("click", () => {
+                if($(".doneList").is(":visible")){
+                    $(".doneListArrow").css({"transform":"rotate(180deg)"})
+                }else{
+                    $(".doneListArrow").css({"transform":"rotate(0deg)"})
+                }
+                $(".doneList").slideToggle();
             });
         }
 
@@ -437,9 +483,11 @@ import Ajax from '../classes/Ajax.js';
                 const res = resList[i];
                 const userId = resList[i]["userId"];
                 if(!userIDs.includes(userId)){
-                    //if the current ID is not already in the userIDs array add it
+                    //if the current ID is not already in the userIDs array, add it
                     userIDs.push(userId);
+                    //get user data for every user
                     const user = await this.modules.ajax.getUserById(userId);
+
                     resByUser.push(
                         {
                             "userId"            :userId,
@@ -449,14 +497,23 @@ import Ajax from '../classes/Ajax.js';
                             "tel"               :user["tel"],
                             "date"              :this.vars.listType == "prepare" ? res["from"] : res["to"],
                             "reservations"      :[res],
-
+                            "inPreparation"     :res["prepared"],
+                            "preparedAll"       :res["prepared"],
                         }
                     );
                 }else{
-                    //count of reservations per user
                     for (const user of resByUser) {
+                        //add all further reservations to the existing user in the resByUser array
                         if(user["userId"] == userId){
                             user["reservations"].push(res);
+                            //if the prepared state of one individual reservation is not true the resbyuser object is not fully prepared
+                            if(res["prepared"]==0){
+                                user["preparedAll"] = 0;
+                            }
+                            //if prepared state of one reservation is true the resbyuser object is in preparation
+                            if(res["prepared"]==1){
+                                user["inPreparation"] = 1;
+                            }
                         }
                     }
                 }
