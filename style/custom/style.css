@@ -2,13 +2,15 @@
     /*font-size: 62.5%;
     1.5rem = 15px*/
     --fontSize: 1rem;
-    --fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --FHlightblue: #CDDEEB;
     --FHdefaultblue: #005096;
+    --inPreparationColor: rgba(14, 151, 0, .3);
+    --preparedAllColor: rgba(14, 151, 0, .6);
 }
 
 h1,h2,h3,h4,h5,p, span, button, a{
-    font-family: var(--fontfamily);
+    font-family: var(--fontFamily);
 }
 
 
@@ -124,4 +126,13 @@ h1,h2,h3,h4,h5,p, span, button, a{
     60% {
         opacity: 0;
     }
+}
+
+/* in preparation and prepared overview list items */
+/*important hier leider notwendig bis bessere lösung wegen uikit list style*/
+.listWrapper .uk-list .inPreparation{
+    background-color: var(--inPreparationColor);
+}
+.listWrapper .uk-list .preparedAll{
+    background-color: var(--preparedAllColor);
 }
