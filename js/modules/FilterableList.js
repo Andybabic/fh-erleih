@@ -297,6 +297,7 @@ import Ajax from '../classes/Ajax.js';
             }else{
                 //group the list by day and by user
                 const groupedData = await this.groupResByDate(departmentData);
+                const groupByPrepared = this.groupByPrepared(groupedData);
                 //console.log(groupedData);
                 //display list
                 this.displayList(groupedData);
@@ -396,7 +397,8 @@ import Ajax from '../classes/Ajax.js';
             const resByDates = [];
 
             for (const res of resList) {
-                const date = res[type];
+                //slice to ignore time
+                const date = res[type].slice(0,10);
                 //check if resByDates Array already contains the date
                 if(resByDates.length > 0){
                     //check if date is already in array
@@ -460,6 +462,10 @@ import Ajax from '../classes/Ajax.js';
                 }
             }
             return resByUser;
+        }
+
+        groupByPrepared(data){
+            console.log(data);
         }
 
         getFilterDates(){
