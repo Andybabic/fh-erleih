@@ -118,3 +118,7 @@ h2,p{
     margin-top: 0;
 }
 
+/*after to provide space for footer*/
+#filterableList{
+    margin-bottom: 50px;
+}

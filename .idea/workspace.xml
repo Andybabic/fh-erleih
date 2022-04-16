@@ -4,7 +4,10 @@
     <list default="true" id="72af2ec9-6af1-46b1-8977-58eb14f831e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/modules/FilterableList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/FilterableList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/modules/ModeSwitch.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/ModeSwitch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/modeSwitch.php" beforeDir="false" afterPath="$PROJECT_DIR$/modules/modeSwitch.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style/custom/overview.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/overview.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/custom/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +55,8 @@
       <updated>1649956390849</updated>
       <workItem from="1649956392168" duration="4732000" />
       <workItem from="1650019491134" duration="5097000" />
-      <workItem from="1650044216930" duration="3526000" />
+      <workItem from="1650044216930" duration="3937000" />
+      <workItem from="1650127929085" duration="3772000" />
     </task>
     <servers />
   </component>

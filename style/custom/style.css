@@ -7,6 +7,7 @@
     --FHdefaultblue: #005096;
     --inPreparationColor: rgba(14, 151, 0, .3);
     --preparedAllColor: rgba(14, 151, 0, .6);
+    --footerHeight: 50px;
 }
 
 h1,h2,h3,h4,h5,p, span, button, a{
@@ -40,6 +41,20 @@ h1,h2,h3,h4,h5,p, span, button, a{
     width: 100%;
 }
 
+/*main*/
+main{
+    margin-bottom: var(--footerHeight);
+}
+
+/*footer*/
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--footerHeight);
+    background-color: #fff;
+}
 
  /* Style for Checklist */
 

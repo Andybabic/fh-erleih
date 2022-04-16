@@ -57,7 +57,6 @@ import Ajax from '../classes/Ajax.js';
                 //if no values are stored set all department filter
                 for (const key in this.departments) {
                     const filter = this.departments[key];
-                    console.log(filter);
                     this.filter[filter] = true;
                 }
             }
@@ -88,11 +87,10 @@ import Ajax from '../classes/Ajax.js';
                         this.filter.timespan.push(this.formatDate(date[0]));
                     }
                     this.addPickerStyle();
-                    console.log(date);
                 },
                 onInit: (e) => {
-                    console.log(e);
-                    console.log(new Date(this.filter.timespan[0]));
+                    //console.log(e);
+                    //console.log(new Date(this.filter.timespan[0]));
                 },
             });
 
@@ -297,7 +295,6 @@ import Ajax from '../classes/Ajax.js';
             }else{
                 //group the list by day and by user
                 const groupedData = await this.groupResByDate(departmentData);
-                const groupByPrepared = this.groupByPrepared(groupedData);
                 //console.log(groupedData);
                 //display list
                 this.displayList(groupedData);
@@ -521,9 +518,6 @@ import Ajax from '../classes/Ajax.js';
             return resByUser;
         }
 
-        groupByPrepared(data){
-            console.log(data);
-        }
 
         getFilterDates(){
             //returns array with one date (today & tomorrow) or start and end (timespan)
@@ -576,35 +570,6 @@ import Ajax from '../classes/Ajax.js';
             return diffDays;
         }
 
-
-        async filterResList(e){
-            const filter = $(e.target);
-            if(filter.hasClass("filter-selected")){
-                filter.removeClass("filter-selected");
-                e.target.value = 0;
-            }else{
-                filter.addClass("filter-selected");
-                e.target.value = 1;
-            }
-            const resData = await this.modules.reservierung.getResByFilter(Boolean($("#filter-today").val()*1), Boolean($("#filter-tomorrow").val()*1), Boolean($("#filter-timespan").val()*1));
-            if(resData != -1){
-                //note: -1 not possible yet
-                const lastList = this.doms.listWrapper.children()[0];
-                const newList = UIresList(resData);
-                const newListDOM = newList.get(0);
-
-                if(!newListDOM.isEqualNode(lastList)){
-                    //if new filter settings return a different list
-                    this.doms.listWrapper.html(newList);
-                    console.log("changed");
-                }else{
-                    console.log("not changed");
-                }
-
-            }
-
-        }
-
         addDatePicker(){
             const datepicker = new Datepicker('#page-overview', {
                 inline: true,
@@ -635,7 +600,6 @@ import Ajax from '../classes/Ajax.js';
                 $(loader).insertAfter(this.doms.filterWrapper);
             }
         }
-
 
         removeList(){
             //to call from modeSwitch
