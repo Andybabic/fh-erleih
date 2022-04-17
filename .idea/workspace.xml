@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72af2ec9-6af1-46b1-8977-58eb14f831e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/js/select2/select2.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/select2/select2.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/classes/Ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/classes/Ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/modules/FilterableList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/FilterableList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/modules/ScanSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/ScanSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/scanSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/modules/scanSearch.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/scan.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/scan.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style/custom/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/style.css" afterDir="false" />
     </list>
@@ -72,6 +71,7 @@
       <workItem from="1650127929085" duration="4719000" />
       <workItem from="1650134502199" duration="436000" />
       <workItem from="1650196694340" duration="9724000" />
+      <workItem from="1650216973054" duration="4227000" />
     </task>
     <servers />
   </component>

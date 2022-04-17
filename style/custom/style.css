@@ -157,9 +157,19 @@ footer{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.selectWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
 }
-#scanSearch select{
+.selectWrapper select{
     width: 90%;
     margin: 15px 0;
+}
+.selectResult{
+    text-align: center;
+    width: 90%;
+    padding: 15px;
 }

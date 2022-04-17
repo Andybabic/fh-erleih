@@ -11,7 +11,8 @@ import Ajax from '../classes/Ajax.js';
                 currentMode:        "prepare",
             };
             this.doms = {
-                base:               $base,
+                base:                   $base,
+                resultWrapper:          $base.find(".selectResultWrapper"),
                 selects: {
                     departmentSelect:   $base.find("#departmentSelect"),
                     categorySelect:     $base.find("#categorySelect"),
@@ -31,6 +32,7 @@ import Ajax from '../classes/Ajax.js';
         async initScanSearch(){
             //init department select first
             const departmentOptions = await this.modules.ajax.getDepartments();
+            this.sortAlphabetically(departmentOptions);
             await this.addSelectOptions("departmentSelect", departmentOptions);
 
             //init select2
@@ -44,8 +46,6 @@ import Ajax from '../classes/Ajax.js';
             //add onchange interaction
             this.addInteraction();
         };
-
-
 
 
         addSelectOptions(select, options){
@@ -67,8 +67,8 @@ import Ajax from '../classes/Ajax.js';
                 //clear all following selects
                 this.clearFollowingSelects("departmentSelect");
 
-                //follow.empty();
                 const options = await this.modules.ajax.getEquipmentCategory(e.params.data.id);
+                this.sortAlphabetically(options);
                 this.addSelectOptions("categorySelect", options);
             });
             //category select
@@ -77,19 +77,33 @@ import Ajax from '../classes/Ajax.js';
                 this.clearFollowingSelects("categorySelect");
 
                 const options = await this.modules.ajax.getEquipmentType($("#departmentSelect").val(),e.params.data.id);
-                this.addSelectOptions("typeSelect", options);
+                const uniqueOptions = this.removeDuplicates(options);
+                console.log(uniqueOptions);
+                this.sortAlphabetically(uniqueOptions);
+                this.addSelectOptions("typeSelect", uniqueOptions);
             });
             //type select
             this.doms.selects.typeSelect.on('select2:select', async (e) => {
+                console.log("selected");
                 //clear all following selects
                 this.clearFollowingSelects("typeSelect");
-
                 const options = await this.modules.ajax.getEquipment(e.params.data.id);
+                console.log(options);
+                this.sortAlphabetically(options);
                 this.addSelectOptions("equipmentSelect", options);
             });
             //equipment select
             this.doms.selects.equipmentSelect.on('select2:select', (e) => {
-
+                //output which id will put on nfc tag
+                const result = `
+                    <div class="selectResult">
+                        <h2>Objekt</h2>
+                        <p>${$("#typeSelect").children(':selected').text()} - ${$("#equipmentSelect").children(':selected').text()}</p>
+                        <h2>ID</h2>
+                        <p>${$("#equipmentSelect").val()}</p>
+                    </div>
+                `;
+                this.doms.resultWrapper.html(result);
             });
         }
 
@@ -100,9 +114,42 @@ import Ajax from '../classes/Ajax.js';
                 if(toDelete){
                     //clear select
                     this.doms.selects[key].empty();
+                    //clear result if the equipmentselect is empty
+                    console.log(key);
+                    if(key == "equipmentSelect"){
+                        this.doms.resultWrapper.html("");
+                    }
                 }
                 if(key == select)toDelete = true;
             }
+        }
+
+        removeDuplicates(options){
+            //function to remove duplicates espeially for eqTyp
+            let uniqueIds = [];
+            let uniqueOptions = [];
+            for (const option of options) {
+                if(!uniqueIds.includes(option.id)){
+                    uniqueIds.push(option.id);
+                    uniqueOptions.push(option);
+                }
+            }
+            return uniqueOptions;
+        }
+
+        sortAlphabetically(options){
+            const sortedOptions = options.sort(function(a, b) {
+                var nameA = a.nameDe.toUpperCase(); // ignore upper and lowercase
+                var nameB = b.nameDe.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                    return -1; //nameA comes first
+                }
+                if (nameA > nameB) {
+                    return 1; // nameB comes first
+                }
+                return 0;  // names must be equal
+            });
+            return sortedOptions;
         }
 
 

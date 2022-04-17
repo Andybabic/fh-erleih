@@ -81,8 +81,6 @@ export default class Ajax{
     }
 
     async getEquipmentType(departmentId, eqKatId){
-        console.log(departmentId);
-        console.log(eqKatId);
         const api = `${this.vars.apiUrl}eqTyp/byBereichKat/${departmentId}/${eqKatId}/`;
 
         return new Promise((resolve, reject) => {
@@ -97,7 +95,6 @@ export default class Ajax{
     }
 
     async getEquipment(eqTypeId){
-        console.log(eqTypeId);
         const api = `${this.vars.apiUrl}equipment/byTyp/${eqTypeId}/`;
 
         return new Promise((resolve, reject) => {
