@@ -151,3 +151,15 @@ footer{
 .listWrapper .uk-list .preparedAll{
     background-color: var(--preparedAllColor);
 }
+
+/*scan search module*/
+#scanSearch{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#scanSearch select{
+    width: 90%;
+    margin: 15px 0;
+}

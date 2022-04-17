@@ -47,11 +47,69 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                reject(0);
+                reject(-1);
             });
         });
     }
 
+    async getDepartments(){
+        const api = `${this.vars.apiUrl}bereich/`;
+
+        return new Promise((resolve, reject) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                reject(-1);
+            });
+        });
+    }
+
+    async getEquipmentCategory(departmentId){
+        const api = `${this.vars.apiUrl}eqKat/byBereich/${departmentId}/`;
+
+        return new Promise((resolve, reject) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                reject(-1);
+            });
+        });
+    }
+
+    async getEquipmentType(departmentId, eqKatId){
+        console.log(departmentId);
+        console.log(eqKatId);
+        const api = `${this.vars.apiUrl}eqTyp/byBereichKat/${departmentId}/${eqKatId}/`;
+
+        return new Promise((resolve, reject) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                reject(-1);
+            });
+        });
+    }
+
+    async getEquipment(eqTypeId){
+        console.log(eqTypeId);
+        const api = `${this.vars.apiUrl}equipment/byTyp/${eqTypeId}/`;
+
+        return new Promise((resolve, reject) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                reject(-1);
+            });
+        });
+    }
 
 
 }

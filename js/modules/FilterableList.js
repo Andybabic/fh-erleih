@@ -68,7 +68,7 @@ import Ajax from '../classes/Ajax.js';
                     <input type="hidden" id="ranged">
                     <button id="submitSpanFilter" class="filterBtn dateFilter" data-filter="timespan">Filter setzen</button>
                 </div>`
-            this.doms.base.append(pickerWrapper);
+            this.doms.filterWrapper.append(pickerWrapper);
 
             //TODO datepicker default date from localstorage
             //init time picker
@@ -89,9 +89,12 @@ import Ajax from '../classes/Ajax.js';
                     this.addPickerStyle();
                 },
                 onInit: (e) => {
-                    //console.log(e);
+                    console.log(e);
                     //console.log(new Date(this.filter.timespan[0]));
                 },
+                onRender: (e) => {
+                    console.log(e);
+                }
             });
 
             //init list

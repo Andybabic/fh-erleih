@@ -20,6 +20,7 @@ require_once("../functions/loader.php");
             <?php getModule('menu') ?>
     </header>
     <main>
+        <?php getModule('scanSearch') ?>
         <div uk-grid>
             <div class="uk-position-center">
                     <img src="../style/image/Scanpic.svg" >
