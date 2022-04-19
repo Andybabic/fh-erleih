@@ -31,39 +31,19 @@ import FilterableList from './FilterableList.js';
         //METHODS
 
         initModeSwitch(){
-            console.log(localStorage.overviewState);
-            if(localStorage.overviewState){
-                //try to get state value from localstorage
-                this.modules.filterableList = new FilterableList($("#filterableList"), localStorage.overviewState);
-                this.vars.currentMode = localStorage.overviewState;
-            }else{
-                //if no stored value -> prepared state as default
-                this.modules.filterableList = new FilterableList($("#filterableList"), "prepare");
-            }
+            this.modules.filterableList = new FilterableList($("#filterableList"), "prepare");
 
             this.addInteraction();
-            this.addActiveClass();
         };
 
         addInteraction(){
             this.doms.switchBtn.on("click", (e) => {
                 const val = e.target.dataset.mode;
-                //if the clicked value is different than the current state switch
                 if(val != this.vars.currentMode){
                     this.vars.currentMode = val;
-                    //store current state to localstorage
-                    localStorage.overviewState = val;
                     this.switchMode();
-                    this.addActiveClass();
                 }
             });
-        }
-
-        addActiveClass(){
-            //remove active class first
-            $(".modeSwitch").removeClass("uk-active");
-            //add active class
-            $("#modeSwitch").find(`[data-mode='${this.vars.currentMode}']`).closest("li").addClass("uk-active");
         }
 
         switchMode(){
@@ -76,6 +56,8 @@ import FilterableList from './FilterableList.js';
                 case "return":
                     this.modules.filterableList.removeList();
                     this.modules.filterableList = new FilterableList($("#filterableList"), "return");
+                    break;
+                case "scan":
                     break;
             }
         }

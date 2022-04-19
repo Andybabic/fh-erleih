@@ -124,66 +124,8 @@ $jsonUser = json_decode($data, true);
                 </article>
                 <hr>
                 <!--Start List of Equipment-->
-                <div class="uk-container ">
-                    <div role="main" class="ui-content">
-                        <ul data-role="listview">
-                            <?php 
-                            
-                            //generate a html element for each entry in the array
-                            for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
-                                $data= dings($jsonUser['reservations'][$i]['equipId']);
-                               
-                                ?>
-                     
-                                    <!---Start Equipment Card element--->
-                                    <div  class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline blue-20 swipebox" >
-                                        <div class="checkListbutton">
-                                            <input class="checklist-checkbox" type="checkbox" value="<?=$data['typeId']?>" >
-                                        </div>
-                                        <div class="grid-100 ">
-                                            <h3 class="uk-text-lead "><?=$data["nameDe"]?> <p class="uk-text-lighter uk-display-inline"> id:<?=$data["typeId"]?></p></h3>
-                                            <div class="uk-align-left ">
-                                                <p><?=$data["damage"]?></p>
-                                            </div>
-                                            <div class="uk-align-left ">
-                                                <p><?=$data["nameDe"]?></p>
-                                            </div>
-
-
-                                                <!---Packliste--->
-                                                    <!---Start PHP LOOP--->  
-                                                    <?php     $packlist = packlist($data['id']);
-                                    
-                                                        if (count($packlist) == 0) {
-
-                                                        }
-                                                        else {?>
-                                                                <div class="grid-100 uk-align-left"   >
-                                                                        <hr class="uk-divider-vertical uk-align-left custom_HR ">
-                                                                            <div class="uk-text-large nospace-up">Packliste</div>
-                                                                            <ul>
-                                                                            
-                                                                                <?php  for($item = 0; $item < count($packlist) ; ++$item) { ?>
-                                                                                        <li>
-                                                                                            <label>
-                                                                                                <input value="<?=$packlist[$item]['nameDe']?>" class="checklist-checkbox" type="checkbox"> <?=$packlist[$item]['nameDe']?> </input>
-                                                                                            </label>
-                                                                                        </li>
-                                                                                        <?php } ?>
-                                                                            </ul>
-                                                                </div>                
-                                                    <?php  } ?>
-                                                    <!---End PHP LOOP--->
-                                                <!---End Packliste--->
-                                            
-                                        </div>
-                                    </div>
-                                    <!---End Equipment Card element--->
-
-                            <?php } ?>
-                        </ul>
-                    </div>
-                </div>
+                <?php  include '../modules/checklist-element.php'?>
+                <!--End List of Equipment-->
                 
             </main>
              
@@ -203,30 +145,10 @@ $jsonUser = json_decode($data, true);
 
 
     <script >
-        var done = [];
-        var checkboxesArray = document.querySelectorAll('.checklist-checkbox');
-        //create a list of all checkboxes
-        var checkboxes = document.querySelectorAll('.checklist-checkbox');
-        // print value of checkbox
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener('change', function() {
-                console.log(this.value);
-                //check if checkbox is checked whenn false, add to done array
-                if (!this.checked) {
-                    done.push(this.value);
-                }
-                //check if checkbox is unchecked whenn true, remove from done array
-                else {
-                    var index = done.indexOf(this.value);
-                    if (index > -1) {
-                        done.splice(index, 1);
-                    }
-                }
-                console.log(checkboxesArray);
-                console.log(done);
 
-            });
-        }
+       
+
+
 
 
 
@@ -254,9 +176,7 @@ $jsonUser = json_decode($data, true);
             form.submit();
         }
    
-        //create a box that can be swipe to the left
-        var box = document.querySelector('.swipebox');
-        var hammertime = new Hammer(box);
+
 
  
    

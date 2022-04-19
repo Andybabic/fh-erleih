@@ -1,65 +1,188 @@
-$.fn.extend({
-    createBtn: function () {
-        var elmWidth = $("li", $(this)).width(),
-            listType = $(this).listview("option", "inset") ? true : false,
-            btnWidth = elmWidth < 300 && listType ? "35%" : elmWidth > 300 && !listType ? "25%" : "20%";
-        $("li", $(this)).each(function () {
-            var text = $(this).html();
-            $(this).html($("<div/>", {
-                class: "wrapper"
-            }).append($("<div/>", {
-                class: "go"
-            }).text("Save").width(btnWidth)).append($("<div/>", {
-                class: "item"
-            }).text(text)).append($("<div/>", {
-                class: "del"
-            }).text("Delete").width(btnWidth)).css({
-                left: "-" + btnWidth
-            }).on("swipeleft swiperight vclick tap", function (e) {
 
-                $(this).revealBtn(e, btnWidth);
-            }) /**/ );
-        });
-    },
-    revealBtn: function (e, x) {
-        var check = this.check(x),
-            swipe = e.type;
-        if (check == "closed") {
-            swipe == "swiperight" ? this.open(e, x, "left") : swipe == "swipeleft" ? this.open(e, x, "right") : setTimeout(function () {
-                this.close(e);
-            }, 0);
-            e.stopImmediatePropagation();
-        }
-        if (check == "right" || check == "left") {
-            swipe == "swiperight" ? this.open(e, "left") : swipe == "swipeleft" ? this.open(e, x, "right") : setTimeout(function () {
-                this.close(e);
-            }, 0);
-            e.stopImmediatePropagation();
-        }
-        if (check !== "closed" && e.isImmediatePropagationStopped() && (swipe == "vclick" || swipe == "tap")) {
-            this.close(e);
-        }
-    },
-    close: function (e) {
-        var check = this.check();
-        this.css({
-            transform: "translateX(0)"
-        });
-    },
-    open: function (e, x, dir) {
-        var posX = dir == "left" ? x : "-" + x;
-        $(this).css({
-            transform: "translateX(" + posX + ")"
-        });
-    },
-    check: function (x) {
-        var matrix = this.css("transform").split(" "),
-            posY = parseInt(matrix[matrix.length - 2], 10),
-            btnW = (this.width() * parseInt(x) / 100) / 1.1;
-        return isNaN(posY) ? "closed" : posY >= btnW ? "left" : posY <= "-" + btnW ? "right" : "closed";
+class Swipebox {
+
+    // when mouse is over the swipebox object an moved to left or right, the swipebox object will be moved to the left or right
+    // the max distance is limited to 300px
+
+    constructor(element) {
+        this.element = element;
+        this.element.addEventListener('mousemove', this.mouseMove.bind(this));
+        this.element.addEventListener('mouseleave', this.mouseLeave.bind(this));
+        this.element.addEventListener('mousedown', this.mouseDown.bind(this));
+        this.element.addEventListener('mouseup', this.mouseUp.bind(this));
+
+        // adding touch events
+        this.element.addEventListener('touchstart', this.touchStart.bind(this));
+        this.element.addEventListener('touchmove', this.touchMove.bind(this));
+        this.element.addEventListener('touchend', this.touchEnd.bind(this));
+        this.element.addEventListener('touchstart', this.touchStart.bind(this));
+        this.maxdistance = 200;
+        this.trashhold= 0.2;
+        this.pos=0;
+        this.state=0;
+        this.fixed= true
+
+    }   
+
+
+    //check if interaction is active
+    mouseDown(event) {
+        this.mouseDown = true;
+        this.mouseDownX = event.clientX - this.element.offsetLeft;
     }
-});
+    touchStart(event) {
+        this.touchStart= true;
+        this.touchStartX = event.touches[0].clientX - this.element.offsetLeft;
+    }
 
-$(document).on("pagecreate", function () {
-    $("ul").createBtn();
-});
+    // is active moving
+    mouseMove(event) {
+        if (this.mouseDown && this.fixed) {
+            let x = event.clientX - this.element.offsetLeft;
+                let distance = x - this.mouseDownX;
+            this.drag(event, distance);
+        }
+    }
+    touchMove(event) {
+        if(this.touchStart && this.fixed) {
+            let x =  event.touches[0].clientX - this.element.offsetLeft;
+            let distance = x - this.touchStartX;
+            this.drag(event,distance);   
+         }
+    }
+
+     //interaction stopping
+    mouseLeave() {
+        this.cancel();
+        
+    }
+
+    mouseUp() {
+        this.cancel();
+        
+    }
+    touchEnd() {
+        this.cancel();
+    }
+
+    cancel(){
+        this.touchStart = false;
+        this.mouseDown = false;
+    }
+
+    reset(){
+            setTimeout(() => {
+               this.fixed=true;
+               this.pos=0;
+               this.element.style.left =this.pos+ 'px';
+               this.element.style.transition = 'all 0.9s ease-in-out';
+          });
+    }
+
+
+
+    drag(event,distance){
+        
+        let maxDistance = this.maxdistance;
+        this.pos=distance;
+        this.element.style.left = this.pos + 'px';
+        if(distance < maxDistance*this.trashhold && distance > -maxDistance*this.trashhold && this.state == 1){
+            this.fixed=false;
+            this.check();
+            this.reset();
+        }
+        else if (distance > maxDistance*this.trashhold && this.state == 0) {
+            this.fixed=false;
+            this.check();
+            this.cancel();
+        } 
+        else if (distance < -maxDistance*this.trashhold && this.state == 0) {    
+            this.fixed=false;        
+            this.check();
+            this.cancel();
+        }
+        else {
+            this.reset();
+        }
+       
+       
+    }
+
+   
+
+    //check current position an finish interaction
+    check(){
+        this.fixed=false;
+        this.mouseDown = false;
+        this.touchStart = false;
+        var distance = this.pos;
+        //this.element.style.transition = 'all 0.1s ease-in-out';
+        if  (this.state==1)  {
+            this.state=0;
+            this.movePostition(0);  
+            
+        } 
+        else {
+            if (distance < (-1* this.maxdistance * this.trashhold) && this.state == 0)   {
+                this.movePostition( -1* this.maxdistance);
+                this.state=1;
+            }
+            if (distance > (1* this.maxdistance * this.trashhold)  && this.state == 0) {
+                this.movePostition( 1* this.maxdistance);
+                this.state=1;
+    
+            }
+
+        }
+
+        
+            
+        //this.element.style.transition = 'all 0.3s ease-in-out';
+        
+
+    }
+
+    movePostition(position){
+        this.pos=position;
+        this.element.style.left =this.pos+ 'px';
+        this.element.style.transition = 'all 0.3s ease-in-out';
+        this.fixed=true;
+        this.cancel();
+        
+
+
+        
+
+    }
+
+
+
+
+}
+
+    // create a uniqe instance of Swipebox for every div with class swipebox_Object
+    var swipebox_Objects = document.getElementsByClassName("swipebox_Object");
+    for (var i = 0; i < swipebox_Objects.length; i++) {
+        var swipebox_Object = new Swipebox(swipebox_Objects[i]);
+        
+        
+    }
+
+
+
+    // create slow movement of the swipebox object
+function smooth(start,end) {
+        let distance = end - start;
+        let speed = distance / 100;
+        let step = speed / 10;
+        let current = start;
+        let interval = setInterval(function () {
+            current += step;
+            if (current > end) {
+                current = end;
+                clearInterval(interval);
+            }
+            this.element.style.left = current + 'px';
+        }.bind(this), 10);
+}
+  
