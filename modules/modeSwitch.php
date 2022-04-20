@@ -1,16 +1,21 @@
- <nav id="modeSwitch">
-        <ul class="uk-tab  uk-width-1-1 uk-flex-center">
-            <li class="modeSwitch">
-                <a data-mode="prepare">Vorbereitung</a>
-            </li>
-            <li class="modeSwitch">
-                <a data-mode="return">Rücknahme</a>
-            </li>
-            <!--
-            <li>
-                <a data-mode="scan" class="modeSwitch" href="#">Scan</a>
-            </li>
-            -->
-        </ul>
- </nav>
- <script type="module" src="../js/modules/ModeSwitch.js"></script>
+<nav id="modeSwitch">
+    <ul class="uk-tab  uk-width-1-1 uk-flex-center">
+        <li class="modeSwitch">
+
+            <a data-mode="prepare"><svg xmlns="http://www.w3.org/2000/svg" width="16.929" height="22.571" viewBox="0 0 16.929 22.571">
+                    <path id="Icon_awesome-clipboard-list" data-name="Icon awesome-clipboard-list" d="M14.812,2.821H11.286a2.821,2.821,0,1,0-5.643,0H2.116A2.117,2.117,0,0,0,0,4.937V20.455a2.117,2.117,0,0,0,2.116,2.116h12.7a2.117,2.117,0,0,0,2.116-2.116V4.937A2.117,2.117,0,0,0,14.812,2.821ZM4.232,18.692A1.058,1.058,0,1,1,5.29,17.634,1.055,1.055,0,0,1,4.232,18.692Zm0-4.232A1.058,1.058,0,1,1,5.29,13.4,1.055,1.055,0,0,1,4.232,14.46Zm0-4.232A1.058,1.058,0,1,1,5.29,9.17,1.055,1.055,0,0,1,4.232,10.228ZM8.464,1.763A1.058,1.058,0,1,1,7.406,2.821,1.055,1.055,0,0,1,8.464,1.763Zm5.643,16.223a.354.354,0,0,1-.353.353H7.406a.354.354,0,0,1-.353-.353v-.705a.354.354,0,0,1,.353-.353h6.348a.354.354,0,0,1,.353.353Zm0-4.232a.354.354,0,0,1-.353.353H7.406a.354.354,0,0,1-.353-.353v-.705a.354.354,0,0,1,.353-.353h6.348a.354.354,0,0,1,.353.353Zm0-4.232a.354.354,0,0,1-.353.353H7.406a.354.354,0,0,1-.353-.353V8.817a.354.354,0,0,1,.353-.353h6.348a.354.354,0,0,1,.353.353Z"/>
+                </svg>Vorbereitung</a>
+        </li>
+        <li class="modeSwitch">
+            <a data-mode="return"><svg xmlns="http://www.w3.org/2000/svg" width="19.75" height="22.571" viewBox="0 0 19.75 22.571">
+                    <path id="Icon_awesome-shopping-bag" data-name="Icon awesome-shopping-bag" d="M15.518,7.054V5.643a5.643,5.643,0,1,0-11.286,0V7.054H0V19.045a3.527,3.527,0,0,0,3.527,3.527h12.7a3.527,3.527,0,0,0,3.527-3.527V7.054ZM7.054,5.643a2.821,2.821,0,1,1,5.643,0V7.054H7.054Zm7.054,5.29a1.058,1.058,0,1,1,1.058-1.058A1.058,1.058,0,0,1,14.107,10.933Zm-8.464,0A1.058,1.058,0,1,1,6.7,9.875,1.058,1.058,0,0,1,5.643,10.933Z"/>
+                </svg>Rücknahme</a>
+        </li>
+        <!--
+        <li>
+            <a data-mode="scan" class="modeSwitch" href="#">Scan</a>
+        </li>
+        -->
+    </ul>
+</nav>
+<script type="module" src="../js/modules/ModeSwitch.js"></script>
