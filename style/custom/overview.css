@@ -51,10 +51,10 @@ background-color: #669BC1 !important;
     pointer-events: none;
 }
 
-.reservation{
+.uk-list .reservation{
     border: 1px solid #707070;
     padding: 1rem 2rem;
-    background-color: white !important; ;
+    background-color: white;
 }
 
 .timeFilter{
@@ -77,8 +77,8 @@ h2,p{
     background-color: blue;
     margin: 0 0.2rem 0 0;
     padding: 0.4rem;
-    background-color: #227C9D !important;
-    color: #FEF9EF !important;
+    background-color: #227C9D;
+    color: #FEF9EF;
     border-radius: 0.3rem;
 }
 
@@ -95,4 +95,29 @@ h2,p{
     font-size: 1.5rem;
   }
 
+/*donelist*/
+#doneListToogle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+.doneListArrow{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    border-radius: 50%;
+    color: white;
+    transition: all .4s ease-in;
+}
+.doneListWrapper .doneList.uk-list{
+    margin-top: 0;
+}
 
+/*after to provide space for footer*/
+#filterableList{
+    margin-bottom: 50px;
+}
