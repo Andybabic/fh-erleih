@@ -30,10 +30,6 @@ import Ajax from '../classes/Ajax.js';
                 2: "Audio",
                 3: "Video",
                 5: "Interaktive Medien",
-                /*
-                6: "Physiotheraphie",
-                9: "Diätologie",
-                */
             }
             this.pageUrl = "https://verleihneu.fhstp.ac.at/fh_erleih/";
 
@@ -342,7 +338,7 @@ import Ajax from '../classes/Ajax.js';
 
                         let li = `
                             <li class="reservation ${preperationClass}" data-id = ${curId}>
-                                <h2>${res.firstName} ${res.lastName} - ${res.userId}</h2>
+                                <h2>${general.formatString(res.firstName)} ${res.lastName} - ${res.userId}</h2>
                                 <p>${dateStr}</p>  
                                 <p>Anzahl an Equipment: ${res.reservations.length}</p>
                                 <p class="departments">
