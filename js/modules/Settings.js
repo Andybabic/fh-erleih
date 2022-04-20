@@ -40,6 +40,11 @@ import Ajax from '../classes/Ajax.js';
                 if(settings.darkMode)this.vars.darkMode = settings.darkMode;
             }
 
+            //set postition of darkmode toggle button
+            if(this.vars.darkMode){
+                $("#toggleBtn").addClass("light");
+            }
+
             //init department filter
             await this.addDepartmentOptions();
 
@@ -91,6 +96,29 @@ import Ajax from '../classes/Ajax.js';
                 }
                 //remove values of active filters to prevent errors
                 localStorage.removeItem("filterValues");
+            });
+
+            //darkmode
+            $("#toggleBtn").on("click", () => {
+                $("#toggleBtn").toggleClass("light");
+                if(!$("#toggleBtn").hasClass("light")){
+                    this.vars.darkMode = false;
+                    $(":root").css("--bgColor", "#fff");
+                    $(":root").css("--textColor", "#212529");
+                }else{
+                    this.vars.darkMode = true;
+                    $(":root").css("--bgColor", "#212529");
+                    $(":root").css("--textColor", "#f8f9fa");
+                }
+                //store filter value to localstorage
+                if(localStorage.settings){
+                    let settings = JSON.parse(localStorage.settings);
+                    settings.darkMode = this.vars.darkMode;
+                    localStorage.settings = JSON.stringify(settings);
+                }else{
+                    let settings = {"darkMode":this.vars.darkMode}
+                    localStorage.settings = JSON.stringify(settings);
+                }
             });
         }
 

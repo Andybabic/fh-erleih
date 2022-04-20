@@ -25,6 +25,7 @@ echo (  " <link rel='stylesheet' href='".$path."style/uikit/css/uikit.min.css'> 
 echo (  " <script defer src='".$path."style/uikit/js/uikit.min.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit-icons.min.js'></script> ");
 echo (  " <script defer src='".$path."js/swipe.js'></script> ");
+echo (  " <script defer src='".$path."js/general.js'></script> ");
 
 
 

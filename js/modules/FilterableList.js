@@ -47,6 +47,13 @@ import Ajax from '../classes/Ajax.js';
         //TODO: set departments function to create all departments dynamically (this.departments, whitespace entfernen bei namen)
 
         async initOverviewPage(){
+            //check for stored settings
+            if(localStorage.settings){
+                const settings = JSON.parse(localStorage.settings);
+                //take stored departments
+                if(settings.departments)this.departments = settings.departments;
+            }
+
             //init filter buttons
             this.addFilter();
 

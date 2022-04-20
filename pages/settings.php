@@ -23,7 +23,12 @@ require_once("../functions/loader.php");
         <h2>Bereiche</h2>
         <p>Wähle aus, welche Bereiche du angezeigt haben willst.</p>
         <div class="departmentWrapper"></div>
-        <h2>Darstellung</h2>
+        <h2 id="ds">Darstellung</h2>
+        <div id="toggleBtn">
+            <div class="handle">
+                <div class="handleInner"></div>
+            </div>
+        </div>
     </div>
 
 </main>
