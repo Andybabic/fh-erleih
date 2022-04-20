@@ -183,3 +183,8 @@ html, body {
     transition: .1s ease-in-out;
     transition-property: color,opacity;
 }
+
+.iconmodeswitch{
+    width:2rem;
+    height:2rem;
+}

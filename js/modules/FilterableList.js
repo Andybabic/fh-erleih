@@ -29,7 +29,7 @@ import Ajax from '../classes/Ajax.js';
                 1: "Fotografie",
                 2: "Audio",
                 3: "Video",
-                5: "InteraktiveMedien",
+                5: "Interaktive Medien",
                 /*
                 6: "Physiotheraphie",
                 9: "Diätologie",
@@ -368,7 +368,7 @@ import Ajax from '../classes/Ajax.js';
                     doneListWrapper = `
                         <div class="doneListWrapper">
                             <div id="doneListToogle">
-                                <h2>Vorbereitet</h2>
+                                <h2 id="doneListHeading">Vorbereitet</h2>
                                 <span class="doneListArrow">&darr;</span>
                             </div>
                             ${doneList}
