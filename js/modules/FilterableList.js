@@ -338,7 +338,7 @@ import Ajax from '../classes/Ajax.js';
 
                         let li = `
                             <li class="reservation ${preperationClass}" data-id = ${curId}>
-                                <h2>${general.formatString(res.firstName)} ${res.lastName} - ${res.userId}</h2>
+                                <h2>${general.formatString(res.firstName)} ${general.formatString(res.lastName)} - ${res.userId}</h2>
                                 <p>${dateStr}</p>  
                                 <p>Anzahl an Equipment: ${res.reservations.length}</p>
                                 <p class="departments">
