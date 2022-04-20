@@ -1,185 +1,370 @@
-:root{
-    /*font-size: 62.5%;
-    1.5rem = 15px*/
-    --fontSize: 1rem;
-    --fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --FHlightblue: #CDDEEB;
-    --FHdefaultblue: #005096;
-}
-
-h1,h2,h3,h4,h5,p, span, button, a{
-    font-family: var(--fontfamily);
-}
-
-html, body {
-    overflow-x: hidden;
-  }
-  body {
-    position: relative
-  }
-
-
-.blue {
-    background-color: #005096;
-    color: white;
-}
-
-.blue-40 {
-    background-color: #00509633;
-}
-
-.blue-20 {
-    background-color: #00509633;
-}
-
-
-.grid-33 {
-    width: 33.33%;
-}
-
-.grid-50 {
-    width: 50%;
-}
-
-.grid-100 {
-    width: 100%;
-}
-
-
- /* Style for Checklist */
-
-.checkListbutton {
-    width: 30;
-    left: -20;
-    position: relative;
-    top: 5px;
-}
-
-.grid-100 {
-    width: 100%;
-}
-
-.right {
-    float: right;
-}
-
-.checklist-checkbox {
-    left: 123px; 
-    width: 20px;
-    height: 20px;
-    border: 1px solid #005096;
-    border-radius: 50%;
-    background-color: #CDDEEB;
-
-}
-
-.spacer{
-    height: 20px;
-}
-
-.custom_HR{
-    border-left: 5px solid #005096;
+.filterSelected{
+    background-color: #669BC1 !important;
+        color: #ffffff !important;
+        border: 2px solid #005096 !important;
+        position: relative;
+        overflow: hidden;
+        font-family: var(--fontfamily);
+    }
+    .filterSelected::after {
+         content: "\2713";
+         color: var(--FHlightblue);
+         display: block;
+         height: 3rem;
+         width: 3rem;
+         height: 4rem;
+         width: 4rem;
+         margin: 0 6px 0 0;
+         position: absolute;
+         font-size: 4rem;
+         right: -1.1rem;
+         top: -1.2rem;
+         font-size: 5rem;
+         right: -1rem;
+         top: -1.1rem;
+         opacity: 60%;
+     }
     
-}
-
-.nospace-up{
-    margin-top: 0px;
-}
-
-/* Start Swipebox Style  */
-.Swipe_container {
-    position: relative;
-    background: lightgray;
-
-  }
-  
-  .swipe_box {
-    position: relative;
-    background: white; 
-      width: 98%;
-      height: auto;
-    left: 0;
-/* 
-    border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-  }
-  .swipe_box_back {
-    position: absolute;
-    background: rgb(204, 204, 204); 
-      width: 100%;
-      height: 100%;
-    left: 0;
-/* 
-    border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-  }
-  
-  .swipebox_Object {
-      padding-right: -10px;
-      /* border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-      box-shadow:10px 5px 12px #00000030 ;
-  }
-
-
-  .btn-checklist {
-    position: relative;
-    color: white ;
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    width: 110px;
-    height:100%;
-    margin:0;
-
-  }
-  .btn-checklist {
-    position: relative;
-    color: white !important;
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    width: 110px;
-    height:100%;
-    margin:0;
-
-  }
-  a.link2{
-    color: white !important;
-  }
-  .btn-checklist:hover {
-      /* scale up slowly and add inner shadow*/
-        transform: scale(1.1);
-        transition: all 0.4s ease-in-out;
-        box-shadow: 5px 5px 20px #0000009c;
-        margin:-1px;
-        padding:1px;
-
-  }
-  .center-all {
-    position: relative;
-    top: 40%;
-  }
-
-
-  /* End Swipebox Style */
-
-.bg-orange {
-    background-color: #d49a06;
-}
-.bg-blue {
-    background-color: #005096;
-}
-
-.uk-close {
-    color: #999;
-    left: 95%;
-    transition: .1s ease-in-out;
-    transition-property: color,opacity;
-}
+    .filterBtn{
+        background-color: #CDDEEB;
+        color:#005999;
+        font-size: 1.0rem;
+        border: 2px solid #005096;
+        text-transform:none;
+        font-weight: bold;
+        border-radius: 20px;
+        height: 3rem;
+        padding: 0 20px;
+        font-family: var(--fontfamily);
+        margin: 0.2rem;
+    }
+    .filterBtn:hover{
+        cursor: pointer;
+    }
+    .dateFilter{
+    }
+    .selected-ends div{
+    }
+    .listWrapper li>*{
+         pointer-events: none;
+     }
+    
+     .uk-list .reservation{
+     .reservation{
+         border: 1px solid #707070;
+         padding: 1rem 2rem;
+         background-color: white;
+         background-color: white !important; ;
+     }
+    
+     .timeFilter{
+        border-bottom: 1px solid #707070;
+        padding: 0 0 0.5rem 0;
+    }
+    .filterWrapper{
+        justify-content: center;
+        text-align: center;
+    }
+    h2,p{
+        margin:0px;
+        color: black;
+    }
+    .departments{
+        margin-top: 0.3rem;
+    }
+    .departmentLabel{
+         background-color: blue;
+         margin: 0 0.2rem 0 0;
+         padding: 0.4rem;
+         background-color: #227C9D;
+         color: #FEF9EF;
+         background-color: #227C9D !important;
+         color: #FEF9EF !important;
+         border-radius: 0.3rem;
+     }
+     /*Comment*/
+    
+     .uk-active .modeSwitch{
+         color: #005999 !important ;
+         border-bottom: 2px solid #005999 !important;
+    }
+     .uk-navbar{
+         background-color: #005096 !important;
+     }
+    
+     .uk-navbar span{
+         color:white !important;
+         font-size: 1.5rem;
+       }
+    
+     /*donelist*/
+     #doneListToogle{
+         display: flex;
+         justify-content: flex-start;
+         align-items: center;
+         cursor: pointer;
+     }
+     .doneListArrow{
+         width: 40px;
+         height: 40px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background-color: green;
+         border-radius: 50%;
+         color: white;
+         transition: all .4s ease-in;
+     }
+     .doneListWrapper .doneList.uk-list{
+         margin-top: 0;
+     }
+    
+     /*after to provide space for footer*/
+     #filterableList{
+         margin-bottom: 50px;
+     }
+       198  
+    style/custom/style.css
+     
+     @@ -2,18 +2,22 @@
+         /*font-size: 62.5%;
+         1.5rem = 15px*/
+         --fontSize: 1rem;
+         --fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+         --fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+         --FHlightblue: #CDDEEB;
+         --FHdefaultblue: #005096;
+         --inPreparationColor: rgba(14, 151, 0, .3);
+         --preparedAllColor: rgba(14, 151, 0, .6);
+         --footerHeight: 50px;
+     }
+    
+     h1,h2,h3,h4,h5,p, span, button, a{
+         font-family: var(--fontFamily);
+         font-family: var(--fontfamily);
+     }
+    
+     html, body {
+         overflow-x: hidden;
+       }
+       body {
+         position: relative
+       }
+    
+    
+     .blue {
+         background-color: #005096;
+     @@ -41,20 +45,6 @@ h1,h2,h3,h4,h5,p, span, button, a{
+         width: 100%;
+     }
+    
+     /*main*/
+     main{
+         margin-bottom: var(--footerHeight);
+     }
+    
+     /*footer*/
+     footer{
+         position: fixed;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: var(--footerHeight);
+         background-color: #fff;
+     }
+    
+      /* Style for Checklist */
+    
+     @@ -75,7 +65,6 @@ footer{
+    
+     .checklist-checkbox {
+         left: 123px; 
+    
+         width: 20px;
+         height: 20px;
+         border: 1px solid #005096;
+     @@ -84,8 +73,8 @@ footer{
+    
+     }
+    
+     .space-between-list{
+         margin-bottom: 20px;
+     .spacer{
+         height: 20px;
+     }
+    
+     .custom_HR{
+     @@ -97,79 +86,100 @@ footer{
+         margin-top: 0px;
+     }
+    
+     .uk-navbar{
+         background-color: #005096 !important;
+     }
+     /* Start Swipebox Style  */
+     .Swipe_container {
+         position: relative;
+         background: lightgray;
+    
+     .uk-navbar span {
+         color:white !important;
+         font-size: 1.5rem;
+     }
+       }
+    
+       .swipe_box {
+         position: relative;
+         background: white; 
+           width: 98%;
+           height: auto;
+         left: 0;
+     /* 
+         border: 0px solid red;
+           border-radius: 0px 20px 20px 0px; */
+       }
+       .swipe_box_back {
+         position: absolute;
+         background: rgb(204, 204, 204); 
+           width: 100%;
+           height: 100%;
+         left: 0;
+     /* 
+         border: 0px solid red;
+           border-radius: 0px 20px 20px 0px; */
+       }
+    
+       .swipebox_Object {
+           padding-right: -10px;
+           /* border: 0px solid red;
+           border-radius: 0px 20px 20px 0px; */
+           box-shadow:10px 5px 12px #00000030 ;
+       }
+    
+    
+       .btn-checklist {
+         position: relative;
+         color: white ;
+         border: none;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         cursor: pointer;
+         width: 110px;
+         height:100%;
+         margin:0;
+    
+       }
+       .btn-checklist {
+         position: relative;
+         color: white !important;
+         border: none;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         cursor: pointer;
+         width: 110px;
+         height:100%;
+         margin:0;
+    
+       }
+       a.link2{
+         color: white !important;
+       }
+       .btn-checklist:hover {
+           /* scale up slowly and add inner shadow*/
+             transform: scale(1.1);
+             transition: all 0.4s ease-in-out;
+             box-shadow: 5px 5px 20px #0000009c;
+             margin:-1px;
+             padding:1px;
+    
+       }
+       .center-all {
+         position: relative;
+         top: 40%;
+       }
+    
+     /*---LOADER---*/
+     .loader-horizontal {
+         height: 50px;
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background-color: #f8f9fa;
+     }
+     .loader-horizontal__dot {
+         width: 10px;
+         height: 10px;
+         background: var(--FHdefaultblue);
+         border-radius: 100%;
+         float: left;
+         margin-right: 6px;
+         animation: bounce 1.8s infinite;
+     }
+     .loader-horizontal__dot:first-child {
+         animation-delay: 0.1s;
+     }
+     .loader-horizontal__dot:nth-child(2) {
+         animation-delay: 0.3s;
+     }
+     .loader-horizontal__dot:nth-child(3) {
+         animation-timing-function: ease;
+         animation-delay: 0.5s;
+     }
+     @-webkit-keyframes bounce {
+         0%, 100% {
+             opacity: 1;
+         }
+         60% {
+             opacity: 0;
+         }
+     }
+    
+     /* in preparation and prepared overview list items */
+     /*important hier leider notwendig bis bessere lösung wegen uikit list style*/
+     .listWrapper .uk-list .inPreparation{
+         background-color: var(--inPreparationColor);
+     }
+     .listWrapper .uk-list .preparedAll{
+         background-color: var(--preparedAllColor);
+     }
+    
+     /*scan search module*/
+     #scanSearch{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+     }
+     .selectWrapper{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         width: 100%;
+     }
+     .selectWrapper select{
+         width: 90%;
+         margin: 15px 0;
+    
+       /* End Swipebox Style */
+     }
+     .bg-orange {
+         background-color: #d49a06;
+     }
+     .selectResult{
+         text-align: center;
+         width: 90%;
+         padding: 15px;
+     }
+     .bg-blue {
+         background-color: #005096;
+     }
+    
+     .uk-close {
+         color: #999;
+         left: 95%;
+         transition: .1s ease-in-out;
+         transition-property: color,opacity;
+     } 
