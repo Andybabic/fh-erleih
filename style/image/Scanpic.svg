@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="228" height="221" viewBox="0 0 228 221">
+  <g id="Gruppe_41" data-name="Gruppe 41" transform="translate(-82 -177)">
+    <rect id="Rechteck_55" data-name="Rechteck 55" width="228" height="221" rx="25" transform="translate(82 177)" fill="#005096"/>
+    <g id="Icon_ionic-md-qr-scanner" data-name="Icon ionic-md-qr-scanner" transform="translate(91.625 184.5)">
+      <path id="Pfad_4" data-name="Pfad 4" d="M21.336,27.026A4.467,4.467,0,0,1,25.9,22.461H51.27V4.5h-25a22.726,22.726,0,0,0-22.9,22.526V52.4H21.336Z" transform="translate(0)" fill="#fff"/>
+      <path id="Pfad_5" data-name="Pfad 5" d="M48.92,4.5H23.625V22.461H48.77a4.658,4.658,0,0,1,4.79,4.565V52.4H71.52V27.026A22.493,22.493,0,0,0,48.92,4.5Z" transform="translate(133.915)" fill="#fff"/>
+      <path id="Pfad_6" data-name="Pfad 6" d="M53.56,47.5a4.467,4.467,0,0,1-4.565,4.565H23.625V70.4h25.37A22.726,22.726,0,0,0,71.52,47.5v-25H53.56Z" transform="translate(133.915 131.176)" fill="#fff"/>
+      <path id="Pfad_7" data-name="Pfad 7" d="M25.9,52.06A4.467,4.467,0,0,1,21.336,47.5v-25H3.375v25a23.045,23.045,0,0,0,22.9,22.9h25V52.06Z" transform="translate(0 131.176)" fill="#fff"/>
+    </g>
+    <g id="Gruppe_21" data-name="Gruppe 21" transform="translate(0 4)">
+      <text id="Neue_Eintragung" data-name="Neue
+Eintragung" transform="translate(196 259)" fill="#fff" font-size="29" font-family="HelveticaNeue-Medium, Helvetica Neue" font-weight="500"><tspan x="-34.916" y="0">Neue</tspan><tspan x="-72.79" y="35">Eintragung</tspan></text>
+      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M26,13.25H17v-9a2,2,0,0,0-2-2H13a2,2,0,0,0-2,2v9H2a2,2,0,0,0-2,2v2a2,2,0,0,0,2,2h9v9a2,2,0,0,0,2,2h2a2,2,0,0,0,2-2v-9h9a2,2,0,0,0,2-2v-2A2,2,0,0,0,26,13.25Z" transform="translate(180 305.75)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
