@@ -287,7 +287,24 @@ html, body {
     text-align: center;
     width: 90%;
     padding: 15px;
- }
+}
+
+.uk-active .modeSwitch{
+    color: #005999 !important ;
+    border-bottom: 2px solid #005999 !important;
+}
+
+.modeSwitch a{
+    font-weight: bold;
+}
+
+.uk-tab>.uk-active>a {
+    color: #005999;
+}
+.uk-active svg{
+    fill: #005999;
+}
+
 
 /*SETTINGS PAGE*/
 /*Toggle Button*/

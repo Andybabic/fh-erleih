@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ad4e7d3-cde7-4054-ae75-9037687e6e16" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/js/general.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/fh-erleih.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fh-erleih/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/loader.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/modules/FilterableList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/FilterableList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/modules/Settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/Settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/modeSwitch.php" beforeDir="false" afterPath="$PROJECT_DIR$/modules/modeSwitch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/custom/overview.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/overview.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style/custom/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,13 +20,6 @@
   </component>
   <component name="ComposerSettings">
     <execution />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JavaScript File" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,14 +37,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js/modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\js\modules" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\style\image" />
     </key>
