@@ -28,7 +28,6 @@ require_once("../functions/loader.php");
         </div>
     </main>
     <footer class="uk-position-bottom uk-width-1-1" >
-        <?php getModule('modeSwitch')?>
     </footer>
 
 </body>
