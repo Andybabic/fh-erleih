@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ad4e7d3-cde7-4054-ae75-9037687e6e16" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/fh-erleih.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fh-erleih/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/modules/FilterableList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/FilterableList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/modeSwitch.php" beforeDir="false" afterPath="$PROJECT_DIR$/modules/modeSwitch.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style/custom/overview.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/overview.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style/custom/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/style.css" afterDir="false" />
     </list>

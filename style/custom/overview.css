@@ -82,10 +82,7 @@ h2,p{
     border-radius: 0.3rem;
 }
 
-.uk-active .modeSwitch{
-    color: #005999 !important ;
-    border-bottom: 2px solid #005999 !important;
-}
+
 
 .uk-navbar{
     background-color: #005096 !important;
@@ -97,17 +94,10 @@ h2,p{
 
 
 
-#doneListHeading{
-    margin-left: 3rem
-}
 
-.doneListArrow{
-    margin-left: 3rem;
-    font-weight: bold;
-}
 
 #Icon_awesome-clipboard-list, #Icon_awesome-shopping-bag{
-    fill:black;
+
     width:2rem;
     height:2rem;
 }
@@ -121,20 +111,27 @@ h2,p{
     cursor: pointer;
 }
 .doneListArrow{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: green;
-    border-radius: 50%;
-    color: white;
     transition: all .4s ease-in;
+    fill:green;
 }
 .doneListWrapper .doneList.uk-list{
     margin-top: 0;
 }
 
+#doneListHeading{
+    margin-left: 3rem;
+    margin-right:-2rem;
+}
+
+.doneListArrow{
+    margin-left: 3rem;
+    font-weight: bold;
+}
 /*after to provide space for footer*/
 #filterableList{
     margin-bottom: 50px;

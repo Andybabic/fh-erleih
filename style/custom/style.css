@@ -30,10 +30,10 @@ h1,h2,h3,h4,h5,p, span, button, a{
 
 html, body {
     overflow-x: hidden;
-  }
-  body {
+}
+body {
     position: relative
-  }
+}
 
 
 .blue {
@@ -63,7 +63,7 @@ html, body {
 }
 
 
- /* Style for Checklist */
+/* Style for Checklist */
 
 .checkListbutton {
     width: 30;
@@ -81,7 +81,7 @@ html, body {
 }
 
 .checklist-checkbox {
-    left: 123px; 
+    left: 123px;
     width: 20px;
     height: 20px;
     border: 1px solid #005096;
@@ -96,7 +96,7 @@ html, body {
 
 .custom_HR{
     border-left: 5px solid #005096;
-    
+
 }
 
 .nospace-up{
@@ -108,38 +108,38 @@ html, body {
     position: relative;
     background: lightgray;
 
-  }
-  
-  .swipe_box {
+}
+
+.swipe_box {
     position: relative;
-    background: white; 
-      width: 98%;
-      height: auto;
+    background: white;
+    width: 98%;
+    height: auto;
     left: 0;
-/* 
-    border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-  }
-  .swipe_box_back {
+    /*
+        border: 0px solid red;
+          border-radius: 0px 20px 20px 0px; */
+}
+.swipe_box_back {
     position: absolute;
-    background: rgb(204, 204, 204); 
-      width: 100%;
-      height: 100%;
+    background: rgb(204, 204, 204);
+    width: 100%;
+    height: 100%;
     left: 0;
-/* 
-    border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-  }
-  
-  .swipebox_Object {
-      padding-right: -10px;
-      /* border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-      box-shadow:10px 5px 12px #00000030 ;
-  }
+    /*
+        border: 0px solid red;
+          border-radius: 0px 20px 20px 0px; */
+}
+
+.swipebox_Object {
+    padding-right: -10px;
+    /* border: 0px solid red;
+    border-radius: 0px 20px 20px 0px; */
+    box-shadow:10px 5px 12px #00000030 ;
+}
 
 
-  .btn-checklist {
+.btn-checklist {
     position: relative;
     color: white ;
     border: none;
@@ -152,8 +152,8 @@ html, body {
     height:100%;
     margin:0;
 
-  }
-  .btn-checklist {
+}
+.btn-checklist {
     position: relative;
     color: white !important;
     border: none;
@@ -166,26 +166,26 @@ html, body {
     height:100%;
     margin:0;
 
-  }
-  a.link2{
+}
+a.link2{
     color: white !important;
-  }
-  .btn-checklist:hover {
-      /* scale up slowly and add inner shadow*/
-        transform: scale(1.1);
-        transition: all 0.4s ease-in-out;
-        box-shadow: 5px 5px 20px #0000009c;
-        margin:-1px;
-        padding:1px;
+}
+.btn-checklist:hover {
+    /* scale up slowly and add inner shadow*/
+    transform: scale(1.1);
+    transition: all 0.4s ease-in-out;
+    box-shadow: 5px 5px 20px #0000009c;
+    margin:-1px;
+    padding:1px;
 
-  }
-  .center-all {
+}
+.center-all {
     position: relative;
     top: 40%;
-  }
+}
 
 
-  /* End Swipebox Style */
+/* End Swipebox Style */
 
 .bg-orange {
     background-color: #d49a06;
@@ -211,69 +211,86 @@ html, body {
 
 
 /*---LOADER---*/
- .loader-horizontal {
-     height: 50px;
-     width: 100%;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     background-color: #f8f9fa;
- }
- .loader-horizontal__dot {
-     width: 10px;
-     height: 10px;
-     background: var(--FHdefaultblue);
-     border-radius: 100%;
-     float: left;
-     margin-right: 6px;
-     animation: bounce 1.8s infinite;
- }
- .loader-horizontal__dot:first-child {
-     animation-delay: 0.1s;
- }
- .loader-horizontal__dot:nth-child(2) {
-     animation-delay: 0.3s;
- }
- .loader-horizontal__dot:nth-child(3) {
-     animation-timing-function: ease;
-     animation-delay: 0.5s;
- }
- @-webkit-keyframes bounce {
-     0%, 100% {
-         opacity: 1;
-     }
-     60% {
-         opacity: 0;
-     }
- }
+.loader-horizontal {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+.loader-horizontal__dot {
+    width: 10px;
+    height: 10px;
+    background: var(--FHdefaultblue);
+    border-radius: 100%;
+    float: left;
+    margin-right: 6px;
+    animation: bounce 1.8s infinite;
+}
+.loader-horizontal__dot:first-child {
+    animation-delay: 0.1s;
+}
+.loader-horizontal__dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.loader-horizontal__dot:nth-child(3) {
+    animation-timing-function: ease;
+    animation-delay: 0.5s;
+}
+@-webkit-keyframes bounce {
+    0%, 100% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;
+    }
+}
 
- /* in preparation and prepared overview list items */
- /*important hier leider notwendig bis bessere lösung wegen uikit list style*/
- .listWrapper .uk-list .inPreparation{
-     background-color: var(--inPreparationColor);
- }
- .listWrapper .uk-list .preparedAll{
-     background-color: var(--preparedAllColor);
- }
+/* in preparation and prepared overview list items */
+/*important hier leider notwendig bis bessere lösung wegen uikit list style*/
+.listWrapper .uk-list .inPreparation{
+    background-color: var(--inPreparationColor);
+}
+.listWrapper .uk-list .preparedAll{
+    background-color: var(--preparedAllColor);
+}
 
- /*scan search module*/
- #scanSearch{
-     display: flex;
-     flex-direction: column;
-     align-items: center;
- }
- .selectWrapper{
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     width: 100%;
- }
- .selectWrapper select{
-     width: 90%;
-     margin: 15px 0;
- }
- .selectResult{
+/*scan search module*/
+#scanSearch{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.selectWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.selectWrapper select{
+    width: 90%;
+    margin: 15px 0;
+    margin: 15px 0;
+}
+.selectResult{
     text-align: center;
     width: 90%;
     padding: 15px;
- }
+}
+
+.uk-active .modeSwitch{
+    color: #005999 !important ;
+    border-bottom: 2px solid #005999 !important;
+}
+
+.modeSwitch a{
+    font-weight: bold;
+}
+
+.uk-tab>.uk-active>a {
+    color: #005999;
+}
+.uk-active svg{
+    fill: #005999;
+}
