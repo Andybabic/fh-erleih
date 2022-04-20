@@ -188,10 +188,10 @@ a.link2{
 /* End Swipebox Style */
 
 .bg-orange {
-    background-color: #d49a06;
+    background-color: #FF8800;
 }
 .bg-blue {
-    background-color: #005096;
+    background-color: #0077FF;
 }
 
 .uk-close {
@@ -271,7 +271,6 @@ a.link2{
 .selectWrapper select{
     width: 90%;
     margin: 15px 0;
-    margin: 15px 0;
 }
 .selectResult{
     text-align: center;
@@ -282,15 +281,30 @@ a.link2{
 .uk-active .modeSwitch{
     color: #005999 !important ;
     border-bottom: 2px solid #005999 !important;
+
 }
 
 .modeSwitch a{
     font-weight: bold;
+    border-bottom: 3px solid #005999 !important;
 }
 
-.uk-tab>.uk-active>a {
+.uk-tab>.uk-active>a, .uk-tab>.uk-active>a:hover {
     color: #005999;
+    border-bottom:3px solid #005999 !important;
 }
 .uk-active svg{
     fill: #005999;
 }
+
+.uk-tab>*>a{
+    color: #0c0c0c;
+    border-bottom: 3px solid #0c0c0c !important;
+}
+
+.modeSwitch a:hover{
+    fill: #028ae7;
+    color: #028ae7;
+    border-bottom: 3px solid #028ae7 !important;
+}
+
