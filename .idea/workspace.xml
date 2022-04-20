@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ad4e7d3-cde7-4054-ae75-9037687e6e16" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/loader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/general.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/General.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/modules/FilterableList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modules/FilterableList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/filterableList.php" beforeDir="false" afterPath="$PROJECT_DIR$/modules/filterableList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/custom/overview.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/overview.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/custom/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,13 +15,6 @@
   </component>
   <component name="ComposerSettings">
     <execution />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JavaScript File" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,7 +34,6 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -61,8 +53,6 @@
       <workItem from="1650443204277" duration="1954000" />
       <workItem from="1650448186162" duration="4600000" />
       <workItem from="1650452840574" duration="74000" />
-      <workItem from="1650468315856" duration="659000" />
-      <workItem from="1650468983736" duration="3875000" />
     </task>
     <servers />
   </component>

@@ -74,7 +74,7 @@ html, body {
 }
 
 
- /* Style for Checklist */
+/* Style for Checklist */
 
 .checkListbutton {
     width: 30;
@@ -92,7 +92,7 @@ html, body {
 }
 
 .checklist-checkbox {
-    left: 123px; 
+    left: 123px;
     width: 20px;
     height: 20px;
     border: 1px solid #005096;
@@ -107,7 +107,7 @@ html, body {
 
 .custom_HR{
     border-left: 5px solid #005096;
-    
+
 }
 
 .nospace-up{
@@ -119,35 +119,35 @@ html, body {
     position: relative;
     background: lightgray;
 
-  }
-  
-  .swipe_box {
+}
+
+.swipe_box {
     position: relative;
-    background: white; 
-      width: 98%;
-      height: auto;
+    background: white;
+    width: 98%;
+    height: auto;
     left: 0;
-/* 
-    border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-  }
-  .swipe_box_back {
+    /*
+        border: 0px solid red;
+          border-radius: 0px 20px 20px 0px; */
+}
+.swipe_box_back {
     position: absolute;
-    background: rgb(204, 204, 204); 
-      width: 100%;
-      height: 100%;
+    background: rgb(204, 204, 204);
+    width: 100%;
+    height: 100%;
     left: 0;
-/* 
-    border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-  }
-  
-  .swipebox_Object {
-      padding-right: -10px;
-      /* border: 0px solid red;
-      border-radius: 0px 20px 20px 0px; */
-      box-shadow:10px 5px 12px #00000030 ;
-  }
+    /*
+        border: 0px solid red;
+          border-radius: 0px 20px 20px 0px; */
+}
+
+.swipebox_Object {
+    padding-right: -10px;
+    /* border: 0px solid red;
+    border-radius: 0px 20px 20px 0px; */
+    box-shadow:10px 5px 12px #00000030 ;
+}
 
 
   .btn-checklist {
@@ -177,32 +177,32 @@ html, body {
     height:100%;
     margin:0;
 
-  }
-  a.link2{
+}
+a.link2{
     color: white !important;
-  }
-  .btn-checklist:hover {
-      /* scale up slowly and add inner shadow*/
-        transform: scale(1.1);
-        transition: all 0.4s ease-in-out;
-        box-shadow: 5px 5px 20px #0000009c;
-        margin:-1px;
-        padding:1px;
+}
+.btn-checklist:hover {
+    /* scale up slowly and add inner shadow*/
+    transform: scale(1.1);
+    transition: all 0.4s ease-in-out;
+    box-shadow: 5px 5px 20px #0000009c;
+    margin:-1px;
+    padding:1px;
 
-  }
-  .center-all {
+}
+.center-all {
     position: relative;
     top: 40%;
-  }
+}
 
 
-  /* End Swipebox Style */
+/* End Swipebox Style */
 
 .bg-orange {
-    background-color: #d49a06;
+    background-color: #FF8800;
 }
 .bg-blue {
-    background-color: #005096;
+    background-color: #0077FF;
 }
 
 .uk-close {
@@ -267,43 +267,56 @@ html, body {
      background-color: var(--preparedAllColor);
  }
 
- /*scan search module*/
- #scanSearch{
-     display: flex;
-     flex-direction: column;
-     align-items: center;
- }
- .selectWrapper{
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     width: 100%;
- }
- .selectWrapper select{
-     width: 90%;
-     margin: 15px 0;
- }
- .selectResult{
-    text-align: center;
-    width: 90%;
-    padding: 15px;
+/*scan search module*/
+#scanSearch{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+.selectWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.selectWrapper select{
+    width: 90%;
+    margin: 15px 0;
+}
+.selectResult{
+
 
 .uk-active .modeSwitch{
     color: #005999 !important ;
     border-bottom: 2px solid #005999 !important;
+
 }
 
 .modeSwitch a{
     font-weight: bold;
+    border-bottom: 3px solid #005999 !important;
 }
 
-.uk-tab>.uk-active>a {
+.uk-tab>.uk-active>a, .uk-tab>.uk-active>a:hover {
     color: #005999;
+    border-bottom:3px solid #005999 !important;
 }
 .uk-active svg{
     fill: #005999;
 }
+
+.uk-tab>*>a{
+    color: #0c0c0c;
+    border-bottom: 3px solid #0c0c0c !important;
+}
+
+.modeSwitch a:hover{
+    fill: #028ae7;
+    color: #028ae7;
+    border-bottom: 3px solid #028ae7 !important;
+}
+
+
 
 
 /*SETTINGS PAGE*/
