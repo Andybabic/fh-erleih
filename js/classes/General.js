@@ -33,25 +33,6 @@ class General{
         }
     }
 
-    formatString(string){
-        const badValues = {
-            "Ã¼": "ü",
-            "Ã-":"Ö",
-            "Ãœ":"Ü",
-            "Ã¤":"ä",
-            "Ã¶":"ö",
-            "ÃŸ":"ß",
-            "Ã":"Ä"
-        };
-        for (const key in badValues) {
-            console.log(key);
-            console.log(badValues[key]);
-            string = string.replaceAll(key, badValues[key]);
-        }
-        return string;
-    }
-
-
 }
 
 const general = new General();

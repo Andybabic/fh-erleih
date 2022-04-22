@@ -19,7 +19,7 @@ export default class Ajax{
                 }).catch(err => {
                 //log error header
 
-                reject(-1);
+                reject("error-getResByDepartment");
             });
         });
     }
@@ -47,7 +47,7 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                reject(-1);
+                reject("error-getUser");
             });
         });
     }
