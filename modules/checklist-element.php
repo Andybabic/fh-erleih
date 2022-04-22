@@ -4,13 +4,14 @@ var checkboxes=[]
 function addCheckbox(checkbox,parent) {
     checkboxes.push({
         value: checkbox,
-        parent: parent
+        parent: parent,
     });
 }
 
+                                                                      
 
 
-                
+
 </script>
 
 
@@ -125,77 +126,121 @@ function addCheckbox(checkbox,parent) {
 <script> 
 
 
-//collect all checkboxes
-var checkboxelements = document.getElementsByClassName('checklist-checkbox');
 
+    // example structure checklistComponents
 
+    let checklistComponents = {};
 
-//print checkboxelements
-console.log(checkboxelements);
+    checklistComponents.checklist = (function() {
+        let priv = {},
+            publ = {};
 
-
-
-//add eventlistener to all checkboxes
-// add listener to all checkboxes ( clicked )
-for(var i = 0; i < checkboxelements.length; i++) {
-    checkboxelements[i].checked=false;
-    checkboxelements[i].addEventListener('click', function() {
-    // get value of clicked checkbox
-    var value = this.value;
-    var parent= getParent(value);
-    if (parent){
-        changeState(parent);
-    }
-    
-    });
-}
-
-function getParent(value){
-    for(var i = 0; i < checkboxes.length; i++) {
-        if(checkboxes[i].value==value){
-            return checkboxes[i].parent;
+        priv.send = function(json) {
+            // make post request to url with array
+            url="<?php echo(getAPI_link()) ?>?=";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    data: JSON.stringify(json)
+                },
+                success: function(data) {
+                    console.log("DAMN YOU GOT IT");
+                }
+            });
         }
-    }
-}
 
-//check state of all childs
-function checkChilds(parent){
-    console.log('checkChilds with parent: '+parent);
-    for(var i = 0; i < checkboxes.length; i++) {
-        if(checkboxes[i].parent==parent){
-            console.log('checkChilds with parent: '+parent+' and child: '+checkboxes[i].value+' is: '+ checkboxelements[i].checked );
-            if (checkboxelements[i].checked==false){
-                console.log('one of them is false ');
-                return false;
+        publ.init = function() {
+            //collect all checkboxes
+            var checkboxelements = document.getElementsByClassName('checklist-checkbox');
+
+            // add listener to all checkboxes ( clicked )
+            for(var i = 0; i < checkboxelements.length; i++) {
+                checkboxelements[i].checked=false;
+                checkboxelements[i].addEventListener('change', function() {
+                // get value of clicked checkbox
+                var value = this.value;
+                var parent= getParent(value);
+                if (parent){
+                    changeState(parent);
+                    //send to api that rentry is done or not
+                    priv.send("{"+parent+":"+this.checked+"}");
+
+                }
+                
+                });
             }
+
+            function getParent(value){
+                for(var i = 0; i < checkboxes.length; i++) {
+                    if(checkboxes[i].value==value){
+                        return checkboxes[i].parent;
+                    }
+                }
+            }
+
+            //check state of all childs
+            function checkChilds(parent){
+                console.log('checkChilds with parent: '+parent);
+                for(var i = 0; i < checkboxes.length; i++) {
+                    if(checkboxes[i].parent==parent){
+                        console.log('checkChilds with parent: '+parent+' and child: '+checkboxes[i].value+' is: '+ checkboxelements[i].checked );
+                        if (checkboxelements[i].checked==false){
+                            console.log('one of them is false ');
+                            return false;
+                        }
+                    }
+                }
+                console.log('all boxes true ');
+                return true;
+            }
+
+            //change state of checkbox with ( value )
+            function changeState(value) {
+                var checkboxer = getCheckbox(value);
+                console.log('value='+value+'');
+                if (checkChilds(value)) {
+                    checkboxer.checked = true;    
+                } else {
+                    checkboxer.checked = false;
+                }
+            }
+
+
+            // get checkboxelements with ( value )
+            function getCheckbox(value){
+                for(var i = 0; i < checkboxelements.length; i++) {
+                    if(checkboxes[i].value==value){
+                        return checkboxelements[i];
+                    }
+                }
+            }
+
+
+
+        console.log(checkboxes);
         }
-    }
-    console.log('all boxes true ');
-    return true;
-}
 
-//change state of checkbox with ( value )
-function changeState(value) {
-    var checkboxer = getCheckbox(value);
-    console.log('value='+value+'');
-    if (checkChilds(value)) {
-        checkboxer.checked = true;    
-    } else {
-        checkboxer.checked = false;
-    }
-}
+        
+        console.log('checklistComponents.checklist.init()');
+        return publ;
+    })();
+
+    // add helper function or others to a nice namespace
+    // 
+    // 
+    
 
 
-// get checkboxelements with ( value )
-function getCheckbox(value){
-    for(var i = 0; i < checkboxelements.length; i++) {
-        if(checkboxes[i].value==value){
-            return checkboxelements[i];
-        }
-    }
-}
+// HTML
+
+checklistComponents.checklist.init();
 
 
 
-console.log(checkboxes);                                                                          
- </script>
+
+                
+   
+
+
+</script>

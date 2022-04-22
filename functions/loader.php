@@ -48,4 +48,11 @@ function getLink($link){
     return $path."functions/".$link.".php";
 }
 
+
+
+function getAPI_link(){
+    global $path;
+    return $path."functions/callAPI.php";
+}
+
 ?>
