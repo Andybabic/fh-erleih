@@ -8,13 +8,6 @@
     --inPreparationColor: rgba(14, 151, 0, .3);
     --preparedAllColor: rgba(14, 151, 0, .6);
     --footerHeight: 50px;
-    --bgColor: #f8f9fa;
-    --textColor: #212529;
-}
-
-body{
-    height: 100%;
-    background-color: var(--bgColor);
 }
 /*main*/
 main{
@@ -33,10 +26,6 @@ footer{
 
 h1,h2,h3,h4,h5,p, span, button, a{
     font-family: var(--fontfamily);
-
-}
-h1,h2,h3,h4,h5, p, span, a{
-    color: var(--textColor) !important;
 }
 
 html, body {
@@ -74,7 +63,7 @@ html, body {
 }
 
 
-/* Style for Checklist */
+ /* Style for Checklist */
 
 .checkListbutton {
     width: 30;
@@ -92,7 +81,7 @@ html, body {
 }
 
 .checklist-checkbox {
-    left: 123px;
+    left: 123px; 
     width: 20px;
     height: 20px;
     border: 1px solid #005096;
@@ -107,7 +96,7 @@ html, body {
 
 .custom_HR{
     border-left: 5px solid #005096;
-
+    
 }
 
 .nospace-up{
@@ -119,35 +108,35 @@ html, body {
     position: relative;
     background: lightgray;
 
-}
-
-.swipe_box {
+  }
+  
+  .swipe_box {
     position: relative;
-    background: white;
-    width: 98%;
-    height: auto;
+    background: white; 
+      width: 98%;
+      height: auto;
     left: 0;
-    /*
-        border: 0px solid red;
-          border-radius: 0px 20px 20px 0px; */
-}
-.swipe_box_back {
+/* 
+    border: 0px solid red;
+      border-radius: 0px 20px 20px 0px; */
+  }
+  .swipe_box_back {
     position: absolute;
-    background: rgb(204, 204, 204);
-    width: 100%;
-    height: 100%;
+    background: rgb(204, 204, 204); 
+      width: 100%;
+      height: 100%;
     left: 0;
-    /*
-        border: 0px solid red;
-          border-radius: 0px 20px 20px 0px; */
-}
-
-.swipebox_Object {
-    padding-right: -10px;
-    /* border: 0px solid red;
-    border-radius: 0px 20px 20px 0px; */
-    box-shadow:10px 5px 12px #00000030 ;
-}
+/* 
+    border: 0px solid red;
+      border-radius: 0px 20px 20px 0px; */
+  }
+  
+  .swipebox_Object {
+      padding-right: -10px;
+      /* border: 0px solid red;
+      border-radius: 0px 20px 20px 0px; */
+      box-shadow:10px 5px 12px #00000030 ;
+  }
 
 
   .btn-checklist {
@@ -177,32 +166,32 @@ html, body {
     height:100%;
     margin:0;
 
-}
-a.link2{
+  }
+  a.link2{
     color: white !important;
-}
-.btn-checklist:hover {
-    /* scale up slowly and add inner shadow*/
-    transform: scale(1.1);
-    transition: all 0.4s ease-in-out;
-    box-shadow: 5px 5px 20px #0000009c;
-    margin:-1px;
-    padding:1px;
+  }
+  .btn-checklist:hover {
+      /* scale up slowly and add inner shadow*/
+        transform: scale(1.1);
+        transition: all 0.4s ease-in-out;
+        box-shadow: 5px 5px 20px #0000009c;
+        margin:-1px;
+        padding:1px;
 
-}
-.center-all {
+  }
+  .center-all {
     position: relative;
     top: 40%;
-}
+  }
 
 
-/* End Swipebox Style */
+  /* End Swipebox Style */
 
 .bg-orange {
-    background-color: #FF8800;
+    background-color: #d49a06;
 }
 .bg-blue {
-    background-color: #0077FF;
+    background-color: #005096;
 }
 
 .uk-close {
@@ -267,111 +256,24 @@ a.link2{
      background-color: var(--preparedAllColor);
  }
 
-/*scan search module*/
-#scanSearch{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.selectWrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-.selectWrapper select{
+ /*scan search module*/
+ #scanSearch{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+ .selectWrapper{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     width: 100%;
+ }
+ .selectWrapper select{
+     width: 90%;
+     margin: 15px 0;
+ }
+ .selectResult{
+    text-align: center;
     width: 90%;
-    margin: 15px 0;
-}
-.selectResult{
-
-
-.uk-active .modeSwitch{
-    color: #005999 !important ;
-    border-bottom: 2px solid #005999 !important;
-
-}
-
-.modeSwitch a{
-    font-weight: bold;
-    border-bottom: 3px solid #005999 !important;
-}
-
-.uk-tab>.uk-active>a, .uk-tab>.uk-active>a:hover {
-    color: #005999;
-    border-bottom:3px solid #005999 !important;
-}
-.uk-active svg{
-    fill: #005999;
-}
-
-.uk-tab>*>a{
-    color: #0c0c0c;
-    border-bottom: 3px solid #0c0c0c !important;
-}
-
-.modeSwitch a:hover{
-    fill: #028ae7;
-    color: #028ae7;
-    border-bottom: 3px solid #028ae7 !important;
-}
-
-
-
-
-/*SETTINGS PAGE*/
-/*Toggle Button*/
-#toggleBtn{
-    width: 64px;
-    height: 32px;
-    background-color: gray;
-    border-radius: 45px;
-    position: relative;
-}
-#toggleBtn.light{
-    justify-content: flex-end;
-}
-
-.handle{
-    transition: all .2s ease-in;
-    position: absolute;
-    left: 4px;
-    top: 4px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: lightgrey;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-}
-.light .handle{
-    transform: translateX(calc(64px - 32px));
-}
-.handleInner{
-    transition: all .2s ease-in;
-    width: 75%;
-    height: 75%;
-    background-color: black;
-    border-radius: 50%;
-    position: relative;
-
-}
-.handleInner::after{
-    position: absolute;
-    right: -5%;
-    border-radius: 0 50% 50% 0;
-    content: '';
-    display: block;
-    width: 50%;
-    height: 100%;
-    background-color: lightgrey;
-    transition: all .2s ease-in;
-}
-.light .handleInner::after{
-    border-radius: 70%;
-    height: 65%;
-    width: 65%;
-    transform: translate(5%, 0%);
-
-}
+    padding: 15px;
+ }
