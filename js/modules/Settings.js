@@ -25,6 +25,7 @@ import Ajax from '../classes/Ajax.js';
                 ajax:               new Ajax()
             };
 
+            console.log("init");
             this.initSettings();
 
         };

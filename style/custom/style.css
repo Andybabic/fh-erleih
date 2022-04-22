@@ -8,6 +8,13 @@
     --inPreparationColor: rgba(14, 151, 0, .3);
     --preparedAllColor: rgba(14, 151, 0, .6);
     --footerHeight: 50px;
+    --bgColor: #f8f9fa;
+    --textColor: #212529;
+}
+
+body{
+    height: 100%;
+    background-color: var(--bgColor);
 }
 /*main*/
 main{
@@ -26,6 +33,10 @@ footer{
 
 h1,h2,h3,h4,h5,p, span, button, a{
     font-family: var(--fontfamily);
+}
+
+h1,h2,h3,h4,h5, p, span, a {
+    color: var(--textColor) !important;
 }
 
 html, body {

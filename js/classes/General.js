@@ -3,6 +3,7 @@ class General{
     //CONSTRUCTOR
     constructor() {
         //code to run on every page without explicit call
+        console.log("gen0");
         this.getSettingsFromLS();
     };
 
