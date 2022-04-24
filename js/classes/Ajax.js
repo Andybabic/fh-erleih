@@ -109,4 +109,19 @@ export default class Ajax{
     }
 
 
+    async postResStatus(id){
+        const api = `${this.vars.apiUrl}/reservierung/vorbereiten/`;
+
+        return new Promise((resolve, reject) => {
+            fetch(api)
+                .then(res => res.json(id))
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                reject(-1);
+            });
+        });
+    }
+
+
 }
