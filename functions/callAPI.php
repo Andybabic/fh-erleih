@@ -11,7 +11,7 @@ $headercockie=  getallheaders()["Cookie"] ;
 // zum beispiel $url = "util/login";
 function call($url,$data ){
     global $headercockie;
-   $data == ""?$curl="POST":$curl="GET";
+   $data == ""?$curl="Get":$curl="Post";
         
     
   
@@ -20,7 +20,7 @@ function call($url,$data ){
     $options = array(
             'http' => array(
             'header'  => "Cookie: ".getallheaders()["Cookie"]."\r\n"."Content-type: application/json\r\n",
-            'method'  => $curl,
+            'method'  => $url,
             'content' => json_encode($data),
             'ignore_errors' => true,
             )
