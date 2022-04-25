@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ad4e7d3-cde7-4054-ae75-9037687e6e16" name="Changes" comment="Scan page fertig">
+    <list default="true" id="9ad4e7d3-cde7-4054-ae75-9037687e6e16" name="Changes" comment="Steve hat die API gerichtet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/callAPI.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/callAPI.php" afterDir="false" />
     </list>
@@ -59,7 +59,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650910511676</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Steve hat die API gerichtet">
+      <created>1650911020889</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1650911020889</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -78,6 +85,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Scan page fertig" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scan page fertig" />
+    <MESSAGE value="Steve hat die API gerichtet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Steve hat die API gerichtet" />
   </component>
 </project>
