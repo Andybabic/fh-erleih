@@ -259,7 +259,7 @@ import Ajax from '../classes/Ajax.js';
         }
 
         async getList(){
-            this.toggleLoader();
+            general.toggleLoader(this.doms.filterWrapper);
             //gets the reservations (by department) from
             const dates = this.getFilterDates();
             const startDate = dates[0];
@@ -283,6 +283,11 @@ import Ajax from '../classes/Ajax.js';
                 if(this.filter[name] != undefined && this.filter[name]){
                     //if the filter is set and true
                     const data = await this.modules.ajax.getResByDepartmentTimespan(key, startDate, endDate, type);
+                    if(!data){
+                        //if data returns false error handling
+                        this.displayList("error");
+                        return;
+                    }
 
                     //add departmentId to every entry
                     for (const d of data) {
@@ -308,7 +313,15 @@ import Ajax from '../classes/Ajax.js';
         }
 
         displayList(data){
-            if(data == "empty"){
+            if(data == "error"){
+                const errorMessage = `
+                    <h2>Irgendwas stimmt hier nicht!</h2>
+                    <p>Leider können wir die Reservierungen momentan nicht abrufen.</p>
+                    
+                `;
+                this.doms.listWrapper.html(errorMessage);
+            }
+            else if(data == "empty"){
                 const emptyMessage = `
                     <p>Alles erledigt!</p>
                     <img style="height: 60vh" src="../style/image/alles-erledigt.jpg" alt="alles erledigt Motivationsbild">
@@ -335,6 +348,7 @@ import Ajax from '../classes/Ajax.js';
                         }else if(res.preparedAll){
                             preperationClass = "preparedAll";
                         }
+                        console.log(res.firstName);
 
                         let li = `
                             <li class="reservation ${preperationClass}" data-id = ${curId}>
@@ -393,7 +407,7 @@ import Ajax from '../classes/Ajax.js';
 
             }
             this.listInteraction();
-            this.toggleLoader();
+            general.toggleLoader(this.doms.filterWrapper);
         }
 
         listInteraction(){
@@ -491,7 +505,16 @@ import Ajax from '../classes/Ajax.js';
                     //if the current ID is not already in the userIDs array, add it
                     userIDs.push(userId);
                     //get user data for every user
-                    const user = await this.modules.ajax.getUserById(userId);
+                    let user = await this.modules.ajax.getUserById(userId);
+                    if(!user){
+                        user = {};
+                        //if no userdata is available
+                        user.firstName = "";
+                        user.lastName = "";
+                        user.mail = "";
+                        user.tel = "";
+                    }
+
 
                     resByUser.push(
                         {
@@ -593,23 +616,10 @@ import Ajax from '../classes/Ajax.js';
             });
         };
 
-        toggleLoader(){
-            if($(".loader-horizontal").length){
-                $(".loader-horizontal").slideToggle();
-            }else{
-                const loader = `
-                    <div class="loader-horizontal">
-                      <div class="loader-horizontal__dot"></div>
-                      <div class="loader-horizontal__dot"></div>
-                      <div class="loader-horizontal__dot"></div>
-                    </div>
-                `;
 
-                $(loader).insertAfter(this.doms.filterWrapper);
-            }
-        }
 
         formatName(string){
+            if(string == undefined) return "";
             const badValues = {
                 "Ã¼": "ü",
                 "Ã-":"Ö",

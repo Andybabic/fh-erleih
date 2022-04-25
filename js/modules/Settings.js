@@ -58,16 +58,22 @@ import Ajax from '../classes/Ajax.js';
         async addDepartmentOptions(){
             //add empty option on order to make placeholder work
             const departments = await this.modules.ajax.getDepartments();
-            //add options
-            for (const dep of departments) {
-                //check if department is active to add class
-                let isActive = false;
-                for (const key in this.vars.selctedDepartments) {
-                    if(key == dep.id)isActive = true;
+            if(departments){
+                //add options
+                for (const dep of departments) {
+                    //check if department is active to add class
+                    let isActive = false;
+                    for (const key in this.vars.selctedDepartments) {
+                        if(key == dep.id)isActive = true;
+                    }
+                    const btn = `<button class="js-departmentBtn filterBtn ${isActive? "filterSelected" : ""}" value="${dep.id}">${dep.nameDe}</button>`;
+                    this.doms.departmentWrapper.append(btn);
                 }
-                const btn = `<button class="js-departmentBtn filterBtn ${isActive? "filterSelected" : ""}" value="${dep.id}">${dep.nameDe}</button>`;
-                this.doms.departmentWrapper.append(btn);
+            }else{
+                //error handling
+                this.doms.departmentWrapper.append($("<p>Leider konnte die Liste der Bereiche gerade nicht geladen werden!</p>"));
             }
+
 
         }
 

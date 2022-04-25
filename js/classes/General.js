@@ -9,18 +9,20 @@ class General{
 
 
 
-    async getUserById(userId){
-        const api = `${this.vars.apiUrl}user/${userId}/`;
+    toggleLoader(DOMPos){
+        if($(".loader-horizontal").length){
+            $(".loader-horizontal").slideToggle();
+        }else{
+            const loader = `
+                    <div class="loader-horizontal">
+                      <div class="loader-horizontal__dot"></div>
+                      <div class="loader-horizontal__dot"></div>
+                      <div class="loader-horizontal__dot"></div>
+                    </div>
+                `;
 
-        return new Promise((resolve, reject) => {
-            fetch(api)
-                .then(res => res.json())
-                .then(data => {
-                    resolve(data);
-                }).catch(err => {
-                reject(-1);
-            });
-        });
+            $(loader).insertAfter(DOMPos);
+        }
     }
 
     getSettingsFromLS(setting){
