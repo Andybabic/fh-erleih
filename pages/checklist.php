@@ -109,10 +109,10 @@ $jsonUser = json_decode($data, true);
 
 <body>
 
-    <body>
+    <body >
         <!--User Data-->
 
-        <div class="uk-container">
+        <div class="uk-container " >
             <main>
                 <article class="uk-article">
                     <h4 class="uk-text-lead"><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>  <?= $jsonUser["userId"] ?></h4>
@@ -123,10 +123,18 @@ $jsonUser = json_decode($data, true);
                     <p class="uk-text-light uk-align-right"> Video</p>
                 </article>
                 <hr>
-                <!--Start List of Equipment-->
-                <?php  include '../modules/checklist-element.php'?>
-                <!--End List of Equipment-->
                 
+                <!--Start List of Equipment_interact-->
+                <div id="checklist_interact" >
+                <?php  include '../modules/checklist-element.php'?>
+                </div>
+                <!--End List of Equipment_interact-->
+                 <!--Start List of Equipment_proof-->
+                <div id="checklist_proof"  >
+                <?php  include '../modules/checklist-element_proofing.php'?>
+                </div>
+                <!--End List of Equipment_proof-->
+
             </main>
              
         </div>
@@ -146,39 +154,39 @@ $jsonUser = json_decode($data, true);
 
     <script >
 
-       
-
-
-
-
-
-        //redirect to next page with post parameters
-        function nextPage(params) {
-            var url = "checklist-2.php";
-            var params = {
-                "data": 'Hallo Welt'
-            };
-            var form = document.createElement("form");
-            form.setAttribute("method", "post");
-            form.setAttribute("action", url);
-
-            for (var key in params) {
-                if (params.hasOwnProperty(key)) {
-                    var hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", key);
-                    hiddenField.setAttribute("value", params[key]);
-
-                    form.appendChild(hiddenField);
-                }
-            }
-            document.body.appendChild(form);
-            form.submit();
+        //change a text in the html
+        function change_text(id, text)
+        {
+            document.getElementById(id).innerHTML = text;
         }
-   
 
 
- 
+
+        function updateStateContent(){
+            //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
+        var local_storage = localStorage.getItem('Site_state');
+        if (local_storage < 0) {
+            // save to local storage
+            localStorage.setItem('Site_state', 0);
+            //redirect to overview.php
+            window.location.href = "../pages/overview.php";
+        } 
+        if (local_storage == 0) {
+            change_text("back","Zurück zur Übersicht");
+            change_text("forward","Weiter");
+            document.getElementById('checklist_interact').style.display = 'block';
+            document.getElementById('checklist_proof').style.display = 'none';
+        } 
+        if (local_storage == 1) {
+            change_text("back","Bearbeiten");
+            change_text("forward","Abschließen");
+            document.getElementById('checklist_interact').style.display = 'none';
+            document.getElementById('checklist_proof').style.display = 'block';
+        }
+          }
+        
+          updateStateContent();
+
    
 
     </script>
