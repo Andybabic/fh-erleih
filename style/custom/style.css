@@ -345,3 +345,22 @@ html, body {
     transform: translate(5%, 0%);
 
 }
+
+/*---POPUP---*/
+.popupBGLayer{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+}
+.popup{
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+}

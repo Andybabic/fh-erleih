@@ -1,5 +1,6 @@
 "use strict";
 import Ajax from '../classes/Ajax.js';
+import Popup from './Popup.js';
 
 (function ($, window, document, undefined) {
 
@@ -127,6 +128,12 @@ import Ajax from '../classes/Ajax.js';
                     localStorage.settings = JSON.stringify(settings);
                 }
             });
+
+            //popup test
+            $("#ds").on("click", (e)=>{
+               const reportPopup = new Popup(e,"report");
+            });
+
         }
 
 
