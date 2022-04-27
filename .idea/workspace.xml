@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ad4e7d3-cde7-4054-ae75-9037687e6e16" name="Changes" comment="Steve hat die API gerichtet">
+    <list default="true" id="9ad4e7d3-cde7-4054-ae75-9037687e6e16" name="Changes" comment="change Color of Mode Switch Tab">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/callAPI.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/callAPI.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/filterableList.php" beforeDir="false" afterPath="$PROJECT_DIR$/modules/filterableList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/custom/overview.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/overview.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/custom/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style/custom/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +41,6 @@
       <recent name="C:\xampp\htdocs\style\image" />
     </key>
   </component>
-  <component name="ShelveChangesManager" show_recycled="true" />
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -51,22 +53,8 @@
       <workItem from="1650443204277" duration="1954000" />
       <workItem from="1650448186162" duration="4600000" />
       <workItem from="1650452840574" duration="74000" />
+      <workItem from="1651060305917" duration="1213000" />
     </task>
-    <task id="LOCAL-00001" summary="Scan page fertig">
-      <created>1650910511675</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1650910511676</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Steve hat die API gerichtet">
-      <created>1650911020889</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1650911020889</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -82,10 +70,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Scan page fertig" />
-    <MESSAGE value="Steve hat die API gerichtet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Steve hat die API gerichtet" />
   </component>
 </project>

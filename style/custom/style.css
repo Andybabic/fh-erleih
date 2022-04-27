@@ -41,7 +41,9 @@ h1,h2,h3,h4,h5, p, span, a {
 
 html, body {
     overflow-x: hidden;
+    color: var(--bgColor) !important;
   }
+
   body {
     position: relative
   }
@@ -290,6 +292,18 @@ html, body {
  }
 
 /*SETTINGS PAGE*/
+#settings{
+    margin: 0 2rem;
+}
+
+#ds{
+    margin: 1rem 0;
+}
+
+.departmentWrapper{
+    margin: 0.5rem 0;
+}
+
 /*Toggle Button*/
 #toggleBtn{
     width: 64px;
@@ -364,3 +378,25 @@ html, body {
     max-width: 500px;
     background-color: white;
 }
+
+/*--Mode Switch--*/
+.uk-active .modeSwitch{
+    color: #005999 !important ;
+    border-bottom: 2px solid #005999 !important;
+}
+
+.modeSwitch a{
+    font-weight: bold;
+}
+
+.uk-tab>.uk-active>a {
+    color: #005999 !important;
+}
+.uk-active svg{
+    fill: #005999;
+}
+
+#modeSwitch{
+    box-shadow: 0 -2px 5px -2px #000000;
+}
+
