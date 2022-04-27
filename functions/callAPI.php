@@ -9,15 +9,19 @@ $headercockie=  getallheaders()["Cookie"] ;
 
 
 // zum beispiel $url = "util/login";
-function call($url ){
+function call($url,$data ){
     global $headercockie;
+   $data == ""?$curl="GET":$curl="POST";
+        
+    
+  
 
     $url = $url;
     $options = array(
             'http' => array(
             'header'  => "Cookie: ".getallheaders()["Cookie"]."\r\n"."Content-type: application/json\r\n",
-            'method'  => 'GET',
-            'content' => json_encode(''),
+            'method'  => $curl,
+            'content' => json_encode($data),
             'ignore_errors' => true,
             )
         );
@@ -54,10 +58,14 @@ function call($url ){
 
 if(isset($_GET['r']) ){
     $api = $_GET['r'];
-   
+    if(isset($_GET['data']) ){
+        $data = $_GET['data'];
+        $result = call($api_url.$api,$data);
+    }
+    else{
+        $result= call($api_url.$api, '');
+    }
 
-
-    $result = call($api_url.$api);
     echo($result);
 
 

@@ -124,8 +124,9 @@ h2,p{
 }
 
 #doneListHeading{
-    margin-left: 3rem;
+    margin-left: 1rem;
     margin-right:-2rem;
+    padding-bottom: 0.5rem;
 }
 
 .doneListArrow{

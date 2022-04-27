@@ -3,25 +3,25 @@ import Ajax from '../classes/Ajax.js';
 
 (function ($, window, document, undefined) {
 
-    class ScanSearch{
+    class ScanSearch {
 
         //CONSTRUCTOR
         constructor($base) {
             this.vars = {
-                currentMode:        "prepare",
+                currentMode: "prepare",
             };
             this.doms = {
-                base:                   $base,
-                resultWrapper:          $base.find(".selectResultWrapper"),
+                base: $base,
+                resultWrapper: $base.find(".selectResultWrapper"),
                 selects: {
-                    departmentSelect:   $base.find("#departmentSelect"),
-                    categorySelect:     $base.find("#categorySelect"),
-                    typeSelect:         $base.find("#typeSelect"),
-                    equipmentSelect:    $base.find("#equipmentSelect"),
+                    "departmentSelect": $base.find("#departmentSelect"),
+                    "categorySelect": $base.find("#categorySelect"),
+                    "typeSelect": $base.find("#typeSelect"),
+                    "equipmentSelect": $base.find("#equipmentSelect"),
                 }
             };
             this.modules = {
-                ajax:               new Ajax()
+                ajax: new Ajax()
             };
 
             this.initScanSearch();
@@ -29,11 +29,15 @@ import Ajax from '../classes/Ajax.js';
         };
 
         //METHODS
-        async initScanSearch(){
+        async initScanSearch() {
             //init department select first
             const departmentOptions = await this.modules.ajax.getDepartments();
+            if (!departmentOptions) {
+                this.requestError();
+                return;
+            }
             this.sortAlphabetically(departmentOptions);
-            await this.addSelectOptions("departmentSelect", departmentOptions);
+            this.addSelectOptions("departmentSelect", departmentOptions);
 
             //init select2
             for (const key in this.doms.selects) {
@@ -48,7 +52,7 @@ import Ajax from '../classes/Ajax.js';
         };
 
 
-        addSelectOptions(select, options){
+        addSelectOptions(select, options) {
             //add empty option on order to make placeholder work
             const ph = `<option></option>`;
             this.doms.selects[select].append(ph);
@@ -58,78 +62,94 @@ import Ajax from '../classes/Ajax.js';
                 const opt = `<option value="${option.id}">${option.nameDe}</option>`;
                 this.doms.selects[select].append(opt);
             }
-
+            general.toggleLoader();
         }
 
-        async addInteraction(){
+        async getOptions(clickedSelect) {
+            const id = clickedSelect.currentTarget.id;
+            const val = clickedSelect.params.data.id;
+
+            //get options data based on clicked select and apply them to following select
+            let options = false;
+            switch (id) {
+                case "departmentSelect":
+                    options = await this.modules.ajax.getEquipmentCategory(val);
+                    break;
+                case "categorySelect":
+                    options = await this.modules.ajax.getEquipmentType($("#departmentSelect").val(), val);
+                    break
+                case "typeSelect":
+                    options = await this.modules.ajax.getEquipment(val);
+                    break;
+            }
+            return options;
+        }
+
+        async addInteraction() {
+            //get name of all selects
+            let selectArr = [];
+            for (const key in this.doms.selects) {
+                selectArr.push(key);
+            }
             //department select
-            this.doms.selects.departmentSelect.on('select2:select', async (e) => {
-                //clear all following selects
-                this.clearFollowingSelects("departmentSelect");
+            for (const key in this.doms.selects) {
+                this.doms.selects[key].on('select2:select', async (e) => {
+                    console.log(this.doms.selects[e.currentTarget.id]);
+                    if (key != "equipmentSelect") {
+                        //display loader
+                        general.toggleLoader(this.doms.selects[e.currentTarget.id]);
+                        //not for last select
+                        const nextSelect = selectArr[selectArr.indexOf(key) + 1];
+                        //remove options for all following select
+                        this.clearFollowingSelects(key);
+                        const options = await this.getOptions(e, nextSelect);
+                        console.log(options);
+                        if(options){
+                            this.addSelectOptions(nextSelect, options);
+                        }else{
+                            this.requestError();
+                        }
 
-                const options = await this.modules.ajax.getEquipmentCategory(e.params.data.id);
-                this.sortAlphabetically(options);
-                this.addSelectOptions("categorySelect", options);
-            });
-            //category select
-            this.doms.selects.categorySelect.on('select2:select', async (e) => {
-                //clear all following selects
-                this.clearFollowingSelects("categorySelect");
+                    } else {
+                        //output which id will put on nfc tag
+                        const result = `
+                            <div class="selectResult">
+                                <h2>Objekt</h2>
+                                <p>${$("#typeSelect").children(':selected').text()} - ${$("#equipmentSelect").children(':selected').text()}</p>
+                                <h2>ID</h2>
+                                <p>${$("#equipmentSelect").val()}</p>
+                            </div>
+                    `   ;
+                        this.doms.resultWrapper.html(result);
+                    }
+                });
+            }
 
-                const options = await this.modules.ajax.getEquipmentType($("#departmentSelect").val(),e.params.data.id);
-                const uniqueOptions = this.removeDuplicates(options);
-                console.log(uniqueOptions);
-                this.sortAlphabetically(uniqueOptions);
-                this.addSelectOptions("typeSelect", uniqueOptions);
-            });
-            //type select
-            this.doms.selects.typeSelect.on('select2:select', async (e) => {
-                console.log("selected");
-                //clear all following selects
-                this.clearFollowingSelects("typeSelect");
-                const options = await this.modules.ajax.getEquipment(e.params.data.id);
-                console.log(options);
-                this.sortAlphabetically(options);
-                this.addSelectOptions("equipmentSelect", options);
-            });
-            //equipment select
-            this.doms.selects.equipmentSelect.on('select2:select', (e) => {
-                //output which id will put on nfc tag
-                const result = `
-                    <div class="selectResult">
-                        <h2>Objekt</h2>
-                        <p>${$("#typeSelect").children(':selected').text()} - ${$("#equipmentSelect").children(':selected').text()}</p>
-                        <h2>ID</h2>
-                        <p>${$("#equipmentSelect").val()}</p>
-                    </div>
-                `;
-                this.doms.resultWrapper.html(result);
-            });
         }
 
-        clearFollowingSelects(select){
+        clearFollowingSelects(select) {
+            console.log(select);
             //function to clear all selects that depend on the changed select
             let toDelete = false;
             for (const key in this.doms.selects) {
-                if(toDelete){
+                if (toDelete) {
                     //clear select
                     this.doms.selects[key].empty();
                     //clear result if the equipmentselect is empty
-                    console.log(key);
-                    if(key == "equipmentSelect"){
+                    if (key == "equipmentSelect") {
                         this.doms.resultWrapper.html("");
                     }
                 }
-                if(key == select)toDelete = true;
+                if (key == select) toDelete = true;
             }
         }
 
-        removeDuplicates(options){
+        removeDuplicates(options) {
             //function to remove duplicates espeially for eqTyp
             let uniqueIds = [];
             let uniqueOptions = [];
             for (const option of options) {
-                if(!uniqueIds.includes(option.id)){
+                if (!uniqueIds.includes(option.id)) {
                     uniqueIds.push(option.id);
                     uniqueOptions.push(option);
                 }
@@ -137,8 +157,8 @@ import Ajax from '../classes/Ajax.js';
             return uniqueOptions;
         }
 
-        sortAlphabetically(options){
-            const sortedOptions = options.sort(function(a, b) {
+        sortAlphabetically(options) {
+            const sortedOptions = options.sort(function (a, b) {
                 var nameA = a.nameDe.toUpperCase(); // ignore upper and lowercase
                 var nameB = b.nameDe.toUpperCase(); // ignore upper and lowercase
                 if (nameA < nameB) {
@@ -152,12 +172,23 @@ import Ajax from '../classes/Ajax.js';
             return sortedOptions;
         }
 
+        requestError() {
+            //function to call if the api request returns error
+            const error = `
+                    <div class="selectResult">
+                        <h2>API Error</h2>
+                        <p>Leider konnten die Equipment Daten gerade nicht abgefragt werden</p>
+                    </div>
+                `;
+            this.doms.resultWrapper.html(error);
+        }
+
 
     }
 
 
     const init = () => {
-        if ($("#scanSearch").length > 0 ) {
+        if ($("#scanSearch").length > 0) {
             new ScanSearch($("#scanSearch"));
         }
     };
