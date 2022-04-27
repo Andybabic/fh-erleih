@@ -129,25 +129,21 @@ checklistComponents.checklist = (function() {
     let priv = {},
         publ = {};
 
-   priv.send = function(json) {
+   priv.send = function(res) {
         // make post request to url with array
-        url="../functions/callAPI.php?r=reservierung/vorbereiten/";
+        url="../functions/callAPI.php?r=reservierung/vorbereiten/&data="+res;
         $.ajax({
             //append header cockie
             headers: {
                 'Content-Type': 'application/json',
-
             },
             type: "POST",
             url: url,
-            data: [
-  5345,
-  12312
+            data: '',
+            success: function(msg) {
+                console.log("Update success");
+            },
 
-],
-            success: function(data) {
-                console.log("DAMN YOU GOT IT"+data);
-            }
         });
     }
 
@@ -164,7 +160,7 @@ checklistComponents.checklist = (function() {
                 //ajax.postResStatus("{"+value+":"+this.checked+"}");
                 // get value of clicked checkbox
                 var value = this.value;
-                priv.send("[663]");
+                priv.send(663);
                 var parent = getParent(value);
                 if (parent) {
                     changeState(parent);

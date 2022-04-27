@@ -9,9 +9,9 @@ $headercockie=  getallheaders()["Cookie"] ;
 
 
 // zum beispiel $url = "util/login";
-function call($url,$data ){
+function call($url,$data,$curl ){
     global $headercockie;
-   $data == ""?$curl="GET":$curl="POST";
+
         
     
   
@@ -40,7 +40,7 @@ function call($url,$data ){
 
     if ($status !== "200") {
         echo($url);
-        echo('<br>');
+        echo($curl);
         echo($status);
         echo( "Sorry du hast keine Berechtigungen");
         echo('<br>');
@@ -60,21 +60,16 @@ if(isset($_GET['r']) ){
     $api = $_GET['r'];
     if(isset($_GET['data']) ){
         $data = $_GET['data'];
-        $result = call($api_url.$api,$data);
+        $result = call($api_url.$api,$data,"POST");      
     }
     else{
-        $result= call($api_url.$api, '');
+        
+        $result= call($api_url.$api,'',"GET");
     }
-
     echo($result);
-
-
-    
-    
+  
 } else {
     echo "No Data";
-
-
 }
 
 
