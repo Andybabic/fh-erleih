@@ -182,10 +182,16 @@ $jsonUser = json_decode($data, true);
             change_text("forward","Abschließen");
             document.getElementById('checklist_interact').style.display = 'none';
             document.getElementById('checklist_proof').style.display = 'block';
+        }else {
+            // save to local storage
+            localStorage.setItem('Site_state', 0);
+            //updateStateContent();
         }
+        
+
           }
         
-          updateStateContent();
+        updateStateContent();
 
    
 
