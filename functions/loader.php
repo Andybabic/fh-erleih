@@ -22,8 +22,11 @@ for ($i = 1; $i < $count_slashes; $i++) {
 //load global files
 echo (  " <link rel='stylesheet' href='".$path."style/uikit/css/uikit-rtl.min.css'> ");
 echo (  " <link rel='stylesheet' href='".$path."style/uikit/css/uikit.min.css'> ");
+echo (  " <script src='".$path."js/classes/General.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit.min.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit-icons.min.js'></script> ");
+echo (  " <script defer src='".$path."js/swipe.js'></script> ");
+
 
 
 ///Cutom CSS

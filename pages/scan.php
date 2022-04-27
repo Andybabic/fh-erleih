@@ -11,15 +11,27 @@ require_once("../functions/loader.php");
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../style/custom/style.css">
     <title>Scan</title>
 </head>
 <body>
-    <header></header>
+    <header>
+
+            <?php getModule('menu') ?>
+    </header>
     <main>
-        <button type="button">Hallo bitte mich drücken für einen neuen NFC-Tag, danke bussi und baba. LG</button>
+
+        <?php getModule('scanSearch') ?>
+
+        <div class="uk-height-medium">
+            <div class="uk-height-1-1 ">
+
+                    <img class="uk-align-center uk-margin-large-top uk-vertical-align-middle" src="../style/image/Scanpic.svg" >
+
+             </div>
+        </div>
     </main>
-    <footer>
-        <?php getModule('modeSwitch')?>
-    </footer>
+
+
 </body>
 </html>

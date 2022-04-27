@@ -109,10 +109,10 @@ $jsonUser = json_decode($data, true);
 
 <body>
 
-    <body>
+    <body >
         <!--User Data-->
 
-        <div class="uk-container">
+        <div class="uk-container " >
             <main>
                 <article class="uk-article">
                     <h4 class="uk-text-lead"><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>  <?= $jsonUser["userId"] ?></h4>
@@ -123,68 +123,18 @@ $jsonUser = json_decode($data, true);
                     <p class="uk-text-light uk-align-right"> Video</p>
                 </article>
                 <hr>
-                <!--Start List of Equipment-->
-                <div class="uk-container ">
-                    <div role="main" class="ui-content">
-                        <ul data-role="listview">
-                            <?php 
-                            
-                            //generate a html element for each entry in the array
-                            for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
-                                $data= dings($jsonUser['reservations'][$i]['equipId']);
-                               
-                                ?>
-                     
-                                    <!---Start Equipment Card element--->
-                                    <div  class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline blue-20 swipebox" >
-                                        <div class="checkListbutton">
-                                            <input class="checklist-checkbox" type="checkbox" value="<?=$data['typeId']?>" >
-                                        </div>
-                                        <div class="grid-100 ">
-                                            <h3 class="uk-text-lead "><?=$data["nameDe"]?> <p class="uk-text-lighter uk-display-inline"> id:<?=$data["typeId"]?></p></h3>
-                                            <div class="uk-align-left ">
-                                                <p><?=$data["damage"]?></p>
-                                            </div>
-                                            <div class="uk-align-left ">
-                                                <p><?=$data["nameDe"]?></p>
-                                            </div>
-
-
-                                                <!---Packliste--->
-                                                    <!---Start PHP LOOP--->  
-                                                    <?php     $packlist = packlist($data['id']);
-                                    
-                                                        if (count($packlist) == 0) {
-
-                                                        }
-                                                        else {?>
-                                                                <div class="grid-100 uk-align-left"   >
-                                                                        <hr class="uk-divider-vertical uk-align-left custom_HR ">
-                                                                            <div class="uk-text-large nospace-up">Packliste</div>
-                                                                            <ul>
-                                                                            
-                                                                                <?php  for($item = 0; $item < count($packlist) ; ++$item) { ?>
-                                                                                        <li>
-                                                                                            <label>
-                                                                                                <input value="<?=$packlist[$item]['nameDe']?>" class="checklist-checkbox" type="checkbox"> <?=$packlist[$item]['nameDe']?> </input>
-                                                                                            </label>
-                                                                                        </li>
-                                                                                        <?php } ?>
-                                                                            </ul>
-                                                                </div>                
-                                                    <?php  } ?>
-                                                    <!---End PHP LOOP--->
-                                                <!---End Packliste--->
-                                            
-                                        </div>
-                                    </div>
-                                    <!---End Equipment Card element--->
-
-                            <?php } ?>
-                        </ul>
-                    </div>
-                </div>
                 
+                <!--Start List of Equipment_interact-->
+                <div id="checklist_interact" >
+                <?php  include '../modules/checklist-element.php'?>
+                </div>
+                <!--End List of Equipment_interact-->
+                 <!--Start List of Equipment_proof-->
+                <div id="checklist_proof"  >
+                <?php  include '../modules/checklist-element_proofing.php'?>
+                </div>
+                <!--End List of Equipment_proof-->
+
             </main>
              
         </div>
@@ -203,62 +153,40 @@ $jsonUser = json_decode($data, true);
 
 
     <script >
-        var done = [];
-        var checkboxesArray = document.querySelectorAll('.checklist-checkbox');
-        //create a list of all checkboxes
-        var checkboxes = document.querySelectorAll('.checklist-checkbox');
-        // print value of checkbox
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener('change', function() {
-                console.log(this.value);
-                //check if checkbox is checked whenn false, add to done array
-                if (!this.checked) {
-                    done.push(this.value);
-                }
-                //check if checkbox is unchecked whenn true, remove from done array
-                else {
-                    var index = done.indexOf(this.value);
-                    if (index > -1) {
-                        done.splice(index, 1);
-                    }
-                }
-                console.log(checkboxesArray);
-                console.log(done);
 
-            });
+        //change a text in the html
+        function change_text(id, text)
+        {
+            document.getElementById(id).innerHTML = text;
         }
 
 
 
-        //redirect to next page with post parameters
-        function nextPage(params) {
-            var url = "checklist-2.php";
-            var params = {
-                "data": 'Hallo Welt'
-            };
-            var form = document.createElement("form");
-            form.setAttribute("method", "post");
-            form.setAttribute("action", url);
-
-            for (var key in params) {
-                if (params.hasOwnProperty(key)) {
-                    var hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", key);
-                    hiddenField.setAttribute("value", params[key]);
-
-                    form.appendChild(hiddenField);
-                }
-            }
-            document.body.appendChild(form);
-            form.submit();
+        function updateStateContent(){
+            //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
+        var local_storage = localStorage.getItem('Site_state');
+        if (local_storage < 0) {
+            // save to local storage
+            localStorage.setItem('Site_state', 0);
+            //redirect to overview.php
+            window.location.href = "../pages/overview.php";
+        } 
+        if (local_storage == 0) {
+            change_text("back","Zurück zur Übersicht");
+            change_text("forward","Weiter");
+            document.getElementById('checklist_interact').style.display = 'block';
+            document.getElementById('checklist_proof').style.display = 'none';
+        } 
+        if (local_storage == 1) {
+            change_text("back","Bearbeiten");
+            change_text("forward","Abschließen");
+            document.getElementById('checklist_interact').style.display = 'none';
+            document.getElementById('checklist_proof').style.display = 'block';
         }
-   
-        //create a box that can be swipe to the left
-        var box = document.querySelector('.swipebox');
-        var hammertime = new Hammer(box);
+          }
+        
+          updateStateContent();
 
- 
    
 
     </script>

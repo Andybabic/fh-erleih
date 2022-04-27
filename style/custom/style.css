@@ -5,11 +5,48 @@
     --fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --FHlightblue: #CDDEEB;
     --FHdefaultblue: #005096;
+    --inPreparationColor: rgba(14, 151, 0, .3);
+    --preparedAllColor: rgba(14, 151, 0, .6);
+    --footerHeight: 50px;
+    --bgColor: #f8f9fa;
+    --textColor: #212529;
+}
+
+body{
+    height: 100%;
+    background-color: var(--bgColor);
+}
+/*main*/
+main{
+    margin-bottom: var(--footerHeight);
+}
+
+/*footer*/
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--footerHeight);
+    background-color: #fff;
 }
 
 h1,h2,h3,h4,h5,p, span, button, a{
     font-family: var(--fontfamily);
 }
+
+h1,h2,h3,h4,h5, p, span, a {
+    color: var(--textColor) !important;
+}
+
+html, body {
+    overflow-x: hidden;
+    color: var(--bgColor) !important;
+  }
+
+  body {
+    position: relative
+  }
 
 
 .blue {
@@ -58,7 +95,6 @@ h1,h2,h3,h4,h5,p, span, button, a{
 
 .checklist-checkbox {
     left: 123px; 
-
     width: 20px;
     height: 20px;
     border: 1px solid #005096;
@@ -67,8 +103,8 @@ h1,h2,h3,h4,h5,p, span, button, a{
 
 }
 
-.space-between-list{
-    margin-bottom: 20px;
+.spacer{
+    height: 20px;
 }
 
 .custom_HR{
@@ -79,3 +115,288 @@ h1,h2,h3,h4,h5,p, span, button, a{
 .nospace-up{
     margin-top: 0px;
 }
+
+/* Start Swipebox Style  */
+.Swipe_container {
+    position: relative;
+    background: lightgray;
+
+  }
+  
+  .swipe_box {
+    position: relative;
+    background: white; 
+      width: 98%;
+      height: auto;
+    left: 0;
+/* 
+    border: 0px solid red;
+      border-radius: 0px 20px 20px 0px; */
+  }
+  .swipe_box_back {
+    position: absolute;
+    background: rgb(204, 204, 204); 
+      width: 100%;
+      height: 100%;
+    left: 0;
+/* 
+    border: 0px solid red;
+      border-radius: 0px 20px 20px 0px; */
+  }
+  
+  .swipebox_Object {
+      padding-right: -10px;
+      /* border: 0px solid red;
+      border-radius: 0px 20px 20px 0px; */
+      box-shadow:10px 5px 12px #00000030 ;
+  }
+
+
+  .btn-checklist {
+    position: relative;
+    color: white ;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 110px;
+    height:100%;
+    margin:0;
+
+  }
+  .btn-checklist {
+    position: relative;
+    color: white !important;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 110px;
+    height:100%;
+    margin:0;
+
+  }
+  a.link2{
+    color: white !important;
+  }
+  .btn-checklist:hover {
+      /* scale up slowly and add inner shadow*/
+        transform: scale(1.1);
+        transition: all 0.4s ease-in-out;
+        box-shadow: 5px 5px 20px #0000009c;
+        margin:-1px;
+        padding:1px;
+
+  }
+  .center-all {
+    position: relative;
+    top: 40%;
+  }
+
+
+  /* End Swipebox Style */
+
+.bg-orange {
+    background-color: #d49a06;
+}
+.bg-blue {
+    background-color: #005096;
+}
+
+.uk-close {
+    color: #999;
+    left: 95%;
+    transition: .1s ease-in-out;
+    transition-property: color,opacity;
+}
+
+.uk-navbar{
+    background-color: #005096 !important;
+}
+.uk-navbar span {
+    color:white !important;
+    font-size: 1.5rem;
+}
+
+
+/*---LOADER---*/
+ .loader-horizontal {
+     height: 50px;
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #f8f9fa;
+ }
+ .loader-horizontal__dot {
+     width: 10px;
+     height: 10px;
+     background: var(--FHdefaultblue);
+     border-radius: 100%;
+     float: left;
+     margin-right: 6px;
+     animation: bounce 1.8s infinite;
+ }
+ .loader-horizontal__dot:first-child {
+     animation-delay: 0.1s;
+ }
+ .loader-horizontal__dot:nth-child(2) {
+     animation-delay: 0.3s;
+ }
+ .loader-horizontal__dot:nth-child(3) {
+     animation-timing-function: ease;
+     animation-delay: 0.5s;
+ }
+ @-webkit-keyframes bounce {
+     0%, 100% {
+         opacity: 1;
+     }
+     60% {
+         opacity: 0;
+     }
+ }
+
+ /* in preparation and prepared overview list items */
+ /*important hier leider notwendig bis bessere lösung wegen uikit list style*/
+ .listWrapper .uk-list .inPreparation{
+     background-color: var(--inPreparationColor);
+ }
+ .listWrapper .uk-list .preparedAll{
+     background-color: var(--preparedAllColor);
+ }
+
+ /*scan search module*/
+ #scanSearch{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+ .selectWrapper{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     width: 100%;
+ }
+ .selectWrapper select{
+     width: 90%;
+     margin: 15px 0;
+ }
+ .selectResult{
+    text-align: center;
+    width: 90%;
+    padding: 15px;
+ }
+
+/*SETTINGS PAGE*/
+#settings{
+    margin: 0 2rem;
+}
+
+#ds{
+    margin: 1rem 0;
+}
+
+.departmentWrapper{
+    margin: 0.5rem 0;
+}
+
+/*Toggle Button*/
+#toggleBtn{
+    width: 64px;
+    height: 32px;
+    background-color: gray;
+    border-radius: 45px;
+    position: relative;
+}
+#toggleBtn.light{
+    justify-content: flex-end;
+}
+
+.handle{
+    transition: all .2s ease-in;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: lightgrey;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+.light .handle{
+    transform: translateX(calc(64px - 32px));
+}
+.handleInner{
+    transition: all .2s ease-in;
+    width: 75%;
+    height: 75%;
+    background-color: black;
+    border-radius: 50%;
+    position: relative;
+
+}
+.handleInner::after{
+    position: absolute;
+    right: -5%;
+    border-radius: 0 50% 50% 0;
+    content: '';
+    display: block;
+    width: 50%;
+    height: 100%;
+    background-color: lightgrey;
+    transition: all .2s ease-in;
+}
+.light .handleInner::after{
+    border-radius: 70%;
+    height: 65%;
+    width: 65%;
+    transform: translate(5%, 0%);
+
+}
+
+/*---POPUP---*/
+.popupBGLayer{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+}
+.popup{
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+}
+
+/*--Mode Switch--*/
+.uk-active .modeSwitch{
+    color: #005999 !important ;
+    border-bottom: 2px solid #005999 !important;
+}
+
+.modeSwitch a{
+    font-weight: bold;
+}
+
+.uk-tab>.uk-active>a {
+    color: #005999 !important;
+}
+.uk-active svg{
+    fill: #005999;
+}
+
+#modeSwitch{
+    box-shadow: 0 -2px 5px -2px #000000;
+}
+

@@ -8,7 +8,7 @@ import Ajax from '../classes/Ajax.js';
         constructor($base, listType) {
             this.filter = {
                 today:              true,
-                tomorrow:           true,
+                tomorrow:           false,
                 timespan:           [],
             };
             this.vars = {
@@ -29,11 +29,7 @@ import Ajax from '../classes/Ajax.js';
                 1: "Fotografie",
                 2: "Audio",
                 3: "Video",
-                5: "InteraktiveMedien",
-                6: "Physiotheraphie",
-                /*
-                9: "Diätologie",
-                */
+                5: "Interaktive Medien",
             }
             this.pageUrl = "https://verleihneu.fhstp.ac.at/fh_erleih/";
 
@@ -47,11 +43,25 @@ import Ajax from '../classes/Ajax.js';
         //TODO: set departments function to create all departments dynamically (this.departments, whitespace entfernen bei namen)
 
         async initOverviewPage(){
+            //check for stored settings
+            if(localStorage.settings){
+                const settings = JSON.parse(localStorage.settings);
+                //take stored departments
+                if(settings.departments)this.departments = settings.departments;
+            }
+
             //init filter buttons
             this.addFilter();
 
             if(localStorage.filterValues){
+                //if there are filter preferences stored apply them
                 this.filter = JSON.parse(localStorage.filterValues);
+            }else{
+                //if no values are stored set all department filter
+                for (const key in this.departments) {
+                    const filter = this.departments[key];
+                    this.filter[filter] = true;
+                }
             }
             this.setFilterStyle();
 
@@ -61,7 +71,7 @@ import Ajax from '../classes/Ajax.js';
                     <input type="hidden" id="ranged">
                     <button id="submitSpanFilter" class="filterBtn dateFilter" data-filter="timespan">Filter setzen</button>
                 </div>`
-            this.doms.base.append(pickerWrapper);
+            this.doms.filterWrapper.append(pickerWrapper);
 
             //TODO datepicker default date from localstorage
             //init time picker
@@ -80,12 +90,14 @@ import Ajax from '../classes/Ajax.js';
                         this.filter.timespan.push(this.formatDate(date[0]));
                     }
                     this.addPickerStyle();
-                    console.log(date);
                 },
                 onInit: (e) => {
                     console.log(e);
-                    console.log(new Date(this.filter.timespan[0]));
+                    //console.log(new Date(this.filter.timespan[0]));
                 },
+                onRender: (e) => {
+                    console.log(e);
+                }
             });
 
             //init list
@@ -113,9 +125,9 @@ import Ajax from '../classes/Ajax.js';
 
             const timeFilter = `
                     <div class="timeFilter">
-                        <button class="filterBtn ${this.vars.selectionClass}" data-filter="today" data-selected="1">Heute</button>
-                        <button class="filterBtn  ${this.vars.selectionClass}" data-filter="tomorrow" data-selected="1">Morgen</button>
-                        <button class="filterBtn " data-filter="togglePicker" data-selected="0">Datum</button>
+                        <button class="filterBtn ${this.vars.selectionClass}" data-filter="today">Heute</button>
+                        <button class="filterBtn  ${this.vars.selectionClass}" data-filter="tomorrow">Morgen</button>
+                        <button class="filterBtn " data-filter="togglePicker">Datum</button>
                     </div>
             `;
             const prepareFilters = `
@@ -210,7 +222,10 @@ import Ajax from '../classes/Ajax.js';
 
                 //get overview list based on filter settings
                 localStorage.filterValues = JSON.stringify(this.filter);
-                this.getList();
+                if(filter != "togglePicker"){
+                    //exception for toggle picker because this button only toggles date picker and doesnt trigger a list reload
+                    this.getList();
+                }
             });
         }
 
@@ -244,6 +259,7 @@ import Ajax from '../classes/Ajax.js';
         }
 
         async getList(){
+            general.toggleLoader(this.doms.filterWrapper);
             //gets the reservations (by department) from
             const dates = this.getFilterDates();
             const startDate = dates[0];
@@ -267,6 +283,11 @@ import Ajax from '../classes/Ajax.js';
                 if(this.filter[name] != undefined && this.filter[name]){
                     //if the filter is set and true
                     const data = await this.modules.ajax.getResByDepartmentTimespan(key, startDate, endDate, type);
+                    if(!data){
+                        //if data returns false error handling
+                        this.displayList("error");
+                        return;
+                    }
 
                     //add departmentId to every entry
                     for (const d of data) {
@@ -292,7 +313,15 @@ import Ajax from '../classes/Ajax.js';
         }
 
         displayList(data){
-            if(data == "empty"){
+            if(data == "error"){
+                const errorMessage = `
+                    <h2>Irgendwas stimmt hier nicht!</h2>
+                    <p>Leider können wir die Reservierungen momentan nicht abrufen.</p>
+                    
+                `;
+                this.doms.listWrapper.html(errorMessage);
+            }
+            else if(data == "empty"){
                 const emptyMessage = `
                     <p>Alles erledigt!</p>
                     <img style="height: 60vh" src="../style/image/alles-erledigt.jpg" alt="alles erledigt Motivationsbild">
@@ -300,6 +329,7 @@ import Ajax from '../classes/Ajax.js';
                 this.doms.listWrapper.html(emptyMessage);
             }else{
                 let resList = `<ul class="uk-list uk-list-striped">`;
+                let doneList = `<ul class="doneList uk-list uk-list-striped">`;
                 //iterate through days
                 for (const resByDate of data) {
                     const reservations = resByDate.reservations;
@@ -311,12 +341,18 @@ import Ajax from '../classes/Ajax.js';
                         const date = new Date(res.date);
                         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                         const dateStr = date.toLocaleDateString("de-DE", dateOptions);
-
+                        //add class if reservation is in preparation or fully prepared
+                        let preperationClass = "";
+                        if(res.inPreparation && !res.preparedAll){
+                            preperationClass = "inPreparation";
+                        }else if(res.preparedAll){
+                            preperationClass = "preparedAll";
+                        }
+                        console.log(res.firstName);
 
                         let li = `
-                            
-                            <li class="reservation" data-id = ${curId}>
-                                <h2>${res.firstName} ${res.lastName} - ${res.userId}</h2>
+                            <li class="reservation ${preperationClass}" data-id = ${curId}>
+                                <h2>${this.formatName(res.firstName)} ${this.formatName(res.lastName)} - ${res.userId}</h2>
                                 <p>${dateStr}</p>  
                                 <p>Anzahl an Equipment: ${res.reservations.length}</p>
                                 <p class="departments">
@@ -332,13 +368,46 @@ import Ajax from '../classes/Ajax.js';
                         }
                         li += `</p></li>`;
 
-                        resList += li;
+                        //append li to reslist or to preparedlist depending on preparedAll attribute
+                        if(res.preparedAll){
+                            doneList += li;
+                        }else{
+                            resList += li;
+                        }
                     }
                 }
                 resList += `</ul>`;
-                this.doms.listWrapper.html(resList);
+                doneList += `</ul>`;
+
+                //create done list with toggle if list is not empty
+                let doneListWrapper;
+                if($(doneList)[0].childElementCount){
+                    doneListWrapper = `
+                        <div class="doneListWrapper">
+                            <div id="doneListToogle">
+                                <h2 id="doneListHeading">Vorbereitet</h2>
+                                <span class="doneListArrow"><svg xmlns="http://www.w3.org/2000/svg" width="34.875" height="34.875" viewBox="0 0 34.875 34.875">
+                                  <path id="Icon_awesome-arrow-circle-down" data-name="Icon awesome-arrow-circle-down" d="M35.438,18A17.438,17.438,0,1,1,18,.563,17.434,17.434,0,0,1,35.438,18Zm-10.1-2.032L20.25,21.277V8.438A1.683,1.683,0,0,0,18.563,6.75H17.438A1.683,1.683,0,0,0,15.75,8.438V21.277l-5.091-5.309a1.689,1.689,0,0,0-2.412-.028l-.766.773a1.681,1.681,0,0,0,0,2.384l9.323,9.33a1.681,1.681,0,0,0,2.384,0l9.33-9.33a1.681,1.681,0,0,0,0-2.384l-.766-.773a1.689,1.689,0,0,0-2.412.028Z" transform="translate(-0.563 -0.563)"/>
+                                </svg></span>
+                            </div>
+                            ${doneList}
+                        </div>
+                    `;
+                }else{
+                    doneListWrapper = "";
+                }
+
+
+                //clear list and add list again
+                this.doms.listWrapper.html("");
+                this.doms.listWrapper.append(resList);
+                if(doneListWrapper != ""){
+                    this.doms.listWrapper.append(doneListWrapper);
+                }
+
             }
             this.listInteraction();
+            general.toggleLoader(this.doms.filterWrapper);
         }
 
         listInteraction(){
@@ -346,6 +415,16 @@ import Ajax from '../classes/Ajax.js';
                 const id = e.target.dataset.id
                 const data = this.vars[id];
                 this.nextPage(data);
+            });
+
+            //done list toggle
+            $("#doneListToogle").on("click", () => {
+                if($(".doneList").is(":visible")){
+                    $(".doneListArrow").css({"transform":"rotate(180deg)"})
+                }else{
+                    $(".doneListArrow").css({"transform":"rotate(0deg)"})
+                }
+                $(".doneList").slideToggle();
             });
         }
 
@@ -383,7 +462,8 @@ import Ajax from '../classes/Ajax.js';
             const resByDates = [];
 
             for (const res of resList) {
-                const date = res[type];
+                //slice to ignore time
+                const date = res[type].slice(0,10);
                 //check if resByDates Array already contains the date
                 if(resByDates.length > 0){
                     //check if date is already in array
@@ -422,9 +502,20 @@ import Ajax from '../classes/Ajax.js';
                 const res = resList[i];
                 const userId = resList[i]["userId"];
                 if(!userIDs.includes(userId)){
-                    //if the current ID is not already in the userIDs array add it
+                    //if the current ID is not already in the userIDs array, add it
                     userIDs.push(userId);
-                    const user = await this.modules.ajax.getUserById(userId);
+                    //get user data for every user
+                    let user = await this.modules.ajax.getUserById(userId);
+                    if(!user){
+                        user = {};
+                        //if no userdata is available
+                        user.firstName = "";
+                        user.lastName = "";
+                        user.mail = "";
+                        user.tel = "";
+                    }
+
+
                     resByUser.push(
                         {
                             "userId"            :userId,
@@ -434,20 +525,30 @@ import Ajax from '../classes/Ajax.js';
                             "tel"               :user["tel"],
                             "date"              :this.vars.listType == "prepare" ? res["from"] : res["to"],
                             "reservations"      :[res],
-
+                            "inPreparation"     :res["prepared"],
+                            "preparedAll"       :res["prepared"],
                         }
                     );
                 }else{
-                    //count of reservations per user
                     for (const user of resByUser) {
+                        //add all further reservations to the existing user in the resByUser array
                         if(user["userId"] == userId){
                             user["reservations"].push(res);
+                            //if the prepared state of one individual reservation is not true the resbyuser object is not fully prepared
+                            if(res["prepared"]==0){
+                                user["preparedAll"] = 0;
+                            }
+                            //if prepared state of one reservation is true the resbyuser object is in preparation
+                            if(res["prepared"]==1){
+                                user["inPreparation"] = 1;
+                            }
                         }
                     }
                 }
             }
             return resByUser;
         }
+
 
         getFilterDates(){
             //returns array with one date (today & tomorrow) or start and end (timespan)
@@ -500,35 +601,6 @@ import Ajax from '../classes/Ajax.js';
             return diffDays;
         }
 
-
-        async filterResList(e){
-            const filter = $(e.target);
-            if(filter.hasClass("filter-selected")){
-                filter.removeClass("filter-selected");
-                e.target.value = 0;
-            }else{
-                filter.addClass("filter-selected");
-                e.target.value = 1;
-            }
-            const resData = await this.modules.reservierung.getResByFilter(Boolean($("#filter-today").val()*1), Boolean($("#filter-tomorrow").val()*1), Boolean($("#filter-timespan").val()*1));
-            if(resData != -1){
-                //note: -1 not possible yet
-                const lastList = this.doms.listWrapper.children()[0];
-                const newList = UIresList(resData);
-                const newListDOM = newList.get(0);
-
-                if(!newListDOM.isEqualNode(lastList)){
-                    //if new filter settings return a different list
-                    this.doms.listWrapper.html(newList);
-                    console.log("changed");
-                }else{
-                    console.log("not changed");
-                }
-
-            }
-
-        }
-
         addDatePicker(){
             const datepicker = new Datepicker('#page-overview', {
                 inline: true,
@@ -543,6 +615,27 @@ import Ajax from '../classes/Ajax.js';
                 },
             });
         };
+
+
+
+        formatName(string){
+            if(string == undefined) return "";
+            const badValues = {
+                "Ã¼": "ü",
+                "Ã-":"Ö",
+                "Ãœ":"Ü",
+                "Ã¤":"ä",
+                "Ã¶":"ö",
+                "ÃŸ":"ß",
+                "Ã":"Ä"
+            };
+            for (const key in badValues) {
+                console.log(key);
+                console.log(badValues[key]);
+                string = string.replaceAll(key, badValues[key]);
+            }
+            return string;
+        }
 
         removeList(){
             //to call from modeSwitch
