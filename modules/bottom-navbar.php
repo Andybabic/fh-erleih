@@ -6,10 +6,10 @@
 <div class="uk-container" style="color:withe" >
 
                     <div class="uk-float-left grid-50 ">
-                                <a class="uk-button uk-button-default blue  uk-align-center" id="back" onclick="stateComponents.stateManager.set_state(-1) " >Return</a>
+                                <a class="uk-button uk-button-default colorPrimary  uk-align-center" id="back" onclick="stateComponents.stateManager.set_state(-1) " >Return</a>
                     </div>
                     <div class="uk-float-right grid-50 ">
-                            <a class="uk-button uk-button-default blue  uk-align-center"  id="forward" onclick="stateComponents.stateManager.set_state(1) ">Weiter</a>
+                            <a class="uk-button uk-button-default colorPrimary  uk-align-center"  id="forward" onclick="stateComponents.stateManager.set_state(1) ">Weiter</a>
                     </div>
                     
 
