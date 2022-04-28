@@ -4,7 +4,7 @@ class General{
     constructor() {
         //code to run on every page without explicit call
         console.log("gen0");
-        this.getSettingsFromLS();
+        this.addDarkmode();
     };
 
 
@@ -51,16 +51,17 @@ class General{
         }
     }
 
-    getSettingsFromLS(setting){
-        //darkmode
+    addDarkmode(){
         if(localStorage.settings){
             let settings = JSON.parse(localStorage.settings);
             if(settings.darkMode){
-                $(":root").css("--bgColor", "#212529");
+                $(":root").css("--colorBackgroundClean", "#212529");
+                $(":root").css("--colorBackgroundGrey", "#495057");
                 $(":root").css("--textColor", "#f8f9fa");
             }
         }
     }
+
 
 }
 

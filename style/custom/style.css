@@ -8,13 +8,17 @@
     --inPreparationColor: rgba(14, 151, 0, .3);
     --preparedAllColor: rgba(14, 151, 0, .6);
     --footerHeight: 50px;
-    --bgColor: #f8f9fa;
+
+    --colorBackgroundClean: #F8F9FA;
+    --colorBackgroundGrey: #E3E5E6;
+    --colorPrimary: #005096;
+    --colorSecondary: #669BC1;
     --textColor: #212529;
 }
 
 body{
     height: 100%;
-    background-color: var(--bgColor);
+    background-color: var(--colorBackgroundClean);
 }
 /*main*/
 main{
@@ -41,7 +45,7 @@ h1,h2,h3,h4,h5, p, span, a {
 
 html, body {
     overflow-x: hidden;
-    color: var(--bgColor) !important;
+    color: var(--backgroundColor) !important;
   }
 
   body {
@@ -235,7 +239,7 @@ html, body {
  .loader-horizontal__dot {
      width: 10px;
      height: 10px;
-     background: var(--FHdefaultblue);
+     background: var(--colorPrimary);
      border-radius: 100%;
      float: left;
      margin-right: 6px;

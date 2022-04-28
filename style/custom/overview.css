@@ -9,7 +9,7 @@
 
 .filterSelected::after {
     content: "\2713";
-    color: var(--FHlightblue);
+    color: var(--colorSecondary);
     display: block;
     height: 4rem;
     width: 4rem;
