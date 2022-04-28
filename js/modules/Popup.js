@@ -10,7 +10,6 @@ export default class Popup{
             };
             this.doms = {
                 base:                   object,
-                bgLayer:                "",
                 popup:                  "",
                 returnButton:           "",
                 proceedButton:          "",
@@ -27,11 +26,12 @@ export default class Popup{
         initPopup(){
             //type specific popup content
             this.createPopup();
-            this.addInteraction();
         };
 
 
         createPopup(){
+            this.vars.modalId = "modal-"+this.vars.popupType;
+            console.log(this.vars.modalId);
             let titleTxt;
             let titleIcon;
             let content;
@@ -49,7 +49,14 @@ export default class Popup{
                                         <path id="Pfad_22" data-name="Pfad 22" d="M18,24h0" transform="translate(-8 -10)" fill="none" stroke="#f80" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                                     </g>
                                 </svg>`;
-                    content = "";
+                    content = `
+                        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                            <label><input class="uk-radio" type="radio" name="radio2" value="damage" checked>Schaden melden</label>
+                            <label><input class="uk-radio" type="radio" name="radio2" value="todo">Todo vermerken</label>
+                            <label><input class="uk-radio" type="radio" name="radio2" value="resState">Reservierungstatus ändern</label>
+                            <label><input class="uk-radio" type="radio" name="radio2" value="eqState">Equipment Status ändern</label>
+                        </div>
+                    `;
                     returnButtonTxt = "Abbrechen";
                     proceedButtonTxt = "Speichern";
                     break;
@@ -58,79 +65,103 @@ export default class Popup{
                     titleIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <path id="Pfad_23" data-name="Pfad 23" d="M2.679,39.363a.257.257,0,0,0,.439,0L5.734,35.8c.121-.165.064-.3-.128-.3H4.218a.3.3,0,0,1-.281-.379,7.487,7.487,0,0,1,7.079-6.337c4,0,7.249,3.619,7.249,8.068s-3.252,8.068-7.249,8.068a.971.971,0,0,0,0,1.932c4.954,0,8.985-4.486,8.985-10s-4.03-10-8.985-10c-4.423,0-8.107,3.576-8.847,8.266a.439.439,0,0,1-.4.382H.192c-.192,0-.249.134-.128.3Z" transform="translate(0 -26.855)" fill="#07f"/>
                                 </svg>`;
-                    content = `<input type="text" id="datepicker">`;
+                    content = `<input type="text" readonly="readonly" id="datepicker-popup">`;
                     returnButtonTxt = "Abbrechen";
                     proceedButtonTxt = "Verlängern";
                     break;
             }
 
             const popup = `
-                <div class="popupBGLayer">
-                    <div class="popup">
-                        <span>
-                            <h1 class="popupTitle">${titleTxt}</h1>
-                            <span class="titleIcon">${titleIcon}</span>
-                        </span>
-                        <div class="popupContent">
-                            ${content}
-                        </div>
-                        <div class="popupButtons">
-                            <button class="returnButton">${returnButtonTxt}</button>
-                            <button class="proceedButton">${proceedButtonTxt}</button>
+                	<div id="${this.vars.modalId}" uk-modal>
+                        <div class="uk-modal-dialog">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <div class="uk-modal-header">
+                                <span>
+                                    <h2 class="uk-modal-title">${titleTxt}</h2>
+                                    <span class="titleIcon">${titleIcon}</span>
+                                </span> 
+                            </div>
+                            <div class="uk-modal-body">
+                                ${content}                            
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close" type="button">${returnButtonTxt}</button>
+                                <button class="uk-button uk-button-primary proceedButton" type="button">${proceedButtonTxt}</button>
+                            </div>
                         </div>
                     </div>
-                </div>
             `;
 
             $("body").append(popup);
+            UIkit.modal(`#${this.vars.modalId}`).show();
 
-            this.doms.bgLayer = $(".popupBGLayer");
-            this.doms.popup = $(".popup");
+            this.doms.popup = $(`#${this.vars.modalId}`);
             this.doms.returnButton = $(".returnButton");
             this.doms.proceedButton = $(".proceedButton");
+
+            this.addSpecificFunctions();
         }
 
-        setCustomContent(content){
-            this.doms.popup.html(content);
-        }
 
-        addInteraction(){
+
+        addSpecificFunctions(){
             switch (this.vars.popupType){
                 case "report":
-                    this.reportFunctions();
+                    $(".uk-modal-body .uk-radio").on("change", (e) => {
+                        const val = e.target.value;
+                        
+                    });
                     break;
                 case "extend":
-                    this.extendFunctions();
+                    const datePicker = new Datepicker('#datepicker-popup', {
+                        inline: true,
+                        time: true,
+                        openOn: "today",
+                        defaultTime: { start: [8, 30]},
+                        onChange: (date) => {
+                            if(date){         
+                                const hour = date.getHours();
+                                const minutes = date.getMinutes();             
+                                const dateFormated = general.formatDate(date)+` ${hour<10? "0":""}${hour}:${minutes}:00`;
+                                this.vars.selectedDate = dateFormated;
+                            }
+                        },
+                    });
                     break;
             }
-
-            this.doms.returnButton.on("click", () => {
-               this.closePopup();
-            });
+            
         }
 
-        extendFunctions(){
-            //functions for popup type extend
-
-            const timepicker = new Datepicker('#datepicker', {
-                inline: true,
-                time: false,
-                openOn: "today",
-                onChange: (date) => {
-                    if(date){
-                        //TODO check if time after date is relevant
-                        const dateFormated = general.formatDate(date)+" 08:30:00";
-                        console.log(dateFormated);
-                        this.vars.selectedDate = dateFormated;
-                    }
-                },
+        addProceedFunction(){
+            //if proceed button is clicked
+            $(".proceedButton").on("click", () => {
+                let success = false;
+                switch (this.vars.popupType){
+                    case "report":
+                        success = this.reportFunctions();
+                        break;
+                    case "extend":
+                        if(this.vars.selectedDate){
+                            const id = this.doms.base.parent(".swipe_box_back").attr("data-id");
+                            const apiAnswer = this.modules.ajax.extendReservation(id, this.vars.selectedDate);
+                        }
+                        break;
+                }
+                if(success){
+                    UIkit.modal(`#${this.vars.modalId}`).hide();
+                    this.removePopup();
+                }
             });
+        }
+   
+
+        extendFunction(){
+            //functions for popup type extend
+            console.log("#datepicker-popup");
+            
 
             this.doms.proceedButton.on("click", () => {
-                if(this.vars.selectedDate){
-                    const id = this.doms.base.parent(".swipe_box_back").dataset["id"];
-                    const apiAnswer = this.modules.ajax.extendReservation(id, this.vars.selectedDate);
-                }
+                
             });
         }
 
@@ -138,8 +169,10 @@ export default class Popup{
 
         }
 
-        closePopup(){
-            this.doms.bgLayer.remove();
+        removePopup(){
+            console.log("close");
+            console.log(this.doms.popup);
+            this.doms.popup.remove();
         }
 
 

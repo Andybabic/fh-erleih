@@ -7,7 +7,7 @@ class General{
         this.addDarkmode();
     };
 
-
+    //FORMAT - all functions that format something
     formatName(string){
         //function to format Names with Umlaut
         if(string == undefined) return "";
@@ -35,7 +35,9 @@ class General{
         return newDate;
     }
 
+
     toggleLoader(DOMPos){
+        //toggles loader
         if($(".loader-horizontal").length){
             $(".loader-horizontal").slideToggle();
         }else{
@@ -52,6 +54,7 @@ class General{
     }
 
     addDarkmode(){
+        //checks if darkmode is selected and adds it
         if(localStorage.settings){
             let settings = JSON.parse(localStorage.settings);
             if(settings.darkMode){

@@ -28,6 +28,9 @@ function addCheckbox(checkbox, parent) {
                             <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                         </a>
                         <?php getModule('modalboxes')?>
+                    <div class=" uk-align-right btn-checklist bg-blue uk-animation-scale-up" data-type="extend">
+
+                        <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>
                     <div class=" uk-align-right btn-checklist bg-orange uk-animation-scale-up">
                         <a class="link2" href="#modal-sections" uk-toggle>
@@ -51,7 +54,7 @@ function addCheckbox(checkbox, parent) {
                 <div class="swipebox_Object swipe_box uk-animation-slide-left" style=" z-index: 1;">
                     <!---Start Equipment Card element--->
                     <div
-                        class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
+                        class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline blue-20 uk-object-position-top-center">
                         <div class="checkListbutton ">
                             <script>
                             addCheckbox('<?=$data['typeId']?>', false);
@@ -60,7 +63,7 @@ function addCheckbox(checkbox, parent) {
 
                         </div>
                         <div class="grid-100 ">
-                            <h3 class="uk-text-lead  "><?=$data["nameDe"]?> <p class="uk-text-lighter uk-display-inline">
+                            <h3 class="uk-text-lead "><?=$data["nameDe"]?> <p class="uk-text-lighter uk-display-inline">
                                     id:<?=$data["typeId"]?></p>
                             </h3>
                             <div class="uk-align-left ">
@@ -83,18 +86,18 @@ function addCheckbox(checkbox, parent) {
 
                             <div class="grid-100 uk-align-left">
                                 <hr class="uk-divider-vertical uk-align-left custom_HR ">
-                                <div class="uk-text-large nospace-up textColor">Packliste</div>
+                                <div class="uk-text-large nospace-up ">Packliste</div>
                                 <ul>
                                     <?php  for($item = 0; $item < count($packlist) ; ++$item) { ?>
                                     <li>
-                                        <label class="textColor">
+                                        <label>
                                             <?php $listData = $packlist[$item]['nameDe']; ?>
                                             <script>
                                             addCheckbox('<?=$listData?>', '<?=$data['typeId']?>');
                                             </script>
 
                                             <!---Start PHP LOOP--->
-                                            <input value="<?=$listData?>" class="checklist-checkbox child "
+                                            <input value="<?=$listData?>" class="checklist-checkbox child"
                                                 type="checkbox"> <?=$packlist[$item]['nameDe']?> </input>
                                         </label>
                                     </li>

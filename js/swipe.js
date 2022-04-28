@@ -1,4 +1,4 @@
-
+import Popup from './modules/Popup.js';
 class Swipebox {
 
     // when mouse is over the swipebox object an moved to left or right, the swipebox object will be moved to the left or right
@@ -187,3 +187,15 @@ function smooth(start,end) {
         }.bind(this), 10);
 }
   
+
+    //adding onclick dialogues
+    function displaySwipeModal(){
+        $(".btn-checklist").on("click", (e) => {
+            const resId = $(e.target).parent(".swipe_box_back").attr("data-id");
+            const type = e.target.dataset.type;
+            console.log(type);
+            
+            const modal = new Popup(e, type);
+        });
+    }
+    displaySwipeModal();
