@@ -22,7 +22,7 @@ function addCheckbox(checkbox, parent) {
 
             <div class="Swipe_container  grid-100 ">
 
-                <div class=" swipe_box_back">
+                <div class=" swipe_box_back" data-id="<?=$jsonUser['reservations'][$i]['equipId']?>">
                     <div class=" uk-align-right btn-checklist bg-blue uk-animation-scale-up">
                         <a class="link2" href="#modal-sections" uk-toggle>
                             <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
