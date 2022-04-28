@@ -22,7 +22,6 @@ import Ajax from '../classes/Ajax.js';
             };
             this.modules = {
                 ajax:        new Ajax(),
-                //reservierung:   new Reservierung(),
             };
             this.departments = {
                 //should be created dynamically later
@@ -82,12 +81,12 @@ import Ajax from '../classes/Ajax.js';
                 onChange: (date) => {
                     if(date.length > 1){
                         let arr = [];
-                        arr.push(this.formatDate(date[0]));
-                        arr.push(this.formatDate(date[date.length -1]));
+                        arr.push(general.formatDate(date[0]));
+                        arr.push(general.formatDate(date[date.length -1]));
                         this.filter.timespan = arr;
                     }else if(date.length === 1){
                         this.filter.timespan = [];
-                        this.filter.timespan.push(this.formatDate(date[0]));
+                        this.filter.timespan.push(this.general(date[0]));
                     }
                     this.addPickerStyle();
                 },
@@ -156,16 +155,6 @@ import Ajax from '../classes/Ajax.js';
                 }
             }
         }
-
-        formatDate(date){
-            //formats date object to rest api standard
-            const offset = date.getTimezoneOffset();
-            let newDate = new Date(date.getTime() - (offset*60*1000));
-            newDate = newDate.toISOString().split('T')[0];
-
-            return newDate;
-        }
-
 
         addFilterInteraction(){
             //adds onclick events to all filter buttons
@@ -352,7 +341,7 @@ import Ajax from '../classes/Ajax.js';
 
                         let li = `
                             <li class="reservation ${preperationClass}" data-id = ${curId}>
-                                <h2>${this.formatName(res.firstName)} ${this.formatName(res.lastName)} - ${res.userId}</h2>
+                                <h2>${general.formatName(res.firstName)} ${general.formatName(res.lastName)} - ${res.userId}</h2>
                                 <p>${dateStr}</p>  
                                 <p>Anzahl an Equipment: ${res.reservations.length}</p>
                                 <p class="departments">
@@ -583,7 +572,7 @@ import Ajax from '../classes/Ajax.js';
             }
             const currentDate = new Date();
             //format and return
-            return this.formatDate(currentDate.addDays(dateVal));
+            return general.formatDate(currentDate.addDays(dateVal));
         }
 
         calculateDayNumber(date){
@@ -601,41 +590,6 @@ import Ajax from '../classes/Ajax.js';
             return diffDays;
         }
 
-        addDatePicker(){
-            const datepicker = new Datepicker('#page-overview', {
-                inline: true,
-                ranged: true,
-                time: false,
-                weekStart: 1,
-                yearRange: 1,
-                openOn: "today",
-                min: "today",
-                onchange: (date) => {
-                    alert(date);
-                },
-            });
-        };
-
-
-
-        formatName(string){
-            if(string == undefined) return "";
-            const badValues = {
-                "Ã¼": "ü",
-                "Ã-":"Ö",
-                "Ãœ":"Ü",
-                "Ã¤":"ä",
-                "Ã¶":"ö",
-                "ÃŸ":"ß",
-                "Ã":"Ä"
-            };
-            for (const key in badValues) {
-                console.log(key);
-                console.log(badValues[key]);
-                string = string.replaceAll(key, badValues[key]);
-            }
-            return string;
-        }
 
         removeList(){
             //to call from modeSwitch

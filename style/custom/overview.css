@@ -1,5 +1,5 @@
-.filterSelected{
-    background-color: #669BC1 !important;
+.filterSelected {
+    background-color: var(--colorSecondary) !important;
     color: #ffffff !important;
     border: 2px solid #005096 !important;
     position: relative;
@@ -9,7 +9,6 @@
 
 .filterSelected::after {
     content: "\2713";
-    color: var(--FHlightblue);
     display: block;
     height: 4rem;
     width: 4rem;
@@ -21,12 +20,12 @@
     opacity: 60%;
 }
 
-.filterBtn{
-    background-color: #CDDEEB;
-    color:#005999;
+.filterBtn {
+    background-color: #f8f9fa;
+    color: #005999;
     font-size: 1.0rem;
     border: 2px solid #005096;
-    text-transform:none;
+    text-transform: none;
     font-weight: bold;
     border-radius: 20px;
     height: 3rem;
@@ -35,105 +34,103 @@
     margin: 0.2rem;
 }
 
-.filterBtn:hover{
+.filterBtn:hover {
     cursor: pointer;
 }
 
-.dateFilter{
+.dateFilter {
 
 }
 
-.selected-ends div{
+.selected-ends div {
 
 }
 
-.listWrapper li>*{
+.listWrapper li > * {
     pointer-events: none;
 }
 
-.uk-list .reservation{
-    border: 1px solid #707070;
+.uk-list .reservation {
+    border: 1px solid var(--colorBackgroundClean);
     padding: 1rem 2rem;
-    background-color: white;
+    background-color: var(--colorBackgroundGrey);
 }
 
-.timeFilter{
-    border-bottom: 1px solid #707070;
+.timeFilter {
+    border-bottom: 1px solid var(--colorBackgroundGrey);
     padding: 0 0 0.5rem 0;
 }
 
-.filterWrapper{
+.filterWrapper {
     justify-content: center;
     text-align: center;
 }
-h2,p{
-    margin:0px;
-    color: black;
+
+h2, p {
+    margin: 0px;
 }
-.departments{
+
+.departments {
     margin-top: 0.3rem;
 }
-.departmentLabel{
-    background-color: blue;
+
+.departmentLabel {
     margin: 0 0.2rem 0 0;
     padding: 0.4rem;
-    background-color: #227C9D;
-    color: #FEF9EF;
+    background-color: var(--colorSecondary);
+    color:#f8f9fa !important;
     border-radius: 0.3rem;
 }
 
 
 
-.uk-navbar{
-    background-color: #005096 !important;
-}
-.uk-navbar span{
-    color:white !important;
+.uk-navbar span {
+    color: white !important;
     font-size: 1.5rem;
 }
 
 
+#Icon_awesome-clipboard-list, #Icon_awesome-shopping-bag {
 
-
-
-#Icon_awesome-clipboard-list, #Icon_awesome-shopping-bag{
-
-    width:2rem;
-    height:2rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 
 /*donelist*/
-#doneListToogle{
+#doneListToogle {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
 }
-.doneListArrow{
+
+.doneListArrow {
     width: 30px;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all .4s ease-in;
-    fill:green;
+    fill: green;
 }
-.doneListWrapper .doneList.uk-list{
+
+.doneListWrapper .doneList.uk-list {
     margin-top: 0;
 }
 
-#doneListHeading{
+#doneListHeading {
     margin-left: 1rem;
-    margin-right:-2rem;
+    margin-right: -2rem;
     padding-bottom: 0.5rem;
 }
 
-.doneListArrow{
+.doneListArrow {
     margin-left: 3rem;
     font-weight: bold;
 }
+
 /*after to provide space for footer*/
-#filterableList{
+#filterableList {
     margin-bottom: 50px;
 }

@@ -50,6 +50,9 @@ import Popup from './Popup.js';
             //init department filter
             await this.addDepartmentOptions();
 
+            //popup test
+            this.doms.base.append(`<button class="testVerl">Popup test verlängern</button>`);
+            this.doms.base.append(`<button class="testMeld">Popup test melden</button>`);
 
             //add onchange interaction
             this.addInteraction();
@@ -130,8 +133,11 @@ import Popup from './Popup.js';
             });
 
             //popup test
-            $("#ds").on("click", (e)=>{
+            $(".testMeld").on("click", (e)=>{
                const reportPopup = new Popup(e,"report");
+            });
+            $(".testVerl").on("click", (e)=>{
+               const extendPopup = new Popup(e,"extend");
             });
 
         }

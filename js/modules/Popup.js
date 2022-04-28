@@ -34,6 +34,7 @@ export default class Popup{
         createPopup(){
             let titleTxt;
             let titleIcon;
+            let content;
             let returnButtonTxt;
             let proceedButtonTxt;
 
@@ -48,6 +49,7 @@ export default class Popup{
                                         <path id="Pfad_22" data-name="Pfad 22" d="M18,24h0" transform="translate(-8 -10)" fill="none" stroke="#f80" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                                     </g>
                                 </svg>`;
+                    content = "";
                     returnButtonTxt = "Abbrechen";
                     proceedButtonTxt = "Speichern";
                     break;
@@ -56,6 +58,7 @@ export default class Popup{
                     titleIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <path id="Pfad_23" data-name="Pfad 23" d="M2.679,39.363a.257.257,0,0,0,.439,0L5.734,35.8c.121-.165.064-.3-.128-.3H4.218a.3.3,0,0,1-.281-.379,7.487,7.487,0,0,1,7.079-6.337c4,0,7.249,3.619,7.249,8.068s-3.252,8.068-7.249,8.068a.971.971,0,0,0,0,1.932c4.954,0,8.985-4.486,8.985-10s-4.03-10-8.985-10c-4.423,0-8.107,3.576-8.847,8.266a.439.439,0,0,1-.4.382H.192c-.192,0-.249.134-.128.3Z" transform="translate(0 -26.855)" fill="#07f"/>
                                 </svg>`;
+                    content = `<input type="text" id="datepicker">`;
                     returnButtonTxt = "Abbrechen";
                     proceedButtonTxt = "Verlängern";
                     break;
@@ -69,7 +72,7 @@ export default class Popup{
                             <span class="titleIcon">${titleIcon}</span>
                         </span>
                         <div class="popupContent">
-                        
+                            ${content}
                         </div>
                         <div class="popupButtons">
                             <button class="returnButton">${returnButtonTxt}</button>
@@ -91,16 +94,47 @@ export default class Popup{
             this.doms.popup.html(content);
         }
 
-        setTitle(){
-            //function to set title and title icon of popup
-            if(title)$(".popupTitle").text(title);
-            if(icon)$(".titleIcon").html(icon);
-        }
+        addInteraction(){
+            switch (this.vars.popupType){
+                case "report":
+                    this.reportFunctions();
+                    break;
+                case "extend":
+                    this.extendFunctions();
+                    break;
+            }
 
-        async addInteraction(){
             this.doms.returnButton.on("click", () => {
                this.closePopup();
             });
+        }
+
+        extendFunctions(){
+            //functions for popup type extend
+
+            const timepicker = new Datepicker('#datepicker', {
+                inline: true,
+                time: false,
+                openOn: "today",
+                onChange: (date) => {
+                    if(date){
+                        //TODO check if time after date is relevant
+                        const dateFormated = general.formatDate(date)+" 08:30:00";
+                        console.log(dateFormated);
+                        this.vars.selectedDate = dateFormated;
+                    }
+                },
+            });
+
+            this.doms.proceedButton.on("click", () => {
+                if(this.vars.selectedDate){
+                    const id = this.doms.base.parent(".swipe_box_back").dataset["id"];
+                    const apiAnswer = this.modules.ajax.extendReservation(id, this.vars.selectedDate);
+                }
+            });
+        }
+
+        reportFunctions(){
 
         }
 
