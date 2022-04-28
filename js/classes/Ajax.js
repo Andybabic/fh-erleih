@@ -24,7 +24,6 @@ export default class Ajax{
     }
 
     async getUserById(userId){
-        console.log(userId);
         const api = `${this.vars.apiUrl}user/${userId}/`;
 
         return new Promise((resolve) => {
@@ -32,6 +31,7 @@ export default class Ajax{
                 .then(res => res.json())
                 .then(data => {
                     resolve(data);
+                    console.log(data);
                 }).catch(err => {
                     resolve(false);
             });
@@ -105,10 +105,30 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                reject(-1);
+                    resolve(false);
             });
         });
     }
 
+    async extendReservation(resId, toDate){
+        const api = `${this.vars.apiUrl}/reservierung/${resId}/verlaengern`;
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(toDate),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        return new Promise((resolve) => {
+            fetch(api, options)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                    resolve(false);
+            });
+        });
+    }
 
 }
