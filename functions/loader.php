@@ -23,7 +23,7 @@ for ($i = 1; $i < $count_slashes; $i++) {
 echo (  " <link rel='stylesheet' href='".$path."style/uikit/css/uikit-rtl.min.css'> ");
 echo (  " <link rel='stylesheet' href='".$path."style/uikit/css/uikit.min.css'> ");
 echo (  " <link rel='stylesheet' href='".$path."style/datepicker/datepicker.material.css'> ");
-echo (  " <script src='../js/jquery-3.6.0.min.js'></script>");
+echo (  " <script src='".$path."/js/jquery-3.6.0.min.js'></script>");
 echo (  " <script src='".$path."js/classes/General.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit.min.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit-icons.min.js'></script> ");
@@ -37,6 +37,7 @@ echo (  " <script defer src='".$path."style/datepicker/datepicker.js'></script> 
 echo (  " <link rel='stylesheet' href='".$path."style/custom/style.css'> ");
 //echo (" <script defer src='".$path."js/jquery-3.6.0.min.js'></script>");
 echo (" <script defer src='".$path."js/classes/Ajax.js'></script>");
+echo('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>');
 
 // use getMoldule to load 
 function getModule( $modul){

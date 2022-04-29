@@ -32,7 +32,7 @@ footer{
     left: 0;
     width: 100%;
     height: var(--footerHeight);
-    background-color: #fff;
+    background-color: var(--backgroundColor);
 }
 
 h1,h2,h3,h4,h5,p, span, button, a{
@@ -48,11 +48,25 @@ html, body {
     color: var(--backgroundColor) !important;
   }
 
+  .colorPrimary {
+    background-color: var(--colorPrimary);
+    color: white;
+  }
+
+  .colorSecondary {
+    background-color: var(--colorSecondary);
+  }
+  
+  .textColor{
+    color: var(--textColor);
+  }
+  
+
   body {
     position: relative
   }
 
-
+/*
 .blue {
     background-color: #005096;
     color: white;
@@ -64,7 +78,7 @@ html, body {
 
 .blue-20 {
     background-color: #00509633;
-}
+}*/
 
 
 .grid-33 {
@@ -101,9 +115,9 @@ html, body {
     left: 123px; 
     width: 20px;
     height: 20px;
-    border: 1px solid #005096;
+    border: 1px solid var(--colorPrimary);
     border-radius: 50%;
-    background-color: #CDDEEB;
+    background-color: var(--colorBackgroundGrey);
 
 }
 
@@ -112,7 +126,7 @@ html, body {
 }
 
 .custom_HR{
-    border-left: 5px solid #005096;
+    border-left: 5px solid var(--colorPrimary);
     
 }
 
@@ -123,15 +137,15 @@ html, body {
 /* Start Swipebox Style  */
 .Swipe_container {
     position: relative;
-    background: lightgray;
+    background: var(--colorBackgroundGrey);
 
   }
   
   .swipe_box {
     position: relative;
-    background: white; 
-      width: 98%;
-      height: auto;
+    background: var(--colorBackgroundGrey); 
+    width: 98%;
+    height: auto;
     left: 0;
 /* 
     border: 0px solid red;
@@ -139,7 +153,7 @@ html, body {
   }
   .swipe_box_back {
     position: absolute;
-    background: rgb(204, 204, 204); 
+    background: var(--colorBackgroundGrey); 
       width: 100%;
       height: 100%;
     left: 0;
@@ -158,7 +172,7 @@ html, body {
 
   .btn-checklist {
     position: relative;
-    color: white ;
+    color: var(--colorBackgroundClean) ;
     border: none;
     text-align: center;
     text-decoration: none;
@@ -170,37 +184,40 @@ html, body {
     margin:0;
 
   }
+
   .btn-checklist {
     position: relative;
-    color: white !important;
+    color: var(--colorBackgroundClean) !important;
     border: none;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    width: 110px;
-    height:100%;
-    margin:0;
-
+    width: 25%;
+    height: 100%;
+    margin: 0;
   }
-  a.link2{
-    color: white !important;
+  a.link2 {
+    color: var(--colorBackgroundClean) !important;
   }
   .btn-checklist:hover {
-      /* scale up slowly and add inner shadow*/
-        transform: scale(1.1);
-        transition: all 0.4s ease-in-out;
-        box-shadow: 5px 5px 20px #0000009c;
-        margin:-1px;
-        padding:1px;
-
+    /* scale up slowly and add inner shadow*/
+    transform: scale(1.1);
+    transition: all 0.4s ease-in-out;
+    box-shadow: 5px 5px 20px #0000009c;
+    margin: -1px;
+    padding: 1px;
   }
   .center-all {
     position: relative;
     top: 40%;
   }
 
+  /*remove pointer events of icon to get always the swipe button on click*/
+  .swipe_box_back .uk-icon{
+      pointer-events: none;
+  }
 
   /* End Swipebox Style */
 
@@ -217,22 +234,23 @@ html, body {
 .bg-orange {
     background-color: #d49a06;
 }
+/*
 .bg-blue {
     background-color: #005096;
-}
+}*/
 
 .uk-close {
-    color: #999;
+    color: var(--colorBackgroundGrey);
     left: 95%;
     transition: .1s ease-in-out;
     transition-property: color,opacity;
 }
 
 .uk-navbar{
-    background-color: #005096 !important;
+    background-color: var(--colorPrimary) !important;
 }
 .uk-navbar span {
-    color:white !important;
+    color:#f8f9fa !important;
     font-size: 1.5rem;
 }
 
@@ -244,7 +262,7 @@ html, body {
      display: flex;
      justify-content: center;
      align-items: center;
-     background-color: #f8f9fa;
+     background-color: var(--colorBackgroundClean);
  }
  .loader-horizontal__dot {
      width: 10px;
@@ -397,8 +415,8 @@ html, body {
 
 /*--Mode Switch--*/
 .uk-active .modeSwitch{
-    color: #005999 !important ;
-    border-bottom: 2px solid #005999 !important;
+    color: var(--colorSecondary) !important ;
+    border-bottom: 2px solid var(--colorSecondary) !important;
 }
 
 .modeSwitch a{
@@ -406,10 +424,13 @@ html, body {
 }
 
 .uk-tab>.uk-active>a {
-    color: #005999 !important;
+    color: var(--colorSecondary) !important;
+}
+.uk-tab svg {
+    fill: var(--textColor);
 }
 .uk-active svg{
-    fill: #005999;
+    fill: var(--colorSecondary);
 }
 
 #modeSwitch{

@@ -51,14 +51,14 @@
 }
 
 .uk-list .reservation {
-    border: 1px solid var(--colorBackgroundClean);
     padding: 1rem 2rem;
     background-color: var(--colorBackgroundGrey);
+    margin: 0 0 6px 0;
 }
 
 .timeFilter {
     border-bottom: 1px solid var(--colorBackgroundGrey);
-    padding: 0 0 0.5rem 0;
+    padding: 0 0 1rem 0;
 }
 
 .filterWrapper {

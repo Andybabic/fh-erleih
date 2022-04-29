@@ -26,6 +26,7 @@ export default class Popup{
         initPopup(){
             //type specific popup content
             this.createPopup();
+            this.addButtonInteraction();
         };
 
 
@@ -75,11 +76,9 @@ export default class Popup{
                 	<div id="${this.vars.modalId}" uk-modal>
                         <div class="uk-modal-dialog">
                             <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <div class="uk-modal-header">
-                                <span>
-                                    <h2 class="uk-modal-title">${titleTxt}</h2>
-                                    <span class="titleIcon">${titleIcon}</span>
-                                </span> 
+                            <div class="uk-modal-header uk-flex uk-flex-middle">
+                                <h2 class="uk-modal-title">${titleTxt}</h2>
+                                <span class="titleIcon">${titleIcon}</span>
                             </div>
                             <div class="uk-modal-body">
                                 ${content}                            
@@ -103,6 +102,10 @@ export default class Popup{
         }
 
 
+        addButtonInteraction(){
+            this.addProceedFunction();
+            this.addCloseFunction();
+        }
 
         addSpecificFunctions(){
             switch (this.vars.popupType){
@@ -153,6 +156,12 @@ export default class Popup{
                 }
             });
         }
+
+        addCloseFunction(){
+            UIkit.util.on(document, 'hidden', `#${this.vars.modalId}`, () => {
+                this.removePopup();
+            });
+        }
    
 
         extendFunction(){
@@ -170,8 +179,6 @@ export default class Popup{
         }
 
         removePopup(){
-            console.log("close");
-            console.log(this.doms.popup);
             this.doms.popup.remove();
         }
 
