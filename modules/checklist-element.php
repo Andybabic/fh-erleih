@@ -20,8 +20,8 @@ function addCheckbox(checkbox, parent,checked) {
                             //generate a html element for each entry in the array
                             for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
                                 $data= dings($jsonUser['reservations'][$i]['equipId']);
-                                echo(var_dump($jsonUser['reservations']));
-                                $prepared=status($id);
+                                $status= $jsonUser['reservations'][$i]["prepared"]==1? true : false;
+                                
                                 
                                 ?>
 
@@ -50,7 +50,7 @@ function addCheckbox(checkbox, parent,checked) {
                         class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
                         <div class="checkListbutton ">
                             <script>
-                            addCheckbox('<?=$data['typeId']?>', false, <?=$data['prepared']?> );
+                            addCheckbox('<?=$data['typeId']?>', false, <?=$status?> );
                             </script>
                             <input class="checklist-checkbox parent" type="checkbox" value="<?=$data['typeId']?>">
 
@@ -86,7 +86,7 @@ function addCheckbox(checkbox, parent,checked) {
                                         <label class="textColor">
                                             <?php $listData = $packlist[$item]['nameDe']; ?>
                                             <script>
-                                            addCheckbox('<?=$listData?>', '<?=$data['typeId']?>',<?=$data['prepared']?>);
+                                            addCheckbox('<?=$listData?>', '<?=$data['typeId']?>',<?=$status?>);
                                             </script>
 
                                             <!---Start PHP LOOP--->

@@ -38,15 +38,9 @@ function call($url,$data,$curl ){
 
     $status = $match[1];
 
-    if ($status !== "200") {
-        echo($url);
-        echo($curl);
+    if ($status !== "200") {        
+        echo( "Error:");
         echo($status);
-        echo( "Sorry du hast keine Berechtigungen");
-        echo('<br>');
-        echo($headercockie);
-        echo('<br>');
-        echo(var_dump($status_data[8]));
         return $session;
     }
     else {
