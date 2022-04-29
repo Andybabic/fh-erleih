@@ -59,8 +59,9 @@ function call($url,$data,$curl ){
 if(isset($_GET['r']) ){
     $api = $_GET['r'];
     if(isset($_GET['data']) ){
+        $curl= isset($_GET['curl']) ? $_GET['curl'] : 'POST';
         $data = $_GET['data'];
-        $result = call($api_url.$api,$data,"POST");      
+        $result = call($api_url.$api,$data,$curl);      
     }
     else{
         

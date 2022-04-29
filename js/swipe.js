@@ -16,8 +16,8 @@ class Swipebox {
         this.element.addEventListener('touchmove', this.touchMove.bind(this));
         this.element.addEventListener('touchend', this.touchEnd.bind(this));
         this.element.addEventListener('touchstart', this.touchStart.bind(this));
-        // maxdistance is element width/2
-        this.maxdistance = this.element.offsetWidth / 2;
+        // maxdistance is element width/2 but not more than 300px
+        this.maxdistance = Math.min(300, this.element.offsetWidth / 2);
         this.trashhold= 0.2;
         this.pos=0;
         this.state=0;
@@ -32,6 +32,7 @@ class Swipebox {
         this.mouseDownX = event.clientX - this.element.offsetLeft;
     }
     touchStart(event) {
+
         this.touchStart= true;
         this.touchStartX = event.touches[0].clientX - this.element.offsetLeft;
     }
@@ -113,6 +114,7 @@ class Swipebox {
 
     //check current position an finish interaction
     check(){
+        this.maxdistance = Math.min(300, this.element.offsetWidth / 2);
         this.fixed=false;
         this.mouseDown = false;
         this.touchStart = false;

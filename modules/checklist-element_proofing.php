@@ -15,6 +15,8 @@
 
 
     for (var i = 0; i < checkboxes.length; i++) {
+        //print checkboxes[i]
+        console.log(checkboxes[i]);
 
 
         var item = checkboxes[i];
@@ -24,7 +26,7 @@
         html += '</div>';
         html += '<div class="grid-100 ">';
         html += '<dl class="uk-description-list uk-description-list-divider">';
-        html += '<dt>' + item.nameDe + '</dt>';
+        html += '<dt>' + item.value + '</dt>';
         html += '<dd>' + item.damage + '</dd>';
         html += '</dl>';
         html += '</div>';

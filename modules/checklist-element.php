@@ -1,10 +1,12 @@
 <script>
 var checkboxes = []
 
-function addCheckbox(checkbox, parent) {
+function addCheckbox(checkbox, parent,checked) {
     checkboxes.push({
         value: checkbox,
         parent: parent,
+        checked:checked,
+       
     });
 }
 </script>
@@ -18,6 +20,9 @@ function addCheckbox(checkbox, parent) {
                             //generate a html element for each entry in the array
                             for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
                                 $data= dings($jsonUser['reservations'][$i]['equipId']);
+                                echo(var_dump($jsonUser['reservations']));
+                                $prepared=status($id);
+                                
                                 ?>
 
             <div class="Swipe_container  grid-100 ">
@@ -45,7 +50,7 @@ function addCheckbox(checkbox, parent) {
                         class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
                         <div class="checkListbutton ">
                             <script>
-                            addCheckbox('<?=$data['typeId']?>', false);
+                            addCheckbox('<?=$data['typeId']?>', false, <?=$data['prepared']?> );
                             </script>
                             <input class="checklist-checkbox parent" type="checkbox" value="<?=$data['typeId']?>">
 
@@ -81,7 +86,7 @@ function addCheckbox(checkbox, parent) {
                                         <label class="textColor">
                                             <?php $listData = $packlist[$item]['nameDe']; ?>
                                             <script>
-                                            addCheckbox('<?=$listData?>', '<?=$data['typeId']?>');
+                                            addCheckbox('<?=$listData?>', '<?=$data['typeId']?>',<?=$data['prepared']?>);
                                             </script>
 
                                             <!---Start PHP LOOP--->
@@ -120,9 +125,12 @@ checklistComponents.checklist = (function() {
     let priv = {},
         publ = {};
 
-   priv.send = function(res) {
+
+
+
+   priv.send = function(res,curl) {
         // make post request to url with array
-        url="../functions/callAPI.php?r=reservierung/vorbereiten/&data="+res;
+        url="../functions/callAPI.php?r=reservierung/vorbereiten/&data="+res+"&curl="+curl;
         $.ajax({
             //append header cockie
             headers: {
@@ -145,13 +153,23 @@ checklistComponents.checklist = (function() {
 
         // add listener to all checkboxes ( clicked )
         for (var i = 0; i < checkboxelements.length; i++) {
-            checkboxelements[i].checked = false;
-            checkboxelements[i].addEventListener('click', function() {
+            checkbox=checkboxelements[i];
+            checkbox.checked=false;
+            //checkboxelements[i].checked = getParent(value).checked;
+            checkbox.addEventListener('click', function() {
                 //send to api that rentry is done or not
                 //ajax.postResStatus("{"+value+":"+this.checked+"}");
                 // get value of clicked checkbox
                 var value = this.value;
-                priv.send(663);
+                console.log("checkbox is " + this.checked);
+                
+                if (this.checked) {
+                    //send to api that rentry is done or not
+                    priv.send(value,"POST");
+                } else {
+                    //send to api that rentry is done or not
+                    priv.send(value,"DELETE");
+                }
                 var parent = getParent(value);
                 if (parent) {
                     changeState(parent);

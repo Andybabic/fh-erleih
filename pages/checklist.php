@@ -3,8 +3,8 @@
 $headercockie=  getallheaders()["Cookie"] ;
 
 
-//$data = $_POST['data'];
-$data = '{"userId":"mt191075","firstName":"Babic","lastName":"Andreas","email":"mt191075@fhstp.ac.at","tel":"06641681540","date":"2022-03-31 21:01:21","reservations":[{"id":500834,"lastChange":"2022-03-31 21:01:21","userId":"mt191075","equipId":1795,"statusId":2,"from":"2022-03-31 21:01:21","to":"2022-04-02 21:01:21","userComment":"Selbststudium","assiComment":"","lendDate":"0000-00-00 00:00:00","returnDate":"0000-00-00 00:00:00","assiLend":null,"assiReturn":null,"usageId":8,"prepared":0,"departmentId":"2"},{"id":500833,"lastChange":"2022-03-31 21:01:21","userId":"mt191075","equipId":6666,"statusId":2,"from":"2022-03-31 21:01:21","to":"2022-04-02 21:01:21","userComment":"Selbststudium","assiComment":"","lendDate":"0000-00-00 00:00:00","returnDate":"0000-00-00 00:00:00","assiLend":null,"assiReturn":null,"usageId":8,"prepared":0,"departmentId":"3"}],"listType":"prepare"}';
+$data = $_POST['data'];
+#$data = '{"userId":"mt191075","firstName":"Babic","lastName":"Andreas","email":"mt191075@fhstp.ac.at","tel":"06641681540","date":"2022-03-31 21:01:21","reservations":[{"id":500834,"lastChange":"2022-03-31 21:01:21","userId":"mt191075","equipId":1795,"statusId":2,"from":"2022-03-31 21:01:21","to":"2022-04-02 21:01:21","userComment":"Selbststudium","assiComment":"","lendDate":"0000-00-00 00:00:00","returnDate":"0000-00-00 00:00:00","assiLend":null,"assiReturn":null,"usageId":8,"prepared":0,"departmentId":"2"},{"id":500833,"lastChange":"2022-03-31 21:01:21","userId":"mt191075","equipId":6666,"statusId":2,"from":"2022-03-31 21:01:21","to":"2022-04-02 21:01:21","userComment":"Selbststudium","assiComment":"","lendDate":"0000-00-00 00:00:00","returnDate":"0000-00-00 00:00:00","assiLend":null,"assiReturn":null,"usageId":8,"prepared":0,"departmentId":"3"}],"listType":"prepare"}';
 
 
 
@@ -71,6 +71,10 @@ function timeCon($datetime){
 function user($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/user/'.$id.'/','');
     return $data;
+}
+function status($id){
+    $data=call('https://verleihneu.fhstp.ac.at/api/reservierung/'.$id.'/','');
+    return $data['prepared'];
 }
 
 
@@ -153,6 +157,7 @@ $jsonUser = json_decode($data, true);
 
 
     <script >
+        
 
         //change a text in the html
         function change_text(id, text)
@@ -164,32 +169,31 @@ $jsonUser = json_decode($data, true);
 
         function updateStateContent(){
             //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
-        var local_storage = localStorage.getItem('Site_state');
-        if (local_storage < 0) {
-            // save to local storage
-            localStorage.setItem('Site_state', 0);
-            //redirect to overview.php
-            window.location.href = "../pages/overview.php";
-        } 
-        if (local_storage == 0) {
-            change_text("back","Zurück zur Übersicht");
-            change_text("forward","Weiter");
-            document.getElementById('checklist_interact').style.display = 'block';
-            document.getElementById('checklist_proof').style.display = 'none';
-        } 
-        if (local_storage == 1) {
-            change_text("back","Bearbeiten");
-            change_text("forward","Abschließen");
-            document.getElementById('checklist_interact').style.display = 'none';
-            document.getElementById('checklist_proof').style.display = 'block';
-        }else {
-            // save to local storage
-            localStorage.setItem('Site_state', 0);
-            //updateStateContent();
-        }
-        
+            var local_storage = localStorage.getItem('Site_state');
+            console.log("State: " + local_storage);
+            if (local_storage < 0) {
+                // save to local storage
+                localStorage.setItem('Site_state', 0);
+                //redirect to overview.php
+                window.location.href = "../pages/overview.php";
+            } 
+            else if (local_storage == 0) {
+                
+                change_text("back","Zurück zur Übersicht");
+                change_text("forward","Weiter");
+                document.getElementById('checklist_interact').style.display = 'block';
+                document.getElementById('checklist_proof').style.display = 'none';
+            } 
+            else if (local_storage == 1) {
+                change_text("back","Bearbeiten");
+                change_text("forward","Abschließen");
+                document.getElementById('checklist_interact').style.display = 'none';
+                document.getElementById('checklist_proof').style.display = 'block';
+            }
+
 
           }
+        localStorage.setItem('Site_state', 0);
         
         updateStateContent();
 
