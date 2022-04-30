@@ -12,10 +12,6 @@ $headercockie=  getallheaders()["Cookie"] ;
 function call($url,$data,$curl ){
     global $headercockie;
 
-        
-    
-  
-
     $url = $url;
     $options = array(
             'http' => array(
@@ -66,11 +62,6 @@ if(isset($_GET['r']) ){
 } else {
     echo "No Data";
 }
-
-
-
-
-
 
 
 ?>

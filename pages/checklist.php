@@ -52,8 +52,7 @@ require_once("../functions/loader.php");
         }
     }
 
-
-function dings($id){
+function getEquip($id){
         $data=call('https://verleihneu.fhstp.ac.at/api/equipment/'.$id.'/','');
         return $data;
 }
@@ -61,11 +60,6 @@ function dings($id){
 function packlist($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/equipment/'.$id.'/packliste/','');
     return $data;
-}
-
-function timeCon($datetime){
-    $date = new DateTime($datetime);
-    return $date->format('d.m.Y');
 }
 
 function user($id){
@@ -76,20 +70,19 @@ function status($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/reservierung/'.$id.'/','');
     return $data['prepared'];
 }
-
-
-
+function getEquipTyp($id){
+    $data=call('https://verleihneu.fhstp.ac.at/api/eqTyp/'.$id.'/','');
+    return $data;
+}
+function timeCon($datetime){
+    $date = new DateTime($datetime);
+    return $date->format('d.m.Y');
+}
 
 $jsonUser =$_POST['data'];
 
 //convert Json to Array
 $jsonUser = json_decode($data, true);
-
-
-
-
-
-
 
 
 ?>
@@ -106,98 +99,95 @@ $jsonUser = json_decode($data, true);
     <title>Checkliste</title>
 
 </head>
-
 <?php getModule('menu')?>
 
 
 
 <body>
-
-    <body >
+    <body>
         <!--User Data-->
-
-        <div class="uk-container " >
+        <div class="uk-container ">
             <main>
                 <article class="uk-article">
-                    <h4 class="uk-text-lead"><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>  <?= $jsonUser["userId"] ?></h4>
-                    <p class="uk-text-lighter">Email: <a href= "mailto:<?= $jsonUser["email"] ?>"><?= $jsonUser["email"] ?></a>
-                    <br> Tel: <a href= "tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
-                       
+                    <h4 class="uk-text-lead"><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>
+                        <?= $jsonUser["userId"] ?></h4>
+                    <p class="uk-text-lighter">Email: <a
+                            href="mailto:<?= $jsonUser["email"] ?>"><?= $jsonUser["email"] ?></a>
+                        <br> Tel: <a href="tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
+
                     <p class="uk-text-light uk-align-left ">am <?= $jsonUser["date"] ?></p>
                     <p class="uk-text-light uk-align-right"> Video</p>
                 </article>
                 <hr>
-                
+
                 <!--Start List of Equipment_interact-->
-                <div id="checklist_interact" >
-                <?php  include '../modules/checklist-element.php'?>
+                <div id="checklist_interact">
+                    <?php  include '../modules/checklist-element.php'?>
                 </div>
                 <!--End List of Equipment_interact-->
-                 <!--Start List of Equipment_proof-->
-                <div id="checklist_proof"  >
-                <?php  include '../modules/checklist-element_proofing.php'?>
+                <!--Start List of Equipment_proof-->
+                <div id="checklist_proof">
+                    <?php  include '../modules/checklist-element_proofing.php'?>
                 </div>
                 <!--End List of Equipment_proof-->
 
             </main>
-             
+
         </div>
-
-
         <?php getModule('bottom-navbar')?>
-       
-
-   
-
     </body>
-    
 
 
-    
 
 
-    <script >
-        
 
-        //change a text in the html
-        function change_text(id, text)
-        {
-            document.getElementById(id).innerHTML = text;
+
+    <script>
+    //change a text in the html
+    function change_text(id, text) {
+        document.getElementById(id).innerHTML = text;
+    }
+
+    function updateStateContent() {
+        //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
+        var local_storage = localStorage.getItem('Site_state');
+        console.log("State: " + local_storage);
+        if (local_storage < 0) {
+            // save to local storage
+            localStorage.setItem('Site_state', 0);
+            //redirect to overview.php
+            window.location.href = "../pages/overview.php";
+        } else if (local_storage == 0) {
+
+            change_text("back", "Zurück zur Übersicht");
+            change_text("forward", "Weiter");
+            document.getElementById('checklist_interact').style.display = 'block';
+            document.getElementById('checklist_proof').style.display = 'none';
+        } else if (local_storage == 1) {
+            build_proofing_list();
+            change_text("back", "Bearbeiten");
+            change_text("forward", "Abschließen");
+            document.getElementById('checklist_interact').style.display = 'none';
+            document.getElementById('checklist_proof').style.display = 'block';
+
+        }else if (local_storage == 2) {
+            localStorage.setItem('Site_state', 0);
+            //redirect to overview.php
+            window.location.href = "../pages/overview.php";
+
         }
 
 
+    }
+    localStorage.setItem('Site_state', 0);
 
-        function updateStateContent(){
-            //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
-            var local_storage = localStorage.getItem('Site_state');
-            console.log("State: " + local_storage);
-            if (local_storage < 0) {
-                // save to local storage
-                localStorage.setItem('Site_state', 0);
-                //redirect to overview.php
-                window.location.href = "../pages/overview.php";
-            } 
-            else if (local_storage == 0) {
-                
-                change_text("back","Zurück zur Übersicht");
-                change_text("forward","Weiter");
-                document.getElementById('checklist_interact').style.display = 'block';
-                document.getElementById('checklist_proof').style.display = 'none';
-            } 
-            else if (local_storage == 1) {
-                change_text("back","Bearbeiten");
-                change_text("forward","Abschließen");
-                document.getElementById('checklist_interact').style.display = 'none';
-                document.getElementById('checklist_proof').style.display = 'block';
-            }
+    updateStateContent();
+    build_proofing_list();
 
 
-          }
-        localStorage.setItem('Site_state', 0);
-        
-        updateStateContent();
 
-   
+    // replace html 
+
 
     </script>
 

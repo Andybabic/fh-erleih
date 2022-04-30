@@ -1,12 +1,16 @@
 <script>
-var checkboxes = []
+var checkboxes_list = []
 
-function addCheckbox(checkbox, parent,checked) {
-    checkboxes.push({
-        value: checkbox,
+
+function addCheckbox_list(resID = null, parent = null, status = null, typeData = null, resData = null) {
+    checkboxes_list.push({
+        value: resID,
         parent: parent,
-        checked:checked,
-       
+        checked: this.status,
+        typeData: this.typeData,
+        resData: this.resData
+
+
     });
 }
 </script>
@@ -19,10 +23,17 @@ function addCheckbox(checkbox, parent,checked) {
                             
                             //generate a html element for each entry in the array
                             for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
-                                $data= dings($jsonUser['reservations'][$i]['equipId']);
-                                $status= $jsonUser['reservations'][$i]["prepared"]==1? true : false;
-                                
-                                
+                                $data= getEquip($jsonUser['reservations'][$i]['equipId']);
+                                $status= ($jsonUser['reservations'][$i]["prepared"] = 1 ? 'false' : 'true');
+                                $resID=$jsonUser['reservations'][$i]['id'];
+                                $resData=json_encode($jsonUser['reservations'][$i]);
+                                $typData= getEquipTyp($data['typeId']);
+                                $equipData=json_encode($data);
+                                $description=$typData["descriptionDe"];
+                                $description=str_replace("<p>", "", $description);
+                                $description=str_replace("</p>", "", $description);
+                                //convert typData to json
+                                $typDataJson=json_encode($typData);
                                 ?>
 
             <div class="Swipe_container  grid-100 ">
@@ -32,13 +43,13 @@ function addCheckbox(checkbox, parent,checked) {
                         <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>
                     <div class=" uk-align-right btn-checklist bg-orange uk-animation-scale-up" data-type="report">
-                            <span class="center-all uk-animation-scale-down" uk-icon="icon: warning; ratio: 1.5"></span>
+                        <span class="center-all uk-animation-scale-down" uk-icon="icon: warning; ratio: 1.5"></span>
                     </div>
                     <div class=" uk-align-left btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
                         <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>
                     <div class=" uk-align-left btn-checklist bg-orange uk-animation-scale-up" data-type="report">
-                            <span class="center-all uk-animation-scale-down" uk-icon="icon: warning; ratio: 1.5"></span>
+                        <span class="center-all uk-animation-scale-down" uk-icon="icon: warning; ratio: 1.5"></span>
                     </div>
                 </div>
 
@@ -50,20 +61,22 @@ function addCheckbox(checkbox, parent,checked) {
                         class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
                         <div class="checkListbutton ">
                             <script>
-                            addCheckbox('<?=$data['typeId']?>', false, <?=$status?> );
+                            addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status?>, typeData =
+                                <?=$typDataJson?>, resData = <?=$equipData?>);
                             </script>
-                            <input class="checklist-checkbox parent" type="checkbox" value="<?=$data['typeId']?>">
+                            <input class="checklist-checkbox parent" type="checkbox" value="<?=$resID?>">
 
                         </div>
                         <div class="grid-100 ">
-                            <h3 class="uk-text-lead  "><?=$data["nameDe"]?> <p class="uk-text-lighter uk-display-inline">
-                                    id:<?=$data["typeId"]?></p>
+                            <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <p
+                                    class="uk-text-lighter uk-display-inline">
+                                    id:<?=$data["id"]?></p>
                             </h3>
                             <div class="uk-align-left ">
-                                <p><?=$data["damage"]?></p>
+                                <p>Beschreibung:</p>
                             </div>
                             <div class="uk-align-left ">
-                                <p><?=$data["nameDe"]?></p>
+                                <p> <?=$description?></p>
                             </div>
 
 
@@ -86,7 +99,8 @@ function addCheckbox(checkbox, parent,checked) {
                                         <label class="textColor">
                                             <?php $listData = $packlist[$item]['nameDe']; ?>
                                             <script>
-                                            addCheckbox('<?=$listData?>', '<?=$data['typeId']?>',<?=$status?>);
+                                            addCheckbox_list(resID = '<?=$listData?>', parent = '<?=$resID?>', status =
+                                                <?=$status?>);
                                             </script>
 
                                             <!---Start PHP LOOP--->
@@ -128,9 +142,9 @@ checklistComponents.checklist = (function() {
 
 
 
-   priv.send = function(res,curl) {
+    priv.send = function(res, curl) {
         // make post request to url with array
-        url="../functions/callAPI.php?r=reservierung/vorbereiten/&data="+res+"&curl="+curl;
+        url = "../functions/callAPI.php?r=reservierung/vorbereiten/&data=" + res + "&curl=" + curl;
         $.ajax({
             //append header cockie
             headers: {
@@ -153,81 +167,91 @@ checklistComponents.checklist = (function() {
 
         // add listener to all checkboxes ( clicked )
         for (var i = 0; i < checkboxelements.length; i++) {
-            checkbox=checkboxelements[i];
-            checkbox.checked=false;
+            checkbox = checkboxelements[i];
+            checkbox.checked = false;
             //checkboxelements[i].checked = getParent(value).checked;
             checkbox.addEventListener('click', function() {
                 //send to api that rentry is done or not
                 //ajax.postResStatus("{"+value+":"+this.checked+"}");
                 // get value of clicked checkbox
                 var value = this.value;
-                console.log("checkbox is " + this.checked);
-                
-                if (this.checked) {
+                status = getCheckbox_array(value);
+                if (status) {
                     //send to api that rentry is done or not
-                    priv.send(value,"POST");
+                    priv.send(value, "POST");
                 } else {
                     //send to api that rentry is done or not
-                    priv.send(value,"DELETE");
+                    priv.send(value, "DELETE");
                 }
                 var parent = getParent(value);
                 if (parent) {
                     changeState(parent);
                 }
+                update()
             });
         }
 
         function getParent(value) {
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].value == value) {
-                    return checkboxes[i].parent;
+            for (var i = 0; i < checkboxes_list.length; i++) {
+                if (checkboxes_list[i].value == value) {
+                    return checkboxes_list[i].parent;
                 }
             }
+        }   
+
+        function update(){
+            for (var i = 0; i < checkboxelements.length; i++) {
+                checkboxes_list[i].checked = checkboxelements[i].checked;
+            }
         }
+
 
         //check state of all childs
         function checkChilds(parent) {
-            console.log('checkChilds with parent: ' + parent);
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].parent == parent) {
-                    console.log('checkChilds with parent: ' + parent + ' and child: ' + checkboxes[i]
-                        .value + ' is: ' + checkboxelements[i].checked);
-                    if (checkboxelements[i].checked == false) {
-                        console.log('one of them is false ');
-                        return false;
-                    }
-                }
-            }
-            console.log('all boxes true ');
-            return true;
-        }
-
-        //change state of checkbox with ( value )
-        function changeState(value) {
-            var checkboxer = getCheckbox(value);
-            console.log('value=' + value + '');
-            if (checkChilds(value)) {
-                checkboxer.checked = true;
-            } else {
-                checkboxer.checked = false;
-            }
-        }
-
-
-        // get checkboxelements with ( value )
-        function getCheckbox(value) {
-            for (var i = 0; i < checkboxelements.length; i++) {
-                if (checkboxes[i].value == value) {
-                    return checkboxelements[i];
+            for (var i = 0; i < checkboxes_list.length; i++) {
+                if (checkboxes_list[i].parent == parent) {
+                    console.log('checkChilds with parent: ' + parent + ' and child: ' + checkboxes_list[i]);
+                if (checkboxelements[i].checked == false) {
+                    return false;
                 }
             }
         }
-        console.log(checkboxes);
+        return true;
     }
-    console.log('checklistComponents.checklist.init()');
-    return publ;
+
+    //change state of checkbox with ( value )
+    function changeState(value) {
+        var thisCheckbox = getCheckbox(value);
+        if (checkChilds(value)) {
+            //set checkbox to true
+            thisCheckbox.checked = true;
+        } else {
+            thisCheckbox.checked = false;
+        }
+    }
+
+    // get checkboxes with ( value )
+    function getCheckbox_array(value) {
+        for (var i = 0; i < checkboxelements.length; i++) {
+            if (checkboxes_list[i].value == value) {
+                return checkboxes_list[i];
+            }
+        }
+    }
+
+
+    // get checkboxelements with ( value )
+    function getCheckbox(value) {
+        for (var i = 0; i < checkboxelements.length; i++) {
+            if (checkboxes_list[i].value == value) {
+                return checkboxelements[i];
+            }
+        }
+    }
+    console.log(checkboxes_list);
+}
+return publ;
 })();
 
 checklistComponents.checklist.init();
-
 </script>
