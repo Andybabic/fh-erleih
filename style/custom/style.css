@@ -7,7 +7,7 @@
   --FHdefaultblue: #005096;
   --inPreparationColor: rgba(14, 151, 0, 0.3);
   --preparedAllColor: rgba(14, 151, 0, 0.6);
-  --footerHeight: 50px;
+  --footerHeight: 2rem;
 
   --colorBackgroundClean: #f8f9fa;
   --colorBackgroundGrey: #e3e5e6;
@@ -421,6 +421,7 @@ html, body {
 
 #modeSwitch{
     box-shadow: 0 -2px 5px -2px #000000;
+    background-color: var(--colorBackgroundClean);
 }
 
 /*--NAVBAR DROPDOWN--*/
@@ -520,6 +521,12 @@ li {
     background-color: white;
 
 
+}
+
+@media(max-width:369px){
+    footer{
+        height: 4rem;
+    }
 }
 
 @media(max-width:1024px){
