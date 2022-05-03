@@ -114,11 +114,11 @@ import Popup from './Popup.js';
                 $("#toggleBtn").toggleClass("light");
                 if(!$("#toggleBtn").hasClass("light")){
                     this.vars.darkMode = false;
-                    $(":root").css("--bgColor", "#fff");
+                    $(":root").css("--colorBackgroundClean", "#fff");
                     $(":root").css("--textColor", "#212529");
                 }else{
                     this.vars.darkMode = true;
-                    $(":root").css("--bgColor", "#212529");
+                    $(":root").css("--colorBackgroundClean", "#212529");
                     $(":root").css("--textColor", "#f8f9fa");
                 }
                 //store filter value to localstorage

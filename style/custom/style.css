@@ -39,8 +39,8 @@ h1,h2,h3,h4,h5,p, span, button, a{
     font-family: var(--fontfamily);
 }
 
-h1,h2,h3,h4,h5, p, span, a {
-    color: var(--textColor) !important;
+h1,h2,h3,h4,h5, p, a {
+    color: var(--textColor);
 }
 
 html, body {
@@ -310,7 +310,7 @@ html, body {
 
 /*SETTINGS PAGE*/
 #settings{
-    margin: 0 2rem;
+    margin: 1rem 2rem 0 2rem;
 }
 
 #ds{
@@ -385,8 +385,8 @@ html, body {
     font-size: 1rem;
     margin: 0 0 8px 0;
     border: none;
-    background-color: var(--colorBackgroundGrey);
-    color: var(--textColor);
+    background-color: #e3e5e6;
+    color: #212529;
     padding: 8px 0;
 }
 .uk-modal-dialog{
@@ -409,6 +409,9 @@ html, body {
     font-weight: bold;
 }
 
+.uk-tab>*>a{
+    color: var(--textColor);
+}
 .uk-tab>.uk-active>a {
     color: var(--colorSecondary) !important;
 }
@@ -483,7 +486,8 @@ li {
     justify-content: space-between;
     align-items: center;
     gap: 60px;
-    z-index: 1;
+    z-index: 999;
+
 }
 
 .nav-branding{
@@ -545,7 +549,7 @@ li {
      }
 
      .nav-menu{
-         position: fixed;
+         position:absolute;
          right: -100%;
          top: 70px;
          gap:0;
@@ -555,6 +559,7 @@ li {
          text-align: center;
          transition: 0.3s;
 margin-top:0;
+         z-index: 1 !important;
      }
 
      .nav-item{
