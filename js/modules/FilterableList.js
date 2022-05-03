@@ -86,7 +86,7 @@ import Ajax from '../classes/Ajax.js';
                         this.filter.timespan = arr;
                     }else if(date.length === 1){
                         this.filter.timespan = [];
-                        this.filter.timespan.push(this.general(date[0]));
+                        this.filter.timespan.push(general.formatDate(date[0]));
                     }
                     this.addPickerStyle();
                 },

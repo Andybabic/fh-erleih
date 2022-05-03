@@ -82,6 +82,7 @@ export default class Ajax{
     }
 
     async getEquipment(eqTypeId){
+        console.log(eqTypeId);
         const api = `${this.vars.apiUrl}equipment/byTyp/${eqTypeId}/`;
 
         return new Promise((resolve, reject) => {
@@ -95,13 +96,74 @@ export default class Ajax{
         });
     }
 
+    async getEquipmentById(eqId){
+        const api = `${this.vars.apiUrl}equipment/${eqId}/`;
+
+        return new Promise((resolve) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                    resolve(false);
+            });
+        });
+    }
 
     async postResStatus(id){
         const api = `${this.vars.apiUrl}/reservierung/vorbereiten/`;
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             fetch(api)
                 .then(res => res.json(id))
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                    resolve(false);
+            });
+        });
+    }
+
+    async putEquipment(eqId, updateValue){
+        console.log(updateValue);
+        const api = `${this.vars.apiUrl}/equipment/${eqId}/`;
+        const options = {
+            method: 'POST',
+            data: {data:updateValue,
+                    curl:'PUT'},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+
+        return new Promise((resolve) => {
+            fetch(api, options)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                    resolve(err);
+            });
+        });
+
+    }
+
+    async deleteReservation(resId){
+        const api = `${this.vars.apiUrl}/reservierung/loeschen/`;
+        const options = {
+            method: 'POST',
+            data: {data:updateValue,
+                    curl:'DELETE'},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+
+        return new Promise((resolve) => {
+            fetch(api, options)
+                .then(res => res.json(resId))
                 .then(data => {
                     resolve(data);
                 }).catch(err => {

@@ -37,8 +37,8 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
 
             <div class="Swipe_container  grid-100 ">
 
-                <div class=" swipe_box_back" data-resId="<?=$jsonUser['reservations'][$i]['id']?>" data-eqId="<?=$jsonUser['reservations'][$i]['equipId']?>">
-                    <div class=" uk-align-right btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
+                <div class="swipe_box_back" data-resId="<?=$jsonUser['reservations'][$i]['id']?>" data-eqId="<?=$jsonUser['reservations'][$i]['equipId']?>">
+                    <div id="js-modal-confirm" class="js-modal-confirm uk-align-right btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
                         <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>
                     <div class=" uk-align-right btn-checklist bg-orange uk-animation-scale-up" data-type="report">

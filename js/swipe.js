@@ -195,7 +195,6 @@ function smooth(start,end) {
         $(".btn-checklist").on("click", (e) => {
             const type = e.target.dataset.type;
             console.log(type);
-            
             const modal = new Popup(e, type);
         });
     }
