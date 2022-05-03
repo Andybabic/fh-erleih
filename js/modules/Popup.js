@@ -7,6 +7,8 @@ export default class Popup{
         constructor(object, type) {
             this.vars = {
                 popupType:              type,
+                resId:                  $(object.target).parent(".swipe_box_back").attr("data-resId"),
+                eqId:                   $(object.target).parent(".swipe_box_back").attr("data-eqId"),
             };
             this.doms = {
                 base:                   object,
@@ -52,10 +54,18 @@ export default class Popup{
                                 </svg>`;
                     content = `
                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                            <label><input class="uk-radio" type="radio" name="radio2" value="damage" checked>Schaden melden</label>
-                            <label><input class="uk-radio" type="radio" name="radio2" value="todo">Todo vermerken</label>
-                            <label><input class="uk-radio" type="radio" name="radio2" value="resState">Reservierungstatus ändern</label>
-                            <label><input class="uk-radio" type="radio" name="radio2" value="eqState">Equipment Status ändern</label>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="damage" checked><span class="uk-margin-small-left">Schaden melden</span></label>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="todo"><span class="uk-margin-small-left">Todo vermerken</span></label>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="resState"><span class="uk-margin-small-left">Reservierungstatus ändern</span> </label>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="eqState"><span class="uk-margin-small-left">Equipment Status ändern</span></label>
+                        </div>
+                        <div class="modal-reportTextArea uk-align-center">
+                            <p class="modal-inputDescription uk-margin-remove-bottom">Bitte beschreibe den Schaden kurz!</p>
+                            <textarea class="uk-textarea uk-height-small"></textarea>
+                        </div>
+                        <div class="modal-selectWrapper uk-align-center">
+                            <p class="modal-inputDescription uk-margin-remove-bottom"></p>
+                            <select class="uk-select"></select>
                         </div>
                     `;
                     returnButtonTxt = "Abbrechen";
@@ -76,9 +86,9 @@ export default class Popup{
                 	<div id="${this.vars.modalId}" uk-modal>
                         <div class="uk-modal-dialog">
                             <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <div class="uk-modal-header uk-flex uk-flex-middle">
-                                <h2 class="uk-modal-title">${titleTxt}</h2>
-                                <span class="titleIcon">${titleIcon}</span>
+                            <div class="uk-modal-header uk-flex uk-flex-middle">                         
+                                    <h2 class="uk-modal-title uk-margin-remove-bottom">${titleTxt}</h2>
+                                    <span class="titleIcon uk-margin-small-left">${titleIcon}</span>
                             </div>
                             <div class="uk-modal-body">
                                 ${content}                            
@@ -107,12 +117,91 @@ export default class Popup{
             this.addCloseFunction();
         }
 
-        addSpecificFunctions(){
+        async addSpecificFunctions(){
             switch (this.vars.popupType){
                 case "report":
-                    $(".uk-modal-body .uk-radio").on("change", (e) => {
+                    //elements
+                    const textAreaWrapper = $(".modal-reportTextArea");
+                    const textArea = $(".modal-reportTextArea textarea");
+                    const selectWrapper = $(".modal-selectWrapper");
+                    const select = $(".modal-selectWrapper select");
+                    //prepare data 
+                    //new api request for equipment to get damage and todo field values
+                    const equipment = await this.modules.ajax.getEquipment(this.vars.eqId);
+                    if(!equipment){
+                        this.vars.equipmentRequest = false;
+                        this.vars.reportDamage = "Problem bei der API Abfrage - Letzter Wert konnte nicht abgefragt werden! Bereits vorhandene Schadenseinträge könnten überschrieben werden.";
+                        this.vars.reportTodo = "Problem bei der API Abfrage - Letzter Wert konnte nicht abgefragt werden! Bereits vorhandene Todo Einträge könnten überschrieben werden.";
+                    }else{
+                        this.vars.equipmentRequest = true;
+                        this.vars.reportDamage = equipment[0]["damage"];
+                        this.vars.reportTodo = equipment[0]["todo"];
+                    }
+                    //new api request for equipment status and reservation status
+                    //TODO api requests
+                
+                    //for first state
+                    this.vars.reportState = "damage";
+                    selectWrapper.hide();
+                    if(this.vars.equipmentRequest){
+                        //if equipment request was sucessfull insert value
+                        textArea.val(this.vars.reportDamage);
+                    }else{
+                        //if not insert the value as placeholder beause it contains error message
+                        textArea.attr("placeholder", this.vars.reportDamage);
+                    }
+                    
+
+                    $(".uk-modal-body .uk-radio[name='modal-report-radio']").on("change", (e) => {
                         const val = e.target.value;
+                        this.vars.reportState = val;
                         
+                        console.log(this.vars.reportDamage);
+                        console.log(this.vars.reportTodo);
+                        //actions for specific states
+                        if(val == "damage"){
+                            textAreaWrapper.show();
+                            selectWrapper.hide();
+                            //set value to textarea
+                            $(".modal-inputDescription").text("Bitte beschreibe den Schaden kurz!");
+                            if(this.vars.equipmentRequest){
+                                textArea.val(this.vars.reportDamage);
+                            }else{
+                                textArea.attr("placeholder", this.vars.reportDamage);
+                            }
+                        }else if(val == "todo"){
+                            textAreaWrapper.show();
+                            selectWrapper.hide();
+                            //set value to textarea
+                            $(".modal-inputDescription").text("Beschreibe kurz, was zu tun ist.");
+                            if(this.vars.equipmentRequest){
+                                textArea.val(this.vars.reportTodo);
+                            }else{
+                                textArea.attr("placeholder", this.vars.reportTodo);
+                            }
+                        }else if(val == "resState"){
+                            textAreaWrapper.hide();
+                            selectWrapper.show();
+                            //set value to select
+                            $(".modal-inputDescription").text("Wähle den gewünschten Reservierungsstatus aus!");
+                            //TODO options hinzufügen
+                        }else if(val == "eqState"){
+                            textAreaWrapper.hide();
+                            selectWrapper.show();
+                            //set value to select
+                            $(".modal-inputDescription").text("Wähle den gewünschten Equipmentstatus aus!");
+                        }
+                    });
+                    textArea.on("keyup touchend", (e) => {
+                        if(this.vars.reportState == "damage"){
+                            this.vars.reportDamage = e.target.value;
+                        }else if(this.vars.reportState == "todo"){
+                            this.vars.reportTodo = e.target.value;
+                        }
+                  
+                    });
+                    select.on("change", () => {
+
                     });
                     break;
                 case "extend":
@@ -141,12 +230,15 @@ export default class Popup{
                 let success = false;
                 switch (this.vars.popupType){
                     case "report":
-                        success = this.reportFunctions();
+                        if(this.vars.reportState == "damage"){
+
+                        }else if(this.vars.reportState == "todo"){
+
+                        }
                         break;
                     case "extend":
                         if(this.vars.selectedDate){
-                            const id = this.doms.base.parent(".swipe_box_back").attr("data-id");
-                            const apiAnswer = this.modules.ajax.extendReservation(id, this.vars.selectedDate);
+                            const apiAnswer = this.modules.ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
                         }
                         break;
                 }

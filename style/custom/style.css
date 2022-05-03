@@ -61,6 +61,7 @@ html, body {
     color: var(--textColor);
   }
   
+  
 
   body {
     position: relative
@@ -391,6 +392,7 @@ html, body {
 .uk-modal-dialog{
     background-color: var(--colorBackgroundClean);
 }
+
 
 /*datepicker*/
 .datepicker.is-inline, .datepicker__wrapper, .datpicker__container {

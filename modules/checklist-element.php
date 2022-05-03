@@ -20,7 +20,6 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
     <div role="main" class="ui-content">
         <ul data-role="listview">
             <?php 
-                            
                             //generate a html element for each entry in the array
                             for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
                                 $data= getEquip($jsonUser['reservations'][$i]['equipId']);
@@ -38,7 +37,7 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
 
             <div class="Swipe_container  grid-100 ">
 
-                <div class=" swipe_box_back" data-id="<?=$jsonUser['reservations'][$i]['equipId']?>">
+                <div class=" swipe_box_back" data-resId="<?=$jsonUser['reservations'][$i]['id']?>" data-eqId="<?=$jsonUser['reservations'][$i]['equipId']?>">
                     <div class=" uk-align-right btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
                         <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>

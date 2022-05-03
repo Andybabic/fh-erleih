@@ -193,7 +193,6 @@ function smooth(start,end) {
     //adding onclick dialogues
     function displaySwipeModal(){
         $(".btn-checklist").on("click", (e) => {
-            const resId = $(e.target).parent(".swipe_box_back").attr("data-id");
             const type = e.target.dataset.type;
             console.log(type);
             
