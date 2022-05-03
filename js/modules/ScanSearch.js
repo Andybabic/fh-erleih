@@ -85,6 +85,20 @@ import Ajax from "../classes/Ajax.js";
     }
 
     async addInteraction() {
+      //just testing
+      const test = `
+                            <div class="selectResult outerbox">
+                            <div class="innerbox">
+                                <h2>ID</h2>
+                                <p>666</p>
+                            </div>
+                            </div>
+                            <p>Plakatständer ohne Ablage #2</p>
+                    `;
+      this.doms.resultWrapper.html(test);
+      //test end
+
+
       //get name of all selects
       let selectArr = [];
       for (const key in this.doms.selects) {
