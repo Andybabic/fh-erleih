@@ -82,7 +82,7 @@ export default class Popup{
 
             const popup = `
                 	<div id="${this.vars.modalId}" uk-modal='{"bg-close": false, "esc-close": false}'>
-                        <div class="uk-modal-dialog">
+                        <div class="uk-modal-dialog uk-width-large uk-margin-auto-vertical">
                             <button class="uk-modal-close-default" type="button" uk-close></button>
                             <div class="uk-modal-header uk-flex uk-flex-middle">                         
                                     <h2 class="uk-modal-title uk-margin-remove-bottom">${titleTxt}</h2>
@@ -91,7 +91,7 @@ export default class Popup{
                             <div class="uk-modal-body">
                                 ${content}                            
                             </div>
-                            <div class="uk-modal-footer uk-text-right uk-flex uk-flex-between">
+                            <div class="uk-modal-footer uk-text-right uk-flex uk-child-width-1-2">
                                 <button class="uk-button uk-button-default uk-modal-close" type="button">${returnButtonTxt}</button>
                                 <button class="uk-button uk-button-primary proceedButton" type="button">${proceedButtonTxt}</button>
                             </div>
@@ -201,6 +201,7 @@ export default class Popup{
                         inline: true,
                         time: true,
                         openOn: "today",
+                        min: new Date(),
                         defaultTime: { start: [8, 30]},
                         onChange: (date) => {
                             if(date){         
@@ -241,8 +242,13 @@ export default class Popup{
                         break;
                     case "extend":
                         if(this.vars.selectedDate){
+                            console.log(this.vars.selectedDate);
                             const extendAnswer = this.modules.ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
                             if(!extendAnswer)success = false;
+                        }else{
+                          $("#datepicker-popup").val("Kein gültiges Datum!");
+                          const d = new Date(this.vars.selectedDate);
+                            console.log(d);
                         }
                         break;
                 }
@@ -250,7 +256,7 @@ export default class Popup{
                     UIkit.modal(`#${this.vars.modalId}`).hide();
                     this.removePopup();
                 }else{
-                    this.doms.proceedButton.text("Fehlgeschlagen");
+                    //this.doms.proceedButton.text("Fehlgeschlagen");
                 }
             });
         }
