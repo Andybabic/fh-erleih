@@ -37,7 +37,7 @@ if ($state == "error") {
 
         <div class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade uk-background-cover" data-src="https://www.st-poelten.at/images/stpimport/articles/2019_11/1786-fhstp-martin-lifka-photography-3.jpg" uk-img="loading: eager" uk-height-viewport>
 
-        <div class="uk-width-1-1">
+        <div class="uk-width-1-1 login">
             <div class="uk-container">
                 <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
                     <div class="uk-width-1-1@m">

@@ -3,8 +3,8 @@
 $domain = $_SERVER['HTTP_HOST'];
 
 ?>
-<header>
-    <nav class="navbar">
+<header uk-sticky>
+    <nav  class="navbar">
         <a class="nav-branding"> Username</a>
         <ul class="nav-menu">
             <li class="nav-item">
