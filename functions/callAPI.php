@@ -1,4 +1,5 @@
 <?php
+
 // get config.php file from server
 $config_file = require_once("../config.php");
 
@@ -7,12 +8,9 @@ $api_url = $config_api_url;
 $headercockie=  getallheaders()["Cookie"] ;
 
 
-
-
 // zum beispiel $url = "util/login";
 function call($url,$data,$curl ){
     global $headercockie;
-    //if is set Post[data] send data to api else empty data
 
     $url = $url;
     $options = array(
@@ -60,7 +58,7 @@ function call($url,$data,$curl ){
 
 
 if(isset($_GET['r']) ){
-        $api = $_GET['r'];  
+        $api = $_GET['r'];
     }
 if(isset($_POST['r']) ){
         $api = $_POST['r'];
@@ -73,7 +71,7 @@ if(isset($_POST['curl']) ){
 
 if(isset($_POST['data']) ){
             $data = $_POST['data'];
-            $result = call($api_url.$api,$data,$curl);      
+            $result = call($api_url.$api,$data,$curl);
 }else{
             $result = call($api_url.$api,'',$curl);
 }
@@ -84,8 +82,8 @@ if(isset($_POST['data']) ){
     echo($result);
 
 // }
-       
-    
+
+
 
 
 ?>
