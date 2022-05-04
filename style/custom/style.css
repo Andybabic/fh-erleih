@@ -547,7 +547,7 @@ li {
          width: 100%;
          text-align: center;
          transition: 0.3s;
-margin-top:0;
+        margin-top:0;
      }
 
      .nav-item{
@@ -561,3 +561,6 @@ margin-top:0;
 
 
 
+.toTop{
+    margin-top: -20px;
+}
