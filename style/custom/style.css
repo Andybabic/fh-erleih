@@ -552,6 +552,7 @@ var
 
 header {
     background-color: var(--colorPrimary);
+
 }
 
 li {
@@ -569,7 +570,8 @@ li {
     justify-content: space-between;
     align-items: center;
     padding: 0 24px;
-}
+    margin-bottom: 0px;
+  }
 
 .nav-menu {
     display: flex;
