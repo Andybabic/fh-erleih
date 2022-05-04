@@ -71,6 +71,7 @@ import Ajax from '../classes/Ajax.js';
                     <button id="submitSpanFilter" class="filterBtn dateFilter" data-filter="timespan">Filter setzen</button>
                 </div>`
             this.doms.filterWrapper.append(pickerWrapper);
+            $(".pickerWrapper").hide();
 
             //TODO datepicker default date from localstorage
             //init time picker
