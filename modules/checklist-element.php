@@ -33,16 +33,12 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                                 $description=str_replace("</p>", "", $description);
                                 //convert typData to json
                                 $typDataJson=json_encode($typData);
-                                $assiComment= $jsonUser['reservations'][$i]['assiComment'];
-                                //echo(var_dump($jsonUser['reservations'][$i]));
                                 ?>
 
             <div class="Swipe_container  grid-100 ">
 
-
-                <div class=" swipe_box_back" data-resId="<?=$jsonUser['reservations'][$i]['id']?>"
-                    data-eqId="<?=$jsonUser['reservations'][$i]['equipId']?>">
-                    <div class=" uk-align-right btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
+                <div class="swipe_box_back" data-resId="<?=$jsonUser['reservations'][$i]['id']?>" data-eqId="<?=$jsonUser['reservations'][$i]['equipId']?>">
+                    <div id="js-modal-confirm" class="js-modal-confirm uk-align-right btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
                         <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>
                     <div class=" uk-align-right btn-checklist bg-orange uk-animation-scale-up" data-type="report">
@@ -59,12 +55,10 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
 
                 <!---SWIPEBOX Foreground element--->
                 <div class="swipebox_Object swipe_box uk-animation-slide-left" style=" z-index: 1;">
-
                     <!---Start Equipment Card element--->
                     <div
                         class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
                         <div class="checkListbutton ">
-
                             <script>
                             addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status?>, typeData =
                                 <?=$typDataJson?>, resData = <?=$equipData?>);
@@ -77,15 +71,12 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                                     class="uk-text-lighter uk-display-inline">
                                     id:<?=$data["id"]?></p>
                             </h3>
-                            <p class="uk-text-small uk-text-muted uk-text-truncate toTop"><?=$assiComment?></p>
-                            <span href="#toggle-animation<?=$i?>" uk-icon="info"
-                                uk-toggle="target: #toggle-animation<?=$i?>; animation: uk-animation-fade "
-                                style="right: 10px;top: 10px;position: absolute;"></span>
-
-                            <div id="toggle-animation<?=$i?>" hidden
-                                class="uk-card uk-card-default uk-card-body uk-margin-small"><?=$description?></div>
-
-
+                            <div class="uk-align-left ">
+                                <p>Beschreibung:</p>
+                            </div>
+                            <div class="uk-align-left ">
+                                <p> <?=$description?></p>
+                            </div>
 
 
                             <!---Packliste--->
@@ -98,7 +89,7 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                               }
                               else {   ?>
 
-                            <div class="grid-100 uk-align-left toTop">
+                            <div class="grid-100 uk-align-left">
                                 <hr class="uk-divider-vertical uk-align-left custom_HR ">
                                 <div class="uk-text-large nospace-up textColor">Packliste</div>
                                 <ul>
@@ -150,18 +141,17 @@ checklistComponents.checklist = (function() {
 
 
 
-    priv.send = function(jsondata, curl) {
+    priv.send = function(res, curl) {
         // make post request to url with array
-        url = "../functions/callAPI.php?r=reservierung/vorbereiten/";
-        console.log(jsondata);
+        url = "../functions/callAPI.php?r=reservierung/vorbereiten/&data=" + res + "&curl=" + curl;
         $.ajax({
-            type: 'POST',
+            //append header cockie
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            type: "POST",
             url: url,
-            dataType:"JSON",
-            data:  {
-                curl:'POST',
-                data:jsondata} ,
-            
+            data: '',
             success: function(msg) {
                 console.log("Update success");
             },
@@ -180,19 +170,17 @@ checklistComponents.checklist = (function() {
             checkbox.checked = false;
             //checkboxelements[i].checked = getParent(value).checked;
             checkbox.addEventListener('click', function() {
-                //add data post request
-                
+                //send to api that rentry is done or not
+                //ajax.postResStatus("{"+value+":"+this.checked+"}");
+                // get value of clicked checkbox
                 var value = this.value;
                 status = getCheckbox_array(value);
-                //create a list of integers
-                var list = [value * 1];
-                jsondata = 500830;
                 if (status) {
                     //send to api that rentry is done or not
-                    priv.send(jsondata, "POST");
+                    priv.send(value, "POST");
                 } else {
                     //send to api that rentry is done or not
-                    priv.send(jsondata, "DELETE");
+                    priv.send(value, "DELETE");
                 }
                 var parent = getParent(value);
                 if (parent) {
@@ -208,9 +196,9 @@ checklistComponents.checklist = (function() {
                     return checkboxes_list[i].parent;
                 }
             }
-        }
+        }   
 
-        function update() {
+        function update(){
             for (var i = 0; i < checkboxelements.length; i++) {
                 checkboxes_list[i].checked = checkboxelements[i].checked;
             }
@@ -222,46 +210,46 @@ checklistComponents.checklist = (function() {
             for (var i = 0; i < checkboxes_list.length; i++) {
                 if (checkboxes_list[i].parent == parent) {
                     console.log('checkChilds with parent: ' + parent + ' and child: ' + checkboxes_list[i]);
-                    if (checkboxelements[i].checked == false) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        //change state of checkbox with ( value )
-        function changeState(value) {
-            var thisCheckbox = getCheckbox(value);
-            if (checkChilds(value)) {
-                //set checkbox to true
-                thisCheckbox.checked = true;
-            } else {
-                thisCheckbox.checked = false;
-            }
-        }
-
-        // get checkboxes with ( value )
-        function getCheckbox_array(value) {
-            for (var i = 0; i < checkboxelements.length; i++) {
-                if (checkboxes_list[i].value == value) {
-                    return checkboxes_list[i];
+                if (checkboxelements[i].checked == false) {
+                    return false;
                 }
             }
         }
-
-
-        // get checkboxelements with ( value )
-        function getCheckbox(value) {
-            for (var i = 0; i < checkboxelements.length; i++) {
-                if (checkboxes_list[i].value == value) {
-                    return checkboxelements[i];
-                }
-            }
-        }
-        console.log(checkboxes_list);
+        return true;
     }
-    return publ;
+
+    //change state of checkbox with ( value )
+    function changeState(value) {
+        var thisCheckbox = getCheckbox(value);
+        if (checkChilds(value)) {
+            //set checkbox to true
+            thisCheckbox.checked = true;
+        } else {
+            thisCheckbox.checked = false;
+        }
+    }
+
+    // get checkboxes with ( value )
+    function getCheckbox_array(value) {
+        for (var i = 0; i < checkboxelements.length; i++) {
+            if (checkboxes_list[i].value == value) {
+                return checkboxes_list[i];
+            }
+        }
+    }
+
+
+    // get checkboxelements with ( value )
+    function getCheckbox(value) {
+        for (var i = 0; i < checkboxelements.length; i++) {
+            if (checkboxes_list[i].value == value) {
+                return checkboxelements[i];
+            }
+        }
+    }
+    console.log(checkboxes_list);
+}
+return publ;
 })();
 
 checklistComponents.checklist.init();

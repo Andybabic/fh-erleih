@@ -28,9 +28,9 @@ function build_proofing_list() {
     for (var i = 0; i < checkboxes_list.length; i++) {
         var item = checkboxes_list[i];
         if (item.checked){
-            iconUrl='https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Yes_Check_Circle.svg/2048px-Yes_Check_Circle.svg.png';
+            iconUrl='../style/image/HackalGruen.svg';
         }else{
-            iconUrl='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/No_Check_Circle.svg/2048px-No_Check_Circle.svg.png';
+            iconUrl='../style/image/RufzeichenOrange.svg';
         }
         if (!item.parent) {
 
@@ -39,7 +39,7 @@ function build_proofing_list() {
 
                 //var proofing_list_item = document.createElement('div');
                 var html =
-                    '<div class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline  uk-object-position-top-center">';
+                    '<div class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center spacelist">';
                 html += '<div class="checkListbutton ">';
                 html +=
                     '<span class="uk-icon uk-icon-image" style="background-image: url('+iconUrl+');"></span>';
