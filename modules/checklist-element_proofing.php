@@ -1,9 +1,23 @@
 <div class="uk-container uk-animation-scale-up ">
     <div id="proofing_list">
-    <p>Hallo</p>
-    </div>
+    <p>Keine Daten gefunden</p>
+</div>
+
+
 
 </div>
+
+<form class="uk-form-horizontal uk-margin-large">
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Kommentar</label>
+        <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="..."></textarea>
+        </div>
+    </div>
+
+
+</form>
 
 
 
