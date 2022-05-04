@@ -38,9 +38,8 @@
     cursor: pointer;
 }
 
-#submitSpanFilter{
-    width:100%;
-    border-radius: 0 0 12px 12px;
+.dateFilter {
+
 }
 
 .selected-ends div {
@@ -65,7 +64,6 @@
 .filterWrapper {
     justify-content: center;
     text-align: center;
-    margin-top: 1rem;
 }
 
 h2, p {

@@ -24,7 +24,7 @@ echo (  " <link rel='stylesheet' href='".$path."style/uikit/css/uikit-rtl.min.cs
 echo (  " <link rel='stylesheet' href='".$path."style/uikit/css/uikit.min.css'> ");
 echo (  " <link rel='stylesheet' href='".$path."style/datepicker/datepicker.material.css'> ");
 echo (  " <script src='".$path."/js/jquery-3.6.0.min.js'></script>");
-echo (  " <script defer src='".$path."js/classes/General.js'></script> ");
+echo (  " <script src='".$path."js/classes/General.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit.min.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit-icons.min.js'></script> ");
 echo (  " <script defer type='module' src='".$path."js/swipe.js'></script> ");
@@ -51,7 +51,5 @@ function getLink($link){
     global $path;
     return $path."functions/".$link.".php";
 }
-
-
 
 ?>

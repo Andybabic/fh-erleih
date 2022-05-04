@@ -56,7 +56,9 @@ export default class Popup{
                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                             <label><input class="uk-radio" type="radio" name="modal-report-radio" value="damage" checked><span class="uk-margin-small-left">Schaden melden</span></label>
                             <label><input class="uk-radio" type="radio" name="modal-report-radio" value="todo"><span class="uk-margin-small-left">Todo vermerken</span></label>
-                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="cancel"><span class="uk-margin-small-left">Reservierung stornieren</span> </label>                        </div>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="resState"><span class="uk-margin-small-left">Reservierungstatus ändern</span> </label>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="eqState"><span class="uk-margin-small-left">Equipment Status ändern</span></label>
+                        </div>
                         <div class="modal-reportTextArea uk-align-center">
                             <p class="modal-inputDescription uk-margin-remove-bottom">Bitte beschreibe den Schaden kurz!</p>
                             <textarea class="uk-textarea uk-height-small"></textarea>
@@ -81,8 +83,8 @@ export default class Popup{
             }
 
             const popup = `
-                	<div id="${this.vars.modalId}" uk-modal='{"bg-close": false, "esc-close": false}'>
-                        <div class="uk-modal-dialog uk-width-large uk-margin-auto-vertical">
+                	<div id="${this.vars.modalId}" uk-modal>
+                        <div class="uk-modal-dialog">
                             <button class="uk-modal-close-default" type="button" uk-close></button>
                             <div class="uk-modal-header uk-flex uk-flex-middle">                         
                                     <h2 class="uk-modal-title uk-margin-remove-bottom">${titleTxt}</h2>
@@ -91,7 +93,7 @@ export default class Popup{
                             <div class="uk-modal-body">
                                 ${content}                            
                             </div>
-                            <div class="uk-modal-footer uk-text-right uk-flex uk-child-width-1-2">
+                            <div class="uk-modal-footer uk-text-right">
                                 <button class="uk-button uk-button-default uk-modal-close" type="button">${returnButtonTxt}</button>
                                 <button class="uk-button uk-button-primary proceedButton" type="button">${proceedButtonTxt}</button>
                             </div>
@@ -125,17 +127,15 @@ export default class Popup{
                     const select = $(".modal-selectWrapper select");
                     //prepare data 
                     //new api request for equipment to get damage and todo field values
-                    const equipment = await this.modules.ajax.getEquipmentById(this.vars.eqId);
-                    this.vars.equipment = equipment;
+                    const equipment = await this.modules.ajax.getEquipment(this.vars.eqId);
                     if(!equipment){
                         this.vars.equipmentRequest = false;
-                        this.vars.reportDamage = "Problem bei der API Abfrage";
-                        this.vars.reportTodo = "Problem bei der API Abfrage";
-                        $(".proceedButton").remove();
+                        this.vars.reportDamage = "Problem bei der API Abfrage - Letzter Wert konnte nicht abgefragt werden! Bereits vorhandene Schadenseinträge könnten überschrieben werden.";
+                        this.vars.reportTodo = "Problem bei der API Abfrage - Letzter Wert konnte nicht abgefragt werden! Bereits vorhandene Todo Einträge könnten überschrieben werden.";
                     }else{
                         this.vars.equipmentRequest = true;
-                        this.vars.reportDamage = equipment["damage"];
-                        this.vars.reportTodo = equipment["todo"];
+                        this.vars.reportDamage = equipment[0]["damage"];
+                        this.vars.reportTodo = equipment[0]["todo"];
                     }
                     //new api request for equipment status and reservation status
                     //TODO api requests
@@ -151,14 +151,16 @@ export default class Popup{
                         textArea.attr("placeholder", this.vars.reportDamage);
                     }
                     
-                    //on change of radio button changes state of report popup and adds funcions
+
                     $(".uk-modal-body .uk-radio[name='modal-report-radio']").on("change", (e) => {
                         const val = e.target.value;
                         this.vars.reportState = val;
                         
+                        console.log(this.vars.reportDamage);
+                        console.log(this.vars.reportTodo);
                         //actions for specific states
                         if(val == "damage"){
-                            textArea.show();
+                            textAreaWrapper.show();
                             selectWrapper.hide();
                             //set value to textarea
                             $(".modal-inputDescription").text("Bitte beschreibe den Schaden kurz!");
@@ -168,7 +170,7 @@ export default class Popup{
                                 textArea.attr("placeholder", this.vars.reportDamage);
                             }
                         }else if(val == "todo"){
-                            textArea.show();
+                            textAreaWrapper.show();
                             selectWrapper.hide();
                             //set value to textarea
                             $(".modal-inputDescription").text("Beschreibe kurz, was zu tun ist.");
@@ -177,11 +179,17 @@ export default class Popup{
                             }else{
                                 textArea.attr("placeholder", this.vars.reportTodo);
                             }
-                        }else if(val == "cancel"){
-                            textAreaWrapper.show();
-                            textArea.hide();
-                            selectWrapper.hide();
-                            $(".modal-inputDescription").text("Der Status dieser Reservierung wird auf gelöscht gesetzt!");
+                        }else if(val == "resState"){
+                            textAreaWrapper.hide();
+                            selectWrapper.show();
+                            //set value to select
+                            $(".modal-inputDescription").text("Wähle den gewünschten Reservierungsstatus aus!");
+                            //TODO options hinzufügen
+                        }else if(val == "eqState"){
+                            textAreaWrapper.hide();
+                            selectWrapper.show();
+                            //set value to select
+                            $(".modal-inputDescription").text("Wähle den gewünschten Equipmentstatus aus!");
                         }
                     });
                     textArea.on("keyup touchend", (e) => {
@@ -201,7 +209,6 @@ export default class Popup{
                         inline: true,
                         time: true,
                         openOn: "today",
-                        min: new Date(),
                         defaultTime: { start: [8, 30]},
                         onChange: (date) => {
                             if(date){         
@@ -217,46 +224,27 @@ export default class Popup{
             
         }
 
-        async addProceedFunction(){
+        addProceedFunction(){
             //if proceed button is clicked
-            $(".proceedButton").on("click", async () => {
+            $(".proceedButton").on("click", () => {
                 let success = false;
                 switch (this.vars.popupType){
                     case "report":
                         if(this.vars.reportState == "damage"){
-                            console.log(this.vars.reportDamage);
-                            this.vars.equipment.damage = this.vars.reportDamage;
-                            this.vars.equipment.price = 0.1;
-                            const equipPut = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
-                            if(!equipPut)success = false;
-                            //console.log(equipPut);
+
                         }else if(this.vars.reportState == "todo"){
-                            console.log(this.vars.reportTodo);
-                            const newVal = {"damage":this.vars.reportTodo};
-                            const apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, newVal);
-                            if(!apiAnswer)success = false;
-                        }else if(this.vars.reportState == "cancel"){
-                            const cancelRequest = await this.modules.ajax.deleteReservation(this.vars.resId);
-                            if(!cancelRequest)success = false;
+
                         }
                         break;
                     case "extend":
                         if(this.vars.selectedDate){
-                            console.log(this.vars.selectedDate);
-                            const extendAnswer = this.modules.ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
-                            if(!extendAnswer)success = false;
-                        }else{
-                          $("#datepicker-popup").val("Kein gültiges Datum!");
-                          const d = new Date(this.vars.selectedDate);
-                            console.log(d);
+                            const apiAnswer = this.modules.ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
                         }
                         break;
                 }
                 if(success){
                     UIkit.modal(`#${this.vars.modalId}`).hide();
                     this.removePopup();
-                }else{
-                    //this.doms.proceedButton.text("Fehlgeschlagen");
                 }
             });
         }
