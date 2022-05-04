@@ -67,6 +67,9 @@ if(isset($_POST['r']) ){
     }
 
 $curl= isset($_GET['curl']) ? $_GET['curl'] : 'GET';
+if(isset($_POST['curl']) ){
+    $api = $_POST['curl'];
+}
 
 if(isset($_POST['data']) ){
             $data = $_POST['data'];
