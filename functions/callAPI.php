@@ -72,7 +72,7 @@ if(isset($_POST['curl']) ){
 }
 
 if(isset($_POST['data']) ){
-            $data = $_POST['data'];
+            $data = json_decode($_POST['data']);
             $result = call($api_url.$api,$data,$curl);      
 }else{
             $result = call($api_url.$api,'',$curl);
