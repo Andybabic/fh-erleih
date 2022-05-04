@@ -53,9 +53,11 @@ h3,
 h4,
 h5,
 p,
-a,
-label{
-  color: var(--textColor);
+dt,
+li,
+dd,
+a {
+  color: var(--textColor)!important;
 }
 
 html,
@@ -114,11 +116,19 @@ body {
   left: -20;
   position: relative;
   top: 5px;
+  background-color: var(--colorBackgroundGrey);
 }
 
 .grid-100 {
   width: 100%;
+  background-color: var(--colorBackgroundGrey);
 }
+.spacelist{
+  padding: 1rem 2rem;
+  background-color: var(--colorBackgroundGrey);
+  margin: 0 0 6px 0;
+}
+
 
 .right {
   float: right;

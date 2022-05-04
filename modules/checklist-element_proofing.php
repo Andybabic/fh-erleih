@@ -25,7 +25,7 @@ function build_proofing_list() {
 
                 //var proofing_list_item = document.createElement('div');
                 var html =
-                    '<div class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline  uk-object-position-top-center">';
+                    '<div class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center spacelist">';
                 html += '<div class="checkListbutton ">';
                 html +=
                     '<span class="uk-icon uk-icon-image" style="background-image: url('+iconUrl+');"></span>';
