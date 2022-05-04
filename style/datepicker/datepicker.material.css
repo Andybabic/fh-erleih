@@ -174,7 +174,7 @@
 }
 
 .datepicker__day.is-today {
-  color: var(--colorPrimary);
+  color: var(--textColor);
 }
 
 .datepicker__day.is-today div::after {

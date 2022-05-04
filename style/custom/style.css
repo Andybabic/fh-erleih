@@ -53,7 +53,8 @@ h3,
 h4,
 h5,
 p,
-a {
+a,
+label{
   color: var(--textColor);
 }
 
@@ -299,17 +300,53 @@ a.link2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color:var(--textColor) !important;
 }
-.selectWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+
+#scanSearch ul, li
+  color: var(--textColor);
 }
+
 .selectWrapper select {
   width: 90%;
   margin: 15px 0;
 }
+
+.select2{
+  width: 50% !important;
+}
+.selectWrapper {
+  align-items: center;
+  width: 100%;
+  margin: 2rem 0;
+}
+.selectWrapper label{
+  font-weight: bold;
+}
+
+
+/*Select Darkmode*/
+.select2-container--default .select2-selection--single .select2-selection__arrow b{
+  border-color: var(--textColor) transparent transparent transparent !important;
+}
+
+.select2 li, .select2-selection__placeholder{
+  color:var(--textColor) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered, .select2-search--dropdown, .select2-search__field{
+  background-color: var(--colorBackgroundGrey);
+  color: var(--textColor) !important;
+}
+
+.select2-results__option{
+  text-align: center;
+  background-color: var(--colorBackgroundGrey);
+  color: var(--textColor);
+}
+
+
+
 
 /*SETTINGS PAGE*/
 #settings {
@@ -530,6 +567,9 @@ li {
 }
 
 @media (max-width: 1024px) {
+  .select2{
+    width: 100% !important;
+  }
   .hamburger {
     display: block;
   }
@@ -577,6 +617,7 @@ li {
   border-radius: 25px;
   justify-content: center;
   align-items: center;
+
 }
 
 .innerbox {

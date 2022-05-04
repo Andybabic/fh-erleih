@@ -24,15 +24,7 @@ require_once("../functions/loader.php");
 
         <?php getModule('scanSearch') ?>
 
-        <!-- <div class="uk-height-medium">
-            <div class="uk-height-1-1 ">
-
-                <img class="uk-align-center uk-margin-large-top uk-vertical-align-middle" src="../style/image/Scanpic.svg">
-
-            </div>
-        </div> -->
-
-        <div class="uk-height-medium">
+           <div class="uk-height-medium">
             <div class="uk-height-1-1 ">
                
             </div>
