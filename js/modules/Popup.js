@@ -226,14 +226,13 @@ export default class Popup{
                         if(this.vars.reportState == "damage"){
                             console.log(this.vars.reportDamage);
                             this.vars.equipment.damage = this.vars.reportDamage;
-                            this.vars.equipment.price = 0.1;
+                            //this.vars.equipment.price = 0.1;
                             const equipPut = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
                             if(!equipPut)success = false;
                             //console.log(equipPut);
                         }else if(this.vars.reportState == "todo"){
-                            console.log(this.vars.reportTodo);
-                            const newVal = {"damage":this.vars.reportTodo};
-                            const apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, newVal);
+                            this.vars.equipment.todo = this.vars.reportTodo;
+                            const apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
                             if(!apiAnswer)success = false;
                         }else if(this.vars.reportState == "cancel"){
                             const cancelRequest = await this.modules.ajax.deleteReservation(this.vars.resId);

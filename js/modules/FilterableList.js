@@ -273,6 +273,7 @@ import Ajax from '../classes/Ajax.js';
                 if(this.filter[name] != undefined && this.filter[name]){
                     //if the filter is set and true
                     const data = await this.modules.ajax.getResByDepartmentTimespan(key, startDate, endDate, type);
+                    console.log(data);
                     if(!data){
                         //if data returns false error handling
                         this.displayList("error");

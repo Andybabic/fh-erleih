@@ -125,18 +125,27 @@ export default class Ajax{
     }
 
     async putEquipment(eqId, updateValue){
-        console.log(updateValue);
-        const api = `${this.vars.apiUrl}/equipment/${eqId}/`;
-        const options = {
-            method: 'POST',
-            data: {data:updateValue,
-                    curl:'PUT'},
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }
 
+        // TODO: replace as soon as API allows 0 for 0.0
+        const cleared = JSON.stringify(updateValue)
+            .replaceAll('"price":"0",', '"price":0.0,')
+            .replaceAll('"price":0,', '"price":0.0,');
+        // ---------------------------------------------
+
+        const api = `${this.vars.apiUrl}equipment/${eqId}/`;
+
+        $.ajax({
+            url: api,
+            method: "POST",
+            data: {
+                data: cleared,
+                curl: "PUT"
+            }
+        }).done(function(answer) {
+            console.log(answer);
+        });
+
+        /*
         return new Promise((resolve) => {
             fetch(api, options)
                 .then(res => res.json())
@@ -145,7 +154,8 @@ export default class Ajax{
                 }).catch(err => {
                     resolve(err);
             });
-        });
+        });*/
+
 
     }
 
