@@ -13,15 +13,7 @@ $headercockie=  getallheaders()["Cookie"] ;
 function call($url,$data,$curl ){
     global $headercockie;
     //if is set Post[data] send data to api else empty data
-
-    // TODO: replace as soon as API allows 0 for 0.0
     $encoded = json_encode($data);
-    $encoded = str_replace([
-        '"price":0,'
-    ], [
-        '"price":0.0,'
-    ], $encoded);
-    // ------------------------------
 
     $url = $url;
     $options = array(
