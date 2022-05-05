@@ -54,9 +54,9 @@ export default class Popup{
                                 </svg>`;
                     content = `
                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="damage" checked><span class="uk-margin-small-left">Schaden melden</span></label>
-                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="todo"><span class="uk-margin-small-left">Todo vermerken</span></label>
-                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="cancel"><span class="uk-margin-small-left">Reservierung stornieren</span> </label>                        </div>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="damage" checked><span class="uk-text-default uk-margin-small-left">Schaden melden</span></label>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="todo"><span class="uk-text-default uk-margin-small-left">Todo vermerken</span></label>
+                            <label><input class="uk-radio" type="radio" name="modal-report-radio" value="cancel"><span class="uk-text-default uk-margin-small-left">Reservierung stornieren</span> </label>                        </div>
                         <div class="modal-reportTextArea uk-align-center">
                             <p class="modal-inputDescription uk-margin-remove-bottom">Bitte beschreibe den Schaden kurz!</p>
                             <textarea class="uk-textarea uk-height-small"></textarea>
@@ -85,7 +85,7 @@ export default class Popup{
                         <div class="uk-modal-dialog uk-width-large uk-margin-auto-vertical">
                             <button class="uk-modal-close-default" type="button" uk-close></button>
                             <div class="uk-modal-header uk-flex uk-flex-middle">                         
-                                    <h2 class="uk-modal-title uk-margin-remove-bottom">${titleTxt}</h2>
+                                    <h2 class="uk-modal-title uk-text-lead uk-margin-remove-bottom">${titleTxt}</h2>
                                     <span class="titleIcon uk-margin-small-left">${titleIcon}</span>
                             </div>
                             <div class="uk-modal-body">
