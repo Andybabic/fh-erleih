@@ -4,7 +4,7 @@ $domain = $_SERVER['HTTP_HOST'];
 
 ?>
 <header>
-    <nav class="navbar">
+    <nav class="navbar uk-width-3-5@l uk-margin  uk-align-center"">
         <a class="nav-branding"> Username</a>
         <ul class="nav-menu">
             <li class="nav-item">

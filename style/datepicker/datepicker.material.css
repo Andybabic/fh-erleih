@@ -132,7 +132,20 @@
   margin: 0 0.125rem;
   color: #333;
   width: 2ch;
+
+
 }
+
+.datepicker__field option{
+  color: var(--textColor);
+  background-color: var(--colorBackgroundClean) !important;
+
+}
+
+
+
+
+
 
 .datepicker__field span {
   display: block;

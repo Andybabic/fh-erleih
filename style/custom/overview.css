@@ -43,8 +43,8 @@
     border-radius: 0 0 12px 12px;
 }
 
-.selected-ends div {
-
+.uk-list-striped>:nth-of-type(odd){
+    border:none;
 }
 
 .listWrapper li > * {

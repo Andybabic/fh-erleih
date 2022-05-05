@@ -74,7 +74,7 @@ export default class Popup{
                     titleIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <path id="Pfad_23" data-name="Pfad 23" d="M2.679,39.363a.257.257,0,0,0,.439,0L5.734,35.8c.121-.165.064-.3-.128-.3H4.218a.3.3,0,0,1-.281-.379,7.487,7.487,0,0,1,7.079-6.337c4,0,7.249,3.619,7.249,8.068s-3.252,8.068-7.249,8.068a.971.971,0,0,0,0,1.932c4.954,0,8.985-4.486,8.985-10s-4.03-10-8.985-10c-4.423,0-8.107,3.576-8.847,8.266a.439.439,0,0,1-.4.382H.192c-.192,0-.249.134-.128.3Z" transform="translate(0 -26.855)" fill="#07f"/>
                                 </svg>`;
-                    content = `<input type="text" readonly="readonly" id="datepicker-popup">`;
+                    content = `<input type="text" readonly="readonly" id="datepicker-popup" placeholder="Tag auswählen">`;
                     returnButtonTxt = "Abbrechen";
                     proceedButtonTxt = "Verlängern";
                     break;
@@ -92,8 +92,8 @@ export default class Popup{
                                 ${content}                            
                             </div>
                             <div class="uk-modal-footer uk-text-right uk-flex uk-child-width-1-2">
-                                <button class="uk-button uk-button-default uk-modal-close" type="button">${returnButtonTxt}</button>
-                                <button class="uk-button uk-button-primary proceedButton" type="button">${proceedButtonTxt}</button>
+                                <button class="uk-button  proceedButton uk-button-default colorPrimary uk-modal-close" type="button">${returnButtonTxt}</button>
+                                <button class="uk-button  proceedButton uk-button-default colorPrimary  proceedButton" type="button">${proceedButtonTxt}</button>
                             </div>
                         </div>
                     </div>
