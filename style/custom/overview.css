@@ -42,8 +42,8 @@
 
 }
 
-.selected-ends div {
-
+.uk-list-striped>:nth-of-type(odd){
+    border:none;
 }
 
 .listWrapper li > * {

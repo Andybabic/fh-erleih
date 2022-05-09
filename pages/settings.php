@@ -18,6 +18,7 @@ require_once("../functions/loader.php");
     <?php getModule('menu')?>
 </header>
 <main>
+    <div class="uk-width-3-5@l uk-margin  uk-align-center"">
     <div id="settings">
         <h1>Einstellungen</h1>
         <h2>Bereiche</h2>
@@ -29,6 +30,7 @@ require_once("../functions/loader.php");
                 <div class="handleInner"></div>
             </div>
         </div>
+    </div>
     </div>
 
 </main>
