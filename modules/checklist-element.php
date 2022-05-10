@@ -2,11 +2,13 @@
 var checkboxes_list = []
 
 
-function addCheckbox_list(resID = null, parent = null, status = null, typeData = null, resData = null) {
+function addCheckbox_list(resID = null, parent = null, status = false, typeData = null, resData = null) {
+    
+    var fuckbool = (this.status === 'true')
     checkboxes_list.push({
         value: resID,
         parent: parent,
-        checked: this.status,
+        checked: fuckbool,
         typeData: this.typeData,
         resData: this.resData
 
@@ -24,7 +26,7 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                             for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
                                 $data= getEquip($jsonUser['reservations'][$i]['equipId']);
                                 //$status= ($jsonUser['reservations'][$i]["prepared"] = 1 ? 'false' : 'true');
-                                $status= status($jsonUser['reservations'][$i]['id']);
+                                $status=  json_encode(status($jsonUser['reservations'][$i]['id']));
                                 $resID=$jsonUser['reservations'][$i]['id'];
                                 $resData=json_encode($jsonUser['reservations'][$i]);
                                 $typData= getEquipTyp($data['typeId']);
@@ -164,7 +166,7 @@ checklistComponents.checklist = (function() {
     priv.send = function(jsondata, curl) {
         // make post request to url with array
         url = "../functions/callAPI.php?r=reservierung/vorbereiten/";
-        console.log(jsondata);
+
         jsondata = JSON.stringify([jsondata]);
         $.ajax({
             type: 'POST',
@@ -193,11 +195,10 @@ checklistComponents.checklist = (function() {
             var value = this.value;
             status = getCheckbox_array(checkbox.value).checked;
             //change status of checkbox
-            if (status == "true") {
-                checkbox.checked = true;
-            }else{
-                checkbox.checked = false;
-            }
+        
+            checkbox.checked = (status === 'true');
+
+
             checkbox.addEventListener('click', function() {
                 //add data post request
                 var value = this.value;
@@ -236,7 +237,6 @@ checklistComponents.checklist = (function() {
         function checkChilds(parent) {
             for (var i = 0; i < checkboxes_list.length; i++) {
                 if (checkboxes_list[i].parent == parent) {
-                    console.log('checkChilds with parent: ' + parent + ' and child: ' + checkboxes_list[i]);
                     if (checkboxelements[i].checked == false) {
                         return false;
                     }
@@ -274,7 +274,7 @@ checklistComponents.checklist = (function() {
                 }
             }
         }
-        console.log(checkboxes_list);
+
     }
     return publ;
 })();

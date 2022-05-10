@@ -13,16 +13,12 @@ function build_proofing_list() {
 
     for (var i = 0; i < checkboxes_list.length; i++) {
         var item = checkboxes_list[i];
-        if (item.checked){
+        if (item.checked) {
             iconUrl='../style/image/HackalGruen.svg';
         }else{
             iconUrl='../style/image/RufzeichenOrange.svg';
         }
         if (!item.parent) {
-
-            console.log('i am working');
-            console.log(item);
-
                 //var proofing_list_item = document.createElement('div');
                 var html =
                     '<div class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center spacelist">';
@@ -33,7 +29,6 @@ function build_proofing_list() {
                 html += '<div class="grid-100 ">';
                 html += '<dl class="uk-description-list uk-description-list-divider">';
                 html += '<dt>' + item.typeData["nameDe"] +' '+ item.checked+ '</dt>';
-                html += '<dd>' + item.typeData['damage'] + '</dd>';
                 html += '<dd>' + item.resData['damage'] + '</dd>';
                 html += '</dl>';
                 html += '</div>';

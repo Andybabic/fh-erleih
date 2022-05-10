@@ -68,12 +68,8 @@ function status($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/reservierung/'.$id.'/','');
     // if $data['prepared'] is true return "true" else return "false"
     $data= $data['prepared'];
-    if($data==1){
-        return "true";
-    }
-    else{
-        return "false";
-    }
+    return $data;
+    
 
 }
 function getEquipTyp($id){
@@ -157,7 +153,6 @@ $jsonUser = json_decode($data, true);
     function updateStateContent() {
         //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
         var local_storage = localStorage.getItem('Site_state');
-        console.log("State: " + local_storage);
         if (local_storage < 0) {
             // save to local storage
             localStorage.setItem('Site_state', 0);
