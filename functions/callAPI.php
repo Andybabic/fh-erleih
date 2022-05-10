@@ -13,17 +13,18 @@ $headercockie=  getallheaders()["Cookie"] ;
 function call($url,$data,$curl ){
     global $headercockie;
     //if is set Post[data] send data to api else empty data
+    $encoded = json_encode($data);
 
     $url = $url;
     $options = array(
-            'http' => array(
+        'http' => array(
             'header'  => "Cookie: ".getallheaders()["Cookie"]."\r\n"."Content-type: application/json\r\n",
             'method'  => $curl,
-            'content' => $data,
+            'content' => $encoded,
             'ignore_errors' => true,
-            )
-        );
-    
+        )
+    );
+
     $context  = stream_context_create($options);
     $result = file_get_contents( $url, true, $context );
     // get sassion from request
@@ -36,20 +37,8 @@ function call($url,$data,$curl ){
 
     $status = $match[1];
 
-    if ($status !== "200") {        
-        echo( "fuck you:");
-        echo( "<br>");
-        echo(var_dump($data));
-        echo($status);
-        echo( "<br>");
-        echo($url);
-        echo( "<br>");
-        echo($curl);
-        echo( "<br>");
-        //$json = json_decode($_POST['data']);
-        //var_dump($json);
-
-        return $session;
+    if ($status !== "200") {
+        return false;
     }
     else {
         //set rest session to local session
@@ -60,11 +49,12 @@ function call($url,$data,$curl ){
 
 
 if(isset($_GET['r']) ){
-        $api = $_GET['r'];  
-    }
+    $result = "get";
+    $api = $_GET['r'];
+}
 if(isset($_POST['r']) ){
-        $api = $_POST['r'];
-    }
+    $api = $_POST['r'];
+}
 
 $curl= isset($_GET['curl']) ? $_GET['curl'] : 'GET';
 if(isset($_POST['curl']) ){
@@ -72,20 +62,23 @@ if(isset($_POST['curl']) ){
 }
 
 if(isset($_POST['data']) ){
-            $data = json_decode($_POST['data']);
-            $result = call($api_url.$api,$data,$curl);      
+    $data = json_decode($_POST['data'], true);
+    $result = call($api_url.$api,$data,$curl);
 }else{
-            $result = call($api_url.$api,'',$curl);
+    $result = call($api_url.$api,'',$curl);
 }
 
-// if (!$result){
-//     echo "No Data";
-// }else{
+echo $result;
+die();
+
+if (!$result){
+    echo "No Dataa";
+}else{
     echo($result);
 
-// }
-       
-    
+}
+
+
 
 
 ?>

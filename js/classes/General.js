@@ -3,8 +3,8 @@ class General {
   //CONSTRUCTOR
   constructor() {
     //code to run on every page without explicit call
-    console.log("gen0");
     this.addDarkmode();
+    this.openBurgerMenu();
   }
 
   //FORMAT - all functions that format something
