@@ -113,13 +113,18 @@ import Ajax from '../classes/Ajax.js';
                     } else {
                         //output which id will put on nfc tag
                         const result = `
-                            <div class="selectResult">
-                                <h2>Objekt</h2>
-                                <p>${$("#typeSelect").children(':selected').text()} - ${$("#equipmentSelect").children(':selected').text()}</p>
+                           <div class="selectResult outerbox">
+                            <div class="innerbox">
                                 <h2>ID</h2>
                                 <p>${$("#equipmentSelect").val()}</p>
                             </div>
-                    `   ;
+                            </div>
+                            <p>${$("#typeSelect")
+                            .children(":selected")
+                            .text()} - ${$("#equipmentSelect")
+                            .children(":selected")
+                            .text()}</p>
+                    `;
                         this.doms.resultWrapper.html(result);
                     }
                 });

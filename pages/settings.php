@@ -15,23 +15,23 @@ require_once("../functions/loader.php");
 </head>
 <body>
 <header>
-    <?php getModule('menu')?>
+    <?php getModule('menu') ?>
 </header>
 <main>
-    <div class="uk-width-3-5@l uk-margin  uk-align-center"">
-    <div id="settings">
-        <h1>Einstellungen</h1>
-        <h2>Bereiche</h2>
-        <p>Wähle aus, welche Bereiche du angezeigt haben willst.</p>
-        <div class="departmentWrapper"></div>
-        <h2 id="ds">Darstellung</h2>
-        <div id="toggleBtn">
-            <div class="handle">
-                <div class="handleInner"></div>
+    <div class="uk-width-3-5@l uk-margin  uk-align-center">
+        <div id="settings">
+            <h1>Einstellungen</h1>
+            <h2>Bereiche</h2>
+            <p>Wähle aus, welche Bereiche du angezeigt haben willst.</p>
+            <div class="departmentWrapper"></div>
+            <h2 id="ds">Darstellung</h2>
+            <div id="toggleBtn">
+                <div class="handle">
+                    <div class="handleInner"></div>
+                </div>
             </div>
         </div>
     </div>
-
 </main>
 <footer></footer>
 </body>
