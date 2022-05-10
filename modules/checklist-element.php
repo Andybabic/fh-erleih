@@ -23,7 +23,8 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                             //generate a html element for each entry in the array
                             for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
                                 $data= getEquip($jsonUser['reservations'][$i]['equipId']);
-                                $status= ($jsonUser['reservations'][$i]["prepared"] = 1 ? 'false' : 'true');
+                                //$status= ($jsonUser['reservations'][$i]["prepared"] = 1 ? 'false' : 'true');
+                                $status= status($jsonUser['reservations'][$i]['id']);
                                 $resID=$jsonUser['reservations'][$i]['id'];
                                 $resData=json_encode($jsonUser['reservations'][$i]);
                                 $typData= getEquipTyp($data['typeId']);
@@ -61,7 +62,7 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                 <div class="swipebox_Object swipe_box uk-animation-slide-left" style=" z-index: 1;">
 
                     <!---Start Equipment Card element--->
-                    <div 
+                    <div
                         class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
                         <div class="checkListbutton ">
 
@@ -69,8 +70,9 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                             addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status?>, typeData =
                                 <?=$typDataJson?>, resData = <?=$equipData?>);
                             </script>
-                            
-                            <input class="checklist-checkbox parent" type="checkbox" id="<?=$resID?>" value="<?=$resID?>">
+
+                            <input class="checklist-checkbox parent" type="checkbox" id="<?=$resID?>"
+                                value="<?=$resID?>">
 
                             <!-- <label for="option1">
                                 Option 1
@@ -79,12 +81,12 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
 
                         </div>
                         <div class="grid-100 ">
-                        <label for="<?=$resID?>">
-                            <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <p
-                                    class="uk-text-lighter uk-display-inline">
-                                    id:<?=$data["id"]?></p>
-                            </h3>
-                        </label>
+                            <label for="<?=$resID?>">
+                                <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <p
+                                        class="uk-text-lighter uk-display-inline">
+                                        id:<?=$data["id"]?></p>
+                                </h3>
+                            </label>
                             <p class="uk-text-small uk-text-muted uk-text-truncate toTop"><?=$assiComment?></p>
                             <span href="#toggle-animation<?=$i?>" uk-icon="info"
                                 uk-toggle="target: #toggle-animation<?=$i?>; animation: uk-animation-fade "
@@ -120,6 +122,7 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                                             </script>
 
                                             <!---Start PHP LOOP--->
+                                            <!-- set status of checkbox to true -->
                                             <input value="<?=$listData?>" class="checklist-checkbox child "
                                                 type="checkbox"> <?=$packlist[$item]['nameDe']?> </input>
                                         </label>
@@ -162,6 +165,7 @@ checklistComponents.checklist = (function() {
         // make post request to url with array
         url = "../functions/callAPI.php?r=reservierung/vorbereiten/";
         console.log(jsondata);
+        jsondata = JSON.stringify([jsondata]);
         $.ajax({
             type: 'POST',
             url: url,
@@ -186,16 +190,18 @@ checklistComponents.checklist = (function() {
         // add listener to all checkboxes ( clicked )
         for (var i = 0; i < checkboxelements.length; i++) {
             checkbox = checkboxelements[i];
-            checkbox.checked = false;
-            //checkboxelements[i].checked = getParent(value).checked;
+            var value = this.value;
+            status = getCheckbox_array(checkbox.value).checked;
+            //change status of checkbox
+            if (status == "true") {
+                checkbox.checked = true;
+            }else{
+                checkbox.checked = false;
+            }
             checkbox.addEventListener('click', function() {
                 //add data post request
-
                 var value = this.value;
-                status = getCheckbox_array(value);
-                //create a list of integers
-                var list = [value * 1];
-                jsondata = 500830;
+                jsondata = value;
                 if (status) {
                     //send to api that rentry is done or not
                     priv.send(jsondata, "POST");

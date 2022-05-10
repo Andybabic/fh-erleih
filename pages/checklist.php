@@ -39,11 +39,6 @@ require_once("../functions/loader.php");
         $status = $match[1];
 
         if ($status !== "200") {
-            echo( "Sorry du hast keine Berechtigungen");
-            echo('<br>');
-            echo($headercockie);
-            echo('<br>');
-            echo(var_dump($status_data[8]));
             return $session;
         }
         else {
@@ -51,6 +46,9 @@ require_once("../functions/loader.php");
             return $session;
         }
     }
+
+
+
 
 function getEquip($id){
         $data=call('https://verleihneu.fhstp.ac.at/api/equipment/'.$id.'/','');
@@ -68,7 +66,15 @@ function user($id){
 }
 function status($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/reservierung/'.$id.'/','');
-    return $data['prepared'];
+    // if $data['prepared'] is true return "true" else return "false"
+    $data= $data['prepared'];
+    if($data==1){
+        return "true";
+    }
+    else{
+        return "false";
+    }
+
 }
 function getEquipTyp($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/eqTyp/'.$id.'/','');
