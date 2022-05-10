@@ -71,8 +71,7 @@ export default class Popup{
                     titleIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <path id="Pfad_23" data-name="Pfad 23" d="M2.679,39.363a.257.257,0,0,0,.439,0L5.734,35.8c.121-.165.064-.3-.128-.3H4.218a.3.3,0,0,1-.281-.379,7.487,7.487,0,0,1,7.079-6.337c4,0,7.249,3.619,7.249,8.068s-3.252,8.068-7.249,8.068a.971.971,0,0,0,0,1.932c4.954,0,8.985-4.486,8.985-10s-4.03-10-8.985-10c-4.423,0-8.107,3.576-8.847,8.266a.439.439,0,0,1-.4.382H.192c-.192,0-.249.134-.128.3Z" transform="translate(0 -26.855)" fill="#07f"/>
                                 </svg>`;
-                    content = `<input type="text" readonly="readonly" id="datepicker-popup" placehol
-der="Tag auswählen">`;
+                    content = `<input type="text" readonly="readonly" id="datepicker-popup" placeholder="Tag auswählen">`;
                     returnButtonTxt = "Abbrechen";
                     proceedButtonTxt = "Verlängern";
                     break;
@@ -98,7 +97,6 @@ der="Tag auswählen">`;
             `;
 
             $("body").append(popup);
-            console.log(this.vars.resId);
             UIkit.modal(`#${this.vars.modalId}`).show();
 
             this.doms.popup = $(`#${this.vars.modalId}`);
@@ -124,6 +122,7 @@ der="Tag auswählen">`;
                     //new api request for equipment to get damage and todo field values
                     const equipment = await this.modules.ajax.getEquipmentById(this.vars.eqId);
                     this.vars.equipment = equipment;
+                    if(this.vars.equipment.infoMail == null)this.vars.equipment.infoMail = "";
                     const reservation = await this.modules.ajax.getResById(this.vars.resId);
                     this.vars.reservation = reservation;
 
@@ -138,8 +137,6 @@ der="Tag auswählen">`;
                 
                     //for first state
                     this.vars.reportState = "damage";
-                    console.log(this.vars.equipmentRequest)
-                    console.log(this.vars.equipment);
                     if(this.vars.equipmentRequest){
                         //if equipment request was sucessfull insert value
                         textArea.attr("placeholder", "Schadensmeldung");
@@ -161,7 +158,6 @@ der="Tag auswählen">`;
                             if(this.vars.equipmentRequest){
                                 textArea.val(this.vars.reportDamage);
                             }else{
-                                console.log(this.vars.reportDamage);
                                 textArea.attr("placeholder", "Fehler bei der API Abrage!");
                             }
                         }else if(val == "todo"){
@@ -225,14 +221,12 @@ der="Tag auswählen">`;
                                 empty = false;
                                 this.vars.equipment.damage = this.vars.reportDamage;
                                 apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
-                                console.log(apiAnswer);
                             }
                         }else if(this.vars.reportState == "todo"){
                             if(this.vars.reportTodo != "" && this.vars.reportTodo != undefined){
                                 empty = false;
                                 this.vars.equipment.todo = this.vars.reportTodo;
                                 apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
-                                console.log(apiAnswer)
                             }
                         }else if(this.vars.reportState == "cancel"){
                             if(this.vars.reportCancel != "" && this.vars.reportCancel != undefined){
@@ -260,11 +254,9 @@ der="Tag auswählen">`;
                         }
                         break;
                 }
-                console.log(apiAnswer);
                 if(apiAnswer){
                     UIkit.modal(`#${this.vars.modalId}`).hide();
                     this.removePopup();
-                    console.log(this.vars.reportState);
                     //change damage to cancel later
                     if(this.vars.reportState == "cancel"){
                         const resContainer = $("body").find(`[data-resid='${this.vars.resId}']`).parent(".Swipe_container");
@@ -290,8 +282,6 @@ der="Tag auswählen">`;
         }
 
         displayUndoCancel(resObject){
-            console.log("----------");
-            console.log(this.vars.originalResStatus);
             const body = `
                 <h2 class="uk-text-default">Das Element mit der ID ${this.vars.resId} wurde entfernt.</h2>
                 <button id="undoCancel" class="uk-button uk-button-default">Rückgängig machen</button>
@@ -304,8 +294,6 @@ der="Tag auswählen">`;
             });
             $("#undoCancel").on("click", () => {
                 this.vars.reservation.statusId = this.vars.originalResStatus;
-                console.log(this.vars.resId);
-                console.log(this.vars.reservation);
                 let changeResStatus = false;
                 if(this.vars.originalResStatus == 2){
                     changeResStatus = this.modules.ajax.bookReservation(this.vars.resId);

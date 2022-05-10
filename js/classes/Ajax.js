@@ -153,6 +153,7 @@ export default class Ajax{
                     curl: "PUT"
                 }
             }).done(function(answer) {
+                console.log(answer);
                 resolve(answer);
             }).fail(function (){
                 resolve(false);
@@ -162,7 +163,6 @@ export default class Ajax{
     }
 
     async bookReservation(resId){
-        console.log(resId);
         //changes res status to reserviert
         const val = [resId];
         const api = `${this.vars.apiUrl}reservierung/freigabe/`;

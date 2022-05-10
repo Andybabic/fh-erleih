@@ -124,6 +124,10 @@ body {
 
 /* Style for Checklist */
 
+.checklist{
+    padding: 0 5px;
+}
+
 .checkListbutton {
     width: 30;
     left: -20;
@@ -168,6 +172,7 @@ body {
 .nospace-up {
     margin-top: 0px;
 }
+
 
 /* Start Swipebox Style  */
 .Swipe_container {

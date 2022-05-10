@@ -20,8 +20,11 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
 
 <div class="uk-container ">
     <div role="main" class="ui-content">
-        <ul data-role="listview">
-            <?php 
+        <ul class="checklist" data-role="listview">
+            <?php
+                            //general data
+                            $postData = $_POST["data"];
+                            //$listType = $postData["listType"];
                             //generate a html element for each entry in the array
                             for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
                                 $data= getEquip($jsonUser['reservations'][$i]['equipId']);
@@ -38,19 +41,20 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                                 $typDataJson=json_encode($typData);
                                 $assiComment= $jsonUser['reservations'][$i]['assiComment'];
                                 //echo(var_dump($jsonUser['reservations'][$i]));
+
                                 ?>
 
             <div class="Swipe_container  grid-100 ">
-
-
                 <div class=" swipe_box_back" data-resId="<?=$jsonUser['reservations'][$i]['id']?>"
                     data-eqId="<?=$jsonUser['reservations'][$i]['equipId']?>">
                     <div class=" uk-align-right btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
                         <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>
+                    <?php if(true) : ?>
                     <div class=" uk-align-right btn-checklist bg-orange uk-animation-scale-up" data-type="report">
                         <span class="center-all uk-animation-scale-down" uk-icon="icon: warning; ratio: 1.5"></span>
                     </div>
+                    <?php endif; ?>
                     <div class=" uk-align-left btn-checklist colorSecondary uk-animation-scale-up" data-type="extend">
                         <span class="center-all uk-animation-scale-down " uk-icon="icon: future; ratio: 1.5"></span>
                     </div>
@@ -83,11 +87,13 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
 
                         </div>
                         <div class="grid-100 ">
-                            
-                                <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <label for="<?=$resID?>"><p
-                                        class="uk-text-lighter uk-display-inline">
-                                        id:<?=$data["id"]?></p></label>
+
+                            <label for="<?=$resID?>">
+                                <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <p
+                                            class="uk-text-lighter uk-display-inline">
+                                        id:<?=$data["id"]?></p>
                                 </h3>
+                            </label>
                             
                             <p class="uk-text-small uk-text-muted uk-text-truncate toTop"><?=$assiComment?></p>
                             <span href="#toggle-animation<?=$i?>" uk-icon="info"
