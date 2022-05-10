@@ -2,6 +2,14 @@
     <div id="proofing_list">
     <p>Hallo</p>
     </div>
+    <form>
+  
+    
+
+            <textarea class="uk-textarea" rows="5" placeholder="Kommentieren"></textarea>
+    
+
+</form>
 
 </div>
 

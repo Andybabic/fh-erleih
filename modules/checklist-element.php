@@ -83,12 +83,12 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
 
                         </div>
                         <div class="grid-100 ">
-                            <label for="<?=$resID?>">
-                                <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <p
+                            
+                                <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <label for="<?=$resID?>"><p
                                         class="uk-text-lighter uk-display-inline">
-                                        id:<?=$data["id"]?></p>
+                                        id:<?=$data["id"]?></p></label>
                                 </h3>
-                            </label>
+                            
                             <p class="uk-text-small uk-text-muted uk-text-truncate toTop"><?=$assiComment?></p>
                             <span href="#toggle-animation<?=$i?>" uk-icon="info"
                                 uk-toggle="target: #toggle-animation<?=$i?>; animation: uk-animation-fade "
