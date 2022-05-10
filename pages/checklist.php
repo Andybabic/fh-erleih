@@ -39,11 +39,6 @@ require_once("../functions/loader.php");
         $status = $match[1];
 
         if ($status !== "200") {
-            echo( "Sorry du hast keine Berechtigungen");
-            echo('<br>');
-            echo($headercockie);
-            echo('<br>');
-            echo(var_dump($status_data[8]));
             return $session;
         }
         else {
@@ -51,6 +46,9 @@ require_once("../functions/loader.php");
             return $session;
         }
     }
+
+
+
 
 function getEquip($id){
         $data=call('https://verleihneu.fhstp.ac.at/api/equipment/'.$id.'/','');
@@ -68,7 +66,11 @@ function user($id){
 }
 function status($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/reservierung/'.$id.'/','');
-    return $data['prepared'];
+    // if $data['prepared'] is true return "true" else return "false"
+    $data= $data['prepared'];
+    return $data;
+    
+
 }
 function getEquipTyp($id){
     $data=call('https://verleihneu.fhstp.ac.at/api/eqTyp/'.$id.'/','');
@@ -151,7 +153,6 @@ $jsonUser = json_decode($data, true);
     function updateStateContent() {
         //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
         var local_storage = localStorage.getItem('Site_state');
-        console.log("State: " + local_storage);
         if (local_storage < 0) {
             // save to local storage
             localStorage.setItem('Site_state', 0);

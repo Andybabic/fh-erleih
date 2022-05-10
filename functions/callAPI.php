@@ -38,6 +38,8 @@ function call($url,$data,$curl ){
     $status = $match[1];
 
     if ($status !== "200") {
+        echo($status );
+        echo($url." ". $data."  ".$curl );
         return false;
     }
     else {
@@ -71,12 +73,7 @@ if(isset($_POST['data']) ){
 echo $result;
 die();
 
-if (!$result){
-    echo "No Dataa";
-}else{
-    echo($result);
 
-}
 
 
 
