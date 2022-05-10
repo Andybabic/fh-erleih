@@ -61,7 +61,7 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                 <div class="swipebox_Object swipe_box uk-animation-slide-left" style=" z-index: 1;">
 
                     <!---Start Equipment Card element--->
-                    <div
+                    <div 
                         class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
                         <div class="checkListbutton ">
 
@@ -69,14 +69,22 @@ function addCheckbox_list(resID = null, parent = null, status = null, typeData =
                             addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status?>, typeData =
                                 <?=$typDataJson?>, resData = <?=$equipData?>);
                             </script>
-                            <input class="checklist-checkbox parent" type="checkbox" value="<?=$resID?>">
+                            
+                            <input class="checklist-checkbox parent" type="checkbox" id="<?=$resID?>" value="<?=$resID?>">
+
+                            <!-- <label for="option1">
+                                Option 1
+                                <input type="checkbox" id="option1">
+                            </label> -->
 
                         </div>
                         <div class="grid-100 ">
+                        <label for="<?=$resID?>">
                             <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <p
                                     class="uk-text-lighter uk-display-inline">
                                     id:<?=$data["id"]?></p>
                             </h3>
+                        </label>
                             <p class="uk-text-small uk-text-muted uk-text-truncate toTop"><?=$assiComment?></p>
                             <span href="#toggle-animation<?=$i?>" uk-icon="info"
                                 uk-toggle="target: #toggle-animation<?=$i?>; animation: uk-animation-fade "
@@ -157,11 +165,12 @@ checklistComponents.checklist = (function() {
         $.ajax({
             type: 'POST',
             url: url,
-            dataType:"JSON",
-            data:  {
-                curl:'POST',
-                data:jsondata} ,
-            
+            dataType: "JSON",
+            data: {
+                curl: 'POST',
+                data: jsondata
+            },
+
             success: function(msg) {
                 console.log("Update success");
             },
@@ -181,7 +190,7 @@ checklistComponents.checklist = (function() {
             //checkboxelements[i].checked = getParent(value).checked;
             checkbox.addEventListener('click', function() {
                 //add data post request
-                
+
                 var value = this.value;
                 status = getCheckbox_array(value);
                 //create a list of integers

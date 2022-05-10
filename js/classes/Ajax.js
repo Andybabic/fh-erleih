@@ -11,7 +11,7 @@ export default class Ajax{
         const api = `${this.vars.apiUrl}reservierung/byBereichDateType/${departmentID}/${start}/${end}/${type}`;
 
         return new Promise((resolve) => {
-            
+
             fetch(api)
                 .then(res => res.json())
                 .then(data => {
@@ -33,7 +33,7 @@ export default class Ajax{
                     resolve(data);
                     console.log(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
@@ -47,7 +47,7 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
@@ -61,7 +61,7 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
@@ -76,7 +76,7 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
@@ -91,7 +91,7 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
@@ -105,10 +105,26 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
+
+    async getResById(resId){
+        const api = `${this.vars.apiUrl}reservierung/${resId}/`;
+
+        return new Promise((resolve) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
+
 
     async postResStatus(id){
         const api = `${this.vars.apiUrl}/reservierung/vorbereiten/`;
@@ -119,70 +135,119 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
 
     async putEquipment(eqId, updateValue){
-        const jsonVal = JSON.stringify(updateValue);
         console.log(updateValue);
-        const api = `${this.vars.apiUrl}/equipment/${eqId}/`;
-        const options = {
-            method: 'POST',
-            data: {data:updateValue,
-                    curl:'PUT'},
-        }
+        const api = `${this.vars.apiUrl}equipment/${eqId}/`;
 
-        $.ajax({
-            url: api,
-            method: "POST",
-            data: {
-                data: jsonVal,
-                curl: "PUT"
-            }
-        }).done(function(answer) {
-            console.log(answer);
-        });
-
-        /*
         return new Promise((resolve) => {
-            fetch(api, options)
-                .then(res => res.json())
-                .then(data => {
-                    resolve(data);
-                }).catch(err => {
-                    resolve(err);
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: JSON.stringify(updateValue),
+                    curl: "PUT"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function (){
+                resolve(false);
             });
-        });*/
+        });
 
     }
 
-    async deleteReservation(resId){
-        const api = `${this.vars.apiUrl}/reservierung/loeschen/`;
-        const options = {
-            method: 'POST',
-            data: {data:updateValue,
-                    curl:'DELETE'},
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }
+    async bookReservation(resId){
+        console.log(resId);
+        //changes res status to reserviert
+        const val = [resId];
+        const api = `${this.vars.apiUrl}reservierung/freigabe/`;
 
         return new Promise((resolve) => {
-            fetch(api, options)
-                .then(res => res.json(resId))
-                .then(data => {
-                    resolve(data);
-                }).catch(err => {
-                    resolve(false);
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: JSON.stringify(val),
+                    curl: "POST"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function (){
+                resolve(false);
+            });
+        });
+    }
+
+    async handOverReservation(resId){
+        //changes res status to ausgeborgt
+        const val = [resId];
+        const api = `${this.vars.apiUrl}reservierung/ausgabe/`;
+
+        return new Promise((resolve) => {
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: JSON.stringify(val),
+                    curl: "POST"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function (){
+                resolve(false);
+            });
+        });
+    }
+
+    async takeBackReservation(resId){
+        //changes res status to zurückgenommen
+        const val = [resId];
+        const api = `${this.vars.apiUrl}reservierung/ruecknahme`;
+
+        return new Promise((resolve) => {
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: JSON.stringify(val),
+                    curl: "POST"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function (){
+                resolve(false);
+            });
+        });
+    }
+
+
+    async deleteReservation(cancelValue){
+        const jsonVal = JSON.stringify(cancelValue);
+        const api = `${this.vars.apiUrl}reservierung/loeschen/`;
+
+        return new Promise((resolve) => {
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: jsonVal,
+                    curl: "DELETE"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function(error){
+                resolve(false);
             });
         });
     }
 
     async extendReservation(resId, toDate){
-        const api = `${this.vars.apiUrl}/reservierung/${resId}/verlaengern`;
+        const api = `${this.vars.apiUrl}reservierung/${resId}/verlaengern`;
         const options = {
             method: 'POST',
             body: JSON.stringify(toDate),
@@ -197,7 +262,7 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
-                    resolve(false);
+                resolve(false);
             });
         });
     }
