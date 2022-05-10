@@ -339,16 +339,6 @@ a.link2 {
     color: var(--textColor) !important;
 }
 
-#scanSearch ul, li
-color:
-var
-
-(
---textColor
-
-)
-;
-}
 
 .selectWrapper select {
     width: 90%;
@@ -367,6 +357,20 @@ var
 
 .selectWrapper label {
     font-weight: bold;
+}
+
+.selectResultWrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.selectResultWrapper .innerbox p, .selectResultWrapper .innerbox h2{
+    color: #f8f9fa !important;
+}
+
+.selectResultWrapper p {
+    color: var(--textColor);
 }
 
 
@@ -476,8 +480,36 @@ var
     padding: 8px 0;
 }
 
-.uk-modal-dialog {
+.uk-modal-dialog, .uk-modal-header, .uk-modal-footer {
     background-color: var(--colorBackgroundClean);
+    color: var(--textColor) !important;
+}
+
+.datepicker.is-inline input {
+    background-color: var(--colorBackgroundGrey) !important;
+    color: var(--textColor) !important;
+}
+
+.datepicker.is-inline input::placeholder {
+    color: var(--textColor) !important;
+}
+
+.datepicker__time {
+    background-color: var(--colorBackgroundGrey);
+    color: var(--textColor) !important;
+}
+
+.uk-textarea {
+    background-color: var(--colorBackgroundGrey) !important;
+    color: var(--textColor) !important;
+}
+
+.datepicker__time span {
+    color: var(--textColor) !important;
+}
+
+.uk-textarea.active {
+    background-color: var(--colorBackgroundGrey);
 }
 
 /*datepicker*/
@@ -552,6 +584,7 @@ var
 
 header {
     background-color: var(--colorPrimary);
+
 }
 
 li {
@@ -569,7 +602,8 @@ li {
     justify-content: space-between;
     align-items: center;
     padding: 0 24px;
-}
+    margin-bottom: 0px;
+  }
 
 .nav-menu {
     display: flex;
@@ -685,7 +719,7 @@ li {
     height: 88%;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: center;
     justify-content: center;
     font-size: 16px;
@@ -694,11 +728,7 @@ li {
 
 .innerbox h2 {
     margin: 0;
-    color: white;
 }
 
-.innerbox p {
-    color: white;
-}
 
 
