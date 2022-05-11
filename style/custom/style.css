@@ -7,7 +7,7 @@
     --FHdefaultblue: #005096;
     --inPreparationColor: rgba(14, 151, 0, 0.3);
     --preparedAllColor: rgba(14, 151, 0, 0.6);
-    --footerHeight: 2rem;
+    --footerHeight: 3.5rem;
 
     --colorBackgroundClean: #f8f9fa;
     --colorBackgroundGrey: #e3e5e6;
@@ -23,16 +23,16 @@ body {
 
 /*main*/
 main {
-    margin-bottom: var(--footerHeight);
+
 }
 
 /*footer*/
 footer {
     position: fixed;
-    bottom: 0;
+    bottom: -10px;
     left: 0;
-    width: 100%;
     height: var(--footerHeight);
+    width: 100%;
     background-color: var(--backgroundColor);
 }
 
@@ -520,12 +520,25 @@ a.link2 {
 /*datepicker*/
 .datepicker.is-inline,
 .datepicker__wrapper,
-.datpicker__container {
-    max-width: 100%;
+.datpicker__container,
+.pickerWrapper{
+    max-width: 100% ;
+
 }
 
 
 /*--Mode Switch--*/
+
+.modeSwitchButton{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    color: var(--colorSecondary);
+}
+
+.modeSwitchButton:active{
+    border-bottom: 3px solid red;
+}
 .uk-active .modeSwitch {
     color: var(--colorSecondary) !important;
     border-bottom: 2px solid var(--colorSecondary) !important;
@@ -533,13 +546,19 @@ a.link2 {
 
 .modeSwitch a {
     font-weight: bold;
+    color: var(--textColor) !important;
 }
+
+.modeSwitch a:active{
+      color: var(--secondaryColor) !important;
+}
+
 
 .uk-tab > * > a {
     color: var(--textColor);
 }
 
-.uk-tab > .uk-active > a {
+.uk-tab > .uk-active > .modeSwitchButton > a {
     color: var(--colorSecondary) !important;
 }
 
@@ -554,7 +573,14 @@ a.link2 {
 #modeSwitch {
     box-shadow: 0 -2px 5px -2px #000000;
     background-color: var(--colorBackgroundClean);
+
 }
+
+
+
+
+
+
 
 /*--NAVBAR DROPDOWN--*/
 
@@ -652,9 +678,9 @@ li {
     background-color: white;
 }
 
-@media (max-width: 369px) {
+@media (max-width: 266px) {
     footer {
-        height: 4rem;
+        height: 6rem;
     }
 }
 
@@ -733,6 +759,7 @@ li {
 
 .innerbox h2 {
     margin: 0;
+
 }
 
 

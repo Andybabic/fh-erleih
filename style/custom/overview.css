@@ -39,6 +39,9 @@
 }
 
 .dateFilter {
+width: 100%;
+    border-radius:  0 0  20px 20px ;
+
 
 }
 
@@ -50,7 +53,13 @@
     pointer-events: none;
 }
 
-.uk-list .reservation {
+.uk-list .reservation  {
+    padding: 1rem 2rem;
+    background-color: var(--colorBackgroundGrey);
+    margin: 0 0 6px 0;
+
+}
+li.reservation.preparedAll{
     padding: 1rem 2rem;
     background-color: var(--colorBackgroundGrey);
     margin: 0 0 6px 0;
@@ -134,3 +143,78 @@ h2, p {
 #filterableList {
     margin-bottom: 50px;
 }
+
+
+/*Quantitiy Icon */
+
+.listIcons{
+    display: flex;
+    flex-direction: row;
+}
+.reservation .quantityCircle{
+    border-radius: 50%;
+    background-color: var(--colorSecondary);
+
+    height: 70px;
+    width: 70px;
+    max-width: 100%;
+}
+.quantityIcon{
+    background-image: url("../image/quantityIcon.svg");
+      background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 88%;
+    height: 88%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.quantityIcon p{
+    position: relative;
+    top: 11px;
+    left:-14px;
+    color: var(--colorSecondary) !important;
+    font-weight: bold;
+}
+
+.reservation .modeCircle{
+    border-radius: 50%;
+    background-color: var(--colorSecondary);
+      height: 70px;
+    width: 70px;
+    max-width: 100%;
+    margin-top: -40px;
+}
+.modeIcon{
+    /*background-image: url("../image/cliboard.svg");*/
+
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 88%;
+    height: 88%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.listDateandDep{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0 0 20px;
+}
+
+@media (max-width: 520px) {
+    .reservation .modeCircle {
+        margin-top: 0px;
+    }
+}
+
