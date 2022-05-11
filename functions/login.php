@@ -2,7 +2,7 @@
 <?php
 
 //session_start();
-//session_start();
+session_id($_COOKIE['PHPSESSID']);
 
 // get config.php file from server
 $config_file = require_once("../config.php");
@@ -62,7 +62,6 @@ function auth_rest($api_url , $user, $password, $cockie){
 if(isset($_POST['username']) && isset($_POST['password'])  ){
     $username = $_POST['username'];
     $password = $_POST['password'];
-    
     $cockie= $_COOKIE['PHPSESSID'];
     $result = auth_rest($api_url , $username, $password, $cockie);
     

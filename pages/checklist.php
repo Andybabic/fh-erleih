@@ -2,9 +2,8 @@
 //session_start();
 $headercockie=  getallheaders()["Cookie"] ;
 
-
+session_start();
 $data = $_POST['data'];
-#$data = '{"userId":"mt191075","firstName":"Babic","lastName":"Andreas","email":"mt191075@fhstp.ac.at","tel":"06641681540","date":"2022-03-31 21:01:21","reservations":[{"id":500834,"lastChange":"2022-03-31 21:01:21","userId":"mt191075","equipId":1795,"statusId":2,"from":"2022-03-31 21:01:21","to":"2022-04-02 21:01:21","userComment":"Selbststudium","assiComment":"","lendDate":"0000-00-00 00:00:00","returnDate":"0000-00-00 00:00:00","assiLend":null,"assiReturn":null,"usageId":8,"prepared":0,"departmentId":"2"},{"id":500833,"lastChange":"2022-03-31 21:01:21","userId":"mt191075","equipId":6666,"statusId":2,"from":"2022-03-31 21:01:21","to":"2022-04-02 21:01:21","userComment":"Selbststudium","assiComment":"","lendDate":"0000-00-00 00:00:00","returnDate":"0000-00-00 00:00:00","assiLend":null,"assiReturn":null,"usageId":8,"prepared":0,"departmentId":"3"}],"listType":"prepare"}';
 
 
 

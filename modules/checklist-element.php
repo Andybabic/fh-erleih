@@ -40,7 +40,7 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                                 //convert typData to json
                                 $typDataJson=json_encode($typData);
                                 $assiComment= $jsonUser['reservations'][$i]['assiComment'];
-                                //echo(var_dump($jsonUser['reservations'][$i]));
+                                //echo(var_dump($data));
 
                                 ?>
 
@@ -91,7 +91,7 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                             <label for="<?=$resID?>">
                                 <h3 class="uk-text-lead  "><?=$typData["nameDe"]?> <p
                                             class="uk-text-lighter uk-display-inline">
-                                        id:<?=$data["id"]?></p>
+                                        <?=$data["nameDe"]?></p>
                                 </h3>
                             </label>
                             
@@ -101,7 +101,11 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                                 style="right: 10px;top: 10px;position: absolute;"></span>
 
                             <div id="toggle-animation<?=$i?>" hidden
-                                class="uk-card uk-card-default uk-card-body uk-margin-small"><?=$description?></div>
+                                class="uk-card uk-card-default uk-card-body uk-margin-small">
+                                <?=$data["descriptionDe"]?>
+                                <br>
+                                <?=$description?>
+                            </div>
 
 
 

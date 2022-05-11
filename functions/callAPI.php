@@ -39,6 +39,7 @@ function call($url,$data,$curl ){
 
     if ($status !== "200") {
         header($match[0]);
+        echo (var_dump($encoded));
         
         return false;
     }

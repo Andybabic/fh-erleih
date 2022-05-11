@@ -35,8 +35,7 @@ require_once("../functions/loader.php");
 
 
 <script>
-    var json = $.getJSON("/functions/callAPI.php?r=/user/&c");
-    console.log(json);
+
 </script>
 
 
