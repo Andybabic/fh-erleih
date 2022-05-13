@@ -13,7 +13,8 @@ export default class FilterableList {
         };
         this.vars = {
             listType: listType,
-            selectionClass: "filterSelected"
+            selectionClass: "filterSelected",
+            pickerHtml: ""
         };
         this.doms = {
             base: $base,
@@ -74,6 +75,7 @@ export default class FilterableList {
 
         //TODO datepicker default date from localstorage
         //init time picker
+        let init = true;
         var timepicker = new Datepicker('#ranged', {
             inline: true,
             ranged: true,
@@ -86,16 +88,24 @@ export default class FilterableList {
                     this.filter.timespan = arr;
                 } else if (date.length === 1) {
                     this.filter.timespan = [];
-                    this.filter.timespan.push(this.general(date[0]));
+                    this.filter.timespan.push(general.formatDate(date[0]));
                 }
                 this.addPickerStyle();
+                //store current html of picker to set it again later
+
             },
             onInit: (e) => {
-                console.log(e);
-                //console.log(new Date(this.filter.timespan[0]));
+                if(this.filter.pickerHtml != "" && this.filter.pickerHtml != undefined){
+                    $(".datepicker__wrapper").html(this.filter.pickerHtml);
+                }
+                $(".pickerWrapper").hide();
             },
             onRender: (e) => {
-                console.log(e);
+                if(!init){
+                    this.filter.pickerHtml = e.outerHTML;
+                    localStorage.filterValues = JSON.stringify(this.filter);
+                }
+                init = false;
             }
         });
 
@@ -270,7 +280,6 @@ export default class FilterableList {
             if (this.filter[name] != undefined && this.filter[name]) {
                 //if the filter is set and true
                 const data = await this.modules.ajax.getResByDepartmentTimespan(key, startDate, endDate, type);
-                console.log(data);
                 if (!data) {
                     //if data returns false error handling
                     this.displayList("error");
@@ -286,7 +295,6 @@ export default class FilterableList {
         }
         //merge data of every department together
         departmentData = [].concat.apply([], departmentData);
-        //console.log(departmentData);
 
         //display list depending on received data
         if (departmentData.length == 0) {
@@ -294,7 +302,6 @@ export default class FilterableList {
         } else {
             //group the list by day and by user
             const groupedData = await this.groupResByDate(departmentData);
-            //console.log(groupedData);
             //display list
             this.displayList(groupedData);
         }
@@ -330,12 +337,13 @@ export default class FilterableList {
                     const dateStr = date.toLocaleDateString("de-DE", dateOptions);
                     //add class if reservation is in preparation or fully prepared
                     let preperationClass = "";
-                    if (res.inPreparation && !res.preparedAll) {
-                        preperationClass = "inPreparation";
-                    } else if (res.preparedAll) {
-                        preperationClass = "preparedAll";
+                    if(this.vars.listType == "prepare"){
+                        if (res.inPreparation && !res.preparedAll) {
+                            preperationClass = "inPreparation";
+                        } else if (res.preparedAll) {
+                            preperationClass = "preparedAll";
+                        }
                     }
-                    console.log(res.firstName);
 
                     let li = `
                             <li class="reservation  ${preperationClass}" data-id = ${curId}>
@@ -370,7 +378,7 @@ export default class FilterableList {
 </li>`;
 
                     //append li to reslist or to preparedlist depending on preparedAll attribute
-                    if (res.preparedAll) {
+                    if (res.preparedAll && this.vars.listType == "prepare") {
                         doneList += li;
                     } else {
                         resList += li;
@@ -382,7 +390,7 @@ export default class FilterableList {
 
             //create done list with toggle if list is not empty
             let doneListWrapper;
-            if ($(doneList)[0].childElementCount) {
+            if ($(doneList)[0].childElementCount && this.vars.listType == "prepare") {
                 doneListWrapper = `
                         <div class="doneListWrapper">
                             <div id="doneListToogle">
@@ -401,10 +409,10 @@ export default class FilterableList {
 
             //clear list and add list again
             this.doms.listWrapper.html("");
-            this.doms.listWrapper.append(resList);
             if (doneListWrapper != "") {
                 this.doms.listWrapper.append(doneListWrapper);
             }
+            this.doms.listWrapper.append(resList);
 
         }
         this.listInteraction();
@@ -495,7 +503,6 @@ export default class FilterableList {
     }
 
     async groupResByUser(resList) {
-        //console.log(resList)
         //taks all reservations from a query and groups them by user
         let userIDs = [];
         let resByUser = [];

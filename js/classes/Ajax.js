@@ -31,7 +31,6 @@ export default class Ajax{
                 .then(res => res.json())
                 .then(data => {
                     resolve(data);
-                    console.log(data);
                 }).catch(err => {
                 resolve(false);
             });
@@ -82,7 +81,6 @@ export default class Ajax{
     }
 
     async getEquipment(eqTypeId){
-        console.log(eqTypeId);
         const api = `${this.vars.apiUrl}equipment/byTyp/${eqTypeId}/`;
 
         return new Promise((resolve, reject) => {
@@ -141,7 +139,6 @@ export default class Ajax{
     }
 
     async putEquipment(eqId, updateValue){
-        console.log(updateValue);
         const api = `${this.vars.apiUrl}equipment/${eqId}/`;
 
         return new Promise((resolve) => {
@@ -153,7 +150,6 @@ export default class Ajax{
                     curl: "PUT"
                 }
             }).done(function(answer) {
-                console.log(answer);
                 resolve(answer);
             }).fail(function (){
                 resolve(false);
@@ -248,20 +244,18 @@ export default class Ajax{
 
     async extendReservation(resId, toDate){
         const api = `${this.vars.apiUrl}reservierung/${resId}/verlaengern`;
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(toDate),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
 
         return new Promise((resolve) => {
-            fetch(api, options)
-                .then(res => res.json())
-                .then(data => {
-                    resolve(data);
-                }).catch(err => {
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: JSON.stringify({"to": toDate}),
+                    curl: "POST"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function(error){
                 resolve(false);
             });
         });

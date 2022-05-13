@@ -89,7 +89,7 @@ export default class Popup{
                                 ${content}                            
                             </div>
                             <div class="uk-modal-footer uk-text-right uk-flex uk-child-width-1-2">
-                                <button class="uk-button  proceedButton uk-button-default colorPrimary uk-modal-close" type="button">${returnButtonTxt}</button>
+                                <button class="uk-button  returnButton uk-button-default uk-modal-close" type="button">${returnButtonTxt}</button>
                                 <button class="uk-button  proceedButton uk-button-default colorPrimary  proceedButton" type="button">${proceedButtonTxt}</button>
                             </div>
                         </div>
@@ -217,13 +217,13 @@ export default class Popup{
                 switch (this.vars.popupType){
                     case "report":
                         if(this.vars.reportState == "damage"){
-                            if(this.vars.reportDamage != "" && this.vars.reportTodo != undefined){
+                            if(this.vars.reportTodo != undefined){
                                 empty = false;
                                 this.vars.equipment.damage = this.vars.reportDamage;
                                 apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
                             }
                         }else if(this.vars.reportState == "todo"){
-                            if(this.vars.reportTodo != "" && this.vars.reportTodo != undefined){
+                            if(this.vars.reportTodo != undefined){
                                 empty = false;
                                 this.vars.equipment.todo = this.vars.reportTodo;
                                 apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
@@ -247,7 +247,8 @@ export default class Popup{
                         break;
                     case "extend":
                         if(this.vars.selectedDate){
-                            apiAnswer = this.modules.ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
+                            apiAnswer = await this.modules.ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
+                            console.log(apiAnswer);
                         }else{
                           $("#datepicker-popup").val("Kein gültiges Datum!");
                           const d = new Date(this.vars.selectedDate);
@@ -260,11 +261,11 @@ export default class Popup{
                     //change damage to cancel later
                     if(this.vars.reportState == "cancel"){
                         const resContainer = $("body").find(`[data-resid='${this.vars.resId}']`).parent(".Swipe_container");
-
-                        //remove deleted element & display undo button
-                        resContainer.hide();
-                        this.displayUndoCancel(resContainer, this.vars.resId);
+                        //remove deleted element
+                        resContainer.remove();
                     }
+                    //display feedback message
+                    this.displayReportFeedback();
                 }else{
                     if(empty){
                         errorText.html("<span uk-icon=\"icon: warning\"></span><span>Das Textfeld darf nicht leer bleiben!</span>");
@@ -281,39 +282,53 @@ export default class Popup{
             });
         }
 
-        displayUndoCancel(resObject){
-            const body = `
-                <h2 class="uk-text-default">Das Element mit der ID ${this.vars.resId} wurde entfernt.</h2>
-                <button id="undoCancel" class="uk-button uk-button-default">Rückgängig machen</button>
-            `;
-            UIkit.notification({
-                message: body,
-                status: 'primary',
-                pos: 'bottom-center',
-                timeout: 8000
-            });
-            $("#undoCancel").on("click", () => {
-                this.vars.reservation.statusId = this.vars.originalResStatus;
-                let changeResStatus = false;
-                if(this.vars.originalResStatus == 2){
-                    changeResStatus = this.modules.ajax.bookReservation(this.vars.resId);
-                }else if(this.vars.originalResStatus == 3){
-                    changeResStatus = this.modules.ajax.handOverReservation(this.vars.resId);
-                }else if(this.vars.originalResStatus == 4){
-                    changeResStatus = this.modules.ajax.takeBackReservation(this.vars.resId);
+        displayReportFeedback(){
+            let text;
+            if(this.vars.popupType == "report"){
+                switch (this.vars.reportState){
+                    case "damage":
+                        if(this.vars.reportDamage != ""){
+                            text = `
+                            <p>Für das Equipment mit der <strong> ID ${this.vars.eqId} </strong> wurde folgende Schadensmeldung vermerkt:</p>
+                            <p>${this.vars.reportDamage}</p>
+                        `;
+                        }else{
+                            text = `
+                            <p>Für das Equipment mit der <strong> ID ${this.vars.eqId} </strong> wurde die Schadensmeldung entfernt!</p>
+                        `;
+                        }
+                        break;
+                    case "todo":
+                        if(this.vars.reportTodo != ""){
+                            text = `
+                            <p>Für das Equipment mit der <strong> ID ${this.vars.eqId} </strong> wurde folgender Todo Eintrag vermerkt:</p>
+                            <p>${this.vars.reportTodo}</p>
+                        `;
+                        }else{
+                            text = `
+                            <p>Für das Equipment mit der <strong> ID ${this.vars.eqId} </strong> wurde der Todo Eintrag entfernt!</p>
+                        `;
+                        }
+                        break;
+                    case "cancel":
+                        text = `
+                            <p>Die Reservierung mit der <strong> ID ${this.vars.resId} </strong> wurde storniert.</p>
+                            <p>Grund: ${this.vars.reportCancel}</p>
+                        `;
                 }
-                if(changeResStatus){
-                    resObject.show();
-                }else{
-                    UIkit.notification({
-                        message: 'Wiederherstellung war leider nicht möglich',
-                        status: 'primary',
-                        pos: 'bottom-center',
-                        timeout: 8000
-                    });
-                }
+            }else if(this.vars.popupType == "extend"){
+                text = `
+                    <p>Das Equipment mit der ID ${this.vars.eqId} wurde verlängert bis ${this.vars.selectedDate}.</p>
+                `;
+            }
 
+            UIkit.notification({
+                message: text,
+                status: 'success',
+                pos: 'bottom-center',
+                timeout: 5000
             });
+
         }
 
 
