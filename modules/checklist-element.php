@@ -58,11 +58,11 @@
 
                                 $resData = getResdata($jsonUser['id']);                       
                                 $data= $resData['equipId'];                     
-                                $status=  json_encode($resData['prepared']);
+                                $status=  ($resData['prepared']);
                                 $resID=$jsonUser['id'];                
                                 $typData= $resData['equipId']['typeId'] ;
                                 $equipData=json_encode($data);
-                                $description=($typData["descriptionDe"]);
+                                $description=$typData["descriptionDe"];
                                 $description2=($data["descriptionDe"]);
                                 //convert typData to json
                                 $typDataJson=json_encode($typData);
@@ -98,11 +98,13 @@
                 <div class="checkListbutton ">
 
                     <script>
-                    addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status?>, typeData =
+                    addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status? 'true' : 'false'?>, typeData =
                         <?=$typDataJson?>, resData = <?=$equipData?>);
                     </script>
+                    <!-- set state of checkbox -->
 
-                    <input class="checklist-checkbox parent" type="checkbox" id="<?=$resID?>" value="<?=$resID?>">
+                    <input class="checklist-checkbox parent" type="checkbox" <?=($status )? "checked": "" ?> id="<?=$resID?>" value="<?=$resID?>">
+                    
 
 
                 </div>
@@ -118,21 +120,15 @@
 
                             <p class="uk-text-small uk-text-muted uk-text-truncate toTop"><?=$assiComment?></p>
 
-                            <span href="#toggle-animation<?=$i?>" uk-icon="info"
-                                uk-toggle="target: #toggle-animation<?=$i?>; animation: uk-animation-fade "
+                            <span href="#toggle-animation<?=$resID?>" uk-icon="info"
+                                uk-toggle="target: #toggle-animation<?=$resID?>; animation: uk-animation-fade "
                                 style="right: 15px;top: 15px;position: absolute; "></span>
 
-                            <div id="toggle-animation<?=$i?>" hidden
-                                class="uk-card uk-card-default uk-card-body uk-margin-small">
-
-
-
+                                <div id="toggle-animation<?=$resID?>" hidden>
+                                <?=$description2?>
                                 <br>
-
-
-                                </pre>
+                                <?=$description?>
                             </div>
-
 
 
 
