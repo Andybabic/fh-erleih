@@ -1,10 +1,20 @@
 "use strict";
+import Ajax from './Ajax.js';
+import NFCPopup from '../modules/NFCPopup.js';
+
 class General {
   //CONSTRUCTOR
   constructor() {
     //code to run on every page without explicit call
-    this.addDarkmode();
-    this.openBurgerMenu();
+      window.ajax = new Ajax();
+      //applies darkmode to every page if selected
+      this.addDarkmode();
+      //burger button menu functionality
+      this.openBurgerMenu();
+      //checks on page load if there is an ID from NFC scan in localstorage
+      this.checkForNFCId();
+      //nfc listener
+      this.nfcListener();
   }
 
   //FORMAT - all functions that format something
@@ -35,6 +45,8 @@ class General {
     return newDate;
   }
 
+
+  //LOADER+
   toggleLoader(DOMPos) {
     //toggles loader
     if ($(".loader-horizontal").length) {
@@ -52,6 +64,7 @@ class General {
     }
   }
 
+  //DARKMODE
   addDarkmode() {
     //checks if darkmode is selected and adds it
     if (localStorage.settings) {
@@ -64,6 +77,7 @@ class General {
     }
   }
 
+  //MENU
   openBurgerMenu() {
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-menu");
@@ -80,6 +94,58 @@ class General {
       })
     );
   }
+
+  //PAGE REDIRECT
+  redirectWithPost(data) {
+    const url = "checklist.php";
+    const params = {
+      "data": JSON.stringify(data)
+    };
+    const form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", url);
+
+    for (let key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", params[key]);
+
+        form.appendChild(hiddenField);
+      }
+    }
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  //NFC
+  checkForNFCId(){
+    //checks at pageload if there is an ID from a NFC Scan in the localstorage
+    if(localStorage.nfcListener && localStorage.nfcListener != null){
+      console.log(localStorage.nfcListener);
+      this.createPopupFromScannedId(localStorage.nfcListener);
+    }
+  }
+
+  nfcListener(){
+    //listens to changes in localstorage
+    window.addEventListener('storage', (e) => {
+      if(e.key == "nfcListener" && e.newValue != null){
+        this.createPopupFromScannedId(e.newValue);
+      }
+    });
+  }
+
+  createPopupFromScannedId(id){
+    const eqId = parseInt(id);
+    if(!isNaN(eqId)){
+      localStorage.nfcListener = null;
+      new NFCPopup(eqId);
+    }
+  }
+
 }
 
-const general = new General();
+window.general = new General();
+

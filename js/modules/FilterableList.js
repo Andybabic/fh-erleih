@@ -1,6 +1,4 @@
 "use strict";
-import Ajax from '../classes/Ajax.js';
-
 
 export default class FilterableList {
 
@@ -20,9 +18,6 @@ export default class FilterableList {
             base: $base,
             filterWrapper: $base.find(".filterWrapper"),
             listWrapper: $base.find(".listWrapper"),
-        };
-        this.modules = {
-            ajax: new Ajax(),
         };
         this.departments = {
             //should be created dynamically later
@@ -279,7 +274,7 @@ export default class FilterableList {
             const name = this.departments[key];
             if (this.filter[name] != undefined && this.filter[name]) {
                 //if the filter is set and true
-                const data = await this.modules.ajax.getResByDepartmentTimespan(key, startDate, endDate, type);
+                const data = await ajax.getResByDepartmentTimespan(key, startDate, endDate, type);
                 if (!data) {
                     //if data returns false error handling
                     this.displayList("error");
@@ -423,7 +418,8 @@ export default class FilterableList {
         $(".reservation").on("click", (e) => {
             const id = e.target.dataset.id
             const data = this.vars[id];
-            this.nextPage(data);
+            data.listType = this.vars.listType;
+            general.redirectWithPost(data);
         });
 
         //done list toggle
@@ -435,30 +431,6 @@ export default class FilterableList {
             }
             $(".doneList").slideToggle();
         });
-    }
-
-    nextPage(data) {
-        data.listType = this.vars.listType;
-        const url = "checklist.php";
-        const params = {
-            "data": JSON.stringify(data)
-        };
-        const form = document.createElement("form");
-        form.setAttribute("method", "post");
-        form.setAttribute("action", url);
-
-        for (let key in params) {
-            if (params.hasOwnProperty(key)) {
-                const hiddenField = document.createElement("input");
-                hiddenField.setAttribute("type", "hidden");
-                hiddenField.setAttribute("name", key);
-                hiddenField.setAttribute("value", params[key]);
-
-                form.appendChild(hiddenField);
-            }
-        }
-        document.body.appendChild(form);
-        form.submit();
     }
 
     async groupResByDate(resList) {
@@ -513,7 +485,7 @@ export default class FilterableList {
                 //if the current ID is not already in the userIDs array, add it
                 userIDs.push(userId);
                 //get user data for every user
-                let user = await this.modules.ajax.getUserById(userId);
+                let user = await ajax.getUserById(userId);
                 if (!user) {
                     user = {};
                     //if no userdata is available

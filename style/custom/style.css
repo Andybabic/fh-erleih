@@ -76,7 +76,6 @@ a {
 html,
 body {
     overflow-x: hidden;
-    color: var(--backgroundColor) !important;
 }
 
 .colorPrimary {
@@ -86,10 +85,14 @@ body {
 
 .colorSecondary {
     background-color: var(--colorSecondary);
+    color: white;
 }
 
 .textColor {
     color: var(--textColor);
+}
+.colorBackgroundGrey{
+    background-color: var(--colorBackgroundGrey);
 }
 
 body {

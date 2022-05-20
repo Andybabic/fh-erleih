@@ -1,6 +1,4 @@
 "use strict";
-import Ajax from '../classes/Ajax.js';
-
 export default class Popup{
 
         //CONSTRUCTOR
@@ -15,9 +13,6 @@ export default class Popup{
                 popup:                  "",
                 returnButton:           "",
                 proceedButton:          "",
-            };
-            this.modules = {
-                ajax:               new Ajax()
             };
 
             this.initPopup();
@@ -120,10 +115,10 @@ export default class Popup{
                     const textArea = $(".modal-reportTextArea textarea");
                     //prepare data 
                     //new api request for equipment to get damage and todo field values
-                    const equipment = await this.modules.ajax.getEquipmentById(this.vars.eqId);
+                    const equipment = await ajax.getEquipmentById(this.vars.eqId);
                     this.vars.equipment = equipment;
                     if(this.vars.equipment.infoMail == null)this.vars.equipment.infoMail = "";
-                    const reservation = await this.modules.ajax.getResById(this.vars.resId);
+                    const reservation = await ajax.getResById(this.vars.resId);
                     this.vars.reservation = reservation;
 
                     if(!equipment || !reservation){
@@ -220,13 +215,13 @@ export default class Popup{
                             if(this.vars.reportTodo != undefined){
                                 empty = false;
                                 this.vars.equipment.damage = this.vars.reportDamage;
-                                apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
+                                apiAnswer = await ajax.putEquipment(this.vars.eqId, this.vars.equipment);
                             }
                         }else if(this.vars.reportState == "todo"){
                             if(this.vars.reportTodo != undefined){
                                 empty = false;
                                 this.vars.equipment.todo = this.vars.reportTodo;
-                                apiAnswer = await this.modules.ajax.putEquipment(this.vars.eqId, this.vars.equipment);
+                                apiAnswer = await ajax.putEquipment(this.vars.eqId, this.vars.equipment);
                             }
                         }else if(this.vars.reportState == "cancel"){
                             if(this.vars.reportCancel != "" && this.vars.reportCancel != undefined){
@@ -237,7 +232,7 @@ export default class Popup{
                                         "id": this.vars.resId*1,
                                         "grund": this.vars.reportCancel
                                     }];
-                                    apiAnswer = await this.modules.ajax.deleteReservation(cancelValue);
+                                    apiAnswer = await ajax.deleteReservation(cancelValue);
                                     console.log(apiAnswer);
                                 }, function () {
                                     console.log('Rejected.');
@@ -247,7 +242,7 @@ export default class Popup{
                         break;
                     case "extend":
                         if(this.vars.selectedDate){
-                            apiAnswer = await this.modules.ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
+                            apiAnswer = await ajax.extendReservation(this.vars.resId, this.vars.selectedDate);
                             console.log(apiAnswer);
                         }else{
                           $("#datepicker-popup").val("Kein gültiges Datum!");

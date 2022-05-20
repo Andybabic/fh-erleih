@@ -1,7 +1,4 @@
 "use strict";
-import Ajax from '../classes/Ajax.js';
-import Popup from './Popup.js';
-
 (function ($, window, document, undefined) {
 
     class Settings{
@@ -22,11 +19,7 @@ import Popup from './Popup.js';
                 base:                   $base,
                 departmentWrapper:      $base.find(".departmentWrapper"),
             };
-            this.modules = {
-                ajax:               new Ajax()
-            };
 
-            console.log("init");
             this.initSettings();
 
         };
@@ -50,10 +43,6 @@ import Popup from './Popup.js';
             //init department filter
             await this.addDepartmentOptions();
 
-            //popup test
-            this.doms.base.append(`<button class="testVerl">Popup test verlängern</button>`);
-            this.doms.base.append(`<button class="testMeld">Popup test melden</button>`);
-
             //add onchange interaction
             this.addInteraction();
         };
@@ -61,7 +50,7 @@ import Popup from './Popup.js';
 
         async addDepartmentOptions(){
             //add empty option on order to make placeholder work
-            const departments = await this.modules.ajax.getDepartments();
+            const departments = ajax.getDepartments();
             if(departments){
                 //add options
                 for (const dep of departments) {
@@ -131,19 +120,7 @@ import Popup from './Popup.js';
                     localStorage.settings = JSON.stringify(settings);
                 }
             });
-
-            //popup test
-            $(".testMeld").on("click", (e)=>{
-               const reportPopup = new Popup(e,"report");
-            });
-            $(".testVerl").on("click", (e)=>{
-               const extendPopup = new Popup(e,"extend");
-            });
-
         }
-
-
-
     }
 
 

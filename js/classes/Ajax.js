@@ -80,6 +80,24 @@ export default class Ajax{
         });
     }
 
+    async getEquipmentTypeById(eqTypId){
+        const api = `${this.vars.apiUrl}eqTyp/${eqTypId}/`;
+
+        return new Promise((resolve, reject) => {
+
+            fetch(api, {credentials: "include"})
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
+
+
+
     async getEquipment(eqTypeId){
         const api = `${this.vars.apiUrl}equipment/byTyp/${eqTypeId}/`;
 
@@ -95,6 +113,7 @@ export default class Ajax{
     }
 
     async getEquipmentById(eqId){
+        console.log(eqId);
         const api = `${this.vars.apiUrl}equipment/${eqId}/`;
 
         return new Promise((resolve) => {

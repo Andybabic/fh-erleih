@@ -1,6 +1,4 @@
 "use strict";
-import Ajax from '../classes/Ajax.js';
-
 (function ($, window, document, undefined) {
 
     class ScanSearch {
@@ -20,9 +18,6 @@ import Ajax from '../classes/Ajax.js';
                     "equipmentSelect": $base.find("#equipmentSelect"),
                 }
             };
-            this.modules = {
-                ajax: new Ajax()
-            };
 
             this.initScanSearch();
 
@@ -31,7 +26,7 @@ import Ajax from '../classes/Ajax.js';
         //METHODS
         async initScanSearch() {
             //init department select first
-            const departmentOptions = await this.modules.ajax.getDepartments();
+            const departmentOptions = await ajax.getDepartments();
             if (!departmentOptions) {
                 this.requestError();
                 return;
@@ -73,13 +68,13 @@ import Ajax from '../classes/Ajax.js';
             let options = false;
             switch (id) {
                 case "departmentSelect":
-                    options = await this.modules.ajax.getEquipmentCategory(val);
+                    options = await ajax.getEquipmentCategory(val);
                     break;
                 case "categorySelect":
-                    options = await this.modules.ajax.getEquipmentType($("#departmentSelect").val(), val);
+                    options = await ajax.getEquipmentType($("#departmentSelect").val(), val);
                     break
                 case "typeSelect":
-                    options = await this.modules.ajax.getEquipment(val);
+                    options = await ajax.getEquipment(val);
                     break;
             }
             return options;
