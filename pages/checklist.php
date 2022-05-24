@@ -150,7 +150,7 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                             <script>
                             $("#<?=$div ?>").load("../modules/checklist-element.php", {'json':JSON.stringify(<?=$json?>)}, function(){
 
-                                siteloading(<?=$i ?>,<?=count($jsonUser['reservations'])?>); 
+                                siteloading(<?=$i ?>,<?= count($jsonUser['reservations']) ?>); 
                             });
 
                             
@@ -217,6 +217,7 @@ checklistComponents.checklist = (function() {
     publ.init = function() {
         //collect all checkboxes
         var checkboxelements = document.getElementsByClassName('checklist-checkbox');
+        console.log('init checklist');
 
 
         // add listener to all checkboxes ( clicked )
@@ -313,25 +314,14 @@ checklistComponents.checklist = (function() {
     return publ;
 })();
 
-function siteloading(i,count) {
-    if (i == count) {
-        //save localstorage
-        localStorage.setItem('siteloading', true);
-    }else(
-        localStorage.setItem('siteloading', false)
-    )
-}
-function siteloading_check(customfunction) {
-    if (localStorage.getItem('siteloading') == true) {
-        customfunction();
-    }
-    //wait for loading to finish
-    setTimeout(function() {
-        siteloading_check(customfunction);
-    }, 100);
 
+//if page is loaded
+window.onload = function() {
+    siteloading_check(checklistComponents.checklist.init);
 }
-siteloading_check(checklistComponents.checklist.init());
+
+
+
 
 
 </script>
