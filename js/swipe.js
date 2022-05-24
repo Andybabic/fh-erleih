@@ -162,14 +162,31 @@ class Swipebox {
 
 
 }
-
-    // create a uniqe instance of Swipebox for every div with class swipebox_Object
+function startSwipebox(){
     var swipebox_Objects = document.getElementsByClassName("swipebox_Object");
     for (var i = 0; i < swipebox_Objects.length; i++) {
         var swipebox_Object = new Swipebox(swipebox_Objects[i]);
         
         
     }
+    console.log("swipebox started");
+
+}
+
+
+//if page is loaded
+window.onload = function() {
+    siteloading_check(startSwipebox);
+}
+
+//if document is ready, start the script
+document.addEventListener('DOMContentLoaded', function () {
+
+    // create a uniqe instance of Swipebox for every div with class swipebox_Object
+    
+}
+);
+
 
 
 

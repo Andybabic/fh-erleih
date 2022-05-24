@@ -1,5 +1,6 @@
 "use strict";
-export default class Popup{
+export default class NFCPopup{
+
 
         //CONSTRUCTOR
         constructor(object, type) {

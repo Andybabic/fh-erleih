@@ -172,6 +172,8 @@
             </div>
         </div>
     </div>
+
+
     <!--End Equipment Card element-->
     <div class="spacer"></div>
 
