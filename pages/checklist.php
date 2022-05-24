@@ -148,7 +148,11 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                         $div = "element".$i ?>
                         <div id="<?=$div ?>">
                             <script>
-                            $("#<?=$div ?>").load("../modules/checklist-element.php", {'json':JSON.stringify(<?=$json?>)});
+                            $("#<?=$div ?>").load("../modules/checklist-element.php", {'json':JSON.stringify(<?=$json?>)}, function(){
+
+                                siteloading(<?=$i ?>,<?=count($jsonUser['reservations'])?>); 
+                            });
+
                             
                             </script>
                         </div>
@@ -202,7 +206,7 @@ checklistComponents.checklist = (function() {
             },
 
             success: function(msg) {
-                document.getElementById(id).innerHTML = msg;
+                //document.getElementById(id).innerHTML = msg;
                 console.log("Update success");
             },
 
@@ -308,7 +312,28 @@ checklistComponents.checklist = (function() {
     }
     return publ;
 })();
-checklistComponents.checklist.init();
+
+function siteloading(i,count) {
+    if (i == count) {
+        //save localstorage
+        localStorage.setItem('siteloading', true);
+    }else(
+        localStorage.setItem('siteloading', false)
+    )
+}
+function siteloading_check(customfunction) {
+    if (localStorage.getItem('siteloading') == true) {
+        customfunction();
+    }
+    //wait for loading to finish
+    setTimeout(function() {
+        siteloading_check(customfunction);
+    }, 100);
+
+}
+siteloading_check(checklistComponents.checklist.init());
+
+
 </script>
 
 

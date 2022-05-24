@@ -90,7 +90,7 @@
 
 
         <!--SWIPEBOX Foreground element-->
-        <div class="swipebox_Object swipe_box uk-animation-slide-left" style=" z-index: 1;">
+        <div class="swipebox_Object<?=$resID?> swipe_box uk-animation-slide-left" style=" z-index: 1;">
 
             <!--Start Equipment Card element-->
             <div
@@ -172,6 +172,15 @@
             </div>
         </div>
     </div>
+    <script>
+        var swipebox_Objects = document.getElementsByClassName("swipebox_Object<?=$resID?>");
+    
+        var swipebox_Object = new Swipebox(swipebox_Objects[0]);
+        
+        
+    
+    </script>
+
     <!--End Equipment Card element-->
     <div class="spacer"></div>
 

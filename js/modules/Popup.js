@@ -1,5 +1,5 @@
-"use strict";
-export default class Popup{
+
+class Popup{
 
         //CONSTRUCTOR
         constructor(object, type) {
