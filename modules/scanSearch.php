@@ -33,12 +33,40 @@
             </select>
         </div>
     </div>
+
+
+    <button id="writeNFC" value='69' href="#writeToNFC" uk-toggle>
     <div class="selectResultWrapper">
+    </button>
+    <h1 id="logtext"> Test NFC </h1>
+
 
     </div>
 </div>
 
 
+
+
+
+        <div id="writeToNFC" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+                <button class="uk-modal-close-default" id="writeNFC" type="button" uk-close></button>
+
+                <span class="dots-cont"> <span class="dot dot-1"></span> <span class="dot dot-2"></span> <span
+                        class="dot dot-3"></span> </span>
+
+                <div id="nfcMassage" class="uk-align-center" style="text-align: center">
+                    <h2>Wait for NFC Tag</h2>
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
 
 
 <script type="module" src="../js/modules/ScanSearch.js"></script>

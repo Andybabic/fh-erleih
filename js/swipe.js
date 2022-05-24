@@ -163,6 +163,9 @@ class Swipebox {
 
 }
 
+//if document is ready, start the script
+document.addEventListener('DOMContentLoaded', function () {
+
     // create a uniqe instance of Swipebox for every div with class swipebox_Object
     var swipebox_Objects = document.getElementsByClassName("swipebox_Object");
     for (var i = 0; i < swipebox_Objects.length; i++) {
@@ -170,6 +173,9 @@ class Swipebox {
         
         
     }
+}
+);
+
 
 
 
