@@ -73,6 +73,7 @@ a {
 html,
 body {
     overflow-x: hidden;
+    height:100%;
 }
 
 .colorPrimary {
@@ -517,14 +518,17 @@ a.link2 {
     background-color: var(--colorBackgroundGrey);
 }
 
+h3 span{
+    color: var(--textColor) !important;
+}
+
 /*datepicker*/
 .datepicker.is-inline,
 .datepicker__wrapper,
 .datpicker__container,
 .pickerWrapper{
     max-width: 100%;
-    display: flex;
-    justify-content: space-between;
+
 }
 
 
