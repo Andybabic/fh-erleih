@@ -1,5 +1,5 @@
 "use strict";
-export default class Popup{
+class Popup{
 
         //CONSTRUCTOR
         constructor(object, type) {
@@ -326,26 +326,9 @@ export default class Popup{
 
         }
 
-
-        extendFunction(){
-            //functions for popup type extend
-
-            
-
-            this.doms.proceedButton.on("click", () => {
-                
-            });
-        }
-
-        reportFunctions(){
-
-        }
-
         removePopup(){
             this.doms.popup.remove();
         }
-
-
 
     }
 
