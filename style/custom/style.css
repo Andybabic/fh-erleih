@@ -7,7 +7,6 @@
     --FHdefaultblue: #005096;
     --inPreparationColor: rgba(14, 151, 0, 0.3);
     --preparedAllColor: rgba(14, 151, 0, 0.6);
-    --footerHeight: 3.5rem;
 
     --colorBackgroundClean: #f8f9fa;
     --colorBackgroundGrey: #e3e5e6;
@@ -31,9 +30,7 @@ footer {
     position: fixed;
     bottom: -10px;
     left: 0;
-    height: var(--footerHeight);
     width: 100%;
-    background-color: var(--backgroundColor);
 }
 
 h1,
@@ -525,60 +522,46 @@ a.link2 {
 .datepicker__wrapper,
 .datpicker__container,
 .pickerWrapper{
-    max-width: 100% ;
-
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 
 /*--Mode Switch--*/
-
+.modeSwitchWrapper{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: yellow;
+}
 .modeSwitchButton{
+    padding: 10px 0;
+    width: 50vw;
     align-items: center;
     display: flex;
     flex-direction: column;
-    color: var(--colorSecondary);
-}
-
-.modeSwitchButton:active{
-    border-bottom: 3px solid red;
-}
-.uk-active .modeSwitch {
-    color: var(--colorSecondary) !important;
-    border-bottom: 2px solid var(--colorSecondary) !important;
-}
-
-.modeSwitch a {
-    font-weight: bold;
-    color: var(--textColor) !important;
-}
-
-.modeSwitch a:active{
-      color: var(--secondaryColor) !important;
-}
-
-
-.uk-tab > * > a {
-    color: var(--textColor);
-}
-
-.uk-tab > .uk-active > .modeSwitchButton > a {
-    color: var(--colorSecondary) !important;
-}
-
-.uk-tab svg {
-    fill: var(--textColor);
-}
-
-.uk-active svg {
-    fill: var(--colorSecondary);
-}
-
-#modeSwitch {
-    box-shadow: 0 -2px 5px -2px #000000;
     background-color: var(--colorBackgroundClean);
-
+    cursor: pointer;
 }
-
+.modeSwitchButton span{
+    color: #495057;
+    pointer-events: none;
+}
+.modeSwitchButton svg{
+    fill: #495057;
+    pointer-events: none;
+}
+.modeSwitchButton.modeSwitch-active{
+    background-color: var(--colorPrimary);
+}
+.modeSwitchButton.modeSwitch-active span{
+    color: #fff;
+}
+.modeSwitchButton.modeSwitch-active svg{
+    fill: #fff;
+}
 
 
 
@@ -679,12 +662,6 @@ li {
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     background-color: white;
-}
-
-@media (max-width: 266px) {
-    footer {
-        height: 6rem;
-    }
 }
 
 @media (max-width: 1024px) {

@@ -14,7 +14,7 @@ import FilterableList from './FilterableList.js';
             };
             this.doms = {
                 base:               $base,
-                switchBtn:          $base.find(".modeSwitch"),
+                switchBtn:          $base.find(".modeSwitchButton"),
             };
             this.modules = {
                 filterableList:     "",
@@ -40,6 +40,7 @@ import FilterableList from './FilterableList.js';
 
          addInteraction(){
              this.doms.switchBtn.on("click", (e) => {
+                 console.log(e);
                  const val = e.target.dataset.mode;
                  //if the clicked value is different than the current state switch
                  if(val != this.vars.currentMode){
@@ -54,9 +55,13 @@ import FilterableList from './FilterableList.js';
 
          addActiveClass(){
              //remove active class first
-             $(".modeSwitch").removeClass("uk-active");
-             //add active class
-             $("#modeSwitch").find(`[data-mode='${this.vars.currentMode}']`).closest("li").addClass("uk-active");
+             const switchButtons = document.getElementsByClassName("modeSwitchButton");
+             $(".modeSwitchButton").removeClass("modeSwitch-active");
+             for (const switchButton of switchButtons) {
+                 if(switchButton.dataset.mode == this.vars.currentMode){
+                     switchButton.classList.add("modeSwitch-active");
+                 }
+             }
          }
 
          switchMode(){

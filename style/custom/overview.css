@@ -151,65 +151,68 @@ h2, p {
     display: flex;
     flex-direction: row;
 }
-.reservation .quantityCircle{
+.reservation .quantityCircle, .reservation .modeCircle{
     border-radius: 50%;
     background-color: var(--colorSecondary);
-
-    height: 70px;
-    width: 70px;
+    height: 42px;
+    width: 42px;
     max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.reservation .uk-flex .modeCircle{
+    margin-top: 5px;
+}
+.modeCircle svg{
+    fill: #fff;
+}
+
 .quantityIcon{
     background-image: url("../image/quantityIcon.svg");
-      background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 88%;
-    height: 88%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column !important;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.quantityIcon p{
-    position: relative;
-    top: 11px;
-    left:-14px;
-    color: var(--colorSecondary) !important;
-    font-weight: bold;
-}
-
-.reservation .modeCircle{
-    border-radius: 50%;
-    background-color: var(--colorSecondary);
-      height: 70px;
-    width: 70px;
-    max-width: 100%;
-    margin-top: -40px;
-}
-.modeIcon{
-    /*background-image: url("../image/cliboard.svg");*/
-
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    width: 80%;
+    height: 85%;
+}
+.modeIcon{
+    /*background-image: url("../image/cliboard.svg");*/
     width: 88%;
     height: 88%;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column !important;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
 }
+
+.quantityIcon{
+    position: relative;
+}
+.quantityIcon p{
+    font-family: 'Open Sans';
+    font-weight: bold;
+    width: 18px;
+    text-align: center;
+    position: absolute;
+    top: 13px;
+    left:2px;
+    color: var(--colorSecondary) !important;
+    font-size: 12px;
+}
+
+.largeReservation{
+    background-color: #e76f51 !important;
+}
+.mediumReservation{
+    background-color: #f4a261 !important;
+}
+
 
 .listDateandDep{
     display: flex;
     flex-direction: column;
-    margin: 5px 0 0 20px;
+    margin: 5px 0 0 0px;
 }
 
 @media (max-width: 520px) {

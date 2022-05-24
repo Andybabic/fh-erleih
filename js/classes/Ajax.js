@@ -32,6 +32,7 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
+                console.log(err);
                 resolve(false);
             });
         });
@@ -141,6 +142,19 @@ export default class Ajax{
         });
     }
 
+    async getResByEq(eqId){
+        const api = `${this.vars.apiUrl}reservierung/byEq/${eqId}/`;
+
+        return new Promise((resolve) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
 
 
     async postResStatus(id){
