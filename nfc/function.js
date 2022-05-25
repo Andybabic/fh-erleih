@@ -1,1 +1,0 @@
-//localstorage.nfcListener eqId

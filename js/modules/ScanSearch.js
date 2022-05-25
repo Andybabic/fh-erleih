@@ -121,6 +121,9 @@
                             .text()}</p>
                     `;
                         this.doms.resultWrapper.html(result);
+                        //add id=writeNFC a value
+                        $("#writeNFC").val($("#equipmentSelect").val());
+                        
                     }
                 });
             }

@@ -15,6 +15,7 @@ function siteloading(i,count) {
 
 
 function siteloading_check(func) {
+    func();
     
     //set intervall
     var interval = setInterval(function() {
@@ -24,6 +25,6 @@ function siteloading_check(func) {
         }
     }
     , 1000);
-    
+
 
 }

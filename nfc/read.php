@@ -14,4 +14,3 @@ $data = isset($_GET['d']) ? $_GET['d'] : '6267';
     
 
 </script>
-
