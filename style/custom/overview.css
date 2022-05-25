@@ -221,3 +221,21 @@ h2, p {
     }
 }
 
+.aufklappen{
+    margin: 10px auto 20px;
+    color: #f1eeee;
+
+}
+
+.showFilterArrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .4s ease-in;
+    fill: white;
+    margin-left: 10px;
+ position: relative;
+    top:10px;
+}
