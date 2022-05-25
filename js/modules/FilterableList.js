@@ -251,7 +251,7 @@ export default class FilterableList {
     }
 
     async getList() {
-        general.toggleLoader(this.doms.filterWrapper);
+        general.toggleLoader($(".filterButtonWrapper"));
         //gets the reservations (by department) from
         const dates = this.getFilterDates();
         const startDate = dates[0];

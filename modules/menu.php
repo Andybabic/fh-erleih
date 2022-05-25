@@ -6,9 +6,9 @@
 $domain = $_SERVER['HTTP_HOST'];
 $userID = $_SESSION['username']
 ?>
-<header uk-sticky>
+<header>
     <nav  class="navbar uk-width-3-5@l  uk-align-center ">
-        <a class="nav-branding">Hallo "<?=$userID ?>"</a>
+        <a class="nav-branding"><?=$userID ?></a>
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="../pages/overview.php" class="nav-link">Übersicht</a>

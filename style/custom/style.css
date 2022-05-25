@@ -34,28 +34,11 @@ footer {
     height: 70px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-span,
-button,
-a {
+h1, h2, h3, h4, h5, p, span, button, a {
     font-family: var(--fontfamily);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-dt,
-li,
-dd,
-a {
+h1, h2, h3, h4, h5, p, dt, li, dd, a {
     color: var(--textColor) !important;
 }
 
@@ -67,14 +50,13 @@ a {
     color: #333 !important;
 }
 
-.login  a {
+.login a {
     color: #1e87f0 !important;
 }
 
-html,
-body {
+html, body {
     overflow-x: hidden;
-    height:100%;
+    height: 100%;
 }
 
 .colorPrimary {
@@ -90,27 +72,14 @@ body {
 .textColor {
     color: var(--textColor);
 }
-.colorBackgroundGrey{
+
+.colorBackgroundGrey {
     background-color: var(--colorBackgroundGrey);
 }
 
 body {
     position: relative;
 }
-
-/*
-.blue {
-    background-color: #005096;
-    color: white;
-}
-
-.blue-40 {
-    background-color: #00509633;
-}
-
-.blue-20 {
-    background-color: #00509633;
-}*/
 
 .grid-33 {
     width: 33.33%;
@@ -125,8 +94,7 @@ body {
 }
 
 /* Style for Checklist */
-
-.checklist{
+.checklist {
     padding: 0 5px;
 }
 
@@ -148,7 +116,6 @@ body {
     background-color: var(--colorBackgroundGrey);
     margin: 0 0 6px 0;
 }
-
 
 .right {
     float: right;
@@ -174,7 +141,6 @@ body {
 .nospace-up {
     margin-top: 0px;
 }
-
 
 /* Start Swipebox Style  */
 .Swipe_container {
@@ -264,11 +230,6 @@ a.link2 {
     background-color: #d49a06;
 }
 
-/*
-.bg-blue {
-    background-color: #005096;
-}*/
-
 .uk-close {
     color: var(--colorBackgroundGrey);
     left: 95%;
@@ -292,7 +253,6 @@ a.link2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--colorBackgroundClean);
 }
 
 .loader-horizontal__dot {
@@ -346,7 +306,6 @@ a.link2 {
     color: var(--textColor) !important;
 }
 
-
 .selectWrapper select {
     width: 90%;
     margin: 15px 0;
@@ -372,14 +331,13 @@ a.link2 {
     flex-direction: column;
 }
 
-.selectResultWrapper .innerbox p, .selectResultWrapper .innerbox h2{
+.selectResultWrapper .innerbox p, .selectResultWrapper .innerbox h2 {
     color: #f8f9fa !important;
 }
 
 .selectResultWrapper p {
     color: var(--textColor);
 }
-
 
 /*Select Darkmode*/
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
@@ -519,29 +477,25 @@ a.link2 {
     background-color: var(--colorBackgroundGrey);
 }
 
-h3 span{
+h3 span {
     color: var(--textColor) !important;
 }
 
 /*datepicker*/
-.datepicker.is-inline,
-.datepicker__wrapper,
-.datpicker__container,
-.pickerWrapper{
+.datepicker.is-inline, .datepicker__wrapper, .datpicker__container, .pickerWrapper {
     max-width: 100%;
-
 }
 
-
 /*--Mode Switch--*/
-.modeSwitchWrapper{
+.modeSwitchWrapper {
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: space-between;
-    background-color: yellow;
+    box-shadow: rgba(0, 0, 0, 1) 0px 5px 15px;
 }
-.modeSwitchButton{
+
+.modeSwitchButton {
     padding: 10px 0;
     width: 50vw;
     align-items: center;
@@ -550,31 +504,30 @@ h3 span{
     background-color: var(--colorBackgroundClean);
     cursor: pointer;
 }
-.modeSwitchButton span{
+
+.modeSwitchButton span {
     color: #495057;
     pointer-events: none;
 }
-.modeSwitchButton svg{
+
+.modeSwitchButton svg {
     fill: #495057;
     pointer-events: none;
 }
-.modeSwitchButton.modeSwitch-active{
+
+.modeSwitchButton.modeSwitch-active {
     background-color: var(--colorPrimary);
 }
-.modeSwitchButton.modeSwitch-active span{
+
+.modeSwitchButton.modeSwitch-active span {
     color: #fff;
 }
-.modeSwitchButton.modeSwitch-active svg{
+
+.modeSwitchButton.modeSwitch-active svg {
     fill: #fff;
 }
 
-
-
-
-
-
 /*--NAVBAR DROPDOWN--*/
-
 .uk-navbar-right ul {
     color: #f8f9fa !important;
 }
@@ -606,7 +559,6 @@ h3 span{
 
 header {
     background-color: var(--colorPrimary);
-
 }
 
 li {
@@ -619,13 +571,13 @@ li {
 }
 
 .navbar {
-    min-height: 70px;
+    height: 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 24px;
     margin-bottom: 0px;
-  }
+}
 
 .nav-menu {
     display: flex;
@@ -636,7 +588,7 @@ li {
 }
 
 .nav-branding {
-    font-size: 2rem;
+    font-size: 1.2rem;
     text-decoration: none;
     color: white !important;
 }
@@ -644,14 +596,6 @@ li {
 .nav-branding:hover {
     text-decoration: none;
     cursor: default;
-}
-
-.nav-link {
-    transition: 0.7s ease;
-}
-
-.nav-link:hover {
-    color: dodgerblue;
 }
 
 .hamburger {
@@ -690,10 +634,19 @@ li {
         transform: translateY(-8px) rotate(-45deg);
     }
 
+    .navbar {
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 24px;
+        margin-bottom: 0px;
+    }
+
     .nav-menu {
         position: absolute;
         right: -100%;
-        top: 70px;
+        top: 40px;
         gap: 0;
         flex-direction: column;
         background-color: var(--colorPrimary);
@@ -705,7 +658,7 @@ li {
     }
 
     .nav-item {
-        margin: 16px 0;
+        margin: 10px 0;
     }
 
     .nav-menu.active {
@@ -723,7 +676,6 @@ li {
     border-radius: 25px;
     justify-content: center;
     align-items: center;
-
 }
 
 .innerbox {
@@ -744,7 +696,6 @@ li {
 
 .innerbox h2 {
     margin: 0;
-
 }
 
 

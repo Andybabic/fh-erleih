@@ -50,7 +50,7 @@
 
         async addDepartmentOptions(){
             //add empty option on order to make placeholder work
-            const departments = ajax.getDepartments();
+            const departments = await ajax.getDepartments();
             if(departments){
                 //add options
                 for (const dep of departments) {
