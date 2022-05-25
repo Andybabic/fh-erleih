@@ -316,9 +316,10 @@ checklistComponents.checklist = (function() {
 
 
 //if page is loaded
-window.onload = function() {
+
     siteloading_check(checklistComponents.checklist.init);
-}
+
+
 
 
 
