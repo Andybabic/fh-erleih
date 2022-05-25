@@ -44,7 +44,7 @@ export default class ReleasePopup{
                             <div class="uk-modal-body release-modal-content">
                                 ${content}            
                             </div>
-                            <div class="uk-modal-footer uk-flex uk-flex-column uk-text-center">
+                            <div class="releaseButtons uk-modal-footer uk-flex uk-flex-column uk-text-center">
                                 <button class="uk-button reviewButton uk-button-default colorSecondary uk-margin-small-top uk-margin-small-bottom" type="button">Reservierung prüfen</button>
                                 <button class="uk-button finalReleaseButton uk-button-default colorPrimary  proceedButton" type="button">Reservierungen ausgeben</button>
                             </div>
@@ -78,16 +78,17 @@ export default class ReleasePopup{
 
     async release(){
         //release reservations
-        //const response = await ajax.postResRelease(this.vars.resIds);
-        //const answerArray = JSON.parse(response);
+        const response = await ajax.postResRelease(this.vars.resIds);
+        const answerArray = JSON.parse(response);
+        /*
         const answerArray = {
             "521430": true,
             "521431": true,
             "521432": true,
             "521447": "Reservierung konnte nicht ausgegeben werden",
             "521448": "Reservierung konnte nicht ausgegeben werden"
-        };
-        this.vars.resIdsLength = 5;
+        };*/
+        //this.vars.resIdsLength = 5;
         const content = $(".release-modal-content");
         let succeeded = [];
         let failed = [];
@@ -143,7 +144,14 @@ export default class ReleasePopup{
 
         const feedback = `
             <div class="feedbackSummary">
-                <p>${succeeded.length} / ${this.vars.resIdsLength} Reservierungen wurden erfolgreich ausgegeben!</p>
+                <p class="uk-text-default uk-margin-small-bottom">
+                    <span class="uk-margin-small-right releaseIconSuccess" uk-icon="check"></span>
+                    <span>${succeeded.length} / ${this.vars.resIdsLength} Reservierungen wurden erfolgreich ausgegeben!</span>
+                </p>
+                <p class="uk-text-bold uk-margin-small-bottom">
+                    <span class="uk-margin-small-right releaseIconError" uk-icon="close"></span>
+                    <span>${failed.length} / ${this.vars.resIdsLength} Reservierungen konnten nicht ausgegeben werden!</span>
+                </p>
             </div>
             <div class="feedbackDetails">
                 <button href="#toggle-details" class="uk-button uk-button-default uk-width-1-1" type="button" uk-toggle="target: #feedbackDetails; animation: uk-animation-slide-top-">
@@ -156,6 +164,7 @@ export default class ReleasePopup{
             </div>
         `;
         content.html(feedback);
+        $(".releaseButtons").html('<button class="uk-button  returnButton uk-button-default colorPrimary uk-modal-close" type="button">Fenster schließen</button>');
         UIkit.toggle("#feedbackDetails").toggle();
 
 

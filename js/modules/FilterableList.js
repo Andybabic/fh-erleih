@@ -479,7 +479,7 @@ export default class FilterableList {
                 resIds.push(res.id);
             }
             if(resIds.length > 0){
-                const dataTst = {
+               /* const dataTst = {
                     "userId": "mt191092",
                     "firstName": "Jungwirth",
                     "lastName": "Lukas",
@@ -528,8 +528,8 @@ export default class FilterableList {
                     ],
                     "inPreparation": 1,
                     "preparedAll": 1
-                }
-                new ReleasePopup(resIds, dataTst);
+                }*/
+                new ReleasePopup(resIds, data);
             }
         });
     }

@@ -293,7 +293,7 @@ h2, p {
     max-width: 15px;
     min-height: 15px;
     max-width: 15px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 }
@@ -302,10 +302,10 @@ h2, p {
     height: 60%;
 }
 .releaseIconError{
-    border-color: darkred;
+    border-color: var(--colorAlert);
 }
 .releaseIconSuccess{
-    border-color: forestgreen;
+    border-color: var(--colorSuccess);
 }
 
 
