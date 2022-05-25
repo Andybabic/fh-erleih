@@ -352,7 +352,7 @@ export default class FilterableList {
                     }
 
                     let li = `
-                            <li class="reservation uk-flex uk-flex-between ${res.preparedAll ? "uk-flex-top" : "uk-flex-bottom"}  ${preperationClass}" data-id = ${curId}>
+                            <li class="reservation uk-flex uk-flex-between uk-flex-bottom ${preperationClass}" data-id = ${curId}>
                                 <div>
                                     <span>${res.userId}</span>
                                     <h2>${general.formatName(res.firstName)} ${general.formatName(res.lastName)}</h2>
@@ -378,7 +378,15 @@ export default class FilterableList {
                                         </p>
                                     </div>  
                                 </div>
-                                <button class="releaseResButton">Ausgeben</button>
+                                <div class="uk-flex uk-flex-column uk-flex-bottom uk-flex-right">
+                                    <button class="releaseResButton uk-margin-small-bottom">Ausgeben</button>
+                                    <div class="quantityCircle ${res.reservations.length > 25 ? ( res.reservations.length > 50 ? 'largeReservation' : 'mediumReservation') : ''}">
+                                        <div class="quantityIcon"> 
+                                            <p> ${res.reservations.length}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 
                             </li>`;
                     }else{
