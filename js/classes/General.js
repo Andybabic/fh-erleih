@@ -64,89 +64,90 @@ class General {
                     </div>
                 `;
 
-      $(loader).insertAfter(DOMPos);
+            $(loader).insertAfter(DOMPos);
+        }
     }
-  }
 
-  //DARKMODE
-  addDarkmode() {
-    //checks if darkmode is selected and adds it
-    if (localStorage.settings) {
-      let settings = JSON.parse(localStorage.settings);
-      if (settings.darkMode) {
-        $(":root").css("--colorBackgroundClean", "#212529");
-        $(":root").css("--colorBackgroundGrey", "#495057");
-        $(":root").css("--textColor", "#f8f9fa");
-      }
+    //DARKMODE
+    addDarkmode() {
+        //checks if darkmode is selected and adds it
+        if (localStorage.settings) {
+            let settings = JSON.parse(localStorage.settings);
+            if (settings.darkMode) {
+                $(":root").css("--colorBackgroundClean", "#212529");
+                $(":root").css("--colorBackgroundGrey", "#495057");
+                $(":root").css("--textColor", "#f8f9fa");
+            }
+        }
     }
-  }
 
-  //MENU
-  openBurgerMenu() {
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
+    //MENU
+    openBurgerMenu() {
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
 
-    hamburger.addEventListener("click", () => {
-      hamburger.classList.toggle("active");
-      navMenu.classList.toggle("active");
-    });
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
 
-    document.querySelectorAll(".nav-link").forEach((n) =>
-      n.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navMenu.classList.remove("active");
-      })
-    );
-  }
-
-  //PAGE REDIRECT
-  redirectWithPost(data, url) {
-    const params = {
-      "data": JSON.stringify(data)
-    };
-    const form = document.createElement("form");
-    form.setAttribute("method", "post");
-    form.setAttribute("action", url);
-
-    for (let key in params) {
-      if (params.hasOwnProperty(key)) {
-        const hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", key);
-        hiddenField.setAttribute("value", params[key]);
-
-        form.appendChild(hiddenField);
-      }
+        document.querySelectorAll(".nav-link").forEach((n) =>
+            n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            })
+        );
     }
-    document.body.appendChild(form);
-    form.submit();
-  }
 
-  //NFC
-  checkForNFCId(){
-    //checks at pageload if there is an ID from a NFC Scan in the localstorage
-    if(localStorage.nfcListener && localStorage.nfcListener != null){
-      console.log(localStorage.nfcListener);
-      this.createPopupFromScannedId(localStorage.nfcListener);
+    //PAGE REDIRECT
+    redirectWithPost(data) {
+        const url = "checklist.php";
+        const params = {
+            "data": JSON.stringify(data)
+        };
+        const form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", url);
+
+        for (let key in params) {
+            if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+            }
+        }
+        document.body.appendChild(form);
+        form.submit();
     }
-  }
 
-  nfcListener(){
-    //listens to changes in localstorage
-    window.addEventListener('storage', (e) => {
-      if(e.key == "nfcListener" && e.newValue != null){
-        this.createPopupFromScannedId(e.newValue);
-      }
-    });
-  }
-
-  createPopupFromScannedId(id){
-    const eqId = parseInt(id);
-    if(!isNaN(eqId)){
-      localStorage.nfcListener = null;
-      new NFCPopup(eqId);
+    //NFC
+    checkForNFCId() {
+        //checks at pageload if there is an ID from a NFC Scan in the localstorage
+        if (localStorage.nfcListener && localStorage.nfcListener != null) {
+            console.log(localStorage.nfcListener);
+            this.createPopupFromScannedId(localStorage.nfcListener);
+        }
     }
-  }
+
+    nfcListener() {
+        //listens to changes in localstorage
+        window.addEventListener('storage', (e) => {
+            if (e.key == "nfcListener" && e.newValue != null) {
+                this.createPopupFromScannedId(e.newValue);
+            }
+        });
+    }
+
+    createPopupFromScannedId(id) {
+        const eqId = parseInt(id);
+        if (!isNaN(eqId)) {
+            localStorage.nfcListener = null;
+            new NFCPopup(eqId);
+        }
+    }
 
   goPageBack(){
     $(".backButton").on("click", () =>{
@@ -175,6 +176,7 @@ class General {
 
   }
 }
+
 
 window.general = new General();
 
