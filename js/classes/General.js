@@ -153,13 +153,13 @@ class General {
         $(".aufklappen").on("click", (e) => {
             if ($(".filterWrapper").is(":visible")) {
                 $(".showFilterArrow").css({"transform": "rotate(180deg)"})
-                $(".aufklappen").css({"background-color": "var(--colorSecondary"})
+                 $(".aufklappen").css({"background-color": "#004f94B3"})
 
             } else {
                 $(".showFilterArrow").css({"transform": "rotate(0deg)"})
-                $(".aufklappen").css({"background-color": "var(--colorPrimary"})
+                 $(".aufklappen").css({"background-color": "var(--colorPrimary)"})
             }
-            $(".aufklappen").toggleClass("colorPrimary");
+             $(".aufklappen").toggleClass("var--(colorPrimary)");
             $(".filterWrapper").slideToggle();
 
 
