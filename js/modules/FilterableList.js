@@ -337,10 +337,18 @@ export default class FilterableList {
                     //create an id for current reservation to store it and get it later on click
                     const curId = `${res.userId}-${res.date.slice(0, 10)}`;
                     this.vars[curId] = res;
-
-                    const date = new Date(res.date);
+                    // parse 2022-05-18 16:30:00 to format Mittwoch, 11. Mai 2022
+                   
+                    //replace "d" with "T"
+                    const dateString = res.date.replace(" ", "T");
+                    const date = new Date(dateString);
+                    console.log(res.date);
+                    console.log(dateString);
+                    
                     const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+                    //convert date to Mittwoch, 11. Mai 2022
                     const dateStr = date.toLocaleDateString("de-DE", dateOptions);
+                    
                     //add class if reservation is in preparation or fully prepared
                     let preperationClass = "";
                     if(this.vars.listType == "prepare"){

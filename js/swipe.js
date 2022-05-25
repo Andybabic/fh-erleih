@@ -174,11 +174,15 @@ function startSwipebox(){
 }
 
 
-//if page is loaded
-window.onload = function() {
-    //let waitForLoading= 
-    pageLoadingState.siteloading_check(startSwipebox);
+if (window.location.href.includes("checklist")) {
+    window.onload = function() {
+        //let waitForLoading= 
+        pageLoadingstate.siteloading_check(startSwipebox);
+    }
 }
+
+
+
 
 //if document is ready, start the script
 document.addEventListener('DOMContentLoaded', function () {
