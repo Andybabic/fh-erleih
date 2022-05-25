@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url(MIME+BASE64_STRING) format('TYPE_OF_FONT');
+}
+
 :root {
     /*font-size: 62.5%;
       1.5rem = 15px*/
@@ -696,6 +701,12 @@ li {
 
 .innerbox h2 {
     margin: 0;
+}
+
+.logo{
+    height: 3rem;
+    margin-bottom: 20px;
+
 }
 
 

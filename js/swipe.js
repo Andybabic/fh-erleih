@@ -32,6 +32,7 @@ class Swipebox {
         this.mouseDownX = event.clientX - this.element.offsetLeft;
     }
     touchStart(event) {
+        console.log(event);
 
         this.touchStart= true;
         this.touchStartX = event.touches[0].clientX - this.element.offsetLeft;
@@ -166,8 +167,8 @@ function startSwipebox(){
     var swipebox_Objects = document.getElementsByClassName("swipebox_Object");
     for (var i = 0; i < swipebox_Objects.length; i++) {
         var swipebox_Object = new Swipebox(swipebox_Objects[i]);
-        
-        
+
+
     }
     console.log("swipebox started");
 

@@ -15,46 +15,48 @@ class General {
         this.checkForNFCId();
         //nfc listener
         this.nfcListener();
+        //for all back buttons
+        this.goPageBack();
         //opens Div of Filter Buttons
         this.openFilterButtonDiv();
     }
 
-    //FORMAT - all functions that format something
-    formatName(string) {
-        //function to format Names with Umlaut
-        if (string == undefined) return "";
-        const badValues = {
-            "Ã¼": "ü",
-            "Ã-": "Ö",
-            Ãœ: "Ü",
-            "Ã¤": "ä",
-            "Ã¶": "ö",
-            ÃŸ: "ß",
-            Ã: "Ä",
-        };
-        for (const key in badValues) {
-            string = string.replaceAll(key, badValues[key]);
-        }
-        return string;
+  //FORMAT - all functions that format something
+  formatName(string) {
+    //function to format Names with Umlaut
+    if (string == undefined) return "";
+    const badValues = {
+      "Ã¼": "ü",
+      "Ã-": "Ö",
+      Ãœ: "Ü",
+      "Ã¤": "ä",
+      "Ã¶": "ö",
+      ÃŸ: "ß",
+      Ã: "Ä",
+    };
+    for (const key in badValues) {
+      string = string.replaceAll(key, badValues[key]);
     }
+    return string;
+  }
 
-    formatDate(date) {
-        //formats date object to rest api standard
-        const offset = date.getTimezoneOffset();
-        let newDate = new Date(date.getTime() - offset * 60 * 1000);
-        newDate = newDate.toISOString().split("T")[0];
+  formatDate(date) {
+    //formats date object to rest api standard
+    const offset = date.getTimezoneOffset();
+    let newDate = new Date(date.getTime() - offset * 60 * 1000);
+    newDate = newDate.toISOString().split("T")[0];
 
-        return newDate;
-    }
+    return newDate;
+  }
 
 
-    //LOADER+
-    toggleLoader(DOMPos) {
-        //toggles loader
-        if ($(".loader-horizontal").length) {
-            $(".loader-horizontal").slideToggle();
-        } else {
-            const loader = `
+  //LOADER+
+  toggleLoader(DOMPos) {
+    //toggles loader
+    if ($(".loader-horizontal").length) {
+      $(".loader-horizontal").slideToggle();
+    } else {
+      const loader = `
                     <div class="loader-horizontal">
                       <div class="loader-horizontal__dot"></div>
                       <div class="loader-horizontal__dot"></div>
@@ -147,26 +149,32 @@ class General {
         }
     }
 
-    openFilterButtonDiv() {
-        var coll = document.getElementsByClassName("aufklappen");
+  goPageBack(){
+    $(".backButton").on("click", () =>{
+      window.history.back();
+    });
+  }
 
-        $(".aufklappen").on("click", (e) => {
-            if ($(".filterWrapper").is(":visible")) {
-                $(".showFilterArrow").css({"transform": "rotate(180deg)"})
-                 $(".aufklappen").css({"background-color": "#004f94B3"})
+  openFilterButtonDiv() {
+      var coll = document.getElementsByClassName("aufklappen");
 
-            } else {
-                $(".showFilterArrow").css({"transform": "rotate(0deg)"})
-                 $(".aufklappen").css({"background-color": "var(--colorPrimary)"})
-            }
-             $(".aufklappen").toggleClass("var--(colorPrimary)");
-            $(".filterWrapper").slideToggle();
+      $(".aufklappen").on("click", (e) => {
+          if ($(".filterWrapper").is(":visible")) {
+              $(".showFilterArrow").css({"transform": "rotate(180deg)"})
+               $(".aufklappen").css({"background-color": "#004f94B3"})
+
+          } else {
+              $(".showFilterArrow").css({"transform": "rotate(0deg)"})
+               $(".aufklappen").css({"background-color": "var(--colorPrimary)"})
+          }
+           $(".aufklappen").toggleClass("var--(colorPrimary)");
+          $(".filterWrapper").slideToggle();
 
 
-        });
+      });
 
 
-    }
+  }
 }
 
 

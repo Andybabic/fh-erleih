@@ -46,6 +46,7 @@ export default class Ajax{
                 .then(res => res.json())
                 .then(data => {
                     resolve(data);
+                    console.log(data);
                 }).catch(err => {
                 resolve(false);
             });
@@ -128,6 +129,21 @@ export default class Ajax{
         });
     }
 
+    async getExpandedEquipmentById(eqId){
+        console.log(eqId);
+        const api = `${this.vars.apiUrl}equipment/${eqId}?expandKeys=true`;
+
+        return new Promise((resolve) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
     async getResById(resId){
         const api = `${this.vars.apiUrl}reservierung/${resId}/`;
 
@@ -166,6 +182,25 @@ export default class Ajax{
                 .then(data => {
                     resolve(data);
                 }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
+    async postResRelease(resIds){
+        const api = `${this.vars.apiUrl}reservierung/ausgabe/`;
+        console.log(resIds);
+        return new Promise((resolve) => {
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: JSON.stringify(resIds),
+                    curl: "POST"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function (){
                 resolve(false);
             });
         });

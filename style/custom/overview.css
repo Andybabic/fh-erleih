@@ -100,7 +100,7 @@
     border: none;
 }
 
-.listWrapper li > * {
+.listWrapper li > *:not(.releaseResButton) {
     pointer-events: none;
 }
 
@@ -108,12 +108,23 @@
     padding: 1rem 2rem;
     background-color: var(--colorBackgroundGrey);
     margin: 0 0 6px 0;
+
 }
 
 li.reservation.preparedAll {
     padding: 1rem 2rem;
     background-color: var(--colorBackgroundGrey);
     margin: 0 0 6px 0;
+}
+
+.timeFilter {
+    border-bottom: 1px solid var(--colorBackgroundGrey);
+    padding: 0 0 1rem 0;
+}
+
+.filterWrapper {
+    justify-content: center;
+    text-align: center;
 }
 
 h2, p {
@@ -133,6 +144,8 @@ h2, p {
     border-radius: 0.3rem;
     display: inline-block;
 }
+
+
 
 .uk-navbar span {
     color: white !important;
@@ -245,3 +258,62 @@ h2, p {
 .largeReservation {
     background-color: #e76f51 !important;
 }
+.mediumReservation{
+    background-color: #f4a261 !important;
+}
+
+/*release reservation button*/
+.releaseResButton{
+    background-color: #007f5f;
+    color: #f8f9fa;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 14px;
+}
+
+.listDateandDep{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0 0 0px;
+}
+
+/*release popup*/
+#release-reservation-popup li{
+    padding: 5px 0;
+}
+#feedbackDetails{
+    max-height: 250px;
+    overflow-y: scroll;
+}
+.releaseIconError, .releaseIconSuccess{
+    border: 1px solid;
+    border-radius: 50%;
+    min-width: 15px;
+    max-width: 15px;
+    min-height: 15px;
+    max-width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.releaseIconError svg, .releaseIconSuccess svg{
+    width: 60%;
+    height: 60%;
+}
+.releaseIconError{
+    border-color: darkred;
+}
+.releaseIconSuccess{
+    border-color: forestgreen;
+}
+
+
+@media (max-width: 520px) {
+    .reservation .modeCircle {
+        margin-top: 0px;
+    }
+}
+
+
+
