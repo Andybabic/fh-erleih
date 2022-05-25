@@ -1,5 +1,5 @@
 "use strict";
-
+import ReleasePopup from './ReleasePopup.js';
 export default class FilterableList {
 
     //CONSTRUCTOR
@@ -352,7 +352,7 @@ export default class FilterableList {
                     }
 
                     let li = `
-                            <li class="reservation uk-flex uk-flex-between uk-flex-bottom  ${preperationClass}" data-id = ${curId}>
+                            <li class="reservation uk-flex uk-flex-between ${res.preparedAll ? "uk-flex-top" : "uk-flex-bottom"}  ${preperationClass}" data-id = ${curId}>
                                 <div>
                                     <span>${res.userId}</span>
                                     <h2>${general.formatName(res.firstName)} ${general.formatName(res.lastName)}</h2>
@@ -372,7 +372,17 @@ export default class FilterableList {
                     for (const item of departmentList) {
                         li += `<span class="departmentLabel">${this.departments[item]}</span>`;
                     }
-                    li += `            
+
+                    if(res.preparedAll && this.vars.listType == "prepare"){
+                        li += `            
+                                        </p>
+                                    </div>  
+                                </div>
+                                <button class="releaseResButton">Ausgeben</button>
+                                
+                            </li>`;
+                    }else{
+                        li += `            
                                         </p>
                                     </div>  
                                 </div>
@@ -390,6 +400,8 @@ export default class FilterableList {
                                 </div>
                                 
                             </li>`;
+                    }
+
 
                     //append li to reslist or to preparedlist depending on preparedAll attribute
                     if (res.preparedAll && this.vars.listType == "prepare") {
@@ -430,15 +442,19 @@ export default class FilterableList {
 
         }
         this.listInteraction();
+        this.releaseReservation();
         general.toggleLoader(this.doms.filterWrapper);
     }
 
     listInteraction() {
         $(".reservation").on("click", (e) => {
-            const id = e.target.dataset.id
-            const data = this.vars[id];
-            data.listType = this.vars.listType;
-            general.redirectWithPost(data);
+            if(!e.target.classList.contains("releaseResButton")){
+                //only if not release reservation button was clicked
+                const id = e.target.dataset.id
+                const data = this.vars[id];
+                data.listType = this.vars.listType;
+                general.redirectWithPost(data, "checklist.php");
+            }
         });
 
         //done list toggle
@@ -449,6 +465,72 @@ export default class FilterableList {
                 $(".doneListArrow").css({"transform": "rotate(0deg)"})
             }
             $(".doneList").slideToggle();
+        });
+    }
+
+    releaseReservation(){
+        $(".releaseResButton").on("click", (e) => {
+            const listEntry = e.target.parentNode;
+            const id = listEntry.dataset.id
+            const data = this.vars[id];
+            const reservations = data.reservations;
+            let resIds = [];
+            for (const res of reservations) {
+                resIds.push(res.id);
+            }
+            if(resIds.length > 0){
+                const dataTst = {
+                    "userId": "mt191092",
+                    "firstName": "Jungwirth",
+                    "lastName": "Lukas",
+                    "email": "mt191092@fhstp.ac.at",
+                    "tel": "+436801420181",
+                    "date": "2022-05-25 16:30:00",
+                    "reservations": [
+                        {
+                            "id": 521430,
+                            "lastChange": "2022-05-25 10:36:06",
+                            "userId": "mt191092",
+                            "bookedBy": "mt191092",
+                            "equipId": 5553,
+                            "statusId": 2,
+                            "from": "2022-05-25 16:30:00",
+                            "to": "2022-05-27 15:30:00",
+                            "userComment": "test_ausgabe",
+                            "assiComment": "",
+                            "lendDate": "0000-00-00 00:00:00",
+                            "returnDate": "0000-00-00 00:00:00",
+                            "assiLend": null,
+                            "assiReturn": null,
+                            "usageId": 12,
+                            "prepared": 1,
+                            "departmentId": "3"
+                        },
+                        {
+                            "id": 521431,
+                            "lastChange": "2022-05-25 13:15:24",
+                            "userId": "mt191092",
+                            "bookedBy": "mt191092",
+                            "equipId": 3984,
+                            "statusId": 2,
+                            "from": "2022-05-25 16:30:00",
+                            "to": "2022-05-27 15:30:00",
+                            "userComment": "testtest",
+                            "assiComment": "",
+                            "lendDate": "0000-00-00 00:00:00",
+                            "returnDate": "0000-00-00 00:00:00",
+                            "assiLend": null,
+                            "assiReturn": null,
+                            "usageId": 3,
+                            "prepared": 1,
+                            "departmentId": "3"
+                        }
+                    ],
+                    "inPreparation": 1,
+                    "preparedAll": 1
+                }
+                new ReleasePopup(resIds, dataTst);
+            }
         });
     }
 

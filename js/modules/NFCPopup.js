@@ -6,7 +6,6 @@ export default class NFCPopup{
         this.vars = {
             eqId                : eqId,
             equipment           : "",
-            eqType              : "",
         };
         this.doms = {
             popup               : "",
@@ -23,12 +22,9 @@ export default class NFCPopup{
 
     //METHODS
     async initPopup(){
-        this.vars.equipment = await ajax.getEquipmentById(this.vars.eqId);
+        this.vars.equipment = await ajax.getExpandedEquipmentById(this.vars.eqId);
         if(this.vars.equipment){
             console.log(this.vars.equipment);
-            //get eq type if there was no error within the first request
-            this.vars.eqType = await ajax.getEquipmentTypeById(this.vars.equipment["typeId"]);
-            console.log(this.vars.eqType);
         }
         console.log(this.vars.equipment)
         this.createPopup();
@@ -38,12 +34,12 @@ export default class NFCPopup{
 
     createPopup(){
         let content;
-        if(!this.vars.equipment || !this.vars.eqType){
+        if(!this.vars.equipment){
             content = `<p>Leider konnten gerade keine Daten zur am NFC Tag gespeicherten ID abgerufen werden.</p>`;
         }else{
             content = `
                 <h3 class="uk-text-default uk-margin-remove">Folgendes Equipment wurde erkannt:</h3>
-                <p class="uk-text-large uk-margin-remove">${this.vars.eqType["nameDe"]} ${this.vars.equipment["nameDe"]}</p>
+                <p class="uk-text-large uk-margin-remove">${this.vars.equipment.typeId["nameDe"]} ${this.vars.equipment["nameDe"]}</p>
             `;
         }
         const popup = `
@@ -70,14 +66,15 @@ export default class NFCPopup{
         UIkit.modal('#nfc-listener-popup').show();
         this.doms.popup = $('#nfc-listener-popup');
         this.doms.returnButton = $(".returnButton");
-        this.doms.moreInfoButton = $(".proceedButton");
-        this.doms.displayResButton = $(".proceedButton");
+        this.doms.moreInfoButton = $(".moreInfosButton");
+        this.doms.displayResButton = $(".displayResButton");
 
     }
 
 
     addButtonInteraction(){
         this.doms.moreInfoButton.on("click", () => {
+            console.log("more");
             this.showMoreInfos();
         });
         this.doms.displayResButton.on("click", () => {
@@ -89,6 +86,9 @@ export default class NFCPopup{
 
     async showMoreInfos(){
         //displays all important infos concerning the scanned equipment
+        if(this.vars.equipment){
+            general.redirectWithPost(this.vars.equipment, "equipment-detail.php");
+        }
 
     }
 
