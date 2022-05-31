@@ -390,7 +390,7 @@ export default class FilterableList {
                                         </p>
                                     </div>  
                                 </div>
-                                <div class="uk-flex uk-flex-column uk-flex-bottom uk-flex-right">
+                                <div class="buttonClickWrapper uk-flex uk-flex-column uk-flex-bottom uk-flex-right">
                                     <button class="releaseResButton uk-margin-small-bottom">Ausgeben</button>
                                     <div class="quantityCircle ${res.reservations.length > 25 ? ( res.reservations.length > 50 ? 'largeReservation' : 'mediumReservation') : ''}">
                                         <div class="quantityIcon"> 
@@ -490,7 +490,7 @@ export default class FilterableList {
 
     releaseReservation(){
         $(".releaseResButton").on("click", (e) => {
-            const listEntry = e.target.parentNode;
+            const listEntry = e.target.parentNode.parentNode;
             const id = listEntry.dataset.id
             const data = this.vars[id];
             const reservations = data.reservations;
