@@ -50,6 +50,108 @@ class General {
   }
 
 
+
+  groupResByDate(resList, listType) {
+        //taks all reservations from a query and groups them by user
+        //calls groupByUser afterwards and returns grouped reservations
+        let type;
+        //group dates depending on list type by "from" or by "to" date
+        listType == "prepare" ? type = "from" : type = "to";
+
+        const resByDates = [];
+
+        for (const res of resList) {
+            //slice to ignore time
+            const date = res[type].slice(0, 10);
+            //check if resByDates Array already contains the date
+            if (resByDates.length > 0) {
+                //check if date is already in array
+                let contains = false;
+                for (const resByDate of resByDates) {
+                    if (resByDate.date === date) {
+                        resByDate.reservations.push(res);
+                        contains = true;
+                    }
+                }
+                if (contains) {
+                    //curent date is already in resByDates array
+
+                } else {
+                    resByDates.push({date: date, reservations: [res]});
+                }
+            } else {
+                resByDates.push({date: date, reservations: [res]});
+            }
+        }
+
+        return resByDates;
+    }
+
+    async groupResByUser(resByDates, listType) {
+        for (const resByDate of resByDates) {
+            const groupedByUser = await this.groupByUserHelper(resByDate.reservations, listType);
+            resByDate.reservations = groupedByUser;
+        }
+
+        return resByDates;
+    }
+
+    async groupByUserHelper(resList, listType){
+        //taks all reservations from a query and groups them by user
+        let userIDs = [];
+        let resByUser = [];
+        for (let i = 0; i < resList.length; i++) {
+            const res = resList[i];
+            const userId = resList[i]["userId"];
+            if (!userIDs.includes(userId)) {
+                //if the current ID is not already in the userIDs array, add it
+                userIDs.push(userId);
+                //get user data for every user
+                let user = await ajax.getUserById(userId);
+                if (!user) {
+                    user = {};
+                    //if no userdata is available
+                    user.firstName = "";
+                    user.lastName = "";
+                    user.mail = "";
+                    user.tel = "";
+                }
+
+
+                resByUser.push(
+                    {
+                        "userId": userId,
+                        "firstName": user["firstName"],
+                        "lastName": user["lastName"],
+                        "email": user["email"],
+                        "tel": user["tel"],
+                        "date": listType == "prepare" ? res["from"] : res["to"],
+                        "reservations": [res],
+                        "inPreparation": res["prepared"],
+                        "preparedAll": res["prepared"],
+                    }
+                );
+            } else {
+                for (const user of resByUser) {
+                    //add all further reservations to the existing user in the resByUser array
+                    if (user["userId"] == userId) {
+                        user["reservations"].push(res);
+                        //if the prepared state of one individual reservation is not true the resbyuser object is not fully prepared
+                        if (res["prepared"] == 0) {
+                            user["preparedAll"] = 0;
+                        }
+                        //if prepared state of one reservation is true the resbyuser object is in preparation
+                        if (res["prepared"] == 1) {
+                            user["inPreparation"] = 1;
+                        }
+                    }
+                }
+            }
+        }
+        return resByUser;
+    }
+
+
   //LOADER+
   toggleLoader(DOMPos) {
     //toggles loader

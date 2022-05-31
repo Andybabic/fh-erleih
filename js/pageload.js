@@ -9,9 +9,10 @@ class PageloaderState {
     
     siteloading(i,count) {
         count=count-1;
+        console.log("fuck"+i+"/"+count);
         if (i == count) {
             //save localstorage
-            
+
             localStorage.setItem('siteloading', true);
         }else(
             localStorage.setItem('siteloading', false)
@@ -28,7 +29,7 @@ class PageloaderState {
                 clearInterval(interval);
             
             }
-            
+
             }
             , 100);
 
@@ -44,10 +45,10 @@ function saveTime() {
     if (!document.hidden) {
         localStorage.setItem('lastinteract', new Date().getTime());
         var testvar=localStorage.getItem('lastinteract');
-      
+
     }
 
-    
+
 }
 
 // save time every 2 seconds
