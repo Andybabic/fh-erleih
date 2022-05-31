@@ -17,6 +17,9 @@
     --colorBackgroundGrey: #e3e5e6;
     --colorPrimary: #005096;
     --colorSecondary: #669bc1;
+    --colorAlert: darkred;
+    --colorWarning: orange;
+    --colorSuccess: darkgreen;
     --textColor: #212529;
 }
 
@@ -72,6 +75,17 @@ html, body {
 .colorSecondary {
     background-color: var(--colorSecondary);
     color: white;
+}
+.colorAlert{
+    border-color: var(--colorAlert);
+}
+.colorWarning{
+    border-color: var(--colorWarning);
+
+}
+.colorSuccess{
+    border-color: var(--colorSuccess);
+
 }
 
 .textColor {

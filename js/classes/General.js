@@ -100,8 +100,7 @@ class General {
     }
 
     //PAGE REDIRECT
-    redirectWithPost(data) {
-        const url = "checklist.php";
+    redirectWithPost(data, url) {
         const params = {
             "data": JSON.stringify(data)
         };
