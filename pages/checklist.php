@@ -236,7 +236,9 @@ checklistComponents.checklist = (function() {
 
                     //add data post request
                     var value = this.value;
+
                     jsondata = value;
+                    priv.updateaddCheckbox_list(value,this.checked)
                     if (this.checked) {
                         //send to api that rentry is done or not
                         console.log('post');
@@ -307,6 +309,17 @@ checklistComponents.checklist = (function() {
             }
         }
     }
+
+    priv.updateaddCheckbox_list = function(value,status) {
+        for (var i = 0; i < checkboxelements.length; i++) {
+            if (checkboxes_list[i].value == value) {
+                checkboxes_list[i].checked = status;
+                
+            }
+        }
+    }
+
+    
 
     return publ;
 })();
