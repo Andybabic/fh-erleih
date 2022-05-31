@@ -179,6 +179,7 @@ class General {
                 $(":root").css("--colorBackgroundClean", "#212529");
                 $(":root").css("--colorBackgroundGrey", "#495057");
                 $(":root").css("--textColor", "#f8f9fa");
+                $(":root").css("--preparedAllColor", "#024a07");
             }
         }
     }
