@@ -90,7 +90,7 @@
 
 
         <!--SWIPEBOX Foreground element-->
-        <div class="swipebox_Object swipe_box uk-animation-slide-left" style=" z-index: 1;">
+        <div id="swipebox_Object<?=$resID?>" class="swipebox_Object  swipe_box uk-animation-slide-left" style=" z-index: 1;">
 
             <!--Start Equipment Card element-->
             <div
@@ -98,6 +98,8 @@
                 <div class="checkListbutton ">
 
                     <script>
+                        
+                                           
                     addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status? 'true' : 'false'?>, typeData =
                         <?=$typDataJson?>, resData = <?=$equipData?>);
                     </script>
@@ -151,7 +153,12 @@
                                         <label class="textColor">
                                             <?php $listData = $packlist[$item]['nameDe']; ?>
                                             <script>
+                                                // get swipebox_Object 
+                                            
                                             addCheckbox_list(resID = '<?=$listData?>', parent = '<?=$resID?>',
+                                            //swipebox_Object
+                                            
+                                           
                                                 status =
                                                 <?=$status?>);
                                             </script>

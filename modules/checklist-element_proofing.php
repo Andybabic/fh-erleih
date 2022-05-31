@@ -100,7 +100,7 @@ function build_proofing_list() {
                 html += '<dl class="uk-description-list uk-description-list-divider">';
                 html += '<dt>' + item.typeData["nameDe"] +'</dt>';
                 html += '<dd>' + item.resData['damage'] + '</dd>';
-                html += '<dd>' + item.resData['assiComment'] + '</dd>';
+                html += '<dd>' + item.resData['todo'] + '</dd>';
                 html += '</dl>';
                 html += '</div>';
                 html += '</div>';

@@ -1,5 +1,5 @@
 import Popup from './modules/Popup.js';
-class Swipebox {
+export class Swipebox {
 
     // when mouse is over the swipebox object an moved to left or right, the swipebox object will be moved to the left or right
     // the max distance is limited to 300px
@@ -32,7 +32,7 @@ class Swipebox {
         this.mouseDownX = event.clientX - this.element.offsetLeft;
     }
     touchStart(event) {
-        console.log(event);
+ 
 
         this.touchStart= true;
         this.touchStartX = event.touches[0].clientX - this.element.offsetLeft;
@@ -163,6 +163,7 @@ class Swipebox {
 
 
 }
+
 function startSwipebox(){
     var swipebox_Objects = document.getElementsByClassName("swipebox_Object");
     for (var i = 0; i < swipebox_Objects.length; i++) {
@@ -170,16 +171,19 @@ function startSwipebox(){
 
 
     }
-    console.log("swipebox started");
+
 
 }
+
 
 
 if (window.location.href.includes("checklist")) {
     window.onload = function() {
         //let waitForLoading= 
-        pageLoadingstate.siteloading_check(startSwipebox);
+        pageLoadingState.siteloading_check(startSwipebox);
+        pageLoadingState.siteloading_check(displaySwipeModal);
     }
+
 }
 
 
@@ -214,12 +218,12 @@ function smooth(start,end) {
   
 
     //adding onclick dialogues
-    function displaySwipeModal(){
+function displaySwipeModal(){
         $(".btn-checklist").on("click", (e) => {
             const type = e.target.dataset.type;
-            console.log(type);
+
+            
             
             const modal = new Popup(e, type);
         });
     }
-    displaySwipeModal();

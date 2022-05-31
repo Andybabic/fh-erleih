@@ -81,7 +81,9 @@ export default class FilterableList {
                     arr.push(general.formatDate(date[0]));
                     arr.push(general.formatDate(date[date.length - 1]));
                     this.filter.timespan = arr;
+                    console.log(date);
                 } else if (date.length === 1) {
+                    console.log(date);
                     this.filter.timespan = [];
                     this.filter.timespan.push(general.formatDate(date[0]));
                 }

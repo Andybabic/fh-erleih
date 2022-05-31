@@ -9,10 +9,9 @@ class PageloaderState {
     
     siteloading(i,count) {
         count=count-1;
-        console.log("fuck"+i+"/"+count);
         if (i == count) {
             //save localstorage
-            console.log("done");
+            
             localStorage.setItem('siteloading', true);
         }else(
             localStorage.setItem('siteloading', false)
@@ -29,12 +28,27 @@ class PageloaderState {
                 clearInterval(interval);
             
             }
-            console.log("init");
+            
             }
-            , 2000);
+            , 100);
 
 
         }
 
 }
 let pageLoadingState = new PageloaderState();
+
+
+// save current time in local storage
+function saveTime() {
+    if (!document.hidden) {
+        localStorage.setItem('lastinteract', new Date().getTime());
+        var testvar=localStorage.getItem('lastinteract');
+      
+    }
+
+    
+}
+
+// save time every 2 seconds
+setInterval(saveTime, 2000);

@@ -28,7 +28,7 @@ echo (  " <script defer type='module' src='".$path."js/classes/General.js'></scr
 echo (  " <script defer src='".$path."style/uikit/js/uikit.min.js'></script> ");
 echo (  " <script defer src='".$path."style/uikit/js/uikit-icons.min.js'></script> ");
 echo (  " <script src='".$path."js/pageload.js'></script> ");
-echo (  " <script defer type='module' src='".$path."js/swipe.js'></script> ");
+echo (  " <script type='module' src='".$path."js/swipe.js'></script> ");
 
 echo (  " <script defer src='".$path."style/datepicker/datepicker.js'></script> ");
 
@@ -57,6 +57,7 @@ function getLink($link){
 
 
     
+
 
 
 
