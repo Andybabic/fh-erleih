@@ -32,7 +32,7 @@ export class Swipebox {
         this.mouseDownX = event.clientX - this.element.offsetLeft;
     }
     touchStart(event) {
- 
+        console.log(event);
 
         this.touchStart= true;
         this.touchStartX = event.touches[0].clientX - this.element.offsetLeft;
@@ -163,7 +163,6 @@ export class Swipebox {
 
 
 }
-
 function startSwipebox(){
     var swipebox_Objects = document.getElementsByClassName("swipebox_Object");
     for (var i = 0; i < swipebox_Objects.length; i++) {
@@ -171,7 +170,7 @@ function startSwipebox(){
 
 
     }
-
+    console.log("swipebox started");
 
 }
 
@@ -179,7 +178,7 @@ function startSwipebox(){
 
 if (window.location.href.includes("checklist")) {
     window.onload = function() {
-        //let waitForLoading= 
+        //let waitForLoading=
         pageLoadingState.siteloading_check(startSwipebox);
         pageLoadingState.siteloading_check(displaySwipeModal);
     }
@@ -222,7 +221,7 @@ function displaySwipeModal(){
         $(".btn-checklist").on("click", (e) => {
             const type = e.target.dataset.type;
 
-            
+
             
             const modal = new Popup(e, type);
         });

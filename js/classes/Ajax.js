@@ -172,6 +172,20 @@ export default class Ajax{
         });
     }
 
+    async getOpenResByUser(userId){
+        const api = `${this.vars.apiUrl}reservierung/byUserOffen/${userId}/`;
+
+        return new Promise((resolve) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
 
     async postResStatus(id){
         const api = `${this.vars.apiUrl}/reservierung/vorbereiten/`;
