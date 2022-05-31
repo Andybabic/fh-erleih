@@ -50,7 +50,7 @@ function call($url,$data,$curl ){
 }
 
 
-
+$api = "";
 if(isset($_GET['r']) ){
     $result = "get";
     $api = $_GET['r'];

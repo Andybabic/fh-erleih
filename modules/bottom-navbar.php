@@ -3,7 +3,7 @@
 
 
 
-<div class="uk-container" style="color:withe" >
+<div class="uk-container" style="color:white" >
 
                     <div class="uk-float-left grid-50 ">
                                 <a class="uk-button uk-button-default colorPrimary  uk-align-center" id="back" onclick="stateComponents.stateManager.set_state(-1) " >Return</a>

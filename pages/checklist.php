@@ -22,9 +22,6 @@ if(empty($data)){
        
         global $headercockie;
 
-        $time = $milliseconds-$callcount;
-        echo($time);
-
         $url = $url;
         $options = array(
                 'http' => array(

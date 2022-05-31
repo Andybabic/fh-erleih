@@ -7,11 +7,10 @@ session_id($_COOKIE['PHPSESSID']);
 // get config.php file from server
 $config_file = require_once("../config.php");
 //require_once("../functions/loader.php");
-//getModule('auth');
 
 //api url
 $api_url = $config_api_url;
-$headercockie;
+$headercockie = null;
 
 
 // 

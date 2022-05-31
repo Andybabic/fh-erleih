@@ -10,6 +10,7 @@ if(isset($_POST["data"])){
     $equipmentData = $equipmentData;
 }else{
     header("Location:overview.php");
+    exit();
 }
 
 //print jason as table
@@ -34,7 +35,7 @@ function phpObjToTable ($data)
             ';
         }
         if (is_object($value) || is_array($value)) {
-            $table .= jsonToTable($value);
+            $table .= phpObjToTable($value);
         } else {
             $table .= $value;
         }
