@@ -7,7 +7,7 @@ $domain = $_SERVER['HTTP_HOST'];
 $userID = $_SESSION['username']
 ?>
 <header>
-    <nav  class="navbar uk-width-3-5@l  uk-align-center ">
+    <nav  class="navbar uk-width-3-5@l uk-width-4-5@m uk-align-center">
         <a class="nav-branding"><?=$userID ?></a>
         <ul class="nav-menu">
             <li class="nav-item">
@@ -24,11 +24,11 @@ $userID = $_SESSION['username']
             </li>
         </ul>
 
-        <div class="hamburger">
+        <button class="hamburger">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
-        </div>
+        </button>
     </nav>
 </header>
 

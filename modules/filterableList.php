@@ -18,7 +18,7 @@
 
         </div>
     </div>
-    <div class="listWrapper  uk-width-3-5@l uk-margin  uk-align-center">
+    <div class="listWrapper   uk-width-3-5@l uk-width-4-5@m  uk-width-4-5@s  uk-margin  uk-align-center">
     </div>
 
 </div>

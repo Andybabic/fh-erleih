@@ -43,10 +43,11 @@
     width: 100%;
     border-radius: 0;
     margin-top: -0.05rem;
+
 }
 
 .timeFilter {
-    padding: 0 0 0.5rem 0;
+    padding: 0 0 0.2em 0;
 }
 
 .filterWrapper {
@@ -60,8 +61,8 @@
 .aufklappen {
     margin: 0px auto 0px;
     width: 100%;
-    padding: 0.2rem;
-    background-color: var(--colorPrimary);
+    padding: 0.6rem;
+    background-color: var(--colorSecondary);
     display: flex;
     justify-content: center;
 }
@@ -71,34 +72,33 @@
 }
 
 .filterButtonWrapper {
-    background-color: var(--colorBackgroundClean);
-    border: 2px solid var(--colorPrimary);*/
+    background-color: var(--filterWrapperColor);
     margin-bottom: -10px;
     margin-top: 20px;
 }
-
-
 
 @media (max-width: 640px) {
 
     .filterButtonWrapper {
         width: 100%;
-        background-color: #Cddeeb;
-        border: none;
+        margin-top: 0;
     }
 
-    .filterWrapper{
+    .filterWrapper {
         margin-bottom: -0.4rem;
         padding: 0rem 0;
     }
 
-    .datefilter{
-        margin-bottom: 0;
+    .datefilter {
+        margin-bottom: 10px;
     }
 }
 
+.timeFilter {
+    padding-bottom: 0.3rem;
+}
 
-.showFilterArrow {
+.showFilterArrow, .doneListArrow {
     width: 20px;
     height: 20px;
     display: flex;
@@ -110,15 +110,20 @@
     position: relative;
 }
 
+.doneListArrow{
+    margin-left:-20px;
+}
+
 /* Übersichtsliste*/
 .uk-list-striped > :nth-of-type(odd) {
     border: none;
 }
 
-.listWrapper li > *{
+.listWrapper li > * {
     pointer-events: none;
 }
-.releaseResButton{
+
+.releaseResButton {
     pointer-events: all;
 }
 
@@ -172,39 +177,35 @@ h2, p {
 }
 
 /*Vorbereitet Liste*/
-#doneListToogle {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    cursor: pointer;
-}
 
-.doneListArrow {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all .4s ease-in;
-    fill: var(--preparedAllColor);
 
-}
+
 
 .doneListWrapper .doneList.uk-list {
     margin-top: 0;
 }
 
-#doneListHeading {
-    margin-left: 1rem;
-    margin-right: -2rem;
-    padding-bottom: 0.5rem;
+
+
+
+
+.doneListShow{
+    margin: 0px auto 0px;
+    width: 100%;
+    padding: 0.6rem;
+    background-color: #007f5f;
+    display: flex;
+    justify-content: center;
 }
 
-.doneListArrow {
-    margin-left: 3rem;
-    font-weight: bold;
+.doneListShow p{
+    color:white !important;
+    padding-right:30px;
 }
 
+.doneList{
+    padding: 0 0.5rem;
+}
 /*after to provide space for footer*/
 #filterableList {
     margin-bottom: 50px;

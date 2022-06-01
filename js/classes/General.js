@@ -180,6 +180,7 @@ class General {
                 $(":root").css("--colorBackgroundGrey", "#495057");
                 $(":root").css("--textColor", "#f8f9fa");
                 $(":root").css("--preparedAllColor", "#024a07");
+                $(":root").css("--filterWrapperColor", "#003265")
             }
         }
     }
@@ -263,16 +264,11 @@ class General {
       $(".aufklappen").on("click", (e) => {
           if ($(".filterWrapper").is(":visible")) {
               $(".showFilterArrow").css({"transform": "rotate(180deg)"})
-               $(".aufklappen").css({"background-color": "#004f94B3"})
 
           } else {
               $(".showFilterArrow").css({"transform": "rotate(0deg)"})
-               $(".aufklappen").css({"background-color": "var(--colorPrimary)"})
           }
-           $(".aufklappen").toggleClass("var--(colorPrimary)");
           $(".filterWrapper").slideToggle();
-
-
       });
 
 
