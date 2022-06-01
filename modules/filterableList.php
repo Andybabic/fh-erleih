@@ -1,6 +1,7 @@
 <?php
 ?>
 <script defer type="module" src="../js/modules/FilterableList.js"></script>
+<script defer src="../js/modules/LuckyWheel.js"></script>
 <div id="filterableList">
     <div class="filterButtonWrapper uk-width-3-5@l uk-width-4-5@m  uk-width-4-5@s uk-align-center">
         <div class="aufklappen uk-width-3-5@l uk-width-4-5@m uk-width-4-5@s uk-align-center uk-flex ">

@@ -743,6 +743,8 @@ li {
 
 .releaseResButton {
     pointer-events: all;
+    height: 42px;
+    width: 90px;
 }
 
 .uk-list .reservation {

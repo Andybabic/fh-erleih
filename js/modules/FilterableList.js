@@ -1,5 +1,6 @@
 "use strict";
 import ReleasePopup from './ReleasePopup.js';
+import LuckyWheel from "./LuckyWheel.js";
 export default class FilterableList {
 
     //CONSTRUCTOR
@@ -319,10 +320,31 @@ export default class FilterableList {
             this.doms.listWrapper.html(errorMessage);
         } else if (data == "empty") {
             const emptyMessage = `
+                <div class="uk-align-center">
                     <p>Alles erledigt!</p>
-                    <img style="height: 60vh" src="../style/image/alles-erledigt.jpg" alt="alles erledigt Motivationsbild">
+                <div class="wheel">
+                    <div class="wheel__inner">
+                        <div class="wheel__sec">
+                        </div>
+                        <div class="wheel__sec">
+                        </div>
+                        <div class="wheel__sec">
+                        </div>
+                        <div class="wheel__sec">
+                        </div>
+                        <div class="wheel__sec">
+                        </div>
+                        <div class="wheel__sec">
+                        </div>
+                    </div>
+                    <div class="wheel__arrow">
+                        <button class="wheel__button">QUAY</button>
+                    </div>
+                </div>
+                </div>
                 `;
             this.doms.listWrapper.html(emptyMessage);
+            new LuckyWheel();
         } else {
             let resList = `<ul class="uk-list uk-list-striped">`;
             let doneList = `<ul class="doneList uk-list uk-list-striped">`;
