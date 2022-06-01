@@ -122,16 +122,16 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
     <!--User Data-->
     <div class="uk-container ">
         <main>
-            <article class="uk-article">
-                <h4 class="uk-text-lead"><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>
-                    <?= $jsonUser["userId"] ?></h4>
-                <p class="uk-text-lighter">Email: <a
+            <div class="orderPersonInformation">
+                <h2 ><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>
+                    <?= $jsonUser["userId"] ?></h2>
+                <p >Email: <a class="contactLink"
                         href="mailto:<?= $jsonUser["email"] ?>"><?= $jsonUser["email"] ?></a>
-                    <br> Tel: <a href="tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
+                    <br> Tel: <a  class="contactLink" href="tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
 
-                <p class="uk-text-light uk-align-left ">am <?= $jsonUser["date"] ?></p>
-                <p class="uk-text-light uk-align-right"> Video</p>
-            </article>
+                <p class=" uk-align-left ">am <?= $jsonUser["date"] ?></p>
+                <p class=" uk-align-right"> Video</p>
+            </div>
             <hr>
 
             <!--Start List of Equipment_interact-->

@@ -160,6 +160,8 @@ body {
     margin-top: 0px;
 }
 
+
+
 /* Start Swipebox Style  */
 .Swipe_container {
     position: relative;
@@ -234,8 +236,7 @@ a.link2 {
 
 /* End Swipebox Style */
 
-#forward.uk-button,
-#back.uk-button {
+#forward.uk-button{
     color: #f8f9fa !important;
 }
 
@@ -891,5 +892,72 @@ h2, p {
     background-color: #f4a261 !important;
 }
 
+
+/* ORDER INFORMATION PAGE */
+.orderPersonInformation{
+    margin: 1.5rem 0 3rem 1.5rem;
+}
+
+.orderPersonInformation h2{
+    font-weight: bold;
+    margin:0;
+}
+
+.orderPersonInformation p{
+    margin: 0;
+}
+
+.contactLink{
+    color: var(--colorSecondary) !important;
+    text-decoration: underline;
+}
+.equpimentInformation {
+    color: transparent;
+    max-height: 10rem;
+    overflow-y: auto;
+}
+
+
+.equpimentInformation *{
+font-size: 12px !important;
+    margin:0;
+    padding:0;
+    font-color: var(--textColor) !important;
+}
+
+
+
+.equpimentInformation li{
+   list-style-type: circle;
+
+}
+
+.equpimentInformation ul{
+    padding-left:20px;
+}
+
+.uk-container uk-text-lead{
+    color: var(--textColor) !important;
+
+}
+
+.iconInformation{
+    fill:var(--textColor) !important;
+}
+
+.iconInformation circle{
+    stroke: var(--textColor) !important;
+}
+
+#back.uk-button{
+    background-color: var(--colorBackgroundGrey);
+    color: var(--textColor) !important;
+}
+
+#checklistComment{
+    background-color: var(--colorSecondary);
+    color: white;
+    margin-top:3px;
+}
 
 
