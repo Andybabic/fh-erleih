@@ -24,11 +24,14 @@ import FilterableList from './FilterableList.js';
          //METHODS
 
          initModeSwitch(){
-             console.log(localStorage.overviewState);
              if(localStorage.overviewState){
                  //try to get state value from localstorage
                  this.modules.filterableList = new FilterableList($("#filterableList"), localStorage.overviewState);
                  this.vars.currentMode = localStorage.overviewState;
+                 if(this.vars.currentMode == "return"){
+                     document.title = "Rücknahme";
+                     $(".nav-branding").text("Rücknahme");
+                 }
              }else{
                  //if no stored value -> prepared state as default
                  this.modules.filterableList = new FilterableList($("#filterableList"), "prepare");
@@ -70,11 +73,15 @@ import FilterableList from './FilterableList.js';
                 case "prepare":
                     this.modules.filterableList.removeList();
                     this.modules.filterableList = new FilterableList($("#filterableList"), "prepare");
+                    document.title = "Vorbereitung";
+                    $(".nav-branding").text("Vorbereitung");
                     break;
                 case "return":
-                     this.modules.filterableList.removeList();
-                     this.modules.filterableList = new FilterableList($("#filterableList"), "return");
-                     break;
+                    this.modules.filterableList.removeList();
+                    this.modules.filterableList = new FilterableList($("#filterableList"), "return");
+                    document.title = "Rücknahme";
+                    $(".nav-branding").text("Rücknahme");
+                    break;
 
              }
          }

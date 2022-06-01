@@ -170,7 +170,6 @@ function startSwipebox(){
 
 
     }
-    console.log("swipebox started");
 
 }
 
@@ -184,6 +183,7 @@ if (window.location.href.includes("checklist")) {
     }
 
 }
+
 
 
 
@@ -217,12 +217,16 @@ function smooth(start,end) {
   
 
     //adding onclick dialogues
+let once = true;
 function displaySwipeModal(){
-        $(".btn-checklist").on("click", (e) => {
-            const type = e.target.dataset.type;
+        if(once){
+            $(".btn-checklist").on("click", (e) => {
+                console.log(e.target);
+                console.log(e.target.type);
+                const type = e.target.dataset.type;
 
-
-            
-            const modal = new Popup(e, type);
-        });
+                const modal = new Popup(e, type);
+            });
+            once = false;
+        }
     }

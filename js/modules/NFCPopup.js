@@ -23,9 +23,6 @@ export default class NFCPopup{
     //METHODS
     async initPopup(){
         this.vars.equipment = await ajax.getExpandedEquipmentById(this.vars.eqId);
-        if(this.vars.equipment){
-
-        }
 
         this.createPopup();
         this.addButtonInteraction();
@@ -97,11 +94,23 @@ export default class NFCPopup{
         const reservations = await ajax.getResByEq(this.vars.eqId);
         if(reservations){
             const lastRes = this.getEquipment(reservations);
+
             if(lastRes != undefined){
                 const openReservations = await ajax.getOpenResByUser(lastRes["userId"]);
+
                 const groupedRes = general.groupResByDate(openReservations, "return");
-                this.vars.data = await general.groupResByUser(groupedRes, "return");
+                let relevantRes = [];
+                //go through all reservations to get the one with the scanned id in it
+                for (const res of groupedRes) {
+                    for (const subres of res.reservations) {
+                        if(subres.equipId == this.vars.eqId){
+                            relevantRes.push(res);
+                        }
+                    }
+                }
+                this.vars.data = await general.groupResByUser(relevantRes, "return");
                 this.vars.reservation = this.vars.data[0].reservations[0];
+
                 this.changeContentForDisplayResState(true);
             }else{
                 this.changeContentForDisplayResState(false);
@@ -174,22 +183,8 @@ export default class NFCPopup{
                                     <span>${res.userId}</span>
                                     <h2>${general.formatName(res.firstName)} ${general.formatName(res.lastName)}</h2>
                                     <div class="listDateandDep">
-                                        <p>${dateStr}</p>  
-                                        <p class="departments">`;
-                    //create list of departments
-                    let departmentList = new Set();
-                    console.log(res);
-                    for (const subRes of res["reservations"]) {
-                        console.log(subRes);
-                        departmentList.add(subRes.departmentId);
-                    }
-                    console.log(departmentList);
-
-                    for (const item of departmentList) {
-                        listItem += `<span class="departmentLabel"></span>`;
-                    }
-
-                    listItem += `            
+                                        <p>Rückgabe: ${dateStr}</p>  
+                                        <p class="departments">       
                                         </p>
                                     </div>  
                                 </div>
@@ -235,6 +230,7 @@ export default class NFCPopup{
             );
 
             $(".proceedToReservation").on("click", () => {
+                console.log(this.vars.reservation);
                 general.redirectWithPost(this.vars.reservation, "checklist.php");
             });
         }else{

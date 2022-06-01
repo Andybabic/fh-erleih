@@ -9,6 +9,8 @@ class General {
         window.ajax = new Ajax();
         //applies darkmode to every page if selected
         this.addDarkmode();
+        //set page title to nav
+        this.setPageTitle();
         //burger button menu functionality
         this.openBurgerMenu();
         //checks on page load if there is an ID from NFC scan in localstorage
@@ -19,6 +21,12 @@ class General {
         this.goPageBack();
         //opens Div of Filter Buttons
         this.openFilterButtonDiv();
+    }
+
+    //HEADER
+
+    setPageTitle(){
+        $(".nav-branding").text(document.title);
     }
 
   //FORMAT - all functions that format something
