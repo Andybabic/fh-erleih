@@ -1,11 +1,19 @@
 import Popup from './modules/Popup.js';
-export class Swipebox {
+export default class Swipebox {
+
+
+
 
     // when mouse is over the swipebox object an moved to left or right, the swipebox object will be moved to the left or right
     // the max distance is limited to 300px
 
-    constructor(element) {
-        this.element = element;
+    constructor(domElement) {
+        this.element = domElement;
+        //console.log(this.element);
+           
+        
+
+       
         this.element.addEventListener('mousemove', this.mouseMove.bind(this));
         this.element.addEventListener('mouseleave', this.mouseLeave.bind(this));
         this.element.addEventListener('mousedown', this.mouseDown.bind(this));
@@ -22,7 +30,9 @@ export class Swipebox {
         this.pos=0;
         this.state=0;
         this.fixed= true
+    
 
+        
     }   
 
 
@@ -163,38 +173,20 @@ export class Swipebox {
 
 
 }
-function startSwipebox(){
-    var swipebox_Objects = document.getElementsByClassName("swipebox_Object");
-    for (var i = 0; i < swipebox_Objects.length; i++) {
-        var swipebox_Object = new Swipebox(swipebox_Objects[i]);
 
 
-    }
 
-}
 
 
 
 if (window.location.href.includes("checklist")) {
     window.onload = function() {
         //let waitForLoading=
-        pageLoadingState.siteloading_check(startSwipebox);
+        //pageLoadingState.siteloading_check(startSwipebox);
         pageLoadingState.siteloading_check(displaySwipeModal);
     }
 
 }
-
-
-
-
-
-//if document is ready, start the script
-document.addEventListener('DOMContentLoaded', function () {
-
-    // create a uniqe instance of Swipebox for every div with class swipebox_Object
-    
-}
-);
 
 
 

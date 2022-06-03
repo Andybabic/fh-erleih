@@ -70,15 +70,16 @@
 
     ?>
 
+
     <div class="Swipe_container  grid-100 ">
         <div class=" swipe_box_back" data-resId="<?= $resID ?>" data-eqId="<?= $jsonUser['equipId'] ?>">
             <div class=" uk-align-right btn-checklist colorSecondary uk-animation-slide-left-small" data-type="extend">
                 <span class="center-all uk-animation-slide-left-small " uk-icon="icon: future; ratio: 1.5"></span>
             </div>
             <?php if (true) : ?>
-                <div class=" uk-align-right btn-checklist bg-orange uk-animation-slide-left-small" data-type="report">
-                    <span class="center-all uk-animation-slide-left-small" uk-icon="icon: warning; ratio: 1.5"></span>
-                </div>
+            <div class=" uk-align-right btn-checklist bg-orange uk-animation-slide-left-small" data-type="report">
+                <span class="center-all uk-animation-slide-left-small" uk-icon="icon: warning; ratio: 1.5"></span>
+            </div>
             <?php endif; ?>
             <div class=" uk-align-left btn-checklist colorSecondary uk-animation-slide-left-small" data-type="extend">
                 <span class="center-all uk-animation-slide-left-small " uk-icon="icon: future; ratio: 1.5"></span>
@@ -91,41 +92,40 @@
 
         <!--SWIPEBOX Foreground element-->
         <div id="swipebox_Object<?= $resID ?>" class="swipebox_Object  swipe_box uk-animation-slide-left"
-             style=" z-index: 1;">
+            style=" z-index: 1;">
 
             <!--Start Equipment Card element-->
             <div
-                    class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
+                class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
                 <div class="checkListbutton ">
 
                     <script>
-
-
-                        addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status ? 'true' : 'false'?>, typeData =
-                            <?=$typDataJson?>, resData = <?=$equipData?>);
+                    addCheckbox_list(resID = '<?=$resID?>', parent = false, status = <?=$status ? 'true' : 'false'?>,
+                        typeData =
+                        <?=$typDataJson?>, resData = <?=$equipData?>);
                     </script>
                     <!-- set state of checkbox -->
 
                     <input class="checklist-checkbox parent" type="checkbox" <?= ($status) ? "checked" : "" ?>
-                           id="<?= $resID ?>" value="<?= $resID ?>">
+                        id="<?= $resID ?>" value="<?= $resID ?>">
 
 
                 </div>
                 <div class="grid-100 ">
 
-                        <label for="<?= $resID ?>">
-                            <h4><?= $typData["nameDe"] ?></h4>
-                            <p class="uk-text-lighter uk-display-inline">
-                                <?= $data["nameDe"] ?></p>
+                    <label for="<?= $resID ?>">
+                        <h4><?= $typData["nameDe"] ?></h4>
+                        <p class="uk-text-lighter uk-display-inline">
+                            <?= $data["nameDe"] ?></p>
 
-                        </label>
+                    </label>
 
 
-                    <p class="uk-text-small uk-text-muted uk-text-truncate toTop"><?= $assiComment ?></p>
+                    <p class="uk-text-small uk-text-muted  toTop"><?= $assiComment ?></p>
 
-                    <span  href="#toggle-animation<?= $resID ?>" uk-icon="info" class="iconInformation"
-                          uk-toggle="target: #toggle-animation<?= $resID ?>; animation: uk-animation-fade "
-                          style="right: 15px;top: 15px;position: absolute; "></span>
+                    <span href="#toggle-animation<?= $resID ?>" uk-icon="info" class="iconInformation"
+                        uk-toggle="target: #toggle-animation<?= $resID ?>; animation: uk-animation-fade "
+                        style="right: 15px;top: 15px;position: absolute; "></span>
 
                     <div id="toggle-animation<?= $resID ?>" hidden class="equpimentInformation">
                         <?= $description2 ?>
@@ -143,34 +143,34 @@
 
                     } else { ?>
 
-                        <div class="grid-100 uk-align-left toTop">
-                            <hr class="uk-divider-vertical uk-align-left custom_HR ">
-                            <div class="uk-text-large nospace-up textColor">Packliste</div>
-                            <ul>
-                                <?php for ($item = 0; $item < count($packlist); ++$item) { ?>
-                                    <li>
-                                        <label class="textColor">
-                                            <?php $listData = $packlist[$item]['nameDe']; ?>
-                                            <script>
-                                                // get swipebox_Object 
+                    <div class="grid-100 uk-align-left toTop">
+                        <hr class="uk-divider-vertical uk-align-left custom_HR ">
+                        <div class="uk-text-large nospace-up textColor">Packliste</div>
+                        <ul>
+                            <?php for ($item = 0; $item < count($packlist); ++$item) { ?>
+                            <li>
+                                <label class="textColor">
+                                    <?php $listData = $packlist[$item]['nameDe']; ?>
+                                    <script>
+                                    // get swipebox_Object 
 
-                                                addCheckbox_list(resID = '<?=$listData?>', parent = '<?=$resID?>',
-                                                    //swipebox_Object
+                                    addCheckbox_list(resID = '<?=$listData?>', parent = '<?=$resID?>',
+                                        //swipebox_Object
 
 
-                                                    status =
-                                                        <?=$status?>);
-                                            </script>
+                                        status =
+                                        <?=$status?>);
+                                    </script>
 
-                                            <!--Start PHP LOOP-->
-                                            <!-- set status of checkbox to true -->
-                                            <input value="<?= $listData ?>" class="checklist-checkbox child "
-                                                   type="checkbox"> <?= $packlist[$item]['nameDe'] ?> </input>
-                                        </label>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </div>
+                                    <!--Start PHP LOOP-->
+                                    <!-- set status of checkbox to true -->
+                                    <input value="<?= $listData ?>" class="checklist-checkbox child " type="checkbox">
+                                    <?= $packlist[$item]['nameDe'] ?> </input>
+                                </label>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
                     <?php } ?>
                     <!--End PHP LOOP-->
                     <!--End Packliste-->
@@ -185,3 +185,4 @@
 
 
 </div>
+

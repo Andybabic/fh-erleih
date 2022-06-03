@@ -12,10 +12,9 @@ if(empty($data)){
 }
 
 
-
-
 ?>
 <?php
+
 
 
     function call($url,$json ){
@@ -76,6 +75,12 @@ function timeCon($datetime){
 
 //convert Json to Array
 $jsonUser = json_decode($data?? "{}", true);
+if ($jsonUser["listType"]== "prepare"){
+    $StateIsPrepare=true;
+}
+else{
+    $StateIsPrepare=false;
+}
 
 
 ?>
@@ -90,13 +95,14 @@ $jsonUser = json_decode($data?? "{}", true);
 
 
     <title>Checkliste</title>
-    <?php require_once("../functions/loader.php");?>
+    <?php require_once("../functions/loader.php");
+    getchecklistJS();
+    ?>
 </head>
 
 
 <script>
 var checkboxes_list = []
-
 
 function addCheckbox_list(resID = null, parent = null, status = false, typeData = null, resData = null) {
 
@@ -123,11 +129,10 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
     <div class="uk-container ">
         <main>
             <div class="orderPersonInformation">
-                <h2 ><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>
+                <h2><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>
                     <?= $jsonUser["userId"] ?></h2>
-                <p >Email: <a class="contactLink"
-                        href="mailto:<?= $jsonUser["email"] ?>"><?= $jsonUser["email"] ?></a>
-                    <br> Tel: <a  class="contactLink" href="tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
+                <p>Email: <a class="contactLink" href="mailto:<?= $jsonUser["email"] ?>"><?= $jsonUser["email"] ?></a>
+                    <br> Tel: <a class="contactLink" href="tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
 
                 <p class=" uk-align-left ">am <?= $jsonUser["date"] ?></p>
                 <p class=" uk-align-right"> Video</p>
@@ -136,6 +141,7 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
 
             <!--Start List of Equipment_interact-->
             <div id="checklist_interact">
+                <h3> <?=  $StateIsPrepare? "Vorbereitung" : "Rücknahme" ?> </h3>
                 <div class="uk-container ">
                     <div role="main" class="ui-content">
                         <?php for($i = 0; $i < count($jsonUser['reservations']) ; ++$i) {
@@ -143,186 +149,52 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                         $div = "element".$i ?>
                         <div id="<?=$div ?>">
 
-                            <script>
+                            <script type="module">
+                            import Swipebox from '../js/swipe.js';
                             $("#<?=$div ?>").load("../modules/checklist-element.php", {
                                 'json': JSON.stringify(<?=$json?>)
                             }, function() {
-
                                 pageLoadingState.siteloading(<?=$i ?>, <?= count($jsonUser['reservations']) ?>);
-                            
-                            });
-                            </script>
-                            <script type="module">
-                            import Swipebox from '../js/swipe.js';
-                            new Swipebox(document.getElementById( 
+                                new Swipebox(document.getElementById(
                                     'swipebox_Object<?=$jsonUser['reservations'][$i]['id']?>'));
 
-                            
+                            });
                             </script>
                         </div>
                         <?php } ?>
-
                     </div>
                 </div>
+                <button class="uk-button uk-button-primary uk-align-right" onclick="checkAllBoxes()">Alle Artikel
+            Zuruecknehmen</button>
+                <script>
+                function checkAllBoxes() {
+                    //set all checkbosex dom  to true
+                    for (var i = 0; i < checkboxes_list.length; i++) {
+                        checkboxes_list[i].checked = true;
+                        stateComponents.stateManager.set_state(1);
 
-
-
-
+                    }
+                }
+                </script>
             </div>
             <!--End List of Equipment_interact-->
             <!--Start List of Equipment_proof-->
             <div id="checklist_proof">
                 <?php  include '../modules/checklist-element_proofing.php'?>
             </div>
+
             <!--End List of Equipment_proof-->
 
         </main>
+      
 
     </div>
     <?php getModule('bottom-navbar')?>
 </body>
 
+
 <script>
-// example structure checklistComponents
-
-let checklistComponents = {};
-
-
-checklistComponents.checklist = (function() {
-    let priv = {},
-        publ = {};
-
-    var checkboxelementsAdded = [];
-    var checkboxelements;
-
-
-    priv.send = function(jsondata, curl) {
-        // make post request to url with array
-        url = "../functions/callAPI.php?r=reservierung/vorbereiten/";
-
-        jsondata = JSON.stringify([jsondata]);
-        $.ajax({
-            type: 'POST',
-            url: url,
-            dataType: "JSON",
-            data: {
-                curl: curl,
-                data: jsondata
-            },
-            success: function(msg) {
-            },
-
-        });
-    }
-
-
-
-    publ.updateEventListener = function() {
-        checkboxelements = document.getElementsByClassName('checklist-checkbox');
-        for (var i = 0; i < checkboxelements.length; i++) {
-            //if checkboxelements not in checkboxelementsAdded do
-            if (!checkboxelementsAdded.includes(checkboxelements[i])) {
-                //add checkboxelements to checkboxelementsAdded
-                checkboxelementsAdded.push(checkboxelements[i]);
-                checkbox = checkboxelements[i];
-                var value = this.value;
-                var checklistelement = priv.getCheckbox_array(checkbox.value)
-                var checkstatus = checklistelement;
-                checkbox.checked = checkstatus;
-                checkbox.addEventListener('click', function() {
-
-                    //add data post request
-                    var value = this.value;
-
-                    jsondata = value;
-                    priv.updateaddCheckbox_list(value,this.checked)
-                    if (this.checked) {
-                        //send to api that rentry is done or not
-                        console.log('post');
-                        priv.send(jsondata, "POST");
-                    } else {
-                        //send to api that rentry is done or not
-                        console.log('delete');
-                        priv.send(jsondata, "DELETE");
-                    }
-                    var parent = priv.getParent(value);
-                    if (parent) {
-                        priv.changeState(parent);
-                    }
-                    priv.update()
-                });
-            }
-        }
-    }
-
-
-
-    publ.init = function() {
-
-    }
-    priv.getParent = function(value) {
-        for (var i = 0; i < checkboxes_list.length; i++) {
-            if (checkboxes_list[i].value == value) {
-                return checkboxes_list[i].parent;
-            }
-        }
-    }
-    priv.update = function() {
-        for (var i = 0; i < checkboxelements.length; i++) {
-            checkboxes_list[i].checked = checkboxelements[i].checked;
-        }
-    }
-
-
-    //check state of all childs
-    priv.checkChilds = function(parent) {
-        for (var i = 0; i < checkboxes_list.length; i++) {
-            if (checkboxes_list[i].parent == parent) {
-                if (checkboxelements[i].checked == false) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
-    priv.getCheckbox_array = function(value) {
-
-        for (var i = 0; i < checkboxelements.length; i++) {
-            if (checkboxes_list[i].value == value) {
-                return checkboxes_list[i].checked;
-
-            }
-        }
-    }
-
-
-    // get checkboxelements with ( value )
-    priv.getCheckbox = function(value) {
-        for (var i = 0; i < checkboxelements.length; i++) {
-            if (checkboxes_list[i].value == value) {
-                return checkboxelements[i];
-            }
-        }
-    }
-
-    priv.updateaddCheckbox_list = function(value,status) {
-        for (var i = 0; i < checkboxelements.length; i++) {
-            if (checkboxes_list[i].value == value) {
-                checkboxes_list[i].checked = status;
-                
-            }
-        }
-    }
-
-    
-
-    return publ;
-})();
-
-
-checklistComponents.checklist.init();
+//init checklist logic
 pageLoadingState.siteloading_check(checklistComponents.checklist.updateEventListener);
 </script>
 
@@ -345,7 +217,6 @@ function updateStateContent() {
         //redirect to overview.php
         window.location.href = "../pages/overview.php";
     } else if (local_storage == 0) {
-
         change_text("back", "Übersicht");
         change_text("forward", "Weiter");
         document.getElementById('checklist_interact').style.display = 'block';
@@ -359,6 +230,7 @@ function updateStateContent() {
 
     } else if (local_storage == 2) {
         localStorage.setItem('Site_state', 0);
+        closeReservation("return");
         //redirect to overview.php
         window.location.href = "../pages/overview.php";
 
@@ -371,6 +243,34 @@ localStorage.setItem('Site_state', 0);
 updateStateContent();
 build_proofing_list();
 
+function closeReservation(isReturn, allItems) {
+    if (isReturn) {
+        url = "../functions/callAPI.php?r=reservierung/ruecknahme/";
+    } else {
+        url = "../functions/callAPI.php?r=reservierung/vorbereiten/";
+    }
+    //for all addCheckbox_list.checked = true
+    for (var i = 0; i < checkboxes_list.length; i++) {
+        // if checkboxes_list[i].checked or !allItems
+        if (checkboxes_list[i].checked || allItems) {
+            // make post request to url with array
+
+            jsondata = JSON.stringify([checkboxes_list[i].value]);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: "JSON",
+                data: {
+                    curl: "POST",
+                    data: jsondata
+                },
+                success: function(msg) {},
+
+            });
+        }
+
+    }
+}
 
 
 // replace html 

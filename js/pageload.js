@@ -9,10 +9,9 @@ class PageloaderState {
     
     siteloading(i,count) {
         count=count-1;
-        console.log("fuck"+i+"/"+count);
         if (i == count) {
             //save localstorage
-
+            console.log("siteloading finished");
             localStorage.setItem('siteloading', true);
         }else(
             localStorage.setItem('siteloading', false)
@@ -31,7 +30,7 @@ class PageloaderState {
             }
 
             }
-            , 100);
+            , 1000);
 
 
         }
@@ -51,5 +50,4 @@ function saveTime() {
 
 }
 
-// save time every 2 seconds
-setInterval(saveTime, 2000);
+
