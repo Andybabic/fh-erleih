@@ -135,7 +135,7 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                     <br> Tel: <a class="contactLink" href="tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
 
                 <p class=" uk-align-left ">am <?= $jsonUser["date"] ?></p>
-                <p class=" uk-align-right"> Video</p>
+
             </div>
             <hr>
 
@@ -164,7 +164,7 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                         <?php } ?>
                     </div>
                 </div>
-                <button class="uk-button uk-button-primary uk-align-right" onclick="checkAllBoxes()">Alle Artikel
+                <button class="uk-button uk-align-right buttonAllObjects" onclick="checkAllBoxes()">Alle Artikel
             Zuruecknehmen</button>
                 <script>
                 function checkAllBoxes() {
