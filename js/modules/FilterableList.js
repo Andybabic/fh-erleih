@@ -320,31 +320,15 @@ export default class FilterableList {
             this.doms.listWrapper.html(errorMessage);
         } else if (data == "empty") {
             const emptyMessage = `
-                <div class="uk-align-center">
-                    <p>Alles erledigt!</p>
-                <div class="wheel">
-                    <div class="wheel__inner">
-                        <div class="wheel__sec">
-                        </div>
-                        <div class="wheel__sec">
-                        </div>
-                        <div class="wheel__sec">
-                        </div>
-                        <div class="wheel__sec">
-                        </div>
-                        <div class="wheel__sec">
-                        </div>
-                        <div class="wheel__sec">
-                        </div>
+                <div class="allDoneMessage uk-align-center uk-flex uk-flex-center uk-flex-column uk-flex-middle">
+                    <p>Alles erledigt!</p>   
+                    <div id="allDoneWrapper">
+                    
                     </div>
-                    <div class="wheel__arrow">
-                        <button class="wheel__button">QUAY</button>
-                    </div>
-                </div>
                 </div>
                 `;
             this.doms.listWrapper.html(emptyMessage);
-            new LuckyWheel();
+            new LuckyWheel($("#allDoneWrapper"));
         } else {
             let resList = `<ul class="uk-list uk-list-striped">`;
             let doneList = `<ul class="doneList uk-list uk-list-striped">`;

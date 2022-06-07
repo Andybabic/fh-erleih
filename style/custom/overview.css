@@ -112,6 +112,11 @@
 .doneListArrow{
     margin-left:-20px;
 }
+.allDoneMessage{
+    background-color: var(--preparedAllColor);
+    padding: 8px 0;
+    font-weight: bold;
+}
 
 /*release reservation button*/
 .releaseResButton {
@@ -210,6 +215,7 @@ box-shadow: none;
     border: solid 6px #fff;
     box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.1);
     position: relative;
+    display: none;
 }
 .wheel__inner {
     width: 300px;
@@ -364,5 +370,13 @@ box-shadow: none;
 .congratulation__note {
     text-align: center;
 }
-
+.showWheel{
+    background-color: var(--colorSuccess);
+    color: #fff;
+    margin: 5px 0 0 0;
+}
+.blockquote p{
+    font-size: 26px;
+    font-family: "Playfair Display", serif;
+}
 

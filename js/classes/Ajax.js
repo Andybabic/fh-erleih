@@ -343,4 +343,32 @@ export default class Ajax{
         });
     }
 
+    async getRandomJoke(){
+        const api = `https://witzapi.de/api/joke`;
+
+        return new Promise((resolve) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
+    async getChuckNorrisJoke(){
+        const api = `https://api.chucknorris.io/jokes/random`;
+
+        return new Promise((resolve) => {
+            fetch(api)
+                .then(res => res.json())
+                .then(data => {
+                    resolve(data);
+                }).catch(err => {
+                resolve(false);
+            });
+        });
+    }
+
 }
