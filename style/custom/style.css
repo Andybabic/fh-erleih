@@ -1012,5 +1012,49 @@ font-size: 12px !important;
     }
 }
 
+.returnButton{
+    background-color: var(--colorBackgroundGrey);
+    color: var(--textColor);
+}
 
+.returnButton:hover{
+     background-color: darkgrey;
+    color:white;
+}
 
+.proceedButton:hover{
+    background-color: var(--colorSecondary);
+    color:white;
+}
+
+.moreInfosButton:hover{
+    background-color: #5a8aa9;
+    color: white;
+}
+
+.displayResButton:hover{
+    background-color: #004781;
+    color: white;
+}
+
+.uk-table{
+    color:var(--textColor);
+}
+
+td li{
+    color: var(--textColor);
+}
+
+td span{
+    color: var(--textColor);
+}
+
+.li2 span {
+    color: var(--textColor) !important;
+    background-color: transparent !important;
+}
+
+.s2{
+    color: var(--textColor);
+
+}

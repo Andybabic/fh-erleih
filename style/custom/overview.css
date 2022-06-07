@@ -43,7 +43,6 @@
     width: 100%;
     border-radius: 0;
     margin-top: -0.05rem;
-
 }
 
 .timeFilter {
@@ -118,10 +117,11 @@
 .releaseResButton {
     background-color: #007f5f;
     color: #f8f9fa;
-    box-shadow: none;
+box-shadow: none;
     border: none;
     cursor: pointer;
     padding: 8px 14px;
+
 }
 
 .listDateandDep {

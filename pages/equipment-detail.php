@@ -65,7 +65,7 @@ function phpObjToTable ($data)
     <header>
         <?php getModule('menu')?>
     </header>
-    <main class="uk-padding-small backButton">
+    <main class="uk-padding-small backButton uk-width-3-5@l uk-width-4-5@m uk-width-4-5@s uk-align-center">
         <button class="uk-button colorSecondary">Zurück</button>
         <h1 class="uk-text-large"><?= $typeData->nameDe . " " . $equipmentData->nameDe ?></h1>
         <h2 class="uk-heading-bullet uk-text-large">Typ</h2>
