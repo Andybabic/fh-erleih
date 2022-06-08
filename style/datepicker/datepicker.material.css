@@ -4,6 +4,7 @@
   align-items: center;
   display:inline-flex;
   margin: 5px 0 15px;
+  max-width: 90% !important;
 }
 /* ------ */
 
@@ -11,7 +12,6 @@
   display: inline-block;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-
 }
 
 .datepicker table {

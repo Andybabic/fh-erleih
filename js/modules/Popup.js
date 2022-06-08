@@ -53,7 +53,7 @@ export default class NFCPopup{
                             <label><input class="uk-radio" type="radio" name="modal-report-radio" value="todo"><span class="uk-text-default uk-margin-small-left">Todo vermerken</span></label>
                             <label><input class="uk-radio" type="radio" name="modal-report-radio" value="cancel"><span class="uk-text-default uk-margin-small-left">Reservierung stornieren</span> </label>                        </div>
                         <div class="modal-reportTextArea uk-align-center">
-                            <p class="modal-inputDescription uk-margin-remove-bottom">Bitte beschreibe den Schaden kurz!</p>
+                            <p class="modal-inputDescription uk-margin-small-bottom">Bitte beschreibe den Schaden kurz!</p>
                             <textarea class="uk-textarea uk-height-small"></textarea>
                         </div>
                         <div class="report-errorMessage"></span></div>
@@ -228,7 +228,16 @@ export default class NFCPopup{
                             if(this.vars.reportCancel != "" && this.vars.reportCancel != undefined){
                                 empty = false;
                                 const cancelMessage = `<h2 class="uk-text-large">Wirklich stornieren?</h2><p>Bist du sicher, dass du diese Reservierung stornieren möchtest? Das kann später nicht mehr rückgängig gemacht werden!</p>`
-                                UIkit.modal.confirm(cancelMessage, {stack:true}).then(async () => {
+
+                                const modal = UIkit.modal.confirm(cancelMessage, {"stack":true});
+                                const element = modal.dialog.$el;
+                                const cancelButton = element.querySelector(".uk-modal-close");
+                                const proceedButton = element.querySelector(".uk-button-primary");
+                                cancelButton.innerText = "Abbrechen";
+                                proceedButton.innerText = "Stornieren";
+                                element.querySelector(".uk-modal-footer").classList.add("footerBtnWrapper");
+                                modal.then(async (e) => {
+                                    console.log("event",e);
                                     const cancelValue = [{
                                         "id": this.vars.resId*1,
                                         "grund": this.vars.reportCancel
@@ -264,9 +273,9 @@ export default class NFCPopup{
                     this.displayReportFeedback();
                 }else{
                     if(empty){
-                        errorText.html("<span uk-icon=\"icon: warning\"></span><span>Das Textfeld darf nicht leer bleiben!</span>");
+                        errorText.html("<p><span class='uk-margin-small-right' uk-icon=\"icon: warning\"></span><span>Das Textfeld darf nicht leer bleiben!</span></p>");
                     }else{
-                        errorText.html("<span uk-icon=\"icon: warning\"></span><span>Leider konnte die Änderung gerade nicht durchgeführt werden!</span>");
+                        errorText.html("<p><span class='uk-margin-small-right' uk-icon=\"icon: warning\"></span><span>Leider konnte die Änderung gerade nicht durchgeführt werden!</span></p>");
                     }
                 }
             });

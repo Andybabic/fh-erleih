@@ -16,7 +16,6 @@ export default class Ajax{
                 .then(res => res.json())
                 .then(data => {
                     resolve(data);
-                    console.log(data);
                 }).catch(err => {
                 resolve(false);
             });

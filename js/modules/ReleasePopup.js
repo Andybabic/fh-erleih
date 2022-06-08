@@ -142,16 +142,22 @@ export default class ReleasePopup{
             ${errorList}
         `;
 
-        const feedback = `
-            <div class="feedbackSummary">
+        let feedback = `<div class="feedbackSummary">`;
+        if(succeeded.length > 0){
+            feedback += `
                 <p class="uk-text-default uk-margin-small-bottom">
                     <span class="uk-margin-small-right releaseIconSuccess" uk-icon="check"></span>
                     <span>${succeeded.length} / ${this.vars.resIdsLength} Reservierungen wurden erfolgreich ausgegeben!</span>
-                </p>
+                </p>`;
+        }
+        if(failed.length > 0){
+            feedback += `
                 <p class="uk-text-bold uk-margin-small-bottom">
                     <span class="uk-margin-small-right releaseIconError" uk-icon="close"></span>
                     <span>${failed.length} / ${this.vars.resIdsLength} Reservierungen konnten nicht ausgegeben werden!</span>
-                </p>
+                </p>`;
+        }
+        feedback += `
             </div>
             <div class="feedbackDetails">
                 <button href="#toggle-details" class="uk-button uk-button-default  uk-width-1-1" type="button" uk-toggle="target: #feedbackDetails; animation: uk-animation-slide-top-">

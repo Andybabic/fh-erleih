@@ -514,6 +514,13 @@ h3 span {
     color: var(--textColor) !important;
 }
 
+.report-errorMessage{
+    background-color: var(--colorAlert) !important;
+}
+.report-errorMessage p{
+    padding: 4px 8px;
+}
+
 /*datepicker*/
 .datepicker.is-inline, .datepicker__wrapper, .datpicker__container, .pickerWrapper {
     max-width: 100%;
@@ -1059,6 +1066,11 @@ td span{
     color: var(--textColor);
 }
 
+.uk-notification, .uk-notification-message{
+    background-color: var(--colorBackgroundGrey);
+    border: 1px solid var(--colorSuccess);
+}
+
 .li2 span {
     color: var(--textColor) !important;
     background-color: transparent !important;
@@ -1066,7 +1078,6 @@ td span{
 
 .s2{
     color: var(--textColor);
-
 }
 
 /* Bestellung ausgeben Pop Up*/
