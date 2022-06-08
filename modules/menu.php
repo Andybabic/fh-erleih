@@ -14,7 +14,7 @@ $userID = $_SESSION['username']
                 <a href="../pages/overview.php" class="nav-link">Übersicht</a>
             </li>
             <li class="nav-item">
-                <a href="../pages/scan.php" class="nav-link">Eintragung</a>
+                <a href="../pages/scan.php" class="nav-link">NFC-Tags beschreiben</a>
             </li>
             <li class="nav-item">
                 <a href="../pages/settings.php" class="nav-link">Einstellungen</a>

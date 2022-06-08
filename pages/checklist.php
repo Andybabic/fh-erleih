@@ -126,11 +126,11 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
 <body>
     <?php getModule('menu')?>
     <!--User Data-->
-    <div class="uk-container ">
+    <div class="uk-container checklistWrapper ">
         <main>
             <div class="orderPersonInformation">
-                <h2><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?>
-                    <?= $jsonUser["userId"] ?></h2>
+                <h2><?= $jsonUser["firstName"] ?> <?= $jsonUser["lastName"] ?><br> [<span><?= $jsonUser["userId"] ?></span>]</h2>
+
                 <p>Email: <a class="contactLink" href="mailto:<?= $jsonUser["email"] ?>"><?= $jsonUser["email"] ?></a>
                     <br> Tel: <a class="contactLink" href="tel:<?= $jsonUser["tel"] ?>"><?= $jsonUser["tel"] ?></a>
 
@@ -164,8 +164,8 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                         <?php } ?>
                     </div>
                 </div>
-                <button class="uk-button uk-align-right buttonAllObjects" onclick="checkAllBoxes()">Alle Artikel
-            Zuruecknehmen</button>
+                <button class="uk-button uk-align-right buttonAllObjects returnButton" onclick="checkAllBoxes()">Alle Artikel
+            Zurücknehmen</button>
                 <script>
                 function checkAllBoxes() {
                     //set all checkbosex dom  to true
@@ -223,7 +223,7 @@ function updateStateContent() {
         document.getElementById('checklist_proof').style.display = 'none';
     } else if (local_storage == 1) {
         build_proofing_list();
-        change_text("back", "Bearbeiten");
+        change_text("back", "Zurück");
         change_text("forward", "Abschließen");
         document.getElementById('checklist_interact').style.display = 'none';
         document.getElementById('checklist_proof').style.display = 'block';

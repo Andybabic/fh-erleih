@@ -180,7 +180,7 @@
 
 .datepicker__day div:hover,
 .datepicker__day.is-highlighted div {
-  background: var(--colorPrimary);
+  background: var(--colorSecondary);
   color:white;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .datepicker__day.is-selected:hover div::after {
-  background: #006ecb;
+  background: var(--colorSecondary);
 }
 
 .datepicker__day.is-selected .datepicker__daynum {
@@ -224,10 +224,12 @@
 .datepicker__day.is-disabled,
 .datepicker__day.is-otherMonth {
   cursor: default;
-  pointer-events: none;
-  color: #ababab;
+  pointer-events: none
 }
 
+.datepicker__day.is-otherMonth .datepicker__daynum{
+  color: #a8a7a7;
+}
 .datepicker__day.is-disabled.is-selected .datepicker__daynum,
 .datepicker__day.is-otherMonth.is-selected .datepicker__daynum {
   color: rgba(0,0,0,0.2);

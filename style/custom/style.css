@@ -28,6 +28,7 @@
     --colorSuccess:#007F5F;
     --textColor: #212529;
     --filterWrapperColor: #CDDEEB;
+    --greyButtonColor: #c0c0c0;
 }
 
 body {
@@ -247,8 +248,9 @@ a.link2 {
 
 /* End Swipebox Style */
 
+
 #forward.uk-button{
-    color: #f8f9fa !important;
+    color:white !important;
 }
 
 #forward.uk-button:hover{
@@ -610,6 +612,8 @@ li {
     text-decoration: none;
 }
 
+
+
 .navbar {
     height: 55px;
     display: flex;
@@ -653,6 +657,7 @@ li {
     transition: all 0.3s ease-in-out;
     background-color: white;
 }
+
 
 @media (max-width: 959px) {
     .select2 {
@@ -702,9 +707,10 @@ li {
         z-index: 1 !important;
     }
 
-    .nav-branding{
+    .nav-branding {
         margin-left: -10px;
     }
+
     .nav-item {
 
         margin: 10px 0;
@@ -713,7 +719,22 @@ li {
     .nav-menu.active {
         right: 0;
     }
+
+    .nav-item:after  {
+        display: block;
+        content: "";
+        width:2rem;
+        height: 1px;
+        background-color: white;
+        margin:10px auto 0;
+    }
+
+     .nav-item:last-child:after {
+        display:none;
+    }
 }
+
+
 
 /* Settings Style */
 
@@ -928,7 +949,7 @@ h2, p {
 
 /* ORDER INFORMATION PAGE */
 .orderPersonInformation{
-    margin: 1.5rem 0 3rem 0rem;
+    margin: 1.5rem 1rem 3rem 1rem;
 }
 
 .orderPersonInformation h2{
@@ -983,14 +1004,12 @@ font-size: 12px !important;
 }
 
 #back.uk-button{
-    background-color: var(--colorBackgroundGrey);
+    background-color: var(--greyButtonColor);
     color: var(--textColor) !important;
 }
 
 #checklistComment{
-    background-color: var(--colorSecondary);
-    color: white;
-    margin-top:3px;
+    margin-top:5px;
 }
 
 .buttonAllObjects{
@@ -1030,13 +1049,14 @@ font-size: 12px !important;
 }
 
 .returnButton{
-    background-color: var(--colorBackgroundGrey);
+    background-color: var(--greyButtonColor);
     color: var(--textColor);
+    border:1px solid white;
 }
 
 .returnButton:hover{
      background-color: darkgrey;
-    color:white;
+
 }
 
 .proceedButton:hover{
@@ -1098,5 +1118,27 @@ td span{
  .feedbackDetails .uk-button:hover {
      background-color: darkgrey;
  }
+
+
+ .footerBtnWrapper .uk-modal-close{
+     background-color: var(--greyButtonColor);
+     color: var(--textColor);
+ }
+
+ .footerBtnWrapper .uk-modal-close:hover{
+     background-color: darkgrey;
+ }
+
+
+.footerBtnWrapper .uk-button-primary{
+     background-color: var(--colorPrimary);
+    border: 1px solid white;
+ }
+
+ .footerBtnWrapper .uk-button-primary:hover{
+     background-color: var(--colorSecondary);
+ }
+
+
 
 

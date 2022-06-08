@@ -6,7 +6,7 @@
   
             <textarea class="uk-textarea" rows="5" placeholder="Kommentieren"></textarea>
 
-            <button id="checklistComment" class="uk-button uk-button-default colorPrimary uk-align-right">Speichern</button>
+            <button id="checklistComment" class="uk-button uk-button-default returnButton uk-align-right">Speichern</button>
 
     </form>
 

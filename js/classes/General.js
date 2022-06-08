@@ -192,7 +192,9 @@ class General {
                 $(":root").css("--colorSuccess", "#03654D");
                 $(":root").css("--colorAlert", "#9A1515");
                 $(":root").css("--colorWarning", "#B76405");
-                $(":root").css("--filterWrapperColor", "#003265")
+                $(":root").css("--filterWrapperColor", "#003265");
+                $(":root").css("--greyButtonColor", "#495057");
+
             }
         }
     }
