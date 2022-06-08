@@ -35,9 +35,6 @@ export default class FilterableList {
     };
 
     //METHODS
-
-    //TODO: set departments function to create all departments dynamically (this.departments, whitespace entfernen bei namen)
-
     async initOverviewPage() {
         //check for stored settings
         if (localStorage.settings) {
@@ -69,30 +66,22 @@ export default class FilterableList {
                 </div>`
         this.doms.filterWrapper.append(pickerWrapper);
 
-        //TODO datepicker default date from localstorage
         //init time picker
         let init = true;
         var timepicker = new Datepicker('#ranged', {
             inline: true,
-            ranged: true,
+            ranged: false,
             time: false,
             onChange: (date) => {
-                if (date.length > 1) {
-                    let arr = [];
-                    arr.push(general.formatDate(date[0]));
-                    arr.push(general.formatDate(date[date.length - 1]));
-                    this.filter.timespan = arr;
-                    console.log(date);
-                } else if (date.length === 1) {
-                    console.log(date);
-                    this.filter.timespan = [];
-                    this.filter.timespan.push(general.formatDate(date[0]));
+                if(date){
+                    this.filter.timespan = date;
+                    //store current html of picker to set it again later
                 }
-                this.addPickerStyle();
-                //store current html of picker to set it again later
 
             },
             onInit: (e) => {
+
+                //apply last html selection
                 if(this.filter.pickerHtml != "" && this.filter.pickerHtml != undefined){
                     $(".datepicker__wrapper").html(this.filter.pickerHtml);
                 }
@@ -132,7 +121,7 @@ export default class FilterableList {
                     <div class="timeFilter">
                         <button class="filterBtn ${this.vars.selectionClass}" data-filter="today">Heute</button>
                         <button class="filterBtn  ${this.vars.selectionClass}" data-filter="tomorrow">Morgen</button>
-                        <button class="filterBtn " data-filter="togglePicker">Datum</button>
+                        <button class="filterBtn dateButton" data-filter="togglePicker">Datum</button>
                     </div>
             `;
         const prepareFilters = `
@@ -150,16 +139,6 @@ export default class FilterableList {
 
         // append all filters to DOM
         this.doms.filterWrapper.append(filters);
-    }
-
-    addPickerStyle() {
-        //adds class to first and last element of picker span selection
-        const selection = document.getElementsByClassName("is-selected");
-        for (let i = 0; i < selection.length; i++) {
-            if (i == 0 || i == selection.length - 1) {
-                selection[i].classList.add("selected-ends");
-            }
-        }
     }
 
     addFilterInteraction() {
@@ -197,7 +176,8 @@ export default class FilterableList {
                     $(".pickerWrapper").slideToggle();
                     break;
                 case "timespan":
-                    if (this.filter.timespan.length > 0) {
+                    console.log(this.filter.timespan.length)
+                    if (this.filter.timespan) {
                         //if there is a valid timespan set
                         this.filter.today = false;
                         this.filter.tomorrow = false;
@@ -322,6 +302,7 @@ export default class FilterableList {
             const emptyMessage = `
                 <div class="allDoneMessage uk-align-center uk-flex uk-flex-center uk-flex-column uk-flex-middle">
                     <p>Alles erledigt!</p>   
+                    <div id="allDoneWrapper">
                     <div id="allDoneWrapper">
                     
                     </div>

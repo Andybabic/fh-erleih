@@ -14,9 +14,13 @@ export default class LuckyWheel {
 
     checkLastInteraction(){
         if(localStorage.lastWheelSpin){
-            const lastDate = localStorage.lastWheelSpin;
-            const lastDay = new Date().getTime() - (1 * 24 * 60 * 60 * 1000)
-            if(lastDate <= lastDay){
+            const lastDate = new Date(localStorage.lastWheelSpin);
+            const storedDay = lastDate.getDate();
+            const storedMonth = lastDate.getMonth();
+            const currentDay = new Date().getDate();
+            const currentMonth = new Date().getMonth();
+
+            if(storedMonth != currentMonth && storedDay != currentDay){
                 this.displayWheel();
                 this.addInteraction();
             }else{
@@ -286,7 +290,7 @@ export default class LuckyWheel {
 
         $('.wheel__button').on("click", () => {
             if (this.vars.clicked == false) {
-                localStorage.lastWheelSpin = new Date().getTime();
+                localStorage.lastWheelSpin = new Date();
                 this.initLuckyWheel();
                 let random = Math.floor((Math.random() * 360) + 720);
                 this.vars.value += random;
