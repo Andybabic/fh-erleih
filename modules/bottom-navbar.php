@@ -26,6 +26,10 @@
 
         publ.set_state = function(n)
                 {
+                    if(state == 1){
+
+                    }
+
                     state=state + n
                     
                     localStorage.setItem('Site_state', state);

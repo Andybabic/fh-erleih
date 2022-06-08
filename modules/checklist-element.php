@@ -85,7 +85,7 @@
                 <span class="center-all uk-animation-slide-left-small " uk-icon="icon: future; ratio: 1.5"></span>
             </div>
             <div class=" uk-align-left btn-checklist bg-orange uk-animation-slide-left-small" data-type="report">
-                <span class="center-all uk-animation-slide-left-small" uk-icon="icon: warning; ratio: 1.5"></span>
+                <span class="center-all uk-animation-slide-left-small" uk-icon="icon: comments; ratio: 1.5"></span>
             </div>
         </div>
 
@@ -96,7 +96,7 @@
 
             <!--Start Equipment Card element-->
             <div
-                class="uk-card uk-card-body  space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center">
+                class="uk-card uk-card-body space-between-list grid-100 uk-flex-inline colorBackgroundGrey uk-object-position-top-center uk-padding-small">
                 <div class="checkListbutton ">
 
                     <script>
@@ -114,18 +114,24 @@
                 <div class="grid-100 ">
 
                     <label for="<?= $resID ?>">
-                        <h4><?= $typData["nameDe"] ?></h4>
-                        <p class="uk-text-lighter uk-display-inline">
-                            <?= $data["nameDe"] ?></p>
+                        <h4 class="uk-margin-remove-bottom"><?= $typData["nameDe"] ?><span> [<?= $data["nameDe"] ?>]</span></h4>
 
                     </label>
 
 
                     <p class="uk-text-small uk-text-muted  toTop"><?= $assiComment ?></p>
 
-                    <span href="#toggle-animation<?= $resID ?>" uk-icon="info" class="iconInformation"
-                        uk-toggle="target: #toggle-animation<?= $resID ?>; animation: uk-animation-fade "
-                        style="right: 15px;top: 15px;position: absolute; "></span>
+                    <button href="#toggle-animation<?= $resID ?>" class="iconInformation toggleHandle" uk-toggle="target: #toggle-animation<?= $resID ?>; animation: uk-animation-fade">
+                        <span class="showDetailText turnToggleButton">Details anzeigen
+                            <span class="showDetailButton"><svg xmlns="http://www.w3.org/2000/svg" width="34.875" height="34.875" viewBox="0 0 34.875 34.875">
+                            <path id="Icon_awesome-arrow-circle-down" data-name="Icon awesome-arrow-circle-down" d="M35.438,18A17.438,17.438,0,1,1,18,.563,17.434,17.434,0,0,1,35.438,18Zm-10.1-2.032L20.25,21.277V8.438A1.683,1.683,0,0,0,18.563,6.75H17.438A1.683,1.683,0,0,0,15.75,8.438V21.277l-5.091-5.309a1.689,1.689,0,0,0-2.412-.028l-.766.773a1.681,1.681,0,0,0,0,2.384l9.323,9.33a1.681,1.681,0,0,0,2.384,0l9.33-9.33a1.681,1.681,0,0,0,0-2.384l-.766-.773a1.689,1.689,0,0,0-2.412.028Z" transform="translate(-0.563 -0.563)"/>
+                        </svg></span>
+
+                        </span>
+                    </button>
+                    <script>
+                        UIkit.toggle("#toggle-animation<?= $resID ?>").bef
+                    </script>
 
                     <div id="toggle-animation<?= $resID ?>" hidden class="equpimentInformation">
                         <?= $description2 ?>

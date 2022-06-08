@@ -283,8 +283,6 @@ class General {
           }
           $(".filterWrapper").slideToggle();
       });
-
-
   }
 }
 

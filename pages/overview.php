@@ -19,6 +19,7 @@ require_once("../functions/loader.php");
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vorbereitung</title>
     <link rel="stylesheet" href="../style/custom/overview.css">
+    <link rel="icon" href="../style/image/favIcon.svg">
 </head>
 <body id="page-overview" >
     <header>

@@ -4,7 +4,7 @@
     </div>
     <form  >
   
-            <textarea class="uk-textarea" rows="5" placeholder="Kommentieren"></textarea>
+            <textarea id="assiCommentTextarea" class="uk-textarea" rows="5" placeholder="Assi Kommentar zu allen Reservierungen hinzufügen"></textarea>
 
             <button id="checklistComment" class="uk-button uk-button-default returnButton uk-align-right">Speichern</button>
 
@@ -44,7 +44,17 @@ $(document).on('click', '#checklistComment', function(e) {
   
 });
 
+//display save button if assi comment field contains text
+$("#assiCommentTextarea").on("keyup", (e) => {
+    if(e.target.value != ""){
+        console.log(e.target.value);
 
+        $("#checklistComment").slideDown();
+    }else{
+        console.log(e.target.value);
+        $("#checklistComment").slideUp();
+    }
+});
 
 
 

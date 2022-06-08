@@ -42,7 +42,7 @@ export default class Swipebox {
         this.mouseDownX = event.clientX - this.element.offsetLeft;
     }
     touchStart(event) {
-        console.log(event);
+        //console.log(event);
 
         this.touchStart= true;
         this.touchStartX = event.touches[0].clientX - this.element.offsetLeft;
@@ -213,8 +213,6 @@ let once = true;
 function displaySwipeModal(){
         if(once){
             $(".btn-checklist").on("click", (e) => {
-                console.log(e.target);
-                console.log(e.target.type);
                 const type = e.target.dataset.type;
 
                 const modal = new Popup(e, type);

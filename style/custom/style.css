@@ -1,19 +1,29 @@
  @font-face{
-    font-family: "Helvetica Neue";
-    src: url("../font/HelveticaNeueLt.ttf");
-    font-weight: normal;
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Regular.ttf") format('truetype');
+    font-weight: 400;
 }
 @font-face{
-    font-family: "Helvetica Neue";
-    src: url("../font/HelveticaNeueBd.ttf");
-    font-weight: bold;
+    font-family: "Open Sans";
+    src: url("../font/OpenSans-Bold.ttf") format('truetype');
+    font-weight: 700;
 }
+ @font-face{
+     font-family: "Open Sans";
+     src: url("../font/OpenSans-Light.ttf") format('truetype');
+     font-weight: 300;
+ }
+ @font-face{
+     font-family: "Open Sans";
+     src: url("../font/OpenSans-SemiBold.ttf") format('truetype');
+     font-weight: 600;
+ }
 
 :root {
     /*font-size: 62.5%;
       1.5rem = 15px*/
     --fontSize: 1rem;
-    --fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --fontfamily: "Open Sans", Helvetica, Arial, sans-serif;
     --FHlightblue: #cddeeb;
     --FHdefaultblue: #005096;
     --inPreparationColor: #B6E0B2;
@@ -130,7 +140,7 @@ body {
 
 .checkListbutton {
     width: 30px;
-    left: -20px;
+    left: -2px;
     position: relative;
     top: 5px;
     background-color: var(--colorBackgroundGrey);
@@ -479,7 +489,6 @@ a.link2 {
     color: #212529;
     padding: 8px 0;
 }
-
 .uk-modal-dialog, .uk-modal-header, .uk-modal-footer {
     background-color: var(--colorBackgroundClean);
     color: var(--textColor) !important;
@@ -778,26 +787,25 @@ li {
 .uk-list-striped > :nth-of-type(odd) {
     border: none;
 }
-
+/*
 .listWrapper li > * {
     pointer-events: none;
-}
+}*/
 
 .releaseResButton {
     pointer-events: all;
     height: 42px;
-    width: 90px;
+    width: 100%;
 }
 
 .uk-list .reservation {
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     background-color: var(--colorBackgroundGrey);
     margin: 0 0 6px 0;
-
 }
 
 li.reservation.preparedAll {
-    padding: 1rem 2rem;
+    padding: 1rem 1rem 0rem 1rem;
     background-color: var(--colorBackgroundGrey);
     margin: 0 0 6px 0;
 }
@@ -889,6 +897,9 @@ h2, p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.preparedAll .quantityCircle{
+    margin-bottom: 5px;
 }
 
 .reservation .uk-flex .modeCircle {
@@ -997,7 +1008,37 @@ font-size: 12px !important;
 
 .iconInformation{
     fill:var(--textColor) !important;
+    margin-top: 15px;
+    outline: none;
+    border: none;
 }
+.iconInformation:hover{
+    background-color: transparent;
+}
+
+.showDetailText{
+    background-color: #fff;
+    border-radius: 18px;
+    padding: 5px 30px 5px 8px;
+    position: relative;
+}
+.iconInformation svg{
+    width: 20px;
+    height: 20px;
+    transition: all .4s ease-in;
+    fill: var(--colorPrimary);
+    position: absolute;
+    right: 8px;
+    top: 3px;
+}
+.showDetailButton{
+    transition: all .3s ease-in;
+}
+.rotateButton{
+    transform: rotate(180deg);
+
+}
+
 
 .iconInformation circle{
     stroke: var(--textColor) !important;
@@ -1016,6 +1057,7 @@ font-size: 12px !important;
     background-color: var(--colorSecondary);
     color: white;
     margin-top:3px;
+    display: none;
 }
 
 #logtext{
@@ -1118,6 +1160,8 @@ td span{
  .feedbackDetails .uk-button:hover {
      background-color: darkgrey;
  }
+
+ /*pointer events none for all childs of toggle handle that always handle is target on click*/
 
 
  .footerBtnWrapper .uk-modal-close{

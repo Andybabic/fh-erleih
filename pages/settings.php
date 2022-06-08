@@ -11,7 +11,7 @@ require_once("../functions/loader.php");
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="module" src="../js/modules/Settings.js" defer></script>
     <link rel="stylesheet" href="../style/custom/overview.css">
-
+    <link rel="icon" href="../style/image/favIcon.svg">
     <title>Einstellungen</title>
 </head>
 <body>

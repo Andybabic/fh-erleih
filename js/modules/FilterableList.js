@@ -358,7 +358,8 @@ export default class FilterableList {
                     }
 
                     let li = `
-                            <li class="reservation uk-flex uk-flex-between uk-flex-bottom ${preperationClass}" data-id = ${curId}>
+                            <li class="reservation ${preperationClass}" data-id = ${curId}>
+                                <div class="uk-flex uk-flex-between uk-flex-bottom">
                                 <div>
                                     <span>${res.userId}</span>
                                     <h2>${general.formatName(res.firstName)} ${general.formatName(res.lastName)}</h2>
@@ -376,9 +377,12 @@ export default class FilterableList {
                         departmentList.add(subRes.departmentId);
                     }
                     console.log(departmentList);
-                    for (const item of departmentList) {
-                        li += `<span class="departmentLabel">${this.departments[item]}</span>`;
+                    if(!res.preparedAll){
+                        for (const item of departmentList) {
+                            li += `<span class="departmentLabel">${this.departments[item]}</span>`;
+                        }
                     }
+
 
                     if(res.preparedAll && this.vars.listType == "prepare"){
                         li += `            
@@ -386,16 +390,21 @@ export default class FilterableList {
                                     </div>  
                                 </div>
                                 <div class="buttonClickWrapper uk-flex uk-flex-column uk-flex-bottom uk-flex-right">
-                                    <button class="releaseResButton uk-margin-small-bottom">Ausgeben</button>
+                                    
                                     <div class="quantityCircle ${res.reservations.length > 25 ? ( res.reservations.length > 50 ? 'largeReservation' : 'mediumReservation') : ''}">
                                         <div class="quantityIcon"> 
                                             <p> ${res.reservations.length}</p>
                                         </div>
                                     </div>
+                                </div>`;
+
+
+
+                         li +=  `
                                 </div>
-                                
-                                
+                                <button class="releaseResButton uk-margin-small-bottom">Jetzt ausgeben</button>
                             </li>`;
+
                     }else{
                         li += `            
                                         </p>
@@ -413,7 +422,7 @@ export default class FilterableList {
                                         </div>
                                     </div>
                                 </div>
-                                
+                                </div>
                             </li>`;
                     }
 
@@ -462,12 +471,13 @@ export default class FilterableList {
     }
 
     listInteraction() {
-        $(".reservation").on("click", (e) => {
+        const _self = this;
+        $(".reservation").on("click", function(e){
             if(!e.target.classList.contains("releaseResButton")){
                 //only if not release reservation button was clicked
-                const id = e.target.dataset.id
-                const data = this.vars[id];
-                data.listType = this.vars.listType;
+                const id = this.dataset.id
+                const data = _self.vars[id];
+                data.listType = _self.vars.listType;
                 general.redirectWithPost(data, "checklist.php");
             }
         });
@@ -484,10 +494,11 @@ export default class FilterableList {
     }
 
     releaseReservation(){
-        $(".releaseResButton").on("click", (e) => {
-            const listEntry = e.target.parentNode.parentNode;
-            const id = listEntry.dataset.id
-            const data = this.vars[id];
+        const _self = this;
+        $(".releaseResButton").on("click", function(){
+            const listEntry = $(this).parent(".reservation").first()[0];
+            const id = listEntry.dataset.id;
+            const data = _self.vars[id];
             const reservations = data.reservations;
             let resIds = [];
             for (const res of reservations) {

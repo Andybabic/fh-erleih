@@ -13,6 +13,7 @@ require_once("../functions/loader.php");
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../style/custom/style.css">
     <title>Scan</title>
+    <link rel="icon" href="../style/image/favIcon.svg">
 </head>
 
 <body>
