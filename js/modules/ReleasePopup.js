@@ -45,7 +45,7 @@ export default class ReleasePopup{
                                 ${content}            
                             </div>
                             <div class="releaseButtons uk-modal-footer uk-flex uk-flex-column uk-text-center">
-                                <button class="uk-button reviewButton uk-button-default colorSecondary uk-margin-small-top uk-margin-small-bottom" type="button">Reservierung prüfen</button>
+                                <button class="uk-button reviewButton returnButton uk-button-default colorSecondary uk-margin-small-top uk-margin-small-bottom" type="button">Reservierung prüfen</button>
                                 <button class="uk-button finalReleaseButton uk-button-default colorPrimary  proceedButton" type="button">Reservierungen ausgeben</button>
                             </div>
                         </div>
@@ -154,7 +154,7 @@ export default class ReleasePopup{
                 </p>
             </div>
             <div class="feedbackDetails">
-                <button href="#toggle-details" class="uk-button uk-button-default uk-width-1-1" type="button" uk-toggle="target: #feedbackDetails; animation: uk-animation-slide-top-">
+                <button href="#toggle-details" class="uk-button uk-button-default  uk-width-1-1" type="button" uk-toggle="target: #feedbackDetails; animation: uk-animation-slide-top-">
                 Details
                 <span uk-icon="chevron-up"></span>
                 </button>

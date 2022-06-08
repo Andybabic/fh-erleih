@@ -187,7 +187,11 @@ class General {
                 $(":root").css("--colorBackgroundClean", "#212529");
                 $(":root").css("--colorBackgroundGrey", "#495057");
                 $(":root").css("--textColor", "#f8f9fa");
-                $(":root").css("--preparedAllColor", "#024a07");
+                $(":root").css("--inPreparationColor", "#7A9E78");
+                $(":root").css("--preparedAllColor", "#5E9C58");
+                $(":root").css("--colorSuccess", "#03654D");
+                $(":root").css("--colorAlert", "#9A1515");
+                $(":root").css("--colorWarning", "#B76405");
                 $(":root").css("--filterWrapperColor", "#003265")
             }
         }

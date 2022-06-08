@@ -234,6 +234,7 @@ function updateStateContent() {
         //redirect to overview.php
         window.location.href = "../pages/overview.php";
 
+
     }
 
 

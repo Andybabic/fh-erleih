@@ -1,4 +1,4 @@
-@font-face{
+ @font-face{
     font-family: "Helvetica Neue";
     src: url("../font/HelveticaNeueLt.ttf");
     font-weight: normal;
@@ -16,16 +16,16 @@
     --fontfamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --FHlightblue: #cddeeb;
     --FHdefaultblue: #005096;
-    --inPreparationColor: rgba(14, 151, 0, 0.3);
-    --preparedAllColor: rgba(14, 151, 0, 0.6);
+    --inPreparationColor: #B6E0B2;
+    --preparedAllColor:#6EC066;
 
     --colorBackgroundClean: #f8f9fa;
     --colorBackgroundGrey: #e3e5e6;
     --colorPrimary: #005096;
     --colorSecondary: #669bc1;
-    --colorAlert: darkred;
-    --colorWarning: orange;
-    --colorSuccess: darkgreen;
+    --colorAlert: #F61919;
+    --colorWarning: #FF8800;
+    --colorSuccess:#007F5F;
     --textColor: #212529;
     --filterWrapperColor: #CDDEEB;
 }
@@ -823,7 +823,7 @@ h2, p {
     margin: 0px auto 0px;
     width: 100%;
     padding: 0.6rem;
-    background-color: #007f5f;
+    background-color: var(--colorSuccess);
     display: flex;
     justify-content: center;
 }
@@ -836,6 +836,16 @@ h2, p {
 .doneList{
     padding: 0 0.5rem;
 }
+
+ .doneList::after{
+     display: block;
+     content: '';
+     width: 100%;
+     background-color: var(--colorSuccess);
+     height: 5px;
+     margin-top: -10px;
+ }
+
 /*after to provide space for footer*/
 #filterableList {
     margin-bottom: 50px;
@@ -1058,3 +1068,24 @@ td span{
     color: var(--textColor);
 
 }
+
+/* Bestellung ausgeben Pop Up*/
+ #feedbackDetails{
+     background-color: var(--colorBackgroundGrey);
+ }
+
+ .feedbackDetails .uk-button{
+     background-color: var(--colorBackgroundGrey);
+     color: var(--textColor);
+ }
+
+ .feedbackDetails .uk-button{
+     background-color: var(--colorBackgroundGrey);
+     color: var(--textColor);
+ }
+
+ .feedbackDetails .uk-button:hover {
+     background-color: darkgrey;
+ }
+
+

@@ -78,7 +78,7 @@
             </div>
             <?php if (true) : ?>
             <div class=" uk-align-right btn-checklist bg-orange uk-animation-slide-left-small" data-type="report">
-                <span class="center-all uk-animation-slide-left-small" uk-icon="icon: warning; ratio: 1.5"></span>
+                <span class="center-all uk-animation-slide-left-small" uk-icon="icon:  comments; ratio: 1.5"></span>
             </div>
             <?php endif; ?>
             <div class=" uk-align-left btn-checklist colorSecondary uk-animation-slide-left-small" data-type="extend">

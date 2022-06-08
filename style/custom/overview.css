@@ -109,10 +109,11 @@
     position: relative;
 }
 
-.doneListArrow{
-    margin-left:-20px;
+.doneListArrow {
+    margin-left: -20px;
 }
-.allDoneMessage{
+
+.allDoneMessage {
     background-color: var(--preparedAllColor);
     padding: 8px 0;
     font-weight: bold;
@@ -120,13 +121,12 @@
 
 /*release reservation button*/
 .releaseResButton {
-    background-color: #007f5f;
+    background-color: var(--colorSuccess);
     color: #f8f9fa;
-box-shadow: none;
+    box-shadow: none;
     border: none;
     cursor: pointer;
     padding: 8px 14px;
-
 }
 
 .listDateandDep {
@@ -182,32 +182,41 @@ box-shadow: none;
 .rule {
     margin: 0 50px 0 0;
 }
+
 .rule__content {
     display: flex;
 }
+
 .rule__color {
     width: 50px;
     height: 50px;
     margin: 0 20px 20px 0;
 }
+
 .rule .color-1 {
     background-color: #16a085;
 }
+
 .rule .color-2 {
     background-color: #2980b9;
 }
+
 .rule .color-3 {
     background-color: #34495e;
 }
+
 .rule .color-4 {
     background-color: #f39c12;
 }
+
 .rule .color-5 {
     background-color: #d35400;
 }
+
 .rule .color-6 {
     background-color: #c0392b;
 }
+
 .wheel {
     width: 312px;
     height: 312px;
@@ -217,6 +226,7 @@ box-shadow: none;
     position: relative;
     display: none;
 }
+
 .wheel__inner {
     width: 300px;
     height: 300px;
@@ -225,6 +235,7 @@ box-shadow: none;
     overflow: hidden;
     transition: cubic-bezier(0.19, 1, 0.22, 1) 5s;
 }
+
 .wheel__sec {
     position: absolute;
     top: 0;
@@ -236,32 +247,40 @@ box-shadow: none;
     border-color: transparent;
     transform-origin: 50% 100%;
 }
+
 .wheel__sec:nth-child(1) {
     border-top-color: #16a085;
 }
+
 .wheel__sec:nth-child(2) {
     border-top-color: #2980b9;
     transform: rotate(60deg);
 }
+
 .wheel__sec:nth-child(3) {
     border-top-color: #34495e;
     transform: rotate(120deg);
 }
+
 .wheel__sec:nth-child(4) {
     border-top-color: #f39c12;
     transform: rotate(180deg);
 }
+
 .wheel__sec:nth-child(5) {
     border-top-color: #d35400;
     transform: rotate(240deg);
 }
+
 .wheel__sec:nth-child(6) {
     border-top-color: #c0392b;
     transform: rotate(300deg);
 }
+
 .wheel__text {
     margin: 70px 0 0 70px;
 }
+
 .wheel__arrow {
     width: 70px;
     height: 70px;
@@ -275,6 +294,7 @@ box-shadow: none;
     align-items: center;
     font-family: 'Open sans', sans-serif;
 }
+
 .wheel__arrow::after {
     content: '';
     position: absolute;
@@ -287,6 +307,7 @@ box-shadow: none;
     top: -15px;
     left: 25px;
 }
+
 .wheel__button {
     width: 60px;
     height: 60px;
@@ -298,13 +319,16 @@ box-shadow: none;
     font-weight: 600;
     font-size: 18px;
 }
+
 .wheel__button:hover {
     color: #27ae60;
 }
+
 .wheel__button:active {
     border: solid 3px rgba(0, 0, 0, 0.1);
     font-size: 15px;
 }
+
 .popup {
     position: fixed;
     width: 30vw;
@@ -320,19 +344,23 @@ box-shadow: none;
     transition: all 0.5s;
     opacity: 0;
 }
+
 .popup.active {
     transform: translate(-50%, 0);
     opacity: 1;
 }
+
 .popup__emotion {
     color: #f39c12;
     text-align: center;
     font-size: 30px;
     margin: 0 0 25px 0;
 }
+
 .popup__note {
     text-align: center;
 }
+
 .congratulation {
     position: fixed;
     top: 0;
@@ -342,6 +370,7 @@ box-shadow: none;
     background: rgba(0, 0, 0, 0.2);
     display: none;
 }
+
 .congratulation__container {
     width: 40vw;
     padding: 30px;
@@ -351,6 +380,7 @@ box-shadow: none;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .congratulation__close {
     position: absolute;
     top: 10px;
@@ -359,23 +389,28 @@ box-shadow: none;
     cursor: pointer;
     transition: all 0.5s;
 }
+
 .congratulation__close:hover {
     transform: rotate(360deg);
 }
+
 .congratulation__emotion {
     color: #f39c12;
     text-align: center;
     margin: 0 0 20px 0;
 }
+
 .congratulation__note {
     text-align: center;
 }
-.showWheel{
+
+.showWheel {
     background-color: var(--colorSuccess);
     color: #fff;
     margin: 5px 0 0 0;
 }
-.blockquote p{
+
+.blockquote p {
     font-size: 26px;
     font-family: "Playfair Display", serif;
 }
