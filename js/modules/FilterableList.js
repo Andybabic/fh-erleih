@@ -74,13 +74,14 @@ export default class FilterableList {
             time: false,
             onChange: (date) => {
                 if(date){
-                    this.filter.timespan = date;
-                    //store current html of picker to set it again later
+                    this.filter.timespan = [];
+                    //apply date two times because picker settings were changed from ranged to not ranged and rest of the code requires array of dates
+                    this.filter.timespan.push(general.formatDate(date));
+                    this.filter.timespan.push(general.formatDate(date));
                 }
 
             },
             onInit: (e) => {
-
                 //apply last html selection
                 if(this.filter.pickerHtml != "" && this.filter.pickerHtml != undefined){
                     $(".datepicker__wrapper").html(this.filter.pickerHtml);
@@ -141,6 +142,16 @@ export default class FilterableList {
         this.doms.filterWrapper.append(filters);
     }
 
+    addPickerStyle() {
+        //adds class to first and last element of picker span selection
+        const selection = document.getElementsByClassName("is-selected");
+        for (let i = 0; i < selection.length; i++) {
+            if (i == 0 || i == selection.length - 1) {
+                selection[i].classList.add("selected-ends");
+            }
+        }
+    }
+
     addFilterInteraction() {
         //adds onclick events to all filter buttons
         //return void
@@ -176,8 +187,7 @@ export default class FilterableList {
                     $(".pickerWrapper").slideToggle();
                     break;
                 case "timespan":
-                    console.log(this.filter.timespan.length)
-                    if (this.filter.timespan) {
+                    if (this.filter.timespan.length > 0) {
                         //if there is a valid timespan set
                         this.filter.today = false;
                         this.filter.tomorrow = false;
@@ -332,8 +342,6 @@ export default class FilterableList {
                     //replace "d" with "T"
                     const dateString = res.date.replace(" ", "T");
                     const date = new Date(dateString);
-                    console.log(res.date);
-                    console.log(dateString);
                     
                     const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
                     //convert date to Mittwoch, 11. Mai 2022

@@ -238,7 +238,6 @@ class General {
     checkForNFCId() {
         //checks at pageload if there is an ID from a NFC Scan in the localstorage
         if (localStorage.nfcListener && localStorage.nfcListener != null) {
-            console.log(localStorage.nfcListener);
             this.createPopupFromScannedId(localStorage.nfcListener);
         }
     }

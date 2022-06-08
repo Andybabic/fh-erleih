@@ -8,7 +8,7 @@ export default class Ajax{
     };
 
     async getResByDepartmentTimespan (departmentID, start, end, type){
-        const api = `${this.vars.apiUrl}reservierung/byBereichDateType/${departmentID}/${start}/${end}/${type}`;
+        const api = `${this.vars.apiUrl}reservierung/byBereichDateType/${departmentID}/${start}/${start}/${type}`;
 
         return new Promise((resolve) => {
 
@@ -16,6 +16,7 @@ export default class Ajax{
                 .then(res => res.json())
                 .then(data => {
                     resolve(data);
+                    console.log(data);
                 }).catch(err => {
                 resolve(false);
             });
