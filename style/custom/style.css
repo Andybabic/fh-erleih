@@ -1051,6 +1051,7 @@ font-size: 12px !important;
 
 #checklistComment{
     margin-top:5px;
+    display: none;
 }
 
 .buttonAllObjects{
