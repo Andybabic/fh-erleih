@@ -20,7 +20,7 @@ $userID = $_SESSION['username']
                 <a href="../pages/settings.php" class="nav-link">Einstellungen</a>
             </li>
             <li class="nav-item">
-                <a href="<?php $domain ?>/functions/logout.php" class="nav-link">Abmelden</a>
+                <a href="../functions/logout.php" class="nav-link">Abmelden</a>
             </li>
         </ul>
 
