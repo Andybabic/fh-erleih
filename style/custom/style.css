@@ -1015,28 +1015,40 @@ font-size: 12px !important;
 .iconInformation:hover{
     background-color: transparent;
 }
-
+.swipeboxBottomBtn{
+    margin: 0;
+    font-size: 16px;
+    padding: 0.3rem 0.6rem;
+    background-color: var(--colorSecondary);
+    color: #f8f9fa;
+    border-radius: 0.3rem;
+}
 .showDetailText{
     background-color: #fff;
     border-radius: 18px;
-    padding: 5px 30px 5px 8px;
-    position: relative;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    display: inline-block;
+    height: 100%;
+}
+
+.iconInformation{
+    margin: 0 0 0 10px;
+    background-color: var(--colorBackgroundClean);
+    color: var(--textColor);
 }
 .iconInformation svg{
     width: 20px;
     height: 20px;
-    transition: all .4s ease-in;
+    transition: all .2s ease-in;
     fill: var(--colorPrimary);
-    position: absolute;
-    right: 8px;
-    top: 3px;
+    margin-left: 6px;
 }
 .showDetailButton{
     transition: all .3s ease-in;
 }
 .rotateButton{
     transform: rotate(180deg);
-
 }
 
 
@@ -1058,7 +1070,6 @@ font-size: 12px !important;
     background-color: var(--colorSecondary);
     color: white;
     margin-top:3px;
-    display: none;
 }
 
 #logtext{

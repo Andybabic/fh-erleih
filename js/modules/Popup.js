@@ -29,6 +29,7 @@ export default class NFCPopup{
 
 
         createPopup(){
+            const equipmentName = $(this.doms.base.currentTarget).closest(".Swipe_container").find("h4").text();
             this.vars.modalId = "modal-"+this.vars.popupType;
             let titleTxt;
             let titleIcon;
@@ -71,10 +72,15 @@ export default class NFCPopup{
                 	<div id="${this.vars.modalId}" uk-modal='{"bg-close": false, "esc-close": false}'>
                         <div class="uk-modal-dialog uk-width-large uk-margin-auto-vertical">
                             <button class="uk-modal-close-default" type="button" uk-close></button>
-                            <div class="uk-modal-header uk-flex uk-flex-middle">                         
+                            <div class="uk-modal-header">  
+                                <div class="uk-flex uk-flex-middle">
                                     <h2 class="uk-modal-title uk-text-lead uk-margin-remove-bottom">${titleTxt}</h2>
                                     <span class="titleIcon uk-margin-small-left">${titleIcon}</span>
+                                </div>            
+                                <p class="uk-text-meta">${equipmentName}</p>           
+                                    
                             </div>
+                            
                             <div class="uk-modal-body">
                                 ${content}                            
                             </div>

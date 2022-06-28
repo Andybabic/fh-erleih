@@ -505,56 +505,6 @@ export default class FilterableList {
                 resIds.push(res.id);
             }
             if(resIds.length > 0){
-               /* const dataTst = {
-                    "userId": "mt191092",
-                    "firstName": "Jungwirth",
-                    "lastName": "Lukas",
-                    "email": "mt191092@fhstp.ac.at",
-                    "tel": "+436801420181",
-                    "date": "2022-05-25 16:30:00",
-                    "reservations": [
-                        {
-                            "id": 521430,
-                            "lastChange": "2022-05-25 10:36:06",
-                            "userId": "mt191092",
-                            "bookedBy": "mt191092",
-                            "equipId": 5553,
-                            "statusId": 2,
-                            "from": "2022-05-25 16:30:00",
-                            "to": "2022-05-27 15:30:00",
-                            "userComment": "test_ausgabe",
-                            "assiComment": "",
-                            "lendDate": "0000-00-00 00:00:00",
-                            "returnDate": "0000-00-00 00:00:00",
-                            "assiLend": null,
-                            "assiReturn": null,
-                            "usageId": 12,
-                            "prepared": 1,
-                            "departmentId": "3"
-                        },
-                        {
-                            "id": 521431,
-                            "lastChange": "2022-05-25 13:15:24",
-                            "userId": "mt191092",
-                            "bookedBy": "mt191092",
-                            "equipId": 3984,
-                            "statusId": 2,
-                            "from": "2022-05-25 16:30:00",
-                            "to": "2022-05-27 15:30:00",
-                            "userComment": "testtest",
-                            "assiComment": "",
-                            "lendDate": "0000-00-00 00:00:00",
-                            "returnDate": "0000-00-00 00:00:00",
-                            "assiLend": null,
-                            "assiReturn": null,
-                            "usageId": 3,
-                            "prepared": 1,
-                            "departmentId": "3"
-                        }
-                    ],
-                    "inPreparation": 1,
-                    "preparedAll": 1
-                }*/
                 new ReleasePopup(resIds, data);
             }
         });

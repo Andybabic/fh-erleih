@@ -208,6 +208,7 @@ function change_text(id, text) {
 }
 
 function updateStateContent() {
+    console.log(localStorage.Site_state);
     //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
     var local_storage = localStorage.getItem('Site_state');
     if (local_storage < 0) {
