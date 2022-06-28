@@ -20,7 +20,7 @@ export default class LuckyWheel {
             const currentDay = new Date().getDate();
             const currentMonth = new Date().getMonth();
 
-            if(storedMonth != currentMonth && storedDay != currentDay){
+            if(storedMonth != currentMonth || storedDay != currentDay){
                 this.displayWheel();
                 this.addInteraction();
             }else{
