@@ -67,7 +67,6 @@
     //convert typData to json
     $typDataJson = json_encode($typData);
     $assiComment = $resData['assiComment'];
-
     ?>
 
 
@@ -114,12 +113,12 @@
                 <div class="grid-100 ">
 
                     <label for="<?= $resID ?>">
-                        <h4 class="uk-margin-remove-bottom"><?= $typData["nameDe"] ?><span> [<?= $data["nameDe"] ?>]</span></h4>
+                        <h4 class="uk-margin-remove-bottom"><?= $typData["nameDe"] ?><span> <?php if($data["nameDe"] != ""){echo "[".$data["nameDe"]."]";}  ?></span></h4>
 
                     </label>
 
 
-                    <p class="uk-text-small uk-text-muted  toTop"><?= $assiComment ?></p>
+                    <p class="uk-text-small uk-text-muted  toTop"><?php if($assiComment != "Undefined "){echo $assiComment;} ?></p>
 
                     <button href="#toggle-animation<?= $resID ?>" class="iconInformation toggleHandle" uk-toggle="target: #toggle-animation<?= $resID ?>; animation: uk-animation-fade">
                         <span class="showDetailText turnToggleButton">Details anzeigen
