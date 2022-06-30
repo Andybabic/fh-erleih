@@ -163,8 +163,9 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                         <?php } ?>
                     </div>
                 </div>
-                <button class="uk-button uk-align-right buttonAllObjects returnButton" onclick="checkAllBoxes()">Alle Artikel
-            Zurücknehmen</button>
+                <button class="uk-button uk-align-right buttonAllObjects returnButton" onclick="checkAllBoxes()">
+                <?=  $StateIsPrepare? "Alle Artikel Vorbereiten" : "Alle Artikel Zurücknehmen" ?>
+                </button>
                 <script>
                 function checkAllBoxes() {
                     //set all checkbosex dom  to true
