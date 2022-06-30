@@ -170,9 +170,9 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                     //set all checkbosex dom  to true
                     for (var i = 0; i < checkboxes_list.length; i++) {
                         checkboxes_list[i].checked = true;
-                        stateComponents.stateManager.set_state(1);
 
                     }
+                    stateComponents.stateManager.set_state(1);
                 }
                 </script>
             </div>
