@@ -168,11 +168,13 @@ function addCheckbox_list(resID = null, parent = null, status = false, typeData 
                 </button>
                 <script>
                 function checkAllBoxes() {
+                    console.log("checkall");
                     //set all checkbosex dom  to true
-                    for (var i = 0; i < checkboxes_list.length; i++) {
+                    for (let i = 0; i < checkboxes_list.length; i++) {
                         checkboxes_list[i].checked = true;
 
                     }
+                    console.log(checkboxes_list);
                     stateComponents.stateManager.set_state(1);
                 }
                 </script>
@@ -208,7 +210,7 @@ function change_text(id, text) {
     document.getElementById(id).innerHTML = text;
 }
 
-function updateStateContent() {
+async function updateStateContent() {
     //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
     var local_storage = localStorage.getItem('Site_state');
     if (local_storage < 0) {
@@ -231,7 +233,6 @@ function updateStateContent() {
     } else if (local_storage == 2) {
         //redirect to overview.php
         if(<?= $StateIsPrepare ? "false" : "true" ?>){
-            console.log("true");
             //modal dialog to check if use really wants to take back reservations
             const cancelMessage = `<h2 class="uk-text-large">Markierte Elemente zurücknehmen</h2><p>Bist du sicher, dass du alle ausgewählten Elemente zurücknehmen möchtest?</p>`
 
@@ -244,7 +245,7 @@ function updateStateContent() {
             element.querySelector(".uk-modal-footer").classList.add("footerBtnWrapper");
             modal.then(async (e) => {
 
-                await closeReservation();
+                await closeReservation(true);
                 localStorage.setItem('Site_state', 0);
                 window.location.href = "../pages/overview.php";
 
@@ -252,6 +253,10 @@ function updateStateContent() {
                 stateComponents.stateManager.set_state(-1);
                 console.log('Rejected.');
             });
+        }else{
+            await closeReservation(false);
+            localStorage.setItem('Site_state', 0);
+            window.location.href = "../pages/overview.php";
         }
 
 
@@ -264,25 +269,32 @@ localStorage.setItem('Site_state', 0);
 updateStateContent();
 build_proofing_list();
 
-async function closeReservation(isReturn, allItems) {
+async function closeReservation(isReturn) {
 
     //for all addCheckbox_list.checked = true
     let answers = [];
+    console.log("LIST",checkboxes_list);
     for (var i = 0; i < checkboxes_list.length; i++) {
         // if checkboxes_list[i].checked or !allItems
-        console.log("checkbox",checkboxes_list[i]);
 
         if (checkboxes_list[i].checked) {
             // make post request to url with array
 
-
             jsondata = JSON.stringify([checkboxes_list[i].value]);
-            const apianswer = await ajax.takeBackRes(jsondata);
-            answers.push(apianswer);
+            if(isReturn){
+                const apianswer = await ajax.takeBackRes(jsondata);
+                answers.push(apianswer);
+            }else{
+                await ajax.prepareRes(jsondata);
+            }
+
+
         }
 
     }
-    localStorage.takeBackAnswer = JSON.stringify(answers);
+    if(isReturn){
+        localStorage.takeBackAnswer = JSON.stringify(answers);
+    }
 }
 
 

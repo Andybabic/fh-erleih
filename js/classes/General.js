@@ -280,7 +280,7 @@ class General {
             }
             console.log(data);
 
-            const text = `${success}/${data.length} Reservierungen wurden erfolgreich zurückgenommen`;
+            const text = `<p>${success}/${data.length} Reservierungen wurden erfolgreich zurückgenommen</p>`;
             UIkit.notification({
                 message: text,
                 pos: 'top-center',

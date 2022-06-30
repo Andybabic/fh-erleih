@@ -272,8 +272,24 @@ export default class Ajax{
 
     async takeBackRes(jsondata){
         const api = `${this.vars.apiUrl}reservierung/ruecknahme/`;
-        console.log(api);
-        console.log(jsondata);
+        return new Promise((resolve) => {
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: jsondata,
+                    curl: "POST"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function(error){
+                resolve(false);
+            });
+        });
+    }
+
+    async prepareRes(jsondata){
+        const api = `${this.vars.apiUrl}reservierung/vorbereiten/`;
         return new Promise((resolve) => {
             $.ajax({
                 url: api,
