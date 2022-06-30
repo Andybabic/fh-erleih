@@ -13,7 +13,7 @@ export default class LuckyWheel {
     };
 
     checkLastInteraction(){
-        if(localStorage.lastWheelSpin){
+        if(localStorage.lastWheelSpin && !localStorage.devmode){
             const lastDate = new Date(localStorage.lastWheelSpin);
             const storedDay = lastDate.getDate();
             const storedMonth = lastDate.getMonth();
@@ -188,7 +188,6 @@ export default class LuckyWheel {
 
     async getChuckNorrisJoke(){
         const joke = await ajax.getChuckNorrisJoke();
-        console.log(joke.value)
         if(joke && joke.value != undefined){
             return this.quoteFromText(joke.value);
         }else{
@@ -198,7 +197,6 @@ export default class LuckyWheel {
 
     async getJoke(){
         const joke = await ajax.getRandomJoke();
-        console.log(joke[0].text);
         if(joke[0].text != undefined && joke){
             return this.quoteFromText(joke[0].text);
         }else{
@@ -275,7 +273,9 @@ export default class LuckyWheel {
     addCloseFunction(){
         UIkit.util.on(document, 'hidden', '#luckyWheel-popup', () => {
             $("#luckyWheel-popup").remove();
-            this.displayNoWheel();
+            if(!localStorage.devmode){
+                this.displayNoWheel();
+            }
         });
     }
 

@@ -209,7 +209,6 @@ function change_text(id, text) {
 }
 
 function updateStateContent() {
-    console.log(localStorage.Site_state);
     //get eventlistener to local_storage Site_state , if it 1 then show 'checklist_interact' else show 'checklist_proof'
     var local_storage = localStorage.getItem('Site_state');
     if (local_storage < 0) {
@@ -230,10 +229,30 @@ function updateStateContent() {
         document.getElementById('checklist_proof').style.display = 'block';
 
     } else if (local_storage == 2) {
-        localStorage.setItem('Site_state', 0);
-        closeReservation("return");
         //redirect to overview.php
-        window.location.href = "../pages/overview.php";
+        if(<?= $StateIsPrepare ? "false" : "true" ?>){
+            console.log("true");
+            //modal dialog to check if use really wants to take back reservations
+            const cancelMessage = `<h2 class="uk-text-large">Markierte Elemente zurücknehmen</h2><p>Bist du sicher, dass du alle ausgewählten Elemente zurücknehmen möchtest?</p>`
+
+            const modal = UIkit.modal.confirm(cancelMessage, {"stack":true});
+            const element = modal.dialog.$el;
+            const cancelButton = element.querySelector(".uk-modal-close");
+            const proceedButton = element.querySelector(".uk-button-primary");
+            cancelButton.innerText = "Abbrechen";
+            proceedButton.innerText = "Zurücknehmen";
+            element.querySelector(".uk-modal-footer").classList.add("footerBtnWrapper");
+            modal.then(async (e) => {
+
+                await closeReservation();
+                localStorage.setItem('Site_state', 0);
+                window.location.href = "../pages/overview.php";
+
+            }, function () {
+                stateComponents.stateManager.set_state(-1);
+                console.log('Rejected.');
+            });
+        }
 
 
     }
@@ -245,33 +264,25 @@ localStorage.setItem('Site_state', 0);
 updateStateContent();
 build_proofing_list();
 
-function closeReservation(isReturn, allItems) {
-    if (isReturn) {
-        url = "../functions/callAPI.php?r=reservierung/ruecknahme/";
-    } else {
-        url = "../functions/callAPI.php?r=reservierung/vorbereiten/";
-    }
+async function closeReservation(isReturn, allItems) {
+
     //for all addCheckbox_list.checked = true
+    let answers = [];
     for (var i = 0; i < checkboxes_list.length; i++) {
         // if checkboxes_list[i].checked or !allItems
-        if (checkboxes_list[i].checked || allItems) {
+        console.log("checkbox",checkboxes_list[i]);
+
+        if (checkboxes_list[i].checked) {
             // make post request to url with array
 
-            jsondata = JSON.stringify([checkboxes_list[i].value]);
-            $.ajax({
-                type: 'POST',
-                url: url,
-                dataType: "JSON",
-                data: {
-                    curl: "POST",
-                    data: jsondata
-                },
-                success: function(msg) {},
 
-            });
+            jsondata = JSON.stringify([checkboxes_list[i].value]);
+            const apianswer = await ajax.takeBackRes(jsondata);
+            answers.push(apianswer);
         }
 
     }
+    localStorage.takeBackAnswer = JSON.stringify(answers);
 }
 
 

@@ -21,6 +21,8 @@ class General {
         this.goPageBack();
         //opens Div of Filter Buttons
         this.openFilterButtonDiv();
+        //check if a reservation has been taken back and display message
+        this.displayTakebackFeedback();
     }
 
     //HEADER
@@ -265,6 +267,29 @@ class General {
         }
     }
 
+    //check if a reservation has been taken back and display message
+    displayTakebackFeedback(){
+        if(localStorage.takeBackAnswer){
+
+            const data = JSON.parse(localStorage.takeBackAnswer);
+            let success = 0;
+            for (const d of data) {
+                if(d != false){
+                    success ++;
+                }
+            }
+            console.log(data);
+
+            const text = `${success}/${data.length} Reservierungen wurden erfolgreich zurückgenommen`;
+            UIkit.notification({
+                message: text,
+                pos: 'top-center',
+                timeout: 10000
+            });
+            localStorage.removeItem("takeBackAnswer");
+        }
+    }
+
   goPageBack(){
     $(".backButton").on("click", () =>{
       window.history.back();
@@ -284,6 +309,7 @@ class General {
           $(".filterWrapper").slideToggle();
       });
   }
+
 }
 
 

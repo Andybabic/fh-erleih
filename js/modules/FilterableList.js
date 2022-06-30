@@ -320,6 +320,7 @@ export default class FilterableList {
                 `;
             this.doms.listWrapper.html(emptyMessage);
             new LuckyWheel($("#allDoneWrapper"));
+            this.activateDevMode();
         } else {
             let resList = `<ul class="uk-list uk-list-striped">`;
             let doneList = `<ul class="doneList uk-list uk-list-striped">`;
@@ -564,6 +565,41 @@ export default class FilterableList {
         return diffDays;
     }
 
+    activateDevMode(){
+        let counter = 0;
+        let init = true;
+        $(".allDoneMessage").on("click", function(){
+            if(counter < 6){
+                counter ++;
+            }else{
+                counter = 0;
+                if(localStorage.devmode){
+                    localStorage.removeItem("devmode");
+                    UIkit.notification({
+                        message: "Developer Mode deactivated",
+                        pos: 'top-center',
+                        timeout: 4000
+                    });
+                }else{
+                    localStorage.devmode = true;
+                    localStorage.removeItem("lastWheelSpin");
+                    UIkit.notification({
+                        message: "Developer Mode activated: Unlimited wheel spins",
+                        pos: 'top-center',
+                        timeout: 5000
+                    });
+                    new LuckyWheel($("#allDoneWrapper"));
+                }
+            }
+            if(init){
+                setTimeout(() => {
+                    init = true;
+                    counter = 0;
+                }, 4000);
+                init = false;
+            }
+        });
+    }
 
     removeList() {
         //to call from modeSwitch

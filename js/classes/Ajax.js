@@ -1,6 +1,6 @@
 "use strict";
 export default class Ajax{
-    //CONSTRUCTOR
+    //class for all functions that interact with API from the frontend
     constructor() {
         this.vars = {
             apiUrl:     "/functions/callAPI.php?r=",
@@ -8,6 +8,7 @@ export default class Ajax{
     };
 
     async getResByDepartmentTimespan (departmentID, start, end, type){
+        //GET all reservations by department in the given timespan
         const api = `${this.vars.apiUrl}reservierung/byBereichDateType/${departmentID}/${start}/${start}/${type}`;
 
         return new Promise((resolve) => {
@@ -24,6 +25,7 @@ export default class Ajax{
     }
 
     async getUserById(userId){
+        //GET userdata by user id
         const api = `${this.vars.apiUrl}user/${userId}/`;
 
         return new Promise((resolve) => {
@@ -39,6 +41,7 @@ export default class Ajax{
     }
 
     async getDepartments(){
+        //GET all departments
         const api = `${this.vars.apiUrl}bereich/`;
 
         return new Promise((resolve) => {
@@ -187,19 +190,6 @@ export default class Ajax{
     }
 
 
-    async postResStatus(id){
-        const api = `${this.vars.apiUrl}/reservierung/vorbereiten/`;
-
-        return new Promise((resolve) => {
-            fetch(api)
-                .then(res => res.json(id))
-                .then(data => {
-                    resolve(data);
-                }).catch(err => {
-                resolve(false);
-            });
-        });
-    }
 
     async postResRelease(resIds){
         const api = `${this.vars.apiUrl}reservierung/ausgabe/`;
@@ -240,69 +230,6 @@ export default class Ajax{
 
     }
 
-    async bookReservation(resId){
-        //changes res status to reserviert
-        const val = [resId];
-        const api = `${this.vars.apiUrl}reservierung/freigabe/`;
-
-        return new Promise((resolve) => {
-            $.ajax({
-                url: api,
-                method: "POST",
-                data: {
-                    data: JSON.stringify(val),
-                    curl: "POST"
-                }
-            }).done(function(answer) {
-                resolve(answer);
-            }).fail(function (){
-                resolve(false);
-            });
-        });
-    }
-
-    async handOverReservation(resId){
-        //changes res status to ausgeborgt
-        const val = [resId];
-        const api = `${this.vars.apiUrl}reservierung/ausgabe/`;
-
-        return new Promise((resolve) => {
-            $.ajax({
-                url: api,
-                method: "POST",
-                data: {
-                    data: JSON.stringify(val),
-                    curl: "POST"
-                }
-            }).done(function(answer) {
-                resolve(answer);
-            }).fail(function (){
-                resolve(false);
-            });
-        });
-    }
-
-    async takeBackReservation(resId){
-        //changes res status to zurückgenommen
-        const val = [resId];
-        const api = `${this.vars.apiUrl}reservierung/ruecknahme`;
-
-        return new Promise((resolve) => {
-            $.ajax({
-                url: api,
-                method: "POST",
-                data: {
-                    data: JSON.stringify(val),
-                    curl: "POST"
-                }
-            }).done(function(answer) {
-                resolve(answer);
-            }).fail(function (){
-                resolve(false);
-            });
-        });
-    }
-
 
     async deleteReservation(cancelValue){
         const jsonVal = JSON.stringify(cancelValue);
@@ -333,6 +260,26 @@ export default class Ajax{
                 method: "POST",
                 data: {
                     data: JSON.stringify({"to": toDate}),
+                    curl: "POST"
+                }
+            }).done(function(answer) {
+                resolve(answer);
+            }).fail(function(error){
+                resolve(false);
+            });
+        });
+    }
+
+    async takeBackRes(jsondata){
+        const api = `${this.vars.apiUrl}reservierung/ruecknahme/`;
+        console.log(api);
+        console.log(jsondata);
+        return new Promise((resolve) => {
+            $.ajax({
+                url: api,
+                method: "POST",
+                data: {
+                    data: jsondata,
                     curl: "POST"
                 }
             }).done(function(answer) {
